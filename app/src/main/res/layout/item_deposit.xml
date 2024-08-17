@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="30dp"
+    android:paddingVertical="20dp"
+    android:background="@drawable/bg_ractangle_rounded">
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tvModelName"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:ellipsize="end"
+            android:fontFamily="@font/segoe_ui_regular"
+            android:maxLines="2"
+            android:text="SSD 480GB Sandisk E30 SSD 480GB Sandisk E30 SSD 480GB Sandisk E30 SSD 480GB Sandisk E30 SSD 480GB Sandisk E30"
+            android:textColor="@color/colorBlack"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tvQuantity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:fontFamily="@font/segoe_ui_regular"
+            android:gravity="center_horizontal"
+            android:text="x2"
+            android:textColor="@color/colorBlack"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/btnReopen"
+            style="@style/CustomButton"
+            android:layout_weight="0.5"
+            android:text="Reopen" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+        <ImageView
+            android:id="@+id/ivArrowLeft"
+            android:layout_width="36dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center_vertical"
+            android:visibility="invisible"
+            app:srcCompat="@drawable/arrow_left_icon" />
+
+        <Button
+            android:id="@+id/btnLocker"
+            style="@style/CustomLockerButton"
+            android:layout_marginHorizontal="10dp"
+            android:text="001" />
+
+        <ImageView
+            android:id="@+id/ivArrowRight"
+            android:layout_width="36dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/arrow_right_icon" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnChangeLocker"
+        style="@style/CustomButton"
+        android:text="Change Locker"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout3" />
+</androidx.constraintlayout.widget.ConstraintLayout>

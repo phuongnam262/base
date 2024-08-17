@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/manager_menu_navigation"
+    app:startDestination="@+id/inputEmailFragment">
+
+    <fragment
+        android:id="@+id/inputEmailFragment"
+        android:name="com.lock.smartlocker.ui.inputemail.InputEmailFragment"
+        android:label="@string/auth_required"
+        tools:layout="@layout/fragment_input_email" >
+        <action
+            android:id="@+id/action_navigation_input_email_to_inputOTPFragment"
+            app:destination="@id/inputOTPFragment" />
+    </fragment>
+       <fragment
+        android:id="@+id/inputOTPFragment"
+        android:name="com.lock.smartlocker.ui.inputotp.InputOTPFragment"
+        android:label="@string/auth_required"
+        tools:layout="@layout/fragment_input_otp" >
+        <action
+            android:id="@+id/action_inputOTPFragment_to_registerFaceFragment"
+            app:destination="@id/registerFaceFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFaceFragment"
+        android:name="com.lock.smartlocker.ui.register_face.RegisterFaceFragment"
+        android:label="@string/register_face"
+        tools:layout="@layout/fragment_register_face" />
+</navigation>

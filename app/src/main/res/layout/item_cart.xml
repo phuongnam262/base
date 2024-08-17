@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_ractangle_rounded"
+    android:paddingVertical="@dimen/dp_20"
+    android:paddingHorizontal="@dimen/dp_30">
+
+    <TextView
+        android:id="@+id/tvItemName"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:fontFamily="@font/segoe_ui_regular"
+        android:text="Asus VivoBook A512"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintWidth_percent="0.333"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tvQuantity"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvQuantity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="x2"
+        android:textSize="20sp"
+        android:fontFamily="@font/segoe_ui_regular"
+        app:layout_constraintWidth_percent="0.333"
+        app:layout_constraintBottom_toBottomOf="@id/btnDecrease"
+        app:layout_constraintEnd_toStartOf="@+id/btnDecrease"
+        app:layout_constraintStart_toEndOf="@+id/tvItemName"
+        app:layout_constraintTop_toTopOf="@id/btnDecrease" />
+
+    <Button
+        android:id="@+id/btnDecrease"
+        style="@style/CustomButton"
+        android:layout_marginEnd="15dp"
+        android:text="+"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnIncrease"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnIncrease"
+        style="@style/CustomButton"
+        android:text="-"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

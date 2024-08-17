@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/manager_menu_navigation"
+    app:startDestination="@+id/adminLoginFragment">
+
+    <fragment
+        android:id="@+id/adminLoginFragment"
+        android:name="com.lock.smartlocker.ui.admin_login.AdminLoginFragment"
+        android:label="@string/auth_required"
+        tools:layout="@layout/fragment_admin_login" >
+        <action
+            android:id="@+id/action_adminLoginFragment_to_inputOTPFragment"
+            app:destination="@id/inputOTPFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/inputOTPFragment"
+        android:name="com.lock.smartlocker.ui.inputotp.InputOTPFragment"
+        android:label="@string/auth_required"
+        tools:layout="@layout/fragment_input_otp" />
+</navigation>

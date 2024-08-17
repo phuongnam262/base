@@ -1,0 +1,88 @@
+package com.lock.smartlocker.util.view
+
+import android.annotation.SuppressLint
+import com.bumptech.glide.request.transition.Transition
+import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.core.view.isVisible
+import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.target.CustomTarget
+import com.google.android.material.textview.MaterialTextView
+import java.text.NumberFormat
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
+import android.graphics.drawable.Drawable
+
+
+@BindingAdapter("imagePath")
+fun ImageView.setImagePath(path : String) {
+    this.let {
+        Glide.with(it)
+            .load(path)
+            .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+            .into(it)
+    }
+}
+
+@BindingAdapter("isVisible")
+fun View.isVisible(visible: Boolean) {
+    isVisible = visible
+}
+
+@BindingAdapter("textAny")
+fun TextView.setTextAny(value : Any) {
+    text = value.toString()
+}
+
+@BindingAdapter("imageUrl")
+fun loadImage(view: ImageView, imageUrl: String) {
+    if (imageUrl.isNotEmpty() && imageUrl.isNotBlank())
+        Glide.with(view.context)
+        .load(imageUrl)
+        .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+        .into(view)
+}
+
+@BindingAdapter("android:backgroundImage")
+fun setBackgroundImageUrl(view: View, imageUrl: String?) {
+    if (!imageUrl.isNullOrEmpty()) {
+        Glide.with(view.context)
+            .load(imageUrl)
+            .into(object : CustomTarget<Drawable>() {
+                override fun onResourceReady(resource: Drawable, transition: Transition<in Drawable>?) {
+                    view.background = resource
+                }
+
+                override fun onLoadCleared(placeholder: Drawable?) {
+                    // Xử lý khi ảnh bị clear (nếu cần)
+                }
+            })
+    }
+}
+
+@BindingAdapter("priceVN")
+fun TextView.priceVN(price: Int) {
+     text = NumberFormat.getCurrencyInstance(Locale("vi", "VN"))
+        .format(price)
+}
+
+@SuppressLint("SetTextI18n")
+@BindingAdapter("getDateNow")
+fun getDateNow(textView: MaterialTextView, prefix: String) {
+    val currentTime = Calendar.getInstance().time
+    val dateFormatter = SimpleDateFormat("dd/MM/yyyy", Locale("vi", "VN"))
+    textView.text = "$prefix ${dateFormatter.format(currentTime)}"
+}
+
+@BindingAdapter("android:visibility")
+fun View.isVisibleView(state: Boolean) {
+    visibility = if (state) {
+        View.VISIBLE
+    } else {
+        View.GONE
+    }
+}
