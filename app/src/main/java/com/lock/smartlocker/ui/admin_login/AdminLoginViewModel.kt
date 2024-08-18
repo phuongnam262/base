@@ -39,8 +39,8 @@ class AdminLoginViewModel(
             param.user_name = username.value
             param.password = password.value
             managerRepository.adminLogin(param).apply {
-                mLoading.postValue(false)
                 if (isSuccessful) {
+
                     if (data != null) {
                         uiScope.launch {
                             adminLoginResponse.value = data
@@ -50,6 +50,6 @@ class AdminLoginViewModel(
                     }
                 }else handleError(status)
             }
-        }
+        }.invokeOnCompletion { mLoading.postValue(false) }
     }
 }
