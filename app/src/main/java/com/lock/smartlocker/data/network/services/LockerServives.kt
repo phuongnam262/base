@@ -5,6 +5,7 @@ import com.lock.smartlocker.data.entities.request.ConsumerLoginRequest
 import com.lock.smartlocker.data.entities.responses.AdminLoginResponse
 import com.lock.smartlocker.data.entities.responses.BaseResponse
 import com.lock.smartlocker.data.entities.responses.ConsumerLoginResponse
+import com.lock.smartlocker.data.entities.responses.GetInformationStaffResponse
 import com.lock.smartlocker.data.entities.responses.GetListCategoryResponse
 import com.lock.smartlocker.data.entities.responses.GetSettingResponse
 import com.lock.smartlocker.data.entities.responses.TerminalLoginResponse
@@ -38,6 +39,9 @@ interface LockerServives {
     suspend fun adminLogin(
         @Body adminLoginRequest: AminLoginRequest
     ): Response<BaseResponse<AdminLoginResponse>>
+
+    @POST("/api/admin/get-information-staff")
+    suspend fun getInformationStaff(): Response<BaseResponse<GetInformationStaffResponse>>
 
     companion object {
         operator fun invoke(retrofit: Retrofit): LockerServives {

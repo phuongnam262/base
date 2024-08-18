@@ -2,13 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.inputemail.InputEmailFragment">
+    tools:context=".ui.admin_dashboard.AdminDashboardFragment">
 
     <data>
 
         <variable
             name="viewmodel"
-            type="com.lock.smartlocker.ui.inputemail.InputEmailViewModel" />
+            type="com.lock.smartlocker.ui.admin_dashboard.AdminDashboardViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -233,7 +233,7 @@
 
         <include
             android:id="@+id/bottom_menu"
-            layout="@layout/bottom_menu_1"
+            layout="@layout/bottom_menu_3"
             app:isErrorText="@{viewmodel.isErrorText}"
             app:ownerText="@{viewmodel.ownerText}"
             app:showStatusText="@{viewmodel.showStatusText}"

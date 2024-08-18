@@ -3,8 +3,8 @@ package com.lock.smartlocker
 import android.app.Application
 import android.os.Process
 import com.lock.smartlocker.data.db.AppDatabase
-import com.lock.smartlocker.data.network.NetworkConnectionInterceptor
 import com.lock.smartlocker.data.network.LockerAPI
+import com.lock.smartlocker.data.network.NetworkConnectionInterceptor
 import com.lock.smartlocker.data.network.services.FaceServives
 import com.lock.smartlocker.data.network.services.HardwareControlServives
 import com.lock.smartlocker.data.network.services.LockerServives
@@ -12,10 +12,10 @@ import com.lock.smartlocker.data.preference.PreferenceHelper
 import com.lock.smartlocker.data.repositories.ManagerRepository
 import com.lock.smartlocker.data.repositories.StartAppRepository
 import com.lock.smartlocker.data.repositories.UserFaceRepository
+import com.lock.smartlocker.ui.admin_dashboard.AdminDashboardViewModelFactory
 import com.lock.smartlocker.ui.admin_login.AdminLoginViewModelFactory
 import com.lock.smartlocker.ui.facedetect.FaceViewModelFactory
 import com.lock.smartlocker.ui.home.HomeViewModelFactory
-import com.lock.smartlocker.ui.inputemail.InputEmailViewModel
 import com.lock.smartlocker.ui.inputemail.InputEmailViewModelFactory
 import com.lock.smartlocker.ui.inputotp.InputOTPViewModelFactory
 import com.lock.smartlocker.ui.manager_menu.ManagerMenuViewModelFactory
@@ -77,6 +77,7 @@ class LockerApplication : Application(), KodeinAware {
         bind() from provider { AdminLoginViewModelFactory(instance()) }
         bind() from provider { InputOTPViewModelFactory(instance()) }
         bind() from provider { RegisterFaceViewModelFactory(instance()) }
+        bind() from provider { AdminDashboardViewModelFactory(instance()) }
     }
 
 }

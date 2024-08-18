@@ -1,6 +1,5 @@
 package com.lock.smartlocker.ui.base
 
-import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.lock.smartlocker.R
@@ -49,7 +48,7 @@ abstract class BaseViewModel() : ViewModel() {
     fun startTimer() {
         uiScope.launch {
             val timer = Timer()
-            timer.scheduleAtFixedRate(object : TimerTask() {
+            timer.schedule(object : TimerTask() {
                 override fun run() {
                     val currentTime = Date()
                     val formattedTime = SimpleDateFormat(

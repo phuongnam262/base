@@ -6,6 +6,7 @@ import com.lock.smartlocker.data.entities.request.ConsumerLoginRequest
 import com.lock.smartlocker.data.entities.responses.AdminLoginResponse
 import com.lock.smartlocker.data.entities.responses.BaseResponse
 import com.lock.smartlocker.data.entities.responses.ConsumerLoginResponse
+import com.lock.smartlocker.data.entities.responses.GetInformationStaffResponse
 import com.lock.smartlocker.data.entities.responses.GetListCategoryResponse
 import com.lock.smartlocker.data.entities.responses.GetSettingResponse
 import com.lock.smartlocker.data.entities.responses.TerminalLoginResponse
@@ -23,6 +24,10 @@ class ManagerRepository (
 
     suspend fun adminLogin(adminLoginRequest: AminLoginRequest): BaseResponse<AdminLoginResponse> {
         return apiRequest { api.provideLockerAPIService().adminLogin(adminLoginRequest) }
+    }
+
+    suspend fun getInformationStaff(): BaseResponse<GetInformationStaffResponse> {
+        return apiRequest { api.provideLockerAPIService().getInformationStaff() }
     }
 
 }
