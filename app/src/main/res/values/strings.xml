@@ -137,5 +137,7 @@
     <string name="face_exits">Face ID already exits</string>
     <string name="save_user_fail">Save user fail</string>
     <string name="face_not_found">Face not found</string>
+    <string name="face_register_success">Face Registered Successfully</string>
+    <string name="face_hello">Hello %1$s,/nYour Face ID has been successfully added.</string>
 
 </resources>

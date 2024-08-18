@@ -141,7 +141,9 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
     }
 
     override fun handleSuccess(personCode: String) {
-        Toast.makeText(activity, personCode, Toast.LENGTH_SHORT).show()
+        viewModel.showButtonProcess.postValue(false)
+        viewModel.titlePage.postValue(getString(R.string.face_register_success))
+        mViewDataBinding?.tvHeaderInfo?.text = getString(R.string.face_hello, personCode)
     }
 
     override fun faceNotFound() {

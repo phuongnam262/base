@@ -53,6 +53,7 @@ class RegisterFaceViewModel(
                                 addPerson(strBase64)
                             } else {
                                 mStatusText.postValue(R.string.face_exits)
+                                isErrorText.postValue(true)
                             }
                         } else {
                             addPerson(strBase64)
@@ -82,10 +83,22 @@ class RegisterFaceViewModel(
                 getResponse.errorCode.let {
                     if (it == ConstantUtils.ERROR_CODE_SUCCESS) {
                         val userLockerModel =
-                            UserLockerModel(0, personCodeGen, personCodeGen, "1", 0, "email@gmail.com")
+                            UserLockerModel(
+                                0,
+                                personCodeGen,
+                                personCodeGen,
+                                "1",
+                                0,
+                                "email@gmail.com"
+                            )
                         val saveUser = userLockerRepository.saveUser(userLockerModel)
                         if (saveUser > 0) {
-                            registerFaceListener?.handleSuccess(personCodeGen)
+                            userLockerModel.email?.let { it1 ->
+                                registerFaceListener?.handleSuccess(
+                                    personCodeGen,
+                                    it1
+                                )
+                            }
                         } else {
                             mMessage.postValue(R.string.save_user_fail)
                         }
