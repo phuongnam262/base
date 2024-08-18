@@ -1,6 +1,7 @@
 package com.lock.smartlocker.data.network
 
 import com.lock.smartlocker.data.network.services.FaceServives
+import com.lock.smartlocker.data.network.services.HardwareControlServices
 import com.lock.smartlocker.data.network.services.LockerServives
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -31,11 +32,27 @@ class LockerAPI(private val networkConnectionInterceptor: NetworkConnectionInter
             .build()
     }
 
+    private val hwcRetrofit by lazy {
+        val okkHttpclient = OkHttpClient.Builder()
+            .addInterceptor(networkConnectionInterceptor)
+            .addInterceptor(AuthInterceptor(false))
+            .build()
+        Retrofit.Builder()
+            .client(okkHttpclient)
+            .baseUrl("http://localhost:8532/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
     fun provideLockerAPIService(): LockerServives {
         return LockerServives(lockerRetrofit)
     }
 
     fun provideFaceAPIService(): FaceServives {
         return FaceServives(faceRetrofit)
+    }
+
+    fun provideHWCAPIService(): HardwareControlServices {
+        return HardwareControlServices(hwcRetrofit)
     }
 }

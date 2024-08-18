@@ -9,7 +9,8 @@ class AdminDashboardViewModel(
     private val managerRepository: ManagerRepository
 ) : BaseViewModel() {
 
-    val otpText = MutableLiveData<String>()
+    val numberLockerAvailable = MutableLiveData<Int>()
+    val numberItemFaulty = MutableLiveData<Int>()
 
     fun getInformationStaff() {
         ioScope.launch {
@@ -17,7 +18,8 @@ class AdminDashboardViewModel(
             managerRepository.getInformationStaff().apply {
                 if (isSuccessful) {
                     if (data != null) {
-
+                        numberLockerAvailable.postValue(data.lockerAvailable.size)
+                        numberItemFaulty.postValue(data.itemFaulty)
                     }
                 }else handleError(status)
             }

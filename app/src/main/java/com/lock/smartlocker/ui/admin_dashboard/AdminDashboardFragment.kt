@@ -35,10 +35,17 @@ class AdminDashboardFragment : BaseFragment<FragmentAdminDashboardBinding, Admin
         viewModel.startTimer()
         mViewDataBinding?.bottomMenu?.rlHome?.setOnClickListener(this)
         mViewDataBinding?.headerBar?.ivBack?.setOnClickListener(this)
+        mViewDataBinding?.llTopupItems?.setOnClickListener(this)
     }
 
     private fun initData(){
-
+        viewModel.getInformationStaff()
+        viewModel.numberLockerAvailable.observe(viewLifecycleOwner) {
+            mViewDataBinding?.tvTopupItems?.text = getString(R.string.topup_items, it.toString())
+        }
+        viewModel.numberItemFaulty.observe(viewLifecycleOwner) {
+            mViewDataBinding?.tvRetrieveFaulty?.text = getString(R.string.retrieve_faulty, it.toString())
+        }
     }
 
     override fun onClick(v: View?) {

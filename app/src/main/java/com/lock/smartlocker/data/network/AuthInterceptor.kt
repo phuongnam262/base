@@ -25,6 +25,7 @@ class AuthInterceptor(requireToken: Boolean) : Interceptor {
             val newRequest: Request? = if (requireToken){
                 chain.request().newBuilder()
                     .addHeader("api_token", PreferenceHelper.getString(ConstantUtils.API_TOKEN, ""))
+                    .addHeader("user_token", PreferenceHelper.getString(ConstantUtils.USER_TOKEN, ""))
                     .url(url)
                     .build()
             }else{

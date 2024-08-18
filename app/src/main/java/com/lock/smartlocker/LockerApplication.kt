@@ -6,7 +6,7 @@ import com.lock.smartlocker.data.db.AppDatabase
 import com.lock.smartlocker.data.network.LockerAPI
 import com.lock.smartlocker.data.network.NetworkConnectionInterceptor
 import com.lock.smartlocker.data.network.services.FaceServives
-import com.lock.smartlocker.data.network.services.HardwareControlServives
+import com.lock.smartlocker.data.network.services.HardwareControlServices
 import com.lock.smartlocker.data.network.services.LockerServives
 import com.lock.smartlocker.data.preference.PreferenceHelper
 import com.lock.smartlocker.data.repositories.ManagerRepository
@@ -67,7 +67,7 @@ class LockerApplication : Application(), KodeinAware {
         //bind Service
         bind() from provider { LockerServives(instance()) }
         bind() from provider { FaceServives(instance()) }
-        bind() from provider { HardwareControlServives.create(instance()) }
+        bind() from provider { HardwareControlServices(instance()) }
 
         //bind Repository
         bind() from singleton { UserFaceRepository(instance(), instance()) }

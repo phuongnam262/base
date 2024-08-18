@@ -44,7 +44,7 @@ interface LockerServives {
         @Body adminLoginRequest: AminLoginRequest
     ): Response<BaseResponse<AdminLoginResponse>>
 
-    @POST("/api/admin/get-information-staff")
+    @GET("/api/admin/get-information-staff")
     suspend fun getInformationStaff(): Response<BaseResponse<GetInformationStaffResponse>>
 
     @GET("/api/return/return-get-available-locker")

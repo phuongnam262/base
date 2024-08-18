@@ -111,6 +111,8 @@ abstract class BaseViewModel() : ViewModel() {
 
             ConstantUtils.SERIAL_NUMBER_IS_NO_LONGER_AVAILABLE -> {
                 mStatusText.postValue(R.string.serial_number_is_not_available)
+                isErrorText.postValue(true)
+            }
 
             ConstantUtils.ADMIN_WRONG_USERNAME_PASS -> {
                 mStatusText.postValue(R.string.error_username_password)
