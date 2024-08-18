@@ -52,8 +52,6 @@ class InputSerialNumberFragment : BaseFragment<FragmentInputSerialNumberBinding,
             R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
             R.id.btn_process -> {
                 val newSerialNumber = viewModel.serialNumber.value
-                println(newSerialNumber)
-                println(viewModel.isItemDetailVisible.value)
                 if (viewModel.isItemDetailVisible.value == true && newSerialNumber == viewModel.itemReturnData.value?.serialNumber) {
                     val dialog = CustomConfirmDialog.newInstance(
                         message = "Does this item require attention?",

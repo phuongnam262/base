@@ -69,6 +69,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="@dimen/dp_20"
+            app:imageUrl="@{viewmodel.modelImage}"
             app:itemReturn="@{viewmodel.itemReturnData}"
             android:layout_marginHorizontal="@dimen/dp_30"/>
 

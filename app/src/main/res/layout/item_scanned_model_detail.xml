@@ -5,6 +5,10 @@
 
     <data>
         <variable
+            name="imageUrl"
+            type="String" />
+
+        <variable
             name="itemReturn"
             type="com.lock.smartlocker.data.models.ItemReturn" />
     </data>
@@ -17,6 +21,7 @@
 
         <ImageView
             android:id="@+id/ivModel"
+            imageUrl="@{imageUrl}"
             android:layout_width="@dimen/dp_200"
             android:layout_height="@dimen/dp_200"
             android:background="@drawable/bg_border_ractangle_rounded"

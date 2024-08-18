@@ -66,7 +66,7 @@ class SelectAvailableLockerViewModel(
     }
 
     fun openLocker() {
-        // call api open locker với
+        // call api open locker với lockerId
         println(selectedLocker.value?.lockerId)
 
     }
