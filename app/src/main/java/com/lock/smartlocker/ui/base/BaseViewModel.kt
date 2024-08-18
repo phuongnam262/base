@@ -104,6 +104,16 @@ abstract class BaseViewModel() : ViewModel() {
                 isErrorText.postValue(true)
             }
 
+            ConstantUtils.DOOR_HAS_NOT_BEEN_CLOSE -> {
+                mStatusText.postValue(R.string.door_has_not_been_closed)
+                isErrorText.postValue(true)
+            }
+
+            ConstantUtils.SERIAL_NUMBER_IS_NO_LONGER_AVAILABLE -> {
+                mStatusText.postValue(R.string.serial_number_is_not_available)
+                isErrorText.postValue(true)
+            }
+
             else -> mMessage.postValue(R.string.error_all)
 
         }

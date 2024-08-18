@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.lock.smartlocker.ui.deposit_item.DepositItemViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:backgroundImage="@{viewmodel.imageBackgroundUrl}">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginVertical="@dimen/dp_20"
+            android:layout_marginHorizontal="@dimen/dp_30"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_header_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:text="@string/deposit_item"
+                android:textColor="@color/text_sub_color"
+                android:textSize="@dimen/sp_40" />
+
+            <TextView
+                android:id="@+id/tv_deposit_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginBottom="@dimen/dp_30"
+                android:text="@string/deposit_item_info"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/sp_18" />
+
+            <include
+                android:id="@+id/depositItem"
+                layout="@layout/item_deposit"
+                app:doorStatus="@{viewmodel.doorStatus}" />
+        </LinearLayout>
+
+        <include
+            android:id="@+id/bottom_menu"
+            layout="@layout/bottom_menu_1"
+            app:statusText="@{viewmodel.statusText}"
+            app:ownerText="@{viewmodel.ownerText}"
+            app:showStatusText="@{viewmodel.showStatusText}"
+            app:isErrorText="@{viewmodel.isErrorText}"
+            app:timerHour="@{viewmodel.timerHour}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

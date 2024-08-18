@@ -28,5 +28,7 @@ class ConstantUtils {
         const val LOGIN_WRONG_PASSWORD = "401-002"
         const val EMAIL_NOT_CORRECT_FORMAT = "422"
 
+        const val DOOR_HAS_NOT_BEEN_CLOSE = "423-001"
+        const val SERIAL_NUMBER_IS_NO_LONGER_AVAILABLE = "601"
     }
 }

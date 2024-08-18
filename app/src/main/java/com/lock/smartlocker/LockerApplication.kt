@@ -10,17 +10,23 @@ import com.lock.smartlocker.data.network.services.HardwareControlServives
 import com.lock.smartlocker.data.network.services.LockerServives
 import com.lock.smartlocker.data.preference.PreferenceHelper
 import com.lock.smartlocker.data.repositories.ManagerRepository
+import com.lock.smartlocker.data.repositories.ReturnRepository
 import com.lock.smartlocker.data.repositories.StartAppRepository
 import com.lock.smartlocker.data.repositories.UserFaceRepository
 import com.lock.smartlocker.ui.admin_login.AdminLoginViewModelFactory
+import com.lock.smartlocker.ui.deposit_item.DepositItemViewModelFactory
 import com.lock.smartlocker.ui.facedetect.FaceViewModelFactory
 import com.lock.smartlocker.ui.home.HomeViewModelFactory
+import com.lock.smartlocker.ui.input_serial_number.InputSerialNumberViewModelFactory
 import com.lock.smartlocker.ui.inputemail.InputEmailViewModel
 import com.lock.smartlocker.ui.inputemail.InputEmailViewModelFactory
 import com.lock.smartlocker.ui.inputotp.InputOTPViewModelFactory
 import com.lock.smartlocker.ui.manager_menu.ManagerMenuViewModelFactory
 import com.lock.smartlocker.ui.openlocker.OpenLockerViewModelFactory
 import com.lock.smartlocker.ui.register_face.RegisterFaceViewModelFactory
+import com.lock.smartlocker.ui.returns.ReturnViewModelFactory
+import com.lock.smartlocker.ui.select_available_locker.SelectAvailableLockerViewModelFactory
+import com.lock.smartlocker.ui.select_faulty.SelectFaultyViewModelFactory
 import com.lock.smartlocker.ui.splash.SplashViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -66,9 +72,10 @@ class LockerApplication : Application(), KodeinAware {
         bind() from singleton { UserFaceRepository(instance(), instance()) }
         bind() from singleton { StartAppRepository(instance(), instance()) }
         bind() from singleton { ManagerRepository(instance(), instance()) }
+        bind() from singleton { ReturnRepository(instance()) }
 
         //bind Factory
-        bind() from provider { HomeViewModelFactory(instance()) }
+        bind() from provider { HomeViewModelFactory(instance(), instance()) }
         bind() from provider { FaceViewModelFactory(instance()) }
         bind() from provider { OpenLockerViewModelFactory(instance()) }
         bind() from provider { SplashViewModelFactory(instance()) }
@@ -77,6 +84,11 @@ class LockerApplication : Application(), KodeinAware {
         bind() from provider { AdminLoginViewModelFactory(instance()) }
         bind() from provider { InputOTPViewModelFactory(instance()) }
         bind() from provider { RegisterFaceViewModelFactory(instance()) }
+        bind() from provider { ReturnViewModelFactory(instance()) }
+        bind() from provider { InputSerialNumberViewModelFactory(instance()) }
+        bind() from provider { SelectFaultyViewModelFactory() }
+        bind() from provider { SelectAvailableLockerViewModelFactory(instance()) }
+        bind() from provider { DepositItemViewModelFactory(instance()) }
     }
 
 }

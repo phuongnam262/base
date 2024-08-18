@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/return_navigation"
+    app:startDestination="@id/inputSerialNumberFragment">
+    <fragment
+        android:id="@+id/inputSerialNumberFragment"
+        android:name="com.lock.smartlocker.ui.input_serial_number.InputSerialNumberFragment"
+        android:label="InputSerialNumberFragment" >
+        <action
+            android:id="@+id/action_inputSerialNumberFragment_to_selectFaultyFragment"
+            app:destination="@id/selectFaultyFragment" />
+        <action
+            android:id="@+id/action_inputSerialNumberFragment_to_selectAvailableLockerFragment"
+            app:destination="@id/selectAvailableLockerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/selectFaultyFragment"
+        android:name="com.lock.smartlocker.ui.select_faulty.SelectFaultyFragment"
+        android:label="SelectFaultyFragment" >
+        <action
+            android:id="@+id/action_selectFaultyFragment_to_selectAvailableLockerFragment"
+            app:destination="@id/selectAvailableLockerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/selectAvailableLockerFragment"
+        android:name="com.lock.smartlocker.ui.select_available_locker.SelectAvailableLockerFragment"
+        android:label="fragment_select_available_locker"
+        tools:layout="@layout/fragment_select_available_locker" >
+        <action
+            android:id="@+id/action_selectAvailableLockerFragment_to_depositItemFragment"
+            app:destination="@id/depositItemFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/depositItemFragment"
+        android:name="com.lock.smartlocker.ui.deposit_item.DepositItemFragment"
+        android:label="DepositItemFragment" />
+</navigation>

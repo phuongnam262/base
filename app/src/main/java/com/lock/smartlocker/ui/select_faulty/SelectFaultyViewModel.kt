@@ -1,0 +1,50 @@
+package com.lock.smartlocker.ui.select_faulty
+
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import com.lock.smartlocker.data.entities.responses.GetListCategoryResponse
+import com.lock.smartlocker.data.models.Category
+import com.lock.smartlocker.data.preference.PreferenceHelper
+import com.lock.smartlocker.ui.base.BaseViewModel
+import com.lock.smartlocker.ui.input_serial_number.InputSerialNumberListener
+import com.lock.smartlocker.util.ConstantUtils
+
+class SelectFaultyViewModel(
+
+) : BaseViewModel() {
+    var selectFaultyListener: SelectFaultyListener? = null
+
+    val faultyReason = MutableLiveData<String>()
+
+    private val _spinnerItems = MutableLiveData<List<String>>()
+    val spinnerItems: LiveData<List<String>> = _spinnerItems
+
+
+
+    fun loadSpinnerItems(categoryId: String) {
+        val jsonCategory = PreferenceHelper.getString(ConstantUtils.LIST_CATEGORY, "")
+
+        if (jsonCategory.isNotEmpty()) {
+            try {
+                val categoriesResponseType = object : TypeToken<GetListCategoryResponse>() {}.type
+                val categoriesResponse: GetListCategoryResponse = Gson().fromJson(jsonCategory, categoriesResponseType)
+
+                // Lọc danh mục theo categoryId
+                val category = categoriesResponse.categories.find { it.categoryId == categoryId }
+
+                // Lấy reasonFaulties của danh mục được chọn
+                val reasonFaulties = category?.reasonFaulties?.distinct() ?: listOf("No faulties available")
+
+                _spinnerItems.value = reasonFaulties
+            } catch (e: Exception) {
+                _spinnerItems.value = listOf("Error parsing data")
+                e.printStackTrace()
+            }
+        } else {
+            _spinnerItems.value = listOf("No data available")
+        }
+    }
+}
+
