@@ -99,8 +99,14 @@ abstract class BaseViewModel() : ViewModel() {
                 mStatusText.postValue(R.string.login_error_1002)
                 isErrorText.postValue(true)
             }
+
             ConstantUtils.EMAIL_NOT_CORRECT_FORMAT -> {
                 mStatusText.postValue(R.string.email_not_correct_format)
+                isErrorText.postValue(true)
+            }
+
+            ConstantUtils.ADMIN_WRONG_USERNAME_PASS -> {
+                mStatusText.postValue(R.string.error_username_password)
                 isErrorText.postValue(true)
             }
 

@@ -127,6 +127,7 @@
     <string name="password">Password:</string>
     <string name="error_username_empty">Please enter username</string>
     <string name="error_password_empty">Please enter password</string>
+    <string name="error_username_password">Incorrect username or password</string>
 
     <!-- input OTP -->
     <string name="enter_otp_verify">Enter the OTP sent to your device to verify your account.</string>
@@ -140,6 +141,14 @@
     <string name="save_user_fail">Save user fail</string>
     <string name="face_not_found">Face not found</string>
     <string name="face_register_success">Face Registered Successfully</string>
-    <string name="face_hello">Hello %1$s,/nYour Face ID has been successfully added.</string>
+    <string name="face_hello">Hello %1$s,\nYour Face ID has been successfully added.</string>
+
+    <!-- Admin Dashboard -->
+    <string name="topup_items">TOPUP ITEMS\n(%1$s)</string>
+    <string name="retrieve_faulty">RETRIEVE FAULTY\n(%1$s)</string>
+    <string name="retrieve_items">RETRIEVE ITEMS</string>
+    <string name="manage_lockers">MANAGE LOCKERS</string>
+    <string name="settings">SETTINGS</string>
+    <string name="close_app">CLOSE APPLICATION</string>
 
 </resources>

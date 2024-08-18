@@ -68,4 +68,10 @@
     <style name="ShapeAppearanceOverlay.App.CornerSize50Percent" parent="">
         <item name="cornerSize">50%</item>
     </style>
+
+    <style name="MenuDashboardText">
+        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
 </resources>

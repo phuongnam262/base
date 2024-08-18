@@ -115,24 +115,22 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
      */
     @SuppressLint("InflateParams")
     open fun showLoading() {
-        if (!activity?.isFinishing!!) {
-            mDialog ?: let {
-                mDialog = Dialog(requireActivity())
-                val inflater =
-                    LayoutInflater.from(requireActivity()).inflate(R.layout.dialog_loading, null)
-                mDialog?.setContentView(inflater)
-                mDialog?.setCancelable(false)
-                mDialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        mDialog ?: let {
+            mDialog = Dialog(requireActivity())
+            val inflater =
+                LayoutInflater.from(requireActivity()).inflate(R.layout.dialog_loading, null)
+            mDialog?.setContentView(inflater)
+            mDialog?.setCancelable(false)
+            mDialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-                mDialog?.setOnShowListener {
-                    mDialog?.window?.decorView?.findViewById<CustomLoading>(R.id.custom_loading)
-                        ?.startAnimation()
-                }
+            mDialog?.setOnShowListener {
+                mDialog?.window?.decorView?.findViewById<CustomLoading>(R.id.custom_loading)
+                    ?.startAnimation()
             }
+        }
 
-            if (mDialog?.isShowing != true) {
-                mDialog?.show()
-            }
+        if (mDialog?.isShowing != true) {
+            mDialog?.show()
         }
     }
 
@@ -140,7 +138,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
      * hide progress
      */
     open fun hideLoading() {
-        if (activity?.isFinishing!! && mDialog?.isShowing == true) {
+        if (mDialog?.isShowing == true) {
             mDialog?.dismiss()
             mDialog?.window?.decorView?.findViewById<CustomLoading>(R.id.custom_loading)
                 ?.stopAnimation()
