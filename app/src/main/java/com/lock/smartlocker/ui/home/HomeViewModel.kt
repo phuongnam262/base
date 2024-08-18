@@ -2,8 +2,11 @@ package com.lock.smartlocker.ui.home
 
 import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.common.api.ApiException
+import com.google.gson.Gson
 import com.lock.smartlocker.R
 import com.lock.smartlocker.data.entities.AddGroupModel
+import com.lock.smartlocker.data.preference.PreferenceHelper
+import com.lock.smartlocker.data.repositories.ReturnRepository
 import com.lock.smartlocker.data.repositories.UserFaceRepository
 import com.lock.smartlocker.ui.base.BaseViewModel
 import com.lock.smartlocker.util.ConstantUtils
@@ -14,7 +17,8 @@ import okhttp3.Request
 import java.io.IOException
 
 class HomeViewModel(
-    private val userLockerRepository: UserFaceRepository
+    private val userLockerRepository: UserFaceRepository,
+    private val returnRepository: ReturnRepository
 ) : BaseViewModel() {
     var homeListener: HomeListener? = null
     var isServerOff = MutableLiveData<Boolean>()
@@ -57,4 +61,19 @@ class HomeViewModel(
         }
     }
 
+    fun getListReturnAvailableLockers() {
+        ioScope.launch {
+            returnRepository.listReturnAvailableLockers().apply {
+                if (isSuccessful) {
+                    if (data != null) {
+                        if (data.locker_available.isNotEmpty()) {
+                            homeListener?.getReturnAvailableLockersSuccess()
+                        } else {
+                            // show error snack
+                        }
+                    }
+                }else handleError(status)
+            }
+        }
+    }
 }

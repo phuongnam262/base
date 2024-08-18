@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="viewmodel"
+            type="com.lock.smartlocker.ui.input_serial_number.InputSerialNumberViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/header_bar"
+            layout="@layout/header_navigation"
+            app:nameLocker="@{viewmodel.terminalName}"
+            app:timer="@{viewmodel.timerString}"
+            app:title="@{viewmodel.titlePage}" />
+
+        <TextView
+            android:id="@+id/tv_header_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/enter_serial_number_verify"
+            android:textColor="@color/text_sub_color"
+            android:textSize="@dimen/sp_18"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/header_bar"/>
+
+        <TextView
+            android:id="@+id/tv_input_serial_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_30"
+            android:text="@string/enter_serial_number"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/sp_18"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_header_info" />
+
+        <EditText
+            android:id="@+id/et_serial_number"
+            style="@style/CustomEditTextStyle"
+            android:layout_width="0dp"
+            android:hint="..."
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginStart="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_15"
+            android:layout_marginEnd="@dimen/dp_30"
+            android:text="@={viewmodel.serialNumber}"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_input_serial_number"
+            tools:ignore="TextFields" />
+
+        <include
+            layout="@layout/item_scanned_model_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="@{viewmodel.isItemDetailVisible ? View.VISIBLE : View.GONE}"
+            app:layout_constraintTop_toBottomOf="@id/et_serial_number"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/dp_20"
+            app:imageUrl="@{viewmodel.modelImage}"
+            app:itemReturn="@{viewmodel.itemReturnData}"
+            android:layout_marginHorizontal="@dimen/dp_30"/>
+
+
+        <include
+            android:id="@+id/bottom_menu"
+            layout="@layout/bottom_menu_1"
+            app:statusText="@{viewmodel.statusText}"
+            app:ownerText="@{viewmodel.ownerText}"
+            app:showStatusText="@{viewmodel.showStatusText}"
+            app:isErrorText="@{viewmodel.isErrorText}"
+            app:timerHour="@{viewmodel.timerHour}" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
