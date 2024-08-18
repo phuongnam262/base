@@ -8,6 +8,7 @@ import com.lock.smartlocker.data.preference.PreferenceHelper
 import com.lock.smartlocker.data.repositories.ManagerRepository
 import com.lock.smartlocker.ui.base.BaseViewModel
 import com.lock.smartlocker.util.ConstantUtils
+import com.lock.smartlocker.util.Coroutines
 import kotlinx.coroutines.launch
 
 class AdminLoginViewModel(
@@ -16,7 +17,7 @@ class AdminLoginViewModel(
     var showPassword = MutableLiveData<Boolean>()
     val username = MutableLiveData<String>()
     val password = MutableLiveData<String>()
-    val adminLoginResponse = MutableLiveData<AdminLoginResponse?>()
+    var adminLoginListener : AdminLoginListener? = null
 
     fun clickShowPassword() {
         showPassword.value = showPassword.value != true
@@ -42,9 +43,7 @@ class AdminLoginViewModel(
                 if (isSuccessful) {
 
                     if (data != null) {
-                        uiScope.launch {
-                            adminLoginResponse.value = data
-                        }
+                        adminLoginListener?.adminLoginSuccess(data)
                         PreferenceHelper.writeString(ConstantUtils.USER_TOKEN, data.staff.userToken)
                         showStatusText.postValue(false)
                     }

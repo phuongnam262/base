@@ -7,6 +7,7 @@ import com.lock.smartlocker.data.entities.request.ReturnItemRequest
 import com.lock.smartlocker.data.entities.responses.AdminLoginResponse
 import com.lock.smartlocker.data.entities.responses.BaseResponse
 import com.lock.smartlocker.data.entities.responses.ConsumerLoginResponse
+import com.lock.smartlocker.data.entities.responses.GetInformationStaffResponse
 import com.lock.smartlocker.data.entities.responses.GetListCategoryResponse
 import com.lock.smartlocker.data.entities.responses.GetSettingResponse
 import com.lock.smartlocker.data.entities.responses.ListReturnAvailableLockerResponse
@@ -42,6 +43,9 @@ interface LockerServives {
     suspend fun adminLogin(
         @Body adminLoginRequest: AminLoginRequest
     ): Response<BaseResponse<AdminLoginResponse>>
+
+    @POST("/api/admin/get-information-staff")
+    suspend fun getInformationStaff(): Response<BaseResponse<GetInformationStaffResponse>>
 
     @GET("/api/return/return-get-available-locker")
     suspend fun listReturnAvailableLockers(): Response<BaseResponse<ListReturnAvailableLockerResponse>>

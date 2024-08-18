@@ -7,14 +7,17 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
+import com.lock.smartlocker.data.entities.responses.AdminLoginResponse
 import com.lock.smartlocker.databinding.FragmentAdminLoginBinding
 import com.lock.smartlocker.ui.base.BaseFragment
+import com.lock.smartlocker.util.Coroutines
+import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 
 class AdminLoginFragment : BaseFragment<FragmentAdminLoginBinding, AdminLoginViewModel>(),
-    KodeinAware, View.OnClickListener {
+    KodeinAware, View.OnClickListener, AdminLoginListener {
 
     override val kodein by kodein()
     private val factory: AdminLoginViewModelFactory by instance()
@@ -27,6 +30,7 @@ class AdminLoginFragment : BaseFragment<FragmentAdminLoginBinding, AdminLoginVie
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mViewModel?.adminLoginListener = this
         initView()
         initData()
     }
@@ -40,11 +44,7 @@ class AdminLoginFragment : BaseFragment<FragmentAdminLoginBinding, AdminLoginVie
     }
 
     private fun initData() {
-        activity?.let { activity ->
-            mViewModel?.adminLoginResponse?.observe(activity, Observer {
-                Toast.makeText(activity, it?.staff?.email, Toast.LENGTH_SHORT).show()
-            })
-        }
+
     }
 
     override fun onClick(v: View?) {
@@ -55,5 +55,9 @@ class AdminLoginFragment : BaseFragment<FragmentAdminLoginBinding, AdminLoginVie
                 viewModel.adminLogin()
             }
         }
+    }
+
+    override fun adminLoginSuccess(adminLoginResponse: AdminLoginResponse) {
+        navigateTo(R.id.action_adminLoginFragment_to_adminDashboardFragment, null)
     }
 }

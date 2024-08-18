@@ -150,6 +150,7 @@
     <string name="manage_lockers">MANAGE LOCKERS</string>
     <string name="settings">SETTINGS</string>
     <string name="close_app">CLOSE APPLICATION</string>
+    <string name="admin_menu">Menu</string>
 
     <!-- Scan serial number   -->
     <string name="scan_or_enter_serial_number">Scan or Enter Serial Number</string>

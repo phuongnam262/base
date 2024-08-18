@@ -3,8 +3,8 @@ package com.lock.smartlocker
 import android.app.Application
 import android.os.Process
 import com.lock.smartlocker.data.db.AppDatabase
-import com.lock.smartlocker.data.network.NetworkConnectionInterceptor
 import com.lock.smartlocker.data.network.LockerAPI
+import com.lock.smartlocker.data.network.NetworkConnectionInterceptor
 import com.lock.smartlocker.data.network.services.FaceServives
 import com.lock.smartlocker.data.network.services.HardwareControlServives
 import com.lock.smartlocker.data.network.services.LockerServives
@@ -13,6 +13,7 @@ import com.lock.smartlocker.data.repositories.ManagerRepository
 import com.lock.smartlocker.data.repositories.ReturnRepository
 import com.lock.smartlocker.data.repositories.StartAppRepository
 import com.lock.smartlocker.data.repositories.UserFaceRepository
+import com.lock.smartlocker.ui.admin_dashboard.AdminDashboardViewModelFactory
 import com.lock.smartlocker.ui.admin_login.AdminLoginViewModelFactory
 import com.lock.smartlocker.ui.deposit_item.DepositItemViewModelFactory
 import com.lock.smartlocker.ui.facedetect.FaceViewModelFactory
@@ -84,6 +85,7 @@ class LockerApplication : Application(), KodeinAware {
         bind() from provider { AdminLoginViewModelFactory(instance()) }
         bind() from provider { InputOTPViewModelFactory(instance()) }
         bind() from provider { RegisterFaceViewModelFactory(instance()) }
+        bind() from provider { AdminDashboardViewModelFactory(instance()) }
         bind() from provider { ReturnViewModelFactory(instance()) }
         bind() from provider { InputSerialNumberViewModelFactory(instance()) }
         bind() from provider { SelectFaultyViewModelFactory() }
