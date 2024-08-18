@@ -140,7 +140,7 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
         }
     }
 
-    override fun handleSuccess(personCode: String) {
+    override fun handleSuccess(personCode: String, email: String) {
         viewModel.showButtonProcess.postValue(false)
         viewModel.titlePage.postValue(getString(R.string.face_register_success))
         mViewDataBinding?.tvHeaderInfo?.text = getString(R.string.face_hello, personCode)

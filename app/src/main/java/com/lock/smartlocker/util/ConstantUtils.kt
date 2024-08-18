@@ -7,6 +7,7 @@ class ConstantUtils {
         const val TIME_DELAY = 5000
 
         const val API_TOKEN = "API_TOKEN"
+        const val USER_TOKEN = "USER_TOKEN"
         const val TERMINAL_LOGIN = "TERMINAL_LOGIN"
         const val TERMINAL_NAME   = "TERMINAL_NAME"
         const val GET_SETTING = "GET_SETTING"

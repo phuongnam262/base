@@ -1,0 +1,11 @@
+# Log files
+*.log
+
+# Maven
+target/
+dist/
+
+# JetBrains IDE
+.idea/
+.gradle/
+

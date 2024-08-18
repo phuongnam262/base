@@ -1,6 +1,8 @@
 package com.lock.smartlocker.data.network.services
 
+import com.lock.smartlocker.data.entities.request.AminLoginRequest
 import com.lock.smartlocker.data.entities.request.ConsumerLoginRequest
+import com.lock.smartlocker.data.entities.responses.AdminLoginResponse
 import com.lock.smartlocker.data.entities.responses.BaseResponse
 import com.lock.smartlocker.data.entities.responses.ConsumerLoginResponse
 import com.lock.smartlocker.data.entities.responses.GetListCategoryResponse
@@ -29,8 +31,13 @@ interface LockerServives {
 
     @POST("/api/consumer/consumer-login")
     suspend fun consumerLogin(
-        @Body consumerLoginResponse: ConsumerLoginRequest
+        @Body consumerLoginRequest: ConsumerLoginRequest
     ): Response<BaseResponse<ConsumerLoginResponse>>
+
+    @POST("/api/admin/admin-login")
+    suspend fun adminLogin(
+        @Body adminLoginRequest: AminLoginRequest
+    ): Response<BaseResponse<AdminLoginResponse>>
 
     companion object {
         operator fun invoke(retrofit: Retrofit): LockerServives {

@@ -74,7 +74,7 @@ class LockerApplication : Application(), KodeinAware {
         bind() from provider { SplashViewModelFactory(instance()) }
         bind() from provider { ManagerMenuViewModelFactory(instance()) }
         bind() from provider { InputEmailViewModelFactory(instance()) }
-        bind() from provider { AdminLoginViewModelFactory() }
+        bind() from provider { AdminLoginViewModelFactory(instance()) }
         bind() from provider { InputOTPViewModelFactory(instance()) }
         bind() from provider { RegisterFaceViewModelFactory(instance()) }
     }

@@ -2,6 +2,8 @@ package com.lock.smartlocker.ui.admin_login
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
@@ -38,7 +40,11 @@ class AdminLoginFragment : BaseFragment<FragmentAdminLoginBinding, AdminLoginVie
     }
 
     private fun initData() {
-
+        activity?.let { activity ->
+            mViewModel?.adminLoginResponse?.observe(activity, Observer {
+                Toast.makeText(activity, it?.staff?.email, Toast.LENGTH_SHORT).show()
+            })
+        }
     }
 
     override fun onClick(v: View?) {
@@ -46,7 +52,7 @@ class AdminLoginFragment : BaseFragment<FragmentAdminLoginBinding, AdminLoginVie
             R.id.rl_home -> activity?.finish()
             R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
             R.id.btn_process -> {
-
+                viewModel.adminLogin()
             }
         }
     }

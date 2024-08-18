@@ -125,6 +125,8 @@
     <string name="enter_username_continue">Enter your username to continue.</string>
     <string name="username">Username:</string>
     <string name="password">Password:</string>
+    <string name="error_username_empty">Please enter username</string>
+    <string name="error_password_empty">Please enter password</string>
 
     <!-- input OTP -->
     <string name="enter_otp_verify">Enter the OTP sent to your device to verify your account.</string>

@@ -57,6 +57,6 @@ class SplashViewModel(
                     }
                 }else handleError(status)
             }
-        }.invokeOnCompletion { mLoading.postValue(false) }
+        }
     }
 }
