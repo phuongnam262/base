@@ -20,6 +20,7 @@ import com.lock.smartlocker.R
 import com.lock.smartlocker.databinding.ActivityHomeBinding
 import com.lock.smartlocker.ui.base.BaseActivity
 import com.lock.smartlocker.ui.manager_menu.ManagerMenuActivity
+import com.lock.smartlocker.ui.returns.ReturnActivity
 import com.lock.smartlocker.util.ConstantUtils
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
@@ -140,5 +141,9 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeLis
                 }
             }
         }
+    }
+
+    override fun getReturnAvailableLockersSuccess() {
+        startActivity(ReturnActivity::class.java)
     }
 }

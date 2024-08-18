@@ -30,5 +30,7 @@ class ConstantUtils {
         const val ADMIN_WRONG_USERNAME_PASS = "601"
 
 
+        const val DOOR_HAS_NOT_BEEN_CLOSE = "423-001"
+        const val SERIAL_NUMBER_IS_NO_LONGER_AVAILABLE = "601"
     }
 }

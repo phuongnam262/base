@@ -151,4 +151,17 @@
     <string name="settings">SETTINGS</string>
     <string name="close_app">CLOSE APPLICATION</string>
 
+    <!-- Scan serial number   -->
+    <string name="scan_or_enter_serial_number">Scan or Enter Serial Number</string>
+    <string name="enter_serial_number_verify">Please scan the serial number using the barcode reader below or enter it manually.</string>
+    <string name="enter_serial_number">Enter Serial Number</string>
+    <string name="select_a_faulty">Select A Faulty Reason</string>
+    <string name="select_faulty_reason_info">The faulty reason helps the administrator understand the current state of the items.\nIf none of the common reasons match your situation, please enter your own.</string>
+    <string name="select_available_locker_info">Choose a locker to store your items. \nOnce selected, the locker door will automatically open. </string>
+    <string name="select_an_available_locker">Select An Available Locker</string>
+    <string name="deposit_item">Deposit Item</string>
+    <string name="deposit_item_info">Please deposit the item into the opening locker and close the door.
+locker will auto-trigger confirmation after 10 seconds or when you tap confirm button.</string>
+    <string name="door_has_not_been_closed">Door has not been closed. Tap CONFIRM to continue.</string>
+    <string name="serial_number_is_not_available">This Serial number is no longer available</string>
 </resources>
