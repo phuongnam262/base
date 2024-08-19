@@ -22,8 +22,8 @@
         <ImageView
             android:id="@+id/ivModel"
             imageUrl="@{imageUrl}"
-            android:layout_width="@dimen/dp_200"
-            android:layout_height="@dimen/dp_200"
+            android:layout_width="@dimen/dp_140"
+            android:layout_height="@dimen/dp_140"
             android:background="@drawable/bg_border_ractangle_rounded"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -48,7 +48,7 @@
                 android:fontFamily="@font/segoe_ui_regular"
                 android:text="SERIAL NUMBER"
                 android:textColor="@color/colorBlack"
-                android:textSize="@dimen/sp_20" />
+                android:textSize="@dimen/sp_16" />
 
             <TextView
                 android:id="@+id/tvSerialNumberValue"
@@ -58,10 +58,10 @@
                 android:background="@drawable/bg_model_item_info"
                 android:fontFamily="@font/segoe_ui_semibold"
                 android:letterSpacing="0.05"
-                android:padding="@dimen/dp_10"
+                android:padding="@dimen/dp_6"
                 android:text="@{itemReturn.serialNumber}"
                 android:textColor="@color/colorBlack"
-                android:textSize="@dimen/sp_20"
+                android:textSize="@dimen/sp_16"
                 tools:text="00032021003232"/>
         </LinearLayout>
 
@@ -83,7 +83,7 @@
                 android:fontFamily="@font/segoe_ui_regular"
                 android:text="MODEL"
                 android:textColor="@color/colorBlack"
-                android:textSize="@dimen/sp_20" />
+                android:textSize="@dimen/sp_16" />
 
             <TextView
                 android:id="@+id/tvModelValue"
@@ -93,11 +93,11 @@
                 android:background="@drawable/bg_model_item_info"
                 android:fontFamily="@font/segoe_ui_semibold"
                 android:letterSpacing="0.05"
-                android:padding="@dimen/dp_10"
+                android:padding="@dimen/dp_8"
                 android:text="@{itemReturn.modelName}"
                 tools:text="SSD 480GB Sandisk E30"
                 android:textColor="@color/colorBlack"
-                android:textSize="@dimen/sp_20" />
+                android:textSize="@dimen/sp_16" />
         </LinearLayout>
 
         <LinearLayout
@@ -118,7 +118,7 @@
                 android:fontFamily="@font/segoe_ui_regular"
                 android:text="CATEGORY"
                 android:textColor="@color/colorBlack"
-                android:textSize="@dimen/sp_20" />
+                android:textSize="@dimen/sp_16" />
 
             <TextView
                 android:id="@+id/tvCategoryValue"
@@ -128,11 +128,11 @@
                 android:background="@drawable/bg_model_item_info"
                 android:fontFamily="@font/segoe_ui_semibold"
                 android:letterSpacing="0.05"
-                android:padding="@dimen/dp_10"
+                android:padding="@dimen/dp_8"
                 android:text="@{itemReturn.categoryName}"
                 tools:text="HARD DISK"
                 android:textColor="@color/colorBlack"
-                android:textSize="@dimen/sp_20" />
+                android:textSize="@dimen/sp_16" />
         </LinearLayout>
 
         <LinearLayout
@@ -153,7 +153,7 @@
                 android:fontFamily="@font/segoe_ui_regular"
                 android:text="LOANEE EMAIL"
                 android:textColor="@color/colorBlack"
-                android:textSize="@dimen/sp_20" />
+                android:textSize="@dimen/sp_16" />
 
             <TextView
                 android:id="@+id/tvLoaneeEmailValue"
@@ -163,11 +163,11 @@
                 android:background="@drawable/bg_model_item_info"
                 android:fontFamily="@font/segoe_ui_semibold"
                 android:letterSpacing="0.05"
-                android:padding="@dimen/dp_10"
+                android:padding="@dimen/dp_8"
                 android:text="@{itemReturn.loaneeEmail}"
                 tools:text="example_123@sample.com"
                 android:textColor="@color/colorBlack"
-                android:textSize="@dimen/sp_20" />
+                android:textSize="@dimen/sp_16" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

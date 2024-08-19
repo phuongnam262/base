@@ -21,7 +21,8 @@ class SelectFaultyViewModel(
     private val _spinnerItems = MutableLiveData<List<String>>()
     val spinnerItems: LiveData<List<String>> = _spinnerItems
 
-
+    private val _selectedSpinnerItem = MutableLiveData<String>()
+    val selectedSpinnerItem: LiveData<String> = _selectedSpinnerItem
 
     fun loadSpinnerItems(categoryId: String) {
         val jsonCategory = PreferenceHelper.getString(ConstantUtils.LIST_CATEGORY, "")
