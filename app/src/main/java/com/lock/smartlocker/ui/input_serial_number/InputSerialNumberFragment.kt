@@ -19,6 +19,13 @@ class InputSerialNumberFragment : BaseFragment<FragmentInputSerialNumberBinding,
     InputSerialNumberListener,
     CustomConfirmDialog.ConfirmationDialogListener{
 
+    companion object {
+        const val CATEGORY_ID_KEY = "category_id"
+        const val RETURN_ITEM_REQUEST_KEY = "return_item_request"
+        const val CONFIRMATION_DIALOG_TAG = "confirmation_dialog"
+    }
+
+
     override val kodein by kodein()
     private val factory: InputSerialNumberViewModelFactory by instance()
     override val layoutId: Int = R.layout.fragment_input_serial_number
@@ -56,7 +63,7 @@ class InputSerialNumberFragment : BaseFragment<FragmentInputSerialNumberBinding,
                     val dialog = CustomConfirmDialog.newInstance(
                         message = "Does this item require attention?",
                     )
-                    dialog.show(childFragmentManager, "confirmation_dialog")
+                    dialog.show(childFragmentManager, CONFIRMATION_DIALOG_TAG)
                 } else {
                     viewModel.getItemReturn()
                 }
@@ -76,13 +83,11 @@ class InputSerialNumberFragment : BaseFragment<FragmentInputSerialNumberBinding,
     fun navigateToSelectFaultyFragment(categoryId: String) {
         val returnItemRequest = ReturnItemRequest(
             serial_number = viewModel.serialNumber.value,
-            locker_id = "",
             isFaulty = true,
-            reason_faulty = ""
         )
         val bundle = Bundle().apply {
-            putString("category_id", categoryId)
-            putSerializable( "return_item_request", returnItemRequest)
+            putString(CATEGORY_ID_KEY, categoryId)
+            putSerializable(RETURN_ITEM_REQUEST_KEY, returnItemRequest)
         }
         navigateTo(R.id.action_inputSerialNumberFragment_to_selectFaultyFragment, bundle)
     }
@@ -90,12 +95,10 @@ class InputSerialNumberFragment : BaseFragment<FragmentInputSerialNumberBinding,
     fun navigateToSelectAvailableLockerFragment() {
         val returnItemRequest = ReturnItemRequest(
             serial_number = viewModel.serialNumber.value,
-            locker_id = "",
             isFaulty = false,
-            reason_faulty = ""
         )
         val bundle = Bundle().apply {
-            putSerializable( "return_item_request", returnItemRequest)
+            putSerializable( RETURN_ITEM_REQUEST_KEY, returnItemRequest)
         }
         navigateTo(R.id.action_inputSerialNumberFragment_to_selectAvailableLockerFragment, bundle)
     }

@@ -26,7 +26,6 @@ class InputSerialNumberViewModel(
         ioScope.launch {
             val param = GetItemReturnRequest()
             param.serial_number = serialNumber.value
-
             returnRepository.getItemReturn(param).apply {
                 if (isSuccessful) {
                     if (data != null ) {
@@ -36,7 +35,10 @@ class InputSerialNumberViewModel(
                     } else {
                         isItemDetailVisible.postValue(false)
                     }
-                } else handleError(status)
+                } else {
+                    handleError(status)
+                    isItemDetailVisible.postValue(false)
+                }
             }
         }
     }
