@@ -30,5 +30,14 @@
         android:id="@+id/adminDashboardFragment"
         android:name="com.lock.smartlocker.ui.admin_dashboard.AdminDashboardFragment"
         android:label="@string/admin_menu"
-        tools:layout="@layout/fragment_admin_dashboard" />
+        tools:layout="@layout/fragment_admin_dashboard" >
+        <action
+            android:id="@+id/action_adminDashboardFragment_to_inputSerialNumberFragment2"
+            app:destination="@id/inputSerialNumberFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/inputSerialNumberFragment2"
+        android:name="com.lock.smartlocker.ui.input_serial_number.InputSerialNumberFragment"
+        android:label="fragment_input_serial_number"
+        tools:layout="@layout/fragment_input_serial_number" />
 </navigation>

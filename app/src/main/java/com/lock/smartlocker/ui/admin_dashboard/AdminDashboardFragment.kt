@@ -52,6 +52,11 @@ class AdminDashboardFragment : BaseFragment<FragmentAdminDashboardBinding, Admin
         when(v?.id){
             R.id.rl_home -> activity?.finish()
             R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
+            R.id.ll_topup_items -> {
+                if (viewModel.numberLockerAvailable.value != 0) {
+                    navigateTo(R.id.action_adminDashboardFragment_to_inputSerialNumberFragment2, null)
+                }else viewModel.mMessage.postValue(R.string.error_no_available_locker)
+            }
         }
     }
 }

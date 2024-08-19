@@ -151,6 +151,7 @@
     <string name="settings">SETTINGS</string>
     <string name="close_app">CLOSE APPLICATION</string>
     <string name="admin_menu">Menu</string>
+    <string name="error_no_available_locker">No available lockers for topup at this time</string>
 
     <!-- Scan serial number   -->
     <string name="scan_or_enter_serial_number">Scan or Enter Serial Number</string>
