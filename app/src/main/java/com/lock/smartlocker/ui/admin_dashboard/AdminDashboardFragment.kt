@@ -32,7 +32,6 @@ class AdminDashboardFragment : BaseFragment<FragmentAdminDashboardBinding, Admin
 
     private fun initView(){
         viewModel.titlePage.postValue(getString(R.string.admin_menu))
-        viewModel.startTimer()
         mViewDataBinding?.bottomMenu?.rlHome?.setOnClickListener(this)
         mViewDataBinding?.headerBar?.ivBack?.setOnClickListener(this)
         mViewDataBinding?.llTopupItems?.setOnClickListener(this)

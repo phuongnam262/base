@@ -32,7 +32,6 @@ class InputOTPFragment : BaseFragment<FragmentInputOtpBinding, InputOTPViewModel
     private fun initView(){
         viewModel.titlePage.postValue(getString(R.string.auth_required))
         mViewDataBinding?.btnResendOtp?.setOnClickListener(this)
-        viewModel.startTimer()
         mViewDataBinding?.bottomMenu?.rlHome?.setOnClickListener(this)
         mViewDataBinding?.bottomMenu?.btnProcess?.setOnClickListener(this)
         mViewDataBinding?.headerBar?.ivBack?.setOnClickListener(this)

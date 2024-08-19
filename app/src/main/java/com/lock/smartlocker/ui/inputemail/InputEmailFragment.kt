@@ -33,7 +33,6 @@ class InputEmailFragment : BaseFragment<FragmentInputEmailBinding, InputEmailVie
     }
 
     private fun initView(){
-        viewModel.startTimer()
         viewModel.titlePage.postValue(getString(R.string.auth_required))
         viewModel.spinnerItems.observe(viewLifecycleOwner) { items ->
             val adapter = ArrayAdapter(
