@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Base64
 import android.util.Log
@@ -61,6 +62,7 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
     private var lensFacing = CameraSelector.LENS_FACING_FRONT
     private var cameraSelector: CameraSelector? = null
     private var imageCapture: ImageCapture? = null
+    private var isExited: Boolean = false
 
     companion object {
         private const val TAG = "CameraXLivePreview"
@@ -134,7 +136,12 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
             R.id.rl_home -> activity?.finish()
             R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
             R.id.btn_process -> {
-
+                if (isExited){
+                    isExited = false
+                    viewModel.showStatusText.value = false
+                    FaceDetectorProcessor.isSuccess = false
+                    bindAnalysisUseCase()
+                }
             }
         }
     }
@@ -148,6 +155,11 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
     override fun faceNotFound() {
         FaceDetectorProcessor.isSuccess = false
         bindAnalysisUseCase()
+    }
+
+    override fun faceExited() {
+        mViewDataBinding?.bottomMenu?.btnProcess?.text = getString(R.string.btn_retry)
+        isExited = true
     }
 
     private fun bindAllCameraUseCases() {
@@ -168,14 +180,14 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
         }
 
         val builder = Preview.Builder()
-        /*if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O){
-            previewUseCase?.targetRotation = Surface.ROTATION_180
-        }else {
-            builder.setTargetRotation(Surface.ROTATION_180)
-        }*/
+//        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O){
+//            previewUseCase?.targetRotation = Surface.ROTATION_180
+//        }else {
+//            builder.setTargetRotation(Surface.ROTATION_180)
+//        }
         previewUseCase = builder.build()
-        imageCapture = ImageCapture.Builder().setTargetRotation(Surface.ROTATION_0).build()
-        previewUseCase!!.setSurfaceProvider(mViewDataBinding?.previewView?.getSurfaceProvider())
+        imageCapture = ImageCapture.Builder().setTargetRotation(Surface.ROTATION_180).build()
+        previewUseCase!!.setSurfaceProvider(mViewDataBinding?.previewView?.surfaceProvider)
         camera =
             cameraProvider!!.bindToLifecycle(
                 this,

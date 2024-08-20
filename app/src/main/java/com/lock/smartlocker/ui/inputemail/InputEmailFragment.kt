@@ -2,6 +2,7 @@ package com.lock.smartlocker.ui.inputemail
 
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.lifecycle.ViewModelProvider
 import com.lock.smartlocker.BR
@@ -25,6 +26,8 @@ class InputEmailFragment : BaseFragment<FragmentInputEmailBinding, InputEmailVie
     override val viewModel: InputEmailViewModel
         get() = ViewModelProvider(this, factory)[InputEmailViewModel::class.java]
 
+    private val items = listOf("@gmail.com", "@yahoo.com", "@hotmail.com", "@edu")
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.inputEmailListener = this
@@ -34,17 +37,26 @@ class InputEmailFragment : BaseFragment<FragmentInputEmailBinding, InputEmailVie
 
     private fun initView(){
         viewModel.titlePage.postValue(getString(R.string.auth_required))
-        viewModel.spinnerItems.observe(viewLifecycleOwner) { items ->
-            val adapter = ArrayAdapter(
-                requireContext(),
-                android.R.layout.simple_spinner_item,
-                items
-            )
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            mViewDataBinding?.spiEmail?.adapter = adapter
-            viewModel.subEmail.value = items[0]
+
+        val adapter = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_spinner_item,
+            items
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        mViewDataBinding?.spiEmail?.adapter = adapter
+        viewModel.subEmail.value = items[0]
+
+        mViewDataBinding?.spiEmail?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                val subEmail = parent.getItemAtPosition(position) as String
+                viewModel.subEmail.value = subEmail
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Do nothing
+            }
         }
-        viewModel.loadSpinnerItems()
         mViewDataBinding?.bottomMenu?.rlHome?.setOnClickListener(this)
         mViewDataBinding?.bottomMenu?.btnProcess?.setOnClickListener(this)
         mViewDataBinding?.headerBar?.ivBack?.setOnClickListener(this)

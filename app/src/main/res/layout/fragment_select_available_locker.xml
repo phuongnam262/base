@@ -61,6 +61,7 @@
             app:showStatusText="@{viewmodel.showStatusText}"
             app:isErrorText="@{viewmodel.isErrorText}"
             app:timerHour="@{viewmodel.timerHour}"
+            app:showProcessButton="@{viewmodel.showButtonProcess}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />

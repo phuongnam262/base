@@ -58,6 +58,7 @@
             android:layout_marginEnd="@dimen/dp_30"
             android:text="@={viewmodel.otpText}"
             android:textAlignment="center"
+            android:enabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_input_username"
@@ -70,6 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="@string/resend_otp_button"
+            android:enabled="false"
             android:background="@drawable/bg_button_gray"
             android:layout_marginTop="@dimen/dp_20"
             app:layout_constraintTop_toBottomOf="@+id/et_otp"
@@ -82,6 +84,7 @@
             app:ownerText="@{viewmodel.ownerText}"
             app:showStatusText="@{viewmodel.showStatusText}"
             app:isErrorText="@{viewmodel.isErrorText}"
-            app:timerHour="@{viewmodel.timerHour}" />
+            app:timerHour="@{viewmodel.timerHour}"
+            app:showProcessButton="@{viewmodel.showButtonProcess}"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

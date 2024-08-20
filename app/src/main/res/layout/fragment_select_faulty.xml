@@ -78,6 +78,7 @@
             app:ownerText="@{viewmodel.ownerText}"
             app:showStatusText="@{viewmodel.showStatusText}"
             app:isErrorText="@{viewmodel.isErrorText}"
-            app:timerHour="@{viewmodel.timerHour}" />
+            app:timerHour="@{viewmodel.timerHour}"
+            app:showProcessButton="@{viewmodel.showButtonProcess}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

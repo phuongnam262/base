@@ -54,6 +54,7 @@ class RegisterFaceViewModel(
                             } else {
                                 mStatusText.postValue(R.string.face_exits)
                                 isErrorText.postValue(true)
+                                registerFaceListener?.faceExited()
                             }
                         } else {
                             addPerson(strBase64)

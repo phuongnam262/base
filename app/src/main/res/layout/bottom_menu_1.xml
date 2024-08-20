@@ -26,6 +26,10 @@
             name="ownerText"
             type="String" />
 
+        <variable
+            name="showProcessButton"
+            type="Boolean" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -108,7 +112,8 @@
                     android:id="@+id/rl_menu_3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:visibility="@{showProcessButton ? View.VISIBLE : View.GONE}">
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_process"

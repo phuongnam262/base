@@ -143,6 +143,7 @@
     <string name="face_not_found">Face not found</string>
     <string name="face_register_success">Face Registered Successfully</string>
     <string name="face_hello">Hello %1$s,\nYour Face ID has been successfully added.</string>
+    <string name="btn_retry">RETRY</string>
 
     <!-- Admin Dashboard -->
     <string name="topup_items">TOPUP ITEMS\n(%1$s)</string>

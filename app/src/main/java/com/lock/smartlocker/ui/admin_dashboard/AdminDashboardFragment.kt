@@ -37,6 +37,7 @@ class AdminDashboardFragment : BaseFragment<FragmentAdminDashboardBinding, Admin
         mViewDataBinding?.bottomMenu?.rlHome?.setOnClickListener(this)
         mViewDataBinding?.headerBar?.ivBack?.setOnClickListener(this)
         mViewDataBinding?.llTopupItems?.setOnClickListener(this)
+        mViewDataBinding?.llCloseApp?.setOnClickListener(this)
     }
 
     private fun initData(){
@@ -62,6 +63,7 @@ class AdminDashboardFragment : BaseFragment<FragmentAdminDashboardBinding, Admin
                     navigateTo(R.id.action_adminDashboardFragment_to_inputSerialNumberFragment2, bundle)
                 }else viewModel.mMessage.postValue(R.string.error_no_available_locker)
             }
+            R.id.ll_close_app -> activity?.finishAffinity()
         }
     }
 }
