@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class HardwareControllerRequest(
     @SerializedName("locker_ids") var lockerIds: List<String>? = null,
     @SerializedName("user_handler") var userHandler: String? = null,
-    @SerializedName("open_type") var openType: String? = null
+    @SerializedName("open_type") var openType: Int? = null
 )
 
 //class HardwareControllerRequest {

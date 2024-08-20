@@ -18,7 +18,7 @@
         android:paddingHorizontal="30dp"
         android:paddingVertical="20dp"
         android:layout_marginVertical="@dimen/dp_5"
-        android:background="@{isSelected ? @drawable/bg_border_ractangle_rounded : @drawable/bg_ractangle_rounded}"
+        android:background="@{isSelected ? @drawable/bg_selected_available_locker : @drawable/bg_ractangle_rounded}"
         android:layout_height="wrap_content">
 
         <LinearLayout
@@ -41,6 +41,7 @@
             <Button
                 android:id="@+id/btnLocker"
                 style="@style/CustomLockerButton"
+                android:clickable="false"
                 android:background="@drawable/bg_border_ractangle_rounded"
                 android:layout_marginHorizontal="10dp"
                 android:text="@{model.name}" />
@@ -75,7 +76,7 @@
                 android:text="Size: "
                 android:layout_gravity="center_vertical"
                 android:textColor="@color/colorBlack"
-                android:textSize="@dimen/sp_20" />
+                android:textSize="@dimen/sp_16" />
 
             <TextView
                 android:id="@+id/tvLockerSize"
@@ -85,7 +86,7 @@
                 android:text="@{model.lockerSizeKey}"
                 android:layout_gravity="center_vertical"
                 android:textColor="@color/colorBlack"
-                android:textSize="@dimen/sp_20" />
+                android:textSize="@dimen/sp_16" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

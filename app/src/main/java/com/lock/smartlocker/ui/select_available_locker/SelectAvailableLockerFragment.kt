@@ -1,10 +1,7 @@
 package com.lock.smartlocker.ui.select_available_locker
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
@@ -24,6 +21,10 @@ class SelectAvailableLockerFragment : BaseFragment<FragmentSelectAvailableLocker
     View.OnClickListener,
     SelectAvailableLockerListener {
 
+    companion object {
+        const val RETURN_ITEM_REQUEST_KEY = "return_item_request"
+    }
+
     override val kodein by kodein()
     private val factory: SelectAvailableLockerViewModelFactory by instance()
     override val layoutId: Int = R.layout.fragment_select_available_locker
@@ -34,7 +35,7 @@ class SelectAvailableLockerFragment : BaseFragment<FragmentSelectAvailableLocker
         get() = ViewModelProvider(this, factory)[SelectAvailableLockerViewModel::class.java]
 
 
-    val availableLockerAdapter = GroupAdapter<GroupieViewHolder>()
+    private val availableLockerAdapter = GroupAdapter<GroupieViewHolder>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -71,13 +72,17 @@ class SelectAvailableLockerFragment : BaseFragment<FragmentSelectAvailableLocker
             R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
             R.id.btn_process -> {
                 viewModel.openLocker()
-                val returnItemRequest = arguments?.getSerializable("return_item_request") as? ReturnItemRequest
-                val bundle = Bundle().apply {
-                    putSerializable( "return_item_request", returnItemRequest)
-                }
-                navigateTo(R.id.action_selectAvailableLockerFragment_to_depositItemFragment, bundle)
             }
         }
+    }
+
+    override fun sendCommandOpenLockerSuccess() {
+        val returnItemRequest = arguments?.getSerializable(RETURN_ITEM_REQUEST_KEY) as? ReturnItemRequest
+        returnItemRequest?.locker_id = viewModel.selectedLocker.value?.lockerId
+        val bundle = Bundle().apply {
+            putSerializable( RETURN_ITEM_REQUEST_KEY, returnItemRequest)
+        }
+        navigateTo(R.id.action_selectAvailableLockerFragment_to_depositItemFragment, bundle)
     }
 
 }

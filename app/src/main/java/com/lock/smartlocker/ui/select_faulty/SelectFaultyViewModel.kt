@@ -16,13 +16,11 @@ class SelectFaultyViewModel(
 ) : BaseViewModel() {
     var selectFaultyListener: SelectFaultyListener? = null
 
-    val faultyReason = MutableLiveData<String>()
-
     private val _spinnerItems = MutableLiveData<List<String>>()
     val spinnerItems: LiveData<List<String>> = _spinnerItems
 
-    private val _selectedSpinnerItem = MutableLiveData<String>()
-    val selectedSpinnerItem: LiveData<String> = _selectedSpinnerItem
+    private val _selectedFaultyReason = MutableLiveData<String>()
+    val selectedFaultyReason: LiveData<String> = _selectedFaultyReason
 
     fun loadSpinnerItems(categoryId: String) {
         val jsonCategory = PreferenceHelper.getString(ConstantUtils.LIST_CATEGORY, "")
@@ -34,8 +32,6 @@ class SelectFaultyViewModel(
 
                 // Lọc danh mục theo categoryId
                 val category = categoriesResponse.categories.find { it.categoryId == categoryId }
-
-                // Lấy reasonFaulties của danh mục được chọn
                 val reasonFaulties = category?.reasonFaulties?.distinct() ?: listOf("No faulties available")
 
                 _spinnerItems.value = reasonFaulties
@@ -46,6 +42,10 @@ class SelectFaultyViewModel(
         } else {
             _spinnerItems.value = listOf("No data available")
         }
+    }
+
+    fun setSelectedFaultyReason(reason: String) {
+        _selectedFaultyReason.value = reason
     }
 }
 

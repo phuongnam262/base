@@ -9,6 +9,7 @@ import com.lock.smartlocker.data.network.services.FaceServives
 import com.lock.smartlocker.data.network.services.HardwareControlServices
 import com.lock.smartlocker.data.network.services.LockerServives
 import com.lock.smartlocker.data.preference.PreferenceHelper
+import com.lock.smartlocker.data.repositories.HardwareControllerRepository
 import com.lock.smartlocker.data.repositories.ManagerRepository
 import com.lock.smartlocker.data.repositories.ReturnRepository
 import com.lock.smartlocker.data.repositories.StartAppRepository
@@ -29,6 +30,7 @@ import com.lock.smartlocker.ui.returns.ReturnViewModelFactory
 import com.lock.smartlocker.ui.select_available_locker.SelectAvailableLockerViewModelFactory
 import com.lock.smartlocker.ui.select_faulty.SelectFaultyViewModelFactory
 import com.lock.smartlocker.ui.splash.SplashViewModelFactory
+import com.lock.smartlocker.ui.thank.ThankViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
@@ -74,6 +76,7 @@ class LockerApplication : Application(), KodeinAware {
         bind() from singleton { StartAppRepository(instance(), instance()) }
         bind() from singleton { ManagerRepository(instance(), instance()) }
         bind() from singleton { ReturnRepository(instance()) }
+        bind() from singleton { HardwareControllerRepository(instance()) }
 
         //bind Factory
         bind() from provider { HomeViewModelFactory(instance(), instance()) }
@@ -89,8 +92,9 @@ class LockerApplication : Application(), KodeinAware {
         bind() from provider { ReturnViewModelFactory(instance()) }
         bind() from provider { InputSerialNumberViewModelFactory(instance()) }
         bind() from provider { SelectFaultyViewModelFactory() }
-        bind() from provider { SelectAvailableLockerViewModelFactory(instance()) }
-        bind() from provider { DepositItemViewModelFactory(instance()) }
+        bind() from provider { SelectAvailableLockerViewModelFactory(instance(), instance()) }
+        bind() from provider { DepositItemViewModelFactory(instance(), instance()) }
+        bind() from provider { ThankViewModelFactory() }
     }
 
 }

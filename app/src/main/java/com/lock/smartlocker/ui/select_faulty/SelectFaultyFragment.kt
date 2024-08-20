@@ -1,21 +1,15 @@
 package com.lock.smartlocker.ui.select_faulty
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.lifecycle.ViewModelProvider
 import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
 import com.lock.smartlocker.data.entities.request.ReturnItemRequest
-import com.lock.smartlocker.databinding.FragmentInputSerialNumberBinding
 import com.lock.smartlocker.databinding.FragmentSelectFaultyBinding
 import com.lock.smartlocker.ui.base.BaseFragment
-import com.lock.smartlocker.ui.input_serial_number.InputSerialNumberListener
-import com.lock.smartlocker.ui.input_serial_number.InputSerialNumberViewModel
-import com.lock.smartlocker.ui.input_serial_number.InputSerialNumberViewModelFactory
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
@@ -24,6 +18,11 @@ class SelectFaultyFragment : BaseFragment<FragmentSelectFaultyBinding, SelectFau
     KodeinAware,
     View.OnClickListener,
     SelectFaultyListener {
+
+    companion object {
+        const val CATEGORY_ID_KEY = "category_id"
+        const val RETURN_ITEM_REQUEST_KEY = "return_item_request"
+    }
 
     override val kodein by kodein()
     private val factory: SelectFaultyViewModelFactory by instance()
@@ -51,10 +50,20 @@ class SelectFaultyFragment : BaseFragment<FragmentSelectFaultyBinding, SelectFau
             )
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             mViewDataBinding?.spiFaultyReason?.adapter = adapter
-            viewModel.faultyReason.value = items[0]
+        }
+
+        mViewDataBinding?.spiFaultyReason?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                val selectedReason = parent.getItemAtPosition(position) as String
+                viewModel.setSelectedFaultyReason(selectedReason)
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Do nothing
+            }
         }
         // Retrieve the modelId from the arguments
-        val categoryId = arguments?.getString("category_id")
+        val categoryId = arguments?.getString(CATEGORY_ID_KEY)
 
         if (categoryId != null) {
             viewModel.loadSpinnerItems(categoryId)
@@ -79,10 +88,10 @@ class SelectFaultyFragment : BaseFragment<FragmentSelectFaultyBinding, SelectFau
     }
 
     fun navigateToSelectAvailableLockerFragment() {
-        val returnItemRequest = arguments?.getSerializable("return_item_request") as? ReturnItemRequest
-        returnItemRequest?.reason_faulty = viewModel.faultyReason.value
+        val returnItemRequest = arguments?.getSerializable(RETURN_ITEM_REQUEST_KEY) as? ReturnItemRequest
+        returnItemRequest?.reason_faulty = viewModel.selectedFaultyReason.value
         val bundle = Bundle().apply {
-            putSerializable( "return_item_request", returnItemRequest)
+            putSerializable( RETURN_ITEM_REQUEST_KEY, returnItemRequest)
         }
         navigateTo(R.id.action_selectFaultyFragment_to_selectAvailableLockerFragment, bundle)
     }
