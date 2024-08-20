@@ -1,5 +1,7 @@
 package com.lock.smartlocker.ui.home
 
+import android.content.Context
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.common.api.ApiException
 import com.google.gson.Gson
@@ -22,6 +24,14 @@ class HomeViewModel(
 ) : BaseViewModel() {
     var homeListener: HomeListener? = null
     var isServerOff = MutableLiveData<Boolean>()
+
+    private val _language = MutableLiveData<String>()
+    val language: LiveData<String> = _language
+
+    fun setNewLocale(context: Context, languageCode: String) {
+        LocaleHelper.setLocale(context, languageCode)
+        _language.value = languageCode
+    }
 
     fun checkOpenServer() {
         ioScope.launch {
@@ -77,4 +87,5 @@ class HomeViewModel(
             }
         }
     }
+
 }

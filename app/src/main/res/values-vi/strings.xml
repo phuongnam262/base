@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SmartLocker</string>
+
+    <!-- Strings for camera settings. -->
+    <string name="pref_category_key_camera" translatable="false">pckc</string>
+    <string name="pref_category_title_camera" translatable="false">Camera</string>
+    <string name="pref_key_rear_camera_preview_size" translatable="false">rcpvs</string>
+    <string name="pref_key_rear_camera_picture_size" translatable="false">rcpts</string>
+    <string name="pref_key_front_camera_preview_size" translatable="false">fcpvs</string>
+    <string name="pref_key_front_camera_picture_size" translatable="false">fcpts</string>
+    <string name="pref_key_camerax_rear_camera_target_resolution" translatable="false">crctas</string>
+    <string name="pref_key_camerax_front_camera_target_resolution" translatable="false">cfctas</string>
+    <string name="pref_key_camera_live_viewport" translatable="false">clv</string>
+    <string name="pref_title_rear_camera_preview_size" translatable="false">Rear camera preview size</string>
+    <string name="pref_title_front_camera_preview_size" translatable="false">Front camera preview size</string>
+    <string name="pref_title_camerax_rear_camera_target_resolution" translatable="false">CameraX rear camera target resolution</string>
+    <string name="pref_title_camerax_front_camera_target_resolution" translatable="false">CameraX front camera target resolution</string>
+    <string name="pref_title_camera_live_viewport" translatable="false">Enable live viewport</string>
+    <string name="pref_summary_camera_live_viewport" translatable="false">Do not block camera preview drawing on detection</string>
+
+    <!-- Strings for info preference. -->
+    <string name="pref_title_info_hide" translatable="false">Hide detection info</string>
+    <string name="pref_key_info_hide" translatable="false">ih</string>
+
+    <!-- Strings for face detector landmark mode preference. -->
+    <string name="pref_title_face_detector_landmark_mode" translatable="false">Landmark mode</string>
+    <string name="pref_key_live_preview_face_detection_landmark_mode" translatable="false">lpfdlm</string>
+    <string name="pref_entries_face_detector_landmark_mode_no_landmarks" translatable="false">No landmarks</string>
+    <string name="pref_entries_face_detector_landmark_mode_all_landmarks" translatable="false">All landmarks</string>
+    <!-- The following entry values must match the ones in FaceDetectorOptions#LandmarkMode -->
+    <string name="pref_entry_values_face_detector_landmark_mode_no_landmarks" translatable="false">1</string>
+    <string name="pref_entry_values_face_detector_landmark_mode_all_landmarks" translatable="false">2</string>
+    <!-- Strings for face detector contour mode preference. -->
+    <string name="pref_title_face_detector_contour_mode" translatable="false">Contour mode</string>
+    <string name="pref_key_live_preview_face_detection_contour_mode" translatable="false">lpfdcm</string>
+    <string name="pref_entries_face_detector_contour_mode_no_contours" translatable="false">No contours</string>
+    <string name="pref_entries_face_detector_contour_mode_all_contours" translatable="false">All contours</string>
+    <!-- The following entry values must match the ones in FaceDetectorOptions#ContourMode -->
+    <string name="pref_entry_values_face_detector_contour_mode_no_contours" translatable="false">1</string>
+    <string name="pref_entry_values_face_detector_contour_mode_all_contours" translatable="false">2</string>
+    <!-- Strings for face detector classification mode preference. -->
+    <string name="pref_title_face_detector_classification_mode" translatable="false">Classification mode</string>
+    <string name="pref_key_live_preview_face_detection_classification_mode" translatable="false">lpfdcfm</string>
+    <string name="pref_entries_face_detector_classification_mode_no_classifications" translatable="false">No classifications</string>
+    <string name="pref_entries_face_detector_classification_mode_all_classifications" translatable="false">All classifications</string>
+    <!-- The following entry values must match the ones in FaceDetectorOptions#ClassificationMode -->
+    <string name="pref_entry_values_face_detector_classification_mode_no_classifications" translatable="false">1</string>
+    <string name="pref_entry_values_face_detector_classification_mode_all_classifications" translatable="false">2</string>
+
+    <!-- Strings for face detector performance mode preference. -->
+    <string name="pref_title_face_detector_performance_mode" translatable="false">Performance mode</string>
+    <string name="pref_key_live_preview_face_detection_performance_mode" translatable="false">lpfdpm</string>
+    <string name="pref_entries_face_detector_performance_mode_fast" translatable="false">Fast</string>
+    <string name="pref_entries_face_detector_performance_mode_accurate" translatable="false">Accurate</string>
+    <!-- The following entry values must match the ones in FaceDetectorOptions#PerformanceMode -->
+    <string name="pref_entry_values_face_detector_performance_mode_fast" translatable="false">1</string>
+    <string name="pref_entry_values_face_detector_performance_mode_accurate" translatable="false">2</string>
+
+    <!-- Strings for face detector face tracking preference. -->
+    <string name="pref_title_face_detector_face_tracking" translatable="false">Face tracking</string>
+    <string name="pref_key_live_preview_face_detection_face_tracking" translatable="false">lpfdft</string>
+
+    <!-- Strings for face detector min face size preference. -->
+    <string name="pref_title_face_detector_min_face_size" translatable="false">Minimum face size</string>
+    <string name="pref_key_live_preview_face_detection_min_face_size" translatable="false">lpfdmfs</string>
+    <string name="pref_dialog_message_face_detector_min_face_size" translatable="false">Proportion of the head width to the image width, and the valid value range is [0.0, 1.0]</string>
+    <string name="pref_toast_invalid_min_face_size" translatable="false">Minimum face size must be a float value and in the range [0.0, 1.0]</string>
+
+    <!-- Strings for pose detector performance mode preference. -->
+    <string name="pref_title_pose_detector_performance_mode" translatable="false">Performance mode</string>
+    <string name="pref_key_live_preview_pose_detection_performance_mode" translatable="false">lppdpm</string>
+    <string name="pref_key_still_image_pose_detection_performance_mode" translatable="false">sipdpm</string>
+    <string name="pref_entries_pose_detector_performance_mode_fast" translatable="false">Fast</string>
+    <string name="pref_entries_pose_detector_performance_mode_accurate" translatable="false">Accurate</string>
+    <string name="pref_entry_values_pose_detector_performance_mode_fast" translatable="false">1</string>
+    <string name="pref_entry_values_pose_detector_performance_mode_accurate" translatable="false">2</string>
+
+
+    <!-- Settings related strings. -->
+    <string name="pref_screen" translatable="false">ps</string>
+    <string name="pref_category_info" translatable="false">Detection Info</string>
+    <string name="pref_category_face_detection" translatable="false">Face Detection</string>
+    <string name="pref_screen_title_camerax_live_preview" translatable="false">CameraX live preview settings</string>
+    <string name="pref_screen_title_live_preview" translatable="false">Live preview settings</string>
+
+    <string name="network_error">Make sure you have an active data connection</string>
+    <string name="close">Close</string>
+
+    <string name="server_error">There is an error from server. Please try again.</string>
+    <string name="error_api">Cal API Error</string>
+    <string name="error_network">Please check your network.</string>
+    <string name="error_all">Some error please check it</string>
+    <string name="error_response">Error response</string>
+    <string name="error_message">An internal error has occurred. Please try again.</string>
+
+    <!-- login -->
+    <string name="login_error_1001">Email không tồn tại</string>
+    <string name="login_error_1002">Sai mật khẩu</string>
+    <string name="email_not_correct_format">Invalid email format</string>
+
+    <!-- Error -->
+    <string name="unauthorized">Unauthorized</string>
+
+    <!-- Home -->
+    <string name="menu_item">ITEMS</string>
+    <string name="menu_register_face">Đăng ký khuôn mặt</string>
+    <string name="menu_manager_face">Quản lý khuôn mặt</string>
+    <string name="menu_admin_console">Bảng điều khiển quản trị</string>
+    <string name="loan_button">MƯỢN ĐỒ DÙNG</string>
+    <string name="loan_button_label">Bạn có thể mượn đồ dùng từ tủ và phải trả lại trước thời gian quy định</string>
+    <string name="return_button">TRẢ ĐỒ DÙNG</string>
+    <string name="return_button_label">Hãy chọn một ngăn tủ để trả lại đồ dùng đã mượn</string>
+    <string name="collect_button">LẤY ĐỒ DÙNG</string>
+    <string name="collect_button_label">Bạn có thể lấy đồ dùng theo quy định và không cần hoàn trả </string>
+    <string name="using_mail_button">DÙNG EMAIL</string>
+    <string name="retry_button">THỬ LẠI</string>
+    <string name="process_button">TIẾP TỤC</string>
+
+    <!-- Input email -->
+    <string name="auth_required">Yêu Cầu Xác Thực</string>
+    <string name="enter_email_continue">Nhập email của bạn để tiếp tục.</string>
+    <string name="enter_email">Nhập email của bạn:</string>
+    <string name="error_email_empty">Vui lòng nhập email</string>
+
+    <!-- Admin Login -->
+    <string name="enter_username_continue">Nhập tên người dùng của bạn để tiếp tục..</string>
+    <string name="username">Tên người dùng:</string>
+    <string name="password">Mật khẩu:</string>
+    <string name="error_username_empty">Vui lòng nhập tên người dùng</string>
+    <string name="error_password_empty">Vui lòng nhập mật khẩu</string>
+    <string name="error_username_password">Tên người dùng hoặc mật khẩu không chính xác</string>
+    <string name="error_account_locked">Tài khoản này đã bị khóa</string>
+
+    <!-- input OTP -->
+    <string name="enter_otp_verify">Nhập OTP được gửi đến thiết bị của bạn để xác minh tài khoản..</string>
+    <string name="enter_otp">Nhập OTP::</string>
+    <string name="resend_otp_button">Gửi lại OTP</string>
+
+    <!-- Register face -->
+    <string name="register_face">Đăng Ký Khuôn Mặt Của Bạn</string>
+    <string name="register_face_info">Vui lòng đứng gần tủ và nhìn thẳng vào máy ảnh để chúng tôi có thể chụp rõ khuôn mặt của bạn.</string>
+    <string name="face_exits">Face ID này đã tồn tại.</string>
+    <string name="save_user_fail">Lưu người dùng thất bại</string>
+    <string name="face_not_found">Không tìm thấy khuôn mặt</string>
+    <string name="face_register_success">Đăng Ký Khuôn Mặt Thành Công</string>
+    <string name="face_hello">hello someone@something.com, \nFace ID của bạn đã được thêm thành công.</string>
+
+    <!-- Admin Dashboard -->
+    <string name="topup_items">THÊM ĐỒ DÙNG\n(%1$s)</string>
+    <string name="retrieve_faulty">THU HỒI ĐỒ DÙNG LỖI\n(%1$s)</string>
+    <string name="retrieve_items">THU HỒI ĐỒ DÙNG </string>
+    <string name="manage_lockers">QUẢN LÝ TỦ KHÓA</string>
+    <string name="settings">CÀI ĐẶT</string>
+    <string name="close_app">ĐÓNG ỨNG DỤNG</string>
+    <string name="admin_menu">Danh Mục</string>
+    <string name="error_no_available_locker">Hiện tại không có tủ khóa để thêm đồ dùng</string>
+
+    <!-- Scan serial number   -->
+    <string name="scan_or_enter_serial_number">Quét hoặc Nhập Số sê-ri</string>
+    <string name="enter_serial_number_verify">Vui lòng quét số sê-ri bằng đầu đọc mã vạch bên dưới hoặc nhập thủ công..</string>
+    <string name="enter_serial_number">Nhập số sê-ri</string>
+    <string name="select_a_faulty">Chọn một lý do lỗi</string>
+    <string name="select_faulty_reason_info">Chọn lý do lỗi sau đây giúp người quản trị hiểu được hiện trạng của các đồ dùng.\nNếu không có lý do phổ biến nào phù hợp với tình huống của bạn, vui lòng nhập lý do của riêng bạn.</string>
+    <string name="select_available_locker_info">Chọn tủ khóa để cất đồ dùng của bạn. \nSau khi chọn, cửa tủ khóa sẽ tự động mở.</string>
+    <string name="select_an_available_locker">Chọn Tủ Khóa Khả Dụng</string>
+    <string name="deposit_item">Gửi Đồ Dùng</string>
+    <string name="deposit_item_info">Vui lòng đặt đồ dùng vào tủ khóa đang mở và đóng cửa.
+Tủ khóa sẽ tự động kích hoạt xác nhận sau 10 giây hoặc khi bạn nhấn nút xác nhận.</string>
+    <string name="door_has_not_been_closed">Cửa chưa được đóng. Nhấn XÁC NHẬN để tiếp tục..</string>
+    <string name="error_invalid_serial">Số sê-ri không hợp lệ.</string>
+    <string name="dialog_attention">Đồ dùng này có vấn đề gì không?</string>
+    <string name="error_input_serial_empty">Vui lòng quét hoặc nhập số sê-ri của đồ dùng</string>
+    <string name="serial_number_is_not_available">Số sê-ri này không còn khả dụng nữa</string>
+    <string name="does_this_item_require_attention">Đồ dùng này có vấn đề gì không?</string>
+
+    <!-- hwc   -->
+    <string name="error_open_failed">Cửa không được mở thành công.</string>
+    <string name="error_door_has_not_close">Cửa chưa được đóng.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="successful">Thành công</string>
+
+</resources>

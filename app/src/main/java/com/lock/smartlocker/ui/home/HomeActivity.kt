@@ -1,7 +1,9 @@
 package com.lock.smartlocker.ui.home
 
 import android.Manifest
+import android.app.ActivityOptions
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
@@ -64,6 +66,8 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeLis
         mViewDataBinding?.navMenuLeft?.llRegisterFace?.setOnClickListener(this)
         mViewDataBinding?.navMenuLeft?.llManageFace?.setOnClickListener(this)
         mViewDataBinding?.navMenuLeft?.llAdminConsole?.setOnClickListener(this)
+        mViewDataBinding?.tvEn?.setOnClickListener(this)
+        mViewDataBinding?.tvVi?.setOnClickListener(this)
         viewModel.checkOpenServer()
         viewModel.isServerOff.observeForever {
             isOpenLocalServer = it
@@ -136,7 +140,26 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeLis
                         ManagerMenuActivity::class.java)
                     mViewDataBinding?.drawerLayout?.closeDrawers()
                 }
+                R.id.tv_en -> {
+                    setNewLocale(ConstantUtils.Language.ENGLISH)
+                }
+                R.id.tv_vi -> {
+                    setNewLocale(ConstantUtils.Language.VIETNAMESE)
+                }
             }
+        }
+    }
+
+    private fun setNewLocale(language: String) {
+        viewModel.setNewLocale(this, language)
+
+        val intent = intent.also { it.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION) }
+        finish()
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            overrideActivityTransition(OVERRIDE_TRANSITION_OPEN, android.R.anim.fade_in, android.R.anim.fade_out)
+        } else {
+            startActivity(intent, ActivityOptions.makeCustomAnimation(this, android.R.anim.fade_in, android.R.anim.fade_out).toBundle())
         }
     }
 

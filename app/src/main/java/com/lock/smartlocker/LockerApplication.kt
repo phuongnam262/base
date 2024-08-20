@@ -1,6 +1,9 @@
 package com.lock.smartlocker
 
 import android.app.Application
+import android.content.Context
+import android.content.res.Configuration
+import android.os.Build
 import android.os.Process
 import com.lock.smartlocker.data.db.AppDatabase
 import com.lock.smartlocker.data.network.LockerAPI
@@ -38,6 +41,7 @@ import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
 import org.kodein.di.generic.provider
 import org.kodein.di.generic.singleton
+import java.util.Locale
 
 class LockerApplication : Application(), KodeinAware {
 
@@ -50,6 +54,10 @@ class LockerApplication : Application(), KodeinAware {
         } catch (e: Exception) {
             e.printStackTrace()
         }
+    }
+
+    override fun attachBaseContext(base: Context) {
+        super.attachBaseContext(LocaleHelper.onAttach(base))
     }
 
     override fun onCreate() {

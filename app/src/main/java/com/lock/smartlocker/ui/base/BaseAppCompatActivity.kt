@@ -34,6 +34,10 @@ open class BaseAppCompatActivity : AppCompatActivity() {
         mHandler = Handler(Looper.getMainLooper())
     }
 
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase))
+    }
+
     /**
      * Overriding for set a fragment
      */
