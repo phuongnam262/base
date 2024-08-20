@@ -7,6 +7,8 @@ import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
 import com.lock.smartlocker.databinding.FragmentAdminDashboardBinding
 import com.lock.smartlocker.ui.base.BaseFragment
+import com.lock.smartlocker.ui.input_serial_number.InputSerialNumberFragment
+import com.lock.smartlocker.util.ConstantUtils
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
@@ -32,7 +34,6 @@ class AdminDashboardFragment : BaseFragment<FragmentAdminDashboardBinding, Admin
 
     private fun initView(){
         viewModel.titlePage.postValue(getString(R.string.admin_menu))
-        viewModel.startTimer()
         mViewDataBinding?.bottomMenu?.rlHome?.setOnClickListener(this)
         mViewDataBinding?.headerBar?.ivBack?.setOnClickListener(this)
         mViewDataBinding?.llTopupItems?.setOnClickListener(this)
@@ -52,6 +53,15 @@ class AdminDashboardFragment : BaseFragment<FragmentAdminDashboardBinding, Admin
         when(v?.id){
             R.id.rl_home -> activity?.finish()
             R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
+            R.id.ll_topup_items -> {
+                if (viewModel.numberLockerAvailable.value != 0) {
+                    val bundle = Bundle().apply {
+                        putSerializable(InputSerialNumberFragment.TYPE_INPUT_SERIAL,
+                            ConstantUtils.TYPE_TOPUP_ITEM)
+                    }
+                    navigateTo(R.id.action_adminDashboardFragment_to_inputSerialNumberFragment2, bundle)
+                }else viewModel.mMessage.postValue(R.string.error_no_available_locker)
+            }
         }
     }
 }

@@ -75,7 +75,6 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
 
     private fun initView(){
         viewModel.titlePage.postValue(getString(R.string.register_face))
-        viewModel.startTimer()
         mViewDataBinding?.bottomMenu?.rlHome?.setOnClickListener(this)
         mViewDataBinding?.bottomMenu?.btnProcess?.setOnClickListener(this)
         mViewDataBinding?.headerBar?.ivBack?.setOnClickListener(this)

@@ -19,7 +19,6 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
-import retrofit2.http.Query
 
 interface LockerServives {
 
@@ -52,6 +51,11 @@ interface LockerServives {
 
     @POST("/api/return/get-item-return")
     suspend fun getItemReturn(
+        @Body getItemReturnRequest: GetItemReturnRequest
+    ): Response<BaseResponse<ItemReturn>>
+
+    @POST("/api/item/get-item-topup")
+    suspend fun getItemTopup(
         @Body getItemReturnRequest: GetItemReturnRequest
     ): Response<BaseResponse<ItemReturn>>
 

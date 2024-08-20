@@ -7,11 +7,8 @@ import com.lock.smartlocker.data.entities.responses.AdminLoginResponse
 import com.lock.smartlocker.data.entities.responses.BaseResponse
 import com.lock.smartlocker.data.entities.responses.ConsumerLoginResponse
 import com.lock.smartlocker.data.entities.responses.GetInformationStaffResponse
-import com.lock.smartlocker.data.entities.responses.GetListCategoryResponse
-import com.lock.smartlocker.data.entities.responses.GetSettingResponse
-import com.lock.smartlocker.data.entities.responses.TerminalLoginResponse
-import com.lock.smartlocker.data.network.SafeApiRequest
 import com.lock.smartlocker.data.network.LockerAPI
+import com.lock.smartlocker.data.network.SafeApiRequest
 
 class ManagerRepository (
     private val api: LockerAPI,

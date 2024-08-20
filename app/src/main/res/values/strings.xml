@@ -128,6 +128,7 @@
     <string name="error_username_empty">Please enter username</string>
     <string name="error_password_empty">Please enter password</string>
     <string name="error_username_password">Incorrect username or password</string>
+    <string name="error_account_locked">This account has been locked</string>
 
     <!-- input OTP -->
     <string name="enter_otp_verify">Enter the OTP sent to your device to verify your account.</string>
@@ -151,6 +152,7 @@
     <string name="settings">SETTINGS</string>
     <string name="close_app">CLOSE APPLICATION</string>
     <string name="admin_menu">Menu</string>
+    <string name="error_no_available_locker">No available lockers for topup at this time</string>
 
     <!-- Scan serial number   -->
     <string name="scan_or_enter_serial_number">Scan or Enter Serial Number</string>
@@ -164,6 +166,9 @@
     <string name="deposit_item_info">Please deposit the item into the opening locker and close the door.
 locker will auto-trigger confirmation after 10 seconds or when you tap confirm button.</string>
     <string name="door_has_not_been_closed">Door has not been closed. Tap CONFIRM to continue.</string>
+    <string name="error_invalid_serial">Invalid serial number</string>
+    <string name="dialog_attention">Does this item require attention?</string>
+    <string name="error_input_serial_empty">Please scan or enter item serial number</string>
     <string name="serial_number_is_not_available">This Serial number is no longer available</string>
     <string name="does_this_item_require_attention">Does this item require attention?</string>
 

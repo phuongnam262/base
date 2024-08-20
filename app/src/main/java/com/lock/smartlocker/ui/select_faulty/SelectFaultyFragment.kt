@@ -41,7 +41,6 @@ class SelectFaultyFragment : BaseFragment<FragmentSelectFaultyBinding, SelectFau
     }
 
     private fun initView(){
-        viewModel.startTimer()
         viewModel.titlePage.postValue(getString(R.string.select_a_faulty))
         viewModel.spinnerItems.observe(viewLifecycleOwner) { items ->
             val adapter = ArrayAdapter(

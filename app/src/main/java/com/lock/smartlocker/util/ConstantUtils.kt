@@ -3,8 +3,6 @@ package com.lock.smartlocker.util
 class ConstantUtils {
 
     companion object {
-        const val TIME_OUT = 2000
-        const val TIME_DELAY = 5000
 
         const val API_TOKEN = "API_TOKEN"
         const val USER_TOKEN = "USER_TOKEN"
@@ -26,14 +24,18 @@ class ConstantUtils {
         const val TYPE_ADMIN_CONSOLE = "TYPE_ADMIN_CONSOLE"
         const val TYPE_MANAGER_FACE = "TYPE_MANAGER_FACE"
 
+        //Type input serial
+        const val TYPE_RETURN = "TYPE_RETURN"
+        const val TYPE_TOPUP_ITEM = "TYPE_TOPUP_ITEM"
+
         //Error code
         const val LOGIN_EMAIL_NOT_EXISTED = "401-001"
         const val LOGIN_WRONG_PASSWORD = "401-002"
         const val EMAIL_NOT_CORRECT_FORMAT = "422"
-        const val ADMIN_WRONG_USERNAME_PASS = "601"
-
-
+        const val ADMIN_WRONG_USERNAME_PASS = "60104"
+        const val ADMIN_ACCOUNT_LOCKED = "602"
         const val DOOR_HAS_NOT_BEEN_CLOSE = "423-001"
-        const val SERIAL_NUMBER_IS_NO_LONGER_AVAILABLE = "601"
+        const val SERIAL_NUMBER_INVALID = "60101"
+        const val SERIAL_NUMBER_INVALID_1 = "421"
     }
 }

@@ -69,6 +69,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         mViewDataBinding = DataBindingUtil.inflate(inflater, layoutId, container, false)
+        viewModel.startTimer()
         return mViewDataBinding?.root
     }
 

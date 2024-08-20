@@ -37,7 +37,6 @@ class AdminLoginFragment : BaseFragment<FragmentAdminLoginBinding, AdminLoginVie
 
     private fun initView() {
         viewModel.titlePage.postValue(getString(R.string.auth_required))
-        viewModel.startTimer()
         mViewDataBinding?.bottomMenu?.rlHome?.setOnClickListener(this)
         mViewDataBinding?.bottomMenu?.btnProcess?.setOnClickListener(this)
         mViewDataBinding?.headerBar?.ivBack?.setOnClickListener(this)
