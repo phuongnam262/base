@@ -1,25 +1,13 @@
 package com.lock.smartlocker.ui.deposit_item
 
-import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
 import com.lock.smartlocker.data.entities.request.ReturnItemRequest
 import com.lock.smartlocker.databinding.FragmentDepositItemBinding
-import com.lock.smartlocker.databinding.FragmentInputSerialNumberBinding
 import com.lock.smartlocker.ui.base.BaseFragment
-import com.lock.smartlocker.ui.home.HomeActivity
-import com.lock.smartlocker.ui.input_serial_number.InputSerialNumberListener
-import com.lock.smartlocker.ui.input_serial_number.InputSerialNumberViewModel
-import com.lock.smartlocker.ui.input_serial_number.InputSerialNumberViewModelFactory
-import com.lock.smartlocker.ui.thanks.ThankActivity
-import com.lock.smartlocker.util.ConstantUtils
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
@@ -28,6 +16,10 @@ class DepositItemFragment : BaseFragment<FragmentDepositItemBinding, DepositItem
     KodeinAware,
     View.OnClickListener,
     DepositItemListener {
+
+    companion object {
+        const val RETURN_ITEM_REQUEST_KEY = "return_item_request"
+    }
 
     override val kodein by kodein()
     private val factory: DepositItemViewModelFactory by instance()
@@ -45,45 +37,42 @@ class DepositItemFragment : BaseFragment<FragmentDepositItemBinding, DepositItem
         initData()
     }
 
+    private var returnItemRequest: ReturnItemRequest? = null // Khai báo ở đây
+
     private fun initView(){
         mViewDataBinding?.bottomMenu?.rlHome?.setOnClickListener(this)
         mViewDataBinding?.bottomMenu?.btnProcess?.setOnClickListener(this)
         mViewDataBinding?.depositItem?.btnReopen?.setOnClickListener(this)
         mViewDataBinding?.depositItem?.btnChangeLocker?.setOnClickListener(this)
-
     }
 
     private fun initData(){
-        viewModel.checkStatus()
+        returnItemRequest = arguments?.getSerializable(RETURN_ITEM_REQUEST_KEY) as? ReturnItemRequest
+        returnItemRequest?.let {
+            it.serial_number?.let { it1 -> viewModel.getModelName(it1) }
+            viewModel.initialCheckStatus(it)
+        }
     }
 
     override fun onClick(v: View?) {
         when(v?.id){
             R.id.rl_home -> activity?.finish()
             R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
-            R.id.btnReopen -> {}
+            R.id.btnReopen -> {
+                returnItemRequest?.locker_id?.let { it1 -> viewModel.reopenLocker(it1) }
+            }
             R.id.btnChangeLocker -> {
                 activity?.onBackPressedDispatcher?.onBackPressed()
             }
             R.id.btn_process -> {
-                viewModel.checkStatus()
-                viewModel.doorStatus.observe(viewLifecycleOwner) { doorStatus ->
-                    if (doorStatus == 0) {
-                        viewModel.handleError(ConstantUtils.DOOR_HAS_NOT_BEEN_CLOSE)
-                    } else {
-                        val returnItemRequest = arguments?.getSerializable("return_item_request") as? ReturnItemRequest
-                        if (returnItemRequest != null) {
-                            viewModel.returnItem(returnItemRequest)
-                        }
-                    }
-                    viewModel.doorStatus.removeObservers(viewLifecycleOwner)
+                returnItemRequest?.let {
+                    viewModel.handleReturnItemProcess(it)
                 }
             }
         }
     }
 
     override fun returnItemSuccess() {
-        val intent = Intent(requireContext(), ThankActivity::class.java)
-        requireActivity().startActivity(intent)
+        navigateTo(R.id.action_depositItemFragment_to_thankFragment, null)
     }
 }

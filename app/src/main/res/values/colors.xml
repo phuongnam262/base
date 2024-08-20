@@ -14,6 +14,7 @@
     <color name="text_sub_color">#494848</color>
     <color name="text_color_hint">#919090</color>
     <color name="text_color_error">#FF3945</color>
+    <color name="text_thank_success">#8F3D58</color>
 
     <color name="grey7A7A7A">#7A7A7A</color>
     <color name="grey575757">#575757</color>

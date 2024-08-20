@@ -30,8 +30,9 @@
             android:layout_marginEnd="@dimen/dp_55"
             android:layout_marginTop="@dimen/dp_10"
             android:text="@string/select_available_locker_info"
-            android:textColor="@color/text_sub_color"
-            android:textSize="@dimen/sp_18"
+            android:textColor="@color/text_color"
+            android:fontFamily="@font/segoe_ui_regular"
+            android:textSize="@dimen/sp_16"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/header_bar" />

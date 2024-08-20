@@ -61,7 +61,7 @@ class InputSerialNumberFragment : BaseFragment<FragmentInputSerialNumberBinding,
                 val newSerialNumber = viewModel.serialNumber.value
                 if (viewModel.isItemDetailVisible.value == true && newSerialNumber == viewModel.itemReturnData.value?.serialNumber) {
                     val dialog = CustomConfirmDialog.newInstance(
-                        message = "Does this item require attention?",
+                        message = getString(R.string.does_this_item_require_attention),
                     )
                     dialog.show(childFragmentManager, CONFIRMATION_DIALOG_TAG)
                 } else {
@@ -80,7 +80,7 @@ class InputSerialNumberFragment : BaseFragment<FragmentInputSerialNumberBinding,
         navigateToSelectAvailableLockerFragment()
     }
 
-    fun navigateToSelectFaultyFragment(categoryId: String) {
+    private fun navigateToSelectFaultyFragment(categoryId: String) {
         val returnItemRequest = ReturnItemRequest(
             serial_number = viewModel.serialNumber.value,
             isFaulty = true,
@@ -92,7 +92,7 @@ class InputSerialNumberFragment : BaseFragment<FragmentInputSerialNumberBinding,
         navigateTo(R.id.action_inputSerialNumberFragment_to_selectFaultyFragment, bundle)
     }
 
-    fun navigateToSelectAvailableLockerFragment() {
+    private fun navigateToSelectAvailableLockerFragment() {
         val returnItemRequest = ReturnItemRequest(
             serial_number = viewModel.serialNumber.value,
             isFaulty = false,

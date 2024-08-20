@@ -66,6 +66,7 @@ class HomeViewModel(
             returnRepository.listReturnAvailableLockers().apply {
                 if (isSuccessful) {
                     if (data != null) {
+                        PreferenceHelper.writeString(ConstantUtils.RETURN_AVAILABLE_LOCKER_LIST, Gson().toJson(data))
                         if (data.locker_available.isNotEmpty()) {
                             homeListener?.getReturnAvailableLockersSuccess()
                         } else {

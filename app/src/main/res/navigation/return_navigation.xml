@@ -35,5 +35,13 @@
     <fragment
         android:id="@+id/depositItemFragment"
         android:name="com.lock.smartlocker.ui.deposit_item.DepositItemFragment"
-        android:label="DepositItemFragment" />
+        android:label="DepositItemFragment" >
+        <action
+            android:id="@+id/action_depositItemFragment_to_thankFragment"
+            app:destination="@id/thankFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/thankFragment"
+        android:name="com.lock.smartlocker.ui.thank.ThankFragment"
+        android:label="ThankFragment" />
 </navigation>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
@@ -39,13 +38,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
                 android:layout_marginBottom="@dimen/dp_30"
+                android:fontFamily="@font/segoe_ui_regular"
                 android:text="@string/deposit_item_info"
                 android:textColor="@color/colorBlack"
-                android:textSize="@dimen/sp_18" />
+                android:textSize="@dimen/sp_16" />
 
             <include
                 android:id="@+id/depositItem"
                 layout="@layout/item_deposit"
+                app:modelName="@{viewmodel.modelName}"
                 app:doorStatus="@{viewmodel.doorStatus}" />
         </LinearLayout>
 
