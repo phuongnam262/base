@@ -6,6 +6,7 @@ class ConstantUtils {
 
         const val API_TOKEN = "API_TOKEN"
         const val USER_TOKEN = "USER_TOKEN"
+        const val ADMIN_NAME = "ADMIN_NAME"
         const val TERMINAL_LOGIN = "TERMINAL_LOGIN"
         const val TERMINAL_NAME   = "TERMINAL_NAME"
         const val GET_SETTING = "GET_SETTING"
@@ -37,5 +38,6 @@ class ConstantUtils {
         const val DOOR_HAS_NOT_BEEN_CLOSE = "423-001"
         const val SERIAL_NUMBER_INVALID = "60101"
         const val SERIAL_NUMBER_INVALID_1 = "421"
+        const val ERROR_LOGIC = "623"
     }
 }

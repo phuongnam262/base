@@ -8,8 +8,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
 import com.lock.smartlocker.data.entities.request.ReturnItemRequest
+import com.lock.smartlocker.data.models.ItemReturn
 import com.lock.smartlocker.databinding.FragmentSelectFaultyBinding
 import com.lock.smartlocker.ui.base.BaseFragment
+import com.lock.smartlocker.ui.input_serial_number.InputSerialNumberFragment
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
@@ -18,11 +20,6 @@ class SelectFaultyFragment : BaseFragment<FragmentSelectFaultyBinding, SelectFau
     KodeinAware,
     View.OnClickListener,
     SelectFaultyListener {
-
-    companion object {
-        const val CATEGORY_ID_KEY = "category_id"
-        const val RETURN_ITEM_REQUEST_KEY = "return_item_request"
-    }
 
     override val kodein by kodein()
     private val factory: SelectFaultyViewModelFactory by instance()
@@ -63,7 +60,7 @@ class SelectFaultyFragment : BaseFragment<FragmentSelectFaultyBinding, SelectFau
             }
         }
         // Retrieve the modelId from the arguments
-        val categoryId = arguments?.getString(CATEGORY_ID_KEY)
+        val categoryId = arguments?.getString(InputSerialNumberFragment.CATEGORY_ID_KEY)
 
         if (categoryId != null) {
             viewModel.loadSpinnerItems(categoryId)
@@ -87,11 +84,11 @@ class SelectFaultyFragment : BaseFragment<FragmentSelectFaultyBinding, SelectFau
         }
     }
 
-    fun navigateToSelectAvailableLockerFragment() {
-        val returnItemRequest = arguments?.getSerializable(RETURN_ITEM_REQUEST_KEY) as? ReturnItemRequest
-        returnItemRequest?.reason_faulty = viewModel.selectedFaultyReason.value
+    private fun navigateToSelectAvailableLockerFragment() {
+        val returnItem = arguments?.getSerializable(InputSerialNumberFragment.RETURN_ITEM_REQUEST_KEY) as? ItemReturn
+        returnItem?.reasonFaulty = viewModel.selectedFaultyReason.value.toString()
         val bundle = Bundle().apply {
-            putSerializable( RETURN_ITEM_REQUEST_KEY, returnItemRequest)
+            putSerializable( InputSerialNumberFragment.RETURN_ITEM_REQUEST_KEY, returnItem)
         }
         navigateTo(R.id.action_selectFaultyFragment_to_selectAvailableLockerFragment, bundle)
     }

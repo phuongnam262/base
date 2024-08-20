@@ -4,11 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.lock.smartlocker.data.entities.request.GetItemReturnRequest
 import com.lock.smartlocker.data.entities.request.HardwareControllerRequest
-import com.lock.smartlocker.data.entities.responses.GetListCategoryResponse
 import com.lock.smartlocker.data.entities.responses.GetSettingResponse
-import com.lock.smartlocker.data.entities.responses.ListReturnAvailableLockerResponse
 import com.lock.smartlocker.data.models.Locker
 import com.lock.smartlocker.data.preference.PreferenceHelper
 import com.lock.smartlocker.data.repositories.HardwareControllerRepository
@@ -29,17 +26,15 @@ class SelectAvailableLockerViewModel(
     private val _selectedLocker = MutableLiveData<Locker?>()
     val selectedLocker: LiveData<Locker?> get() = _selectedLocker
 
+    val typeInput = MutableLiveData<String?>()
+
     fun selectLocker(locker: Locker) {
         _selectedLocker.value = locker
     }
 
     fun loadListAvailableLockers() {
         ioScope.launch {
-            val jsonAvailableLocker = PreferenceHelper.getString(ConstantUtils.RETURN_AVAILABLE_LOCKER_LIST, "")
-            val listLockerResponseType = object : TypeToken<ListReturnAvailableLockerResponse>() {}.type
-            val listLockerResponse: ListReturnAvailableLockerResponse = Gson().fromJson(jsonAvailableLocker, listLockerResponseType)
-            val availableLockerIds = listLockerResponse.locker_available
-
+            val availableLockerIds = PreferenceHelper.getString(ConstantUtils.RETURN_AVAILABLE_LOCKER_LIST, "")
             val jsonSetting = PreferenceHelper.getString(ConstantUtils.GET_SETTING, "")
             if (jsonSetting.isNotEmpty()) {
                 val settingResponseType = object : TypeToken<GetSettingResponse>() {}.type
@@ -63,7 +58,7 @@ class SelectAvailableLockerViewModel(
         val lockerId = selectedLocker.value?.lockerId ?: return
         val request = HardwareControllerRequest(
             lockerIds = listOf(lockerId),
-            userHandler = "Chanh",
+            userHandler = PreferenceHelper.getString(ConstantUtils.ADMIN_NAME, "Admin"),
             openType = 2
         )
         ioScope.launch {

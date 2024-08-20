@@ -5,9 +5,12 @@ import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
-import com.lock.smartlocker.data.entities.request.ReturnItemRequest
+import com.lock.smartlocker.data.models.ItemReturn
 import com.lock.smartlocker.databinding.FragmentDepositItemBinding
 import com.lock.smartlocker.ui.base.BaseFragment
+import com.lock.smartlocker.ui.input_serial_number.InputSerialNumberFragment
+import com.lock.smartlocker.util.ConstantUtils
+import com.lock.smartlocker.util.view.custom.CustomConfirmDialog
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
@@ -15,11 +18,8 @@ import org.kodein.di.generic.instance
 class DepositItemFragment : BaseFragment<FragmentDepositItemBinding, DepositItemViewModel>(),
     KodeinAware,
     View.OnClickListener,
-    DepositItemListener {
-
-    companion object {
-        const val RETURN_ITEM_REQUEST_KEY = "return_item_request"
-    }
+    DepositItemListener,
+    CustomConfirmDialog.ConfirmationDialogListener{
 
     override val kodein by kodein()
     private val factory: DepositItemViewModelFactory by instance()
@@ -30,6 +30,8 @@ class DepositItemFragment : BaseFragment<FragmentDepositItemBinding, DepositItem
     override val viewModel: DepositItemViewModel
         get() = ViewModelProvider(this, factory)[DepositItemViewModel::class.java]
 
+    private var isReturnFlow = true
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.depositItemListener = this
@@ -37,7 +39,7 @@ class DepositItemFragment : BaseFragment<FragmentDepositItemBinding, DepositItem
         initData()
     }
 
-    private var returnItemRequest: ReturnItemRequest? = null // Khai báo ở đây
+    private var returnItem: ItemReturn? = null
 
     private fun initView(){
         mViewDataBinding?.bottomMenu?.rlHome?.setOnClickListener(this)
@@ -47,9 +49,13 @@ class DepositItemFragment : BaseFragment<FragmentDepositItemBinding, DepositItem
     }
 
     private fun initData(){
-        returnItemRequest = arguments?.getSerializable(RETURN_ITEM_REQUEST_KEY) as? ReturnItemRequest
-        returnItemRequest?.let {
-            it.serial_number?.let { it1 -> viewModel.getModelName(it1) }
+        if (arguments?.getString(InputSerialNumberFragment.TYPE_INPUT_SERIAL) != null) {
+            viewModel.typeInput.value = arguments?.getString(InputSerialNumberFragment.TYPE_INPUT_SERIAL)
+            isReturnFlow = false
+        }else viewModel.typeInput.value = ConstantUtils.TYPE_RETURN
+        returnItem = arguments?.getSerializable(InputSerialNumberFragment.RETURN_ITEM_REQUEST_KEY) as? ItemReturn
+        returnItem?.let {
+            viewModel.modelName.value = it.modelName
             viewModel.initialCheckStatus(it)
         }
     }
@@ -59,13 +65,13 @@ class DepositItemFragment : BaseFragment<FragmentDepositItemBinding, DepositItem
             R.id.rl_home -> activity?.finish()
             R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
             R.id.btnReopen -> {
-                returnItemRequest?.locker_id?.let { it1 -> viewModel.reopenLocker(it1) }
+                returnItem?.lockerId?.let { it1 -> viewModel.reopenLocker(it1) }
             }
             R.id.btnChangeLocker -> {
                 activity?.onBackPressedDispatcher?.onBackPressed()
             }
             R.id.btn_process -> {
-                returnItemRequest?.let {
+                returnItem?.let {
                     viewModel.handleReturnItemProcess(it)
                 }
             }
@@ -74,5 +80,20 @@ class DepositItemFragment : BaseFragment<FragmentDepositItemBinding, DepositItem
 
     override fun returnItemSuccess() {
         navigateTo(R.id.action_depositItemFragment_to_thankFragment, null)
+    }
+
+    override fun topupItemSuccess() {
+        val dialog = CustomConfirmDialog.newInstance(
+            message = getString(R.string.deposit_topup_success),
+        )
+        dialog.show(childFragmentManager, InputSerialNumberFragment.CONFIRMATION_DIALOG_TAG)
+    }
+
+    override fun onDialogPositiveClick(dialogTag: String?) {
+        navigateTo(R.id.action_depositItemFragment2_to_adminDashboardFragment, null)
+    }
+
+    override fun onDialogNegativeClick(dialogTag: String?) {
+        navigateTo(R.id.action_depositItemFragment2_to_adminDashboardFragment, null)
     }
 }

@@ -1,15 +1,12 @@
 package com.lock.smartlocker.ui.openlocker
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
 import com.lock.smartlocker.databinding.ActivityOpenBinding
 import com.lock.smartlocker.ui.base.BaseActivity
 import com.lock.smartlocker.ui.home.HomeActivity
-import com.lock.smartlocker.ui.thanks.ThankActivity
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
@@ -40,7 +37,6 @@ class OpenLockerActivity : BaseActivity<ActivityOpenBinding, OpenLockerViewModel
         viewModel.personCode = intent.getStringExtra(HomeActivity.PERSON_CODE).toString()
         viewModel.openLockerListener = this
         mViewDataBinding?.btnEnd?.setOnClickListener {
-            startActivity(Intent(this, ThankActivity::class.java))
             finish()
             timer.cancel()
         }
@@ -51,7 +47,6 @@ class OpenLockerActivity : BaseActivity<ActivityOpenBinding, OpenLockerViewModel
 
     private fun goSleepThread() {
         timer.schedule(timerTask {
-            startActivity(Intent(this@OpenLockerActivity, ThankActivity::class.java))
             finish()
         }, 5000)
     }

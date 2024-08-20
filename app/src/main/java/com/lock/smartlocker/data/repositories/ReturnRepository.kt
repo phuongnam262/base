@@ -26,4 +26,8 @@ class ReturnRepository (
     suspend fun returnItem(returnItemRequest: ReturnItemRequest) : BaseResponse<Map<String, Any>> {
         return apiRequest { api.provideLockerAPIService().returnItem(returnItemRequest) }
     }
+
+    suspend fun topupItem(returnItemRequest: ReturnItemRequest) : BaseResponse<Map<String, Any>> {
+        return apiRequest { api.provideLockerAPIService().topupItem(returnItemRequest) }
+    }
 }

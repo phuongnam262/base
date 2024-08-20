@@ -1,14 +1,18 @@
 package com.lock.smartlocker.ui.select_available_locker
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
 import com.lock.smartlocker.data.entities.request.ReturnItemRequest
+import com.lock.smartlocker.data.models.ItemReturn
 import com.lock.smartlocker.databinding.FragmentSelectAvailableLockerBinding
 import com.lock.smartlocker.ui.base.BaseFragment
+import com.lock.smartlocker.ui.input_serial_number.InputSerialNumberFragment
 import com.lock.smartlocker.ui.select_available_locker.adapter.AvailableLockerItem
+import com.lock.smartlocker.util.ConstantUtils
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import org.kodein.di.KodeinAware
@@ -21,10 +25,6 @@ class SelectAvailableLockerFragment : BaseFragment<FragmentSelectAvailableLocker
     View.OnClickListener,
     SelectAvailableLockerListener {
 
-    companion object {
-        const val RETURN_ITEM_REQUEST_KEY = "return_item_request"
-    }
-
     override val kodein by kodein()
     private val factory: SelectAvailableLockerViewModelFactory by instance()
     override val layoutId: Int = R.layout.fragment_select_available_locker
@@ -34,8 +34,8 @@ class SelectAvailableLockerFragment : BaseFragment<FragmentSelectAvailableLocker
     override val viewModel: SelectAvailableLockerViewModel
         get() = ViewModelProvider(this, factory)[SelectAvailableLockerViewModel::class.java]
 
-
     private val availableLockerAdapter = GroupAdapter<GroupieViewHolder>()
+    private var isReturnFlow = true
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -46,16 +46,20 @@ class SelectAvailableLockerFragment : BaseFragment<FragmentSelectAvailableLocker
 
     private fun initView(){
         viewModel.titlePage.postValue(getString(R.string.select_an_available_locker))
-
         mViewDataBinding?.bottomMenu?.rlHome?.setOnClickListener(this)
         mViewDataBinding?.bottomMenu?.btnProcess?.setOnClickListener(this)
         mViewDataBinding?.headerBar?.ivBack?.setOnClickListener(this)
-
         mViewDataBinding?.rvLockers?.adapter = availableLockerAdapter
 
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun initData(){
+        if (arguments?.getString(InputSerialNumberFragment.TYPE_INPUT_SERIAL) != null) {
+            viewModel.typeInput.value = arguments?.getString(InputSerialNumberFragment.TYPE_INPUT_SERIAL)
+            isReturnFlow = false
+        }else viewModel.typeInput.value = ConstantUtils.TYPE_RETURN
+
         viewModel.loadListAvailableLockers()
         viewModel.lockers.observe(viewLifecycleOwner) { lockers ->
             availableLockerAdapter.update(lockers.map { AvailableLockerItem(it, viewModel) })
@@ -77,12 +81,16 @@ class SelectAvailableLockerFragment : BaseFragment<FragmentSelectAvailableLocker
     }
 
     override fun sendCommandOpenLockerSuccess() {
-        val returnItemRequest = arguments?.getSerializable(RETURN_ITEM_REQUEST_KEY) as? ReturnItemRequest
-        returnItemRequest?.locker_id = viewModel.selectedLocker.value?.lockerId
+        val returnItem = arguments?.getSerializable(InputSerialNumberFragment.RETURN_ITEM_REQUEST_KEY) as? ItemReturn
+        returnItem?.lockerId = viewModel.selectedLocker.value?.lockerId.toString()
         val bundle = Bundle().apply {
-            putSerializable( RETURN_ITEM_REQUEST_KEY, returnItemRequest)
+            putSerializable( InputSerialNumberFragment.RETURN_ITEM_REQUEST_KEY, returnItem)
+            putString(InputSerialNumberFragment.TYPE_INPUT_SERIAL, viewModel.typeInput.value)
         }
-        navigateTo(R.id.action_selectAvailableLockerFragment_to_depositItemFragment, bundle)
+        if(isReturnFlow)
+            navigateTo(R.id.action_selectAvailableLockerFragment_to_depositItemFragment, bundle)
+        else
+            navigateTo(R.id.action_selectAvailableLockerFragment2_to_depositItemFragment2, bundle)
     }
 
 }

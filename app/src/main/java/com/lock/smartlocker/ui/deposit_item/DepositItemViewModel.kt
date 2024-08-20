@@ -5,9 +5,12 @@ import com.lock.smartlocker.R
 import com.lock.smartlocker.data.entities.request.GetItemReturnRequest
 import com.lock.smartlocker.data.entities.request.HardwareControllerRequest
 import com.lock.smartlocker.data.entities.request.ReturnItemRequest
+import com.lock.smartlocker.data.models.ItemReturn
+import com.lock.smartlocker.data.preference.PreferenceHelper
 import com.lock.smartlocker.data.repositories.HardwareControllerRepository
 import com.lock.smartlocker.data.repositories.ReturnRepository
 import com.lock.smartlocker.ui.base.BaseViewModel
+import com.lock.smartlocker.util.ConstantUtils
 import kotlinx.coroutines.launch
 
 class DepositItemViewModel(
@@ -18,26 +21,14 @@ class DepositItemViewModel(
 
     val doorStatus = MutableLiveData<Int?>()
     val modelName = MutableLiveData<String>()
-
-    fun getModelName(serialNumber: String) {
-        ioScope.launch {
-            val param = GetItemReturnRequest()
-            param.serial_number = serialNumber
-            returnRepository.getItemReturn(param).apply {
-                if (isSuccessful) {
-                    if (data != null) {
-                        modelName.postValue(data.modelName)
-                    }
-                } else handleError(status)
-            }
-        }
-    }
+    val typeInput = MutableLiveData<String?>()
 
     private suspend fun checkStatus(lockerId: String) {
         ioScope.launch {
+            mLoading.postValue(true)
             val request = HardwareControllerRequest(
                 lockerIds = listOf(lockerId),
-                userHandler = "Chanh",
+                userHandler = PreferenceHelper.getString(ConstantUtils.ADMIN_NAME, "Admin"),
                 openType = 2
             )
             hardwareControllerRepository.checkMassLocker(request).apply {
@@ -47,7 +38,7 @@ class DepositItemViewModel(
                     }
                 } else handleError(status)
             }
-        }
+        }.invokeOnCompletion { mLoading.postValue(false) }
     }
 
 //    private fun getCheckDoorStatusOnConfirm(): Boolean {
@@ -101,22 +92,28 @@ class DepositItemViewModel(
 //        }
 //    }
 
-    fun handleReturnItemProcess(returnItemRequest: ReturnItemRequest) {
+    fun handleReturnItemProcess(itemReturn: ItemReturn) {
         ioScope.launch {
-            checkStatus(returnItemRequest.locker_id ?: "")
-            if (doorStatus.value == 0) {
-                println("chanh chanh 0${returnItemRequest}")
-                mStatusText.postValue(R.string.error_door_has_not_close)
-                isErrorText.postValue(true)
-            } else {
-                returnItem(returnItemRequest)
-            }
+//            checkStatus(returnItemRequest.locker_id ?: "")
+//            if (doorStatus.value == 0) {
+//                println("chanh chanh 0${returnItemRequest}")
+//                mStatusText.postValue(R.string.error_door_has_not_close)
+//                isErrorText.postValue(true)
+//            } else {
+                val returnItemRequest = ReturnItemRequest(
+                    serial_number = itemReturn.serialNumber,
+                    locker_id = itemReturn.lockerId,
+                    reason_faulty = itemReturn.reasonFaulty
+                )
+                if (typeInput.value == ConstantUtils.TYPE_RETURN) returnItem(returnItemRequest)
+                else topupItem(returnItemRequest)
+            //}
         }
     }
 
-    fun initialCheckStatus(returnItemRequest: ReturnItemRequest) {
+    fun initialCheckStatus(returnItemRequest: ItemReturn) {
         ioScope.launch {
-            checkStatus(returnItemRequest.locker_id ?: "")
+            checkStatus(returnItemRequest.lockerId ?: "")
             if (doorStatus.value == 1) {
                 handleError("Door has not been opened successfully.")
             }
@@ -125,7 +122,7 @@ class DepositItemViewModel(
 
     private fun returnItem(returnItemRequest: ReturnItemRequest) {
         ioScope.launch {
-            println("chanh:: $returnItemRequest")
+            mLoading.postValue(true)
             returnRepository.returnItem(returnItemRequest).apply {
                 if (isSuccessful) {
                     if (data != null) {
@@ -133,13 +130,26 @@ class DepositItemViewModel(
                     }
                 }else handleError(status)
             }
-        }
+        }.invokeOnCompletion { mLoading.postValue(false) }
+    }
+
+    private fun topupItem(returnItemRequest: ReturnItemRequest) {
+        ioScope.launch {
+            mLoading.postValue(true)
+            returnRepository.topupItem(returnItemRequest).apply {
+                if (isSuccessful) {
+                    if (data != null) {
+                        depositItemListener?.topupItemSuccess()
+                    }
+                }else handleError(status)
+            }
+        }.invokeOnCompletion { mLoading.postValue(false) }
     }
 
      fun reopenLocker(lockerId: String) {
         val request = HardwareControllerRequest(
             lockerIds = listOf(lockerId),
-            userHandler = "Chanh",
+            userHandler = PreferenceHelper.getString(ConstantUtils.ADMIN_NAME, "Admin"),
             openType = 2
         )
         ioScope.launch {

@@ -56,7 +56,7 @@ class AdminDashboardFragment : BaseFragment<FragmentAdminDashboardBinding, Admin
             R.id.ll_topup_items -> {
                 if (viewModel.numberLockerAvailable.value != 0) {
                     val bundle = Bundle().apply {
-                        putSerializable(InputSerialNumberFragment.TYPE_INPUT_SERIAL,
+                        putString(InputSerialNumberFragment.TYPE_INPUT_SERIAL,
                             ConstantUtils.TYPE_TOPUP_ITEM)
                     }
                     navigateTo(R.id.action_adminDashboardFragment_to_inputSerialNumberFragment2, bundle)

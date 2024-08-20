@@ -95,24 +95,17 @@ class InputSerialNumberFragment : BaseFragment<FragmentInputSerialNumberBinding,
     }
 
     private fun navigateToSelectFaultyFragment(categoryId: String) {
-        val returnItemRequest = ReturnItemRequest(
-            serial_number = viewModel.serialNumber.value,
-            isFaulty = true,
-        )
         val bundle = Bundle().apply {
             putString(CATEGORY_ID_KEY, categoryId)
-            putSerializable(RETURN_ITEM_REQUEST_KEY, returnItemRequest)
+            putSerializable(RETURN_ITEM_REQUEST_KEY, viewModel.itemReturnData.value)
         }
         navigateTo(R.id.action_inputSerialNumberFragment_to_selectFaultyFragment, bundle)
     }
 
     private fun navigateToSelectAvailableLockerFragment() {
-        val returnItemRequest = ReturnItemRequest(
-            serial_number = viewModel.serialNumber.value,
-            isFaulty = false,
-        )
         val bundle = Bundle().apply {
-            putSerializable( RETURN_ITEM_REQUEST_KEY, returnItemRequest)
+            putSerializable( RETURN_ITEM_REQUEST_KEY, viewModel.itemReturnData.value)
+            putString( TYPE_INPUT_SERIAL, viewModel.typeInput.value)
         }
         if(isReturnFlow)
             navigateTo(R.id.action_inputSerialNumberFragment_to_selectAvailableLockerFragment, bundle)

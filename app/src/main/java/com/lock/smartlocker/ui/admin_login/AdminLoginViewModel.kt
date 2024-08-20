@@ -45,6 +45,7 @@ class AdminLoginViewModel(
                     if (data != null) {
                         adminLoginListener?.adminLoginSuccess(data)
                         PreferenceHelper.writeString(ConstantUtils.USER_TOKEN, data.staff.userToken)
+                        PreferenceHelper.writeString(ConstantUtils.ADMIN_NAME, data.staff.userName)
                         showStatusText.postValue(false)
                     }
                 }else handleError(status)

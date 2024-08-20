@@ -45,8 +45,23 @@
             app:destination="@id/selectAvailableLockerFragment2" />
     </fragment>
     <fragment
+        android:id="@+id/depositItemFragment2"
+        android:name="com.lock.smartlocker.ui.deposit_item.DepositItemFragment"
+        android:label="fragment_deposit_item"
+        tools:layout="@layout/fragment_deposit_item" >
+        <action
+            android:id="@+id/action_depositItemFragment2_to_adminDashboardFragment"
+            app:destination="@id/adminDashboardFragment"
+            app:popUpTo="@id/adminDashboardFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
         android:id="@+id/selectAvailableLockerFragment2"
         android:name="com.lock.smartlocker.ui.select_available_locker.SelectAvailableLockerFragment"
         android:label="fragment_select_available_locker"
-        tools:layout="@layout/fragment_select_available_locker" />
+        tools:layout="@layout/fragment_select_available_locker" >
+        <action
+            android:id="@+id/action_selectAvailableLockerFragment2_to_depositItemFragment2"
+            app:destination="@id/depositItemFragment2" />
+    </fragment>
 </navigation>

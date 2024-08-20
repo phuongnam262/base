@@ -124,6 +124,10 @@ abstract class BaseViewModel() : ViewModel() {
                 isErrorText.postValue(true)
             }
 
+            ConstantUtils.ERROR_LOGIC -> {
+                mMessage.postValue(R.string.error_logic)
+            }
+
             else -> mMessage.postValue(R.string.error_all)
 
         }

@@ -64,6 +64,11 @@ interface LockerServives {
         @Body returnItemRequest: ReturnItemRequest
     ): Response<BaseResponse<Map<String, Any>>>
 
+    @POST("api/item/topup-item")
+    suspend fun topupItem(
+        @Body returnItemRequest: ReturnItemRequest
+    ): Response<BaseResponse<Map<String, Any>>>
+
     companion object {
         operator fun invoke(retrofit: Retrofit): LockerServives {
             return retrofit.create(LockerServives::class.java)
