@@ -3,6 +3,7 @@ package com.lock.smartlocker.ui.input_serial_number
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.lock.smartlocker.R
 import com.lock.smartlocker.data.entities.request.GetItemReturnRequest
 import com.lock.smartlocker.data.entities.responses.GetListCategoryResponse
 import com.lock.smartlocker.data.models.ItemReturn
@@ -21,14 +22,22 @@ class InputSerialNumberViewModel(
     val modelImage = MutableLiveData<String?>("")
     val itemReturnData = MutableLiveData<ItemReturn?>()
     val isItemDetailVisible = MutableLiveData(false)
+    val typeInput = MutableLiveData<String?>()
 
     fun getItemReturn() {
         ioScope.launch {
+            if (serialNumber.value.isNullOrEmpty()) {
+                mStatusText.postValue(R.string.error_input_serial_empty)
+                isErrorText.postValue(true)
+                return@launch
+            }
+            mLoading.postValue(true)
             val param = GetItemReturnRequest()
             param.serial_number = serialNumber.value
             returnRepository.getItemReturn(param).apply {
                 if (isSuccessful) {
                     if (data != null ) {
+                        showStatusText.postValue(false)
                         itemReturnData.postValue(data)
                         isItemDetailVisible.postValue(true)
                         modelImage.postValue(getModelImageUrl(data.modelId))
@@ -40,7 +49,35 @@ class InputSerialNumberViewModel(
                     isItemDetailVisible.postValue(false)
                 }
             }
-        }
+        }.invokeOnCompletion { mLoading.postValue(false) }
+    }
+
+    fun getItemTopup() {
+        ioScope.launch {
+            if (serialNumber.value.isNullOrEmpty()) {
+                mStatusText.postValue(R.string.error_input_serial_empty)
+                isErrorText.postValue(true)
+                return@launch
+            }
+            mLoading.postValue(true)
+            val param = GetItemReturnRequest()
+            param.serial_number = serialNumber.value
+            returnRepository.getItemTopup(param).apply {
+                if (isSuccessful) {
+                    if (data != null ) {
+                        showStatusText.postValue(false)
+                        itemReturnData.postValue(data)
+                        isItemDetailVisible.postValue(true)
+                        modelImage.postValue(getModelImageUrl(data.modelId))
+                    } else {
+                        isItemDetailVisible.postValue(false)
+                    }
+                } else {
+                    handleError(status)
+                    isItemDetailVisible.postValue(false)
+                }
+            }
+        }.invokeOnCompletion { mLoading.postValue(false) }
     }
 
     private fun getModelImageUrl(modelId: String) : String? {

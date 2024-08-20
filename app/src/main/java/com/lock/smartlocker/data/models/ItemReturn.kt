@@ -9,5 +9,7 @@ data class ItemReturn(
     @SerializedName("model_id") val modelId: String,
     @SerializedName("category_name") val categoryName: String,
     @SerializedName("category_id") val categoryId: String,
-    @SerializedName("loanee_email") val loaneeEmail: String
-)
+    @SerializedName("loanee_email") val loaneeEmail: String,
+    @SerializedName("model_image") val modelImage: String,
+    @SerializedName("type") val type: Int
+    )

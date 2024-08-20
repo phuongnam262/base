@@ -39,5 +39,14 @@
         android:id="@+id/inputSerialNumberFragment2"
         android:name="com.lock.smartlocker.ui.input_serial_number.InputSerialNumberFragment"
         android:label="fragment_input_serial_number"
-        tools:layout="@layout/fragment_input_serial_number" />
+        tools:layout="@layout/fragment_input_serial_number" >
+        <action
+            android:id="@+id/action_inputSerialNumberFragment2_to_selectAvailableLockerFragment2"
+            app:destination="@id/selectAvailableLockerFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/selectAvailableLockerFragment2"
+        android:name="com.lock.smartlocker.ui.select_available_locker.SelectAvailableLockerFragment"
+        android:label="fragment_select_available_locker"
+        tools:layout="@layout/fragment_select_available_locker" />
 </navigation>

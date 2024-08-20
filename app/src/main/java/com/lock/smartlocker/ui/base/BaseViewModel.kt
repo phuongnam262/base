@@ -104,18 +104,23 @@ abstract class BaseViewModel() : ViewModel() {
                 isErrorText.postValue(true)
             }
 
+            ConstantUtils.ADMIN_WRONG_USERNAME_PASS -> {
+                mStatusText.postValue(R.string.error_username_password)
+                isErrorText.postValue(true)
+            }
+
+            ConstantUtils.ADMIN_ACCOUNT_LOCKED -> {
+                mStatusText.postValue(R.string.error_account_locked)
+                isErrorText.postValue(true)
+            }
+
             ConstantUtils.DOOR_HAS_NOT_BEEN_CLOSE -> {
                 mStatusText.postValue(R.string.door_has_not_been_closed)
                 isErrorText.postValue(true)
             }
 
-            ConstantUtils.SERIAL_NUMBER_IS_NO_LONGER_AVAILABLE -> {
-                mStatusText.postValue(R.string.serial_number_is_not_available)
-                isErrorText.postValue(true)
-            }
-
-            ConstantUtils.ADMIN_WRONG_USERNAME_PASS -> {
-                mStatusText.postValue(R.string.error_username_password)
+            ConstantUtils.SERIAL_NUMBER_INVALID, ConstantUtils.SERIAL_NUMBER_INVALID_1 -> {
+                mStatusText.postValue(R.string.error_invalid_serial)
                 isErrorText.postValue(true)
             }
 

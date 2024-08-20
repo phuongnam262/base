@@ -127,7 +127,7 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : BaseAppCom
     }
 
     // In ManagerMenuActivity.kt
-    fun showFragment(fragment: Fragment, navGraphId: Int, addToBackStack: Boolean = true) {
+    fun showFragment(fragment: Fragment, navGraphId: Int, addToBackStack: Boolean = false) {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment_main) as NavHostFragment
         val navController = navHostFragment.navController
         val navInflater = navController.navInflater

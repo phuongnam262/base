@@ -7,6 +7,8 @@ import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
 import com.lock.smartlocker.databinding.FragmentAdminDashboardBinding
 import com.lock.smartlocker.ui.base.BaseFragment
+import com.lock.smartlocker.ui.input_serial_number.InputSerialNumberFragment
+import com.lock.smartlocker.util.ConstantUtils
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
@@ -53,7 +55,11 @@ class AdminDashboardFragment : BaseFragment<FragmentAdminDashboardBinding, Admin
             R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
             R.id.ll_topup_items -> {
                 if (viewModel.numberLockerAvailable.value != 0) {
-                    navigateTo(R.id.action_adminDashboardFragment_to_inputSerialNumberFragment2, null)
+                    val bundle = Bundle().apply {
+                        putSerializable(InputSerialNumberFragment.TYPE_INPUT_SERIAL,
+                            ConstantUtils.TYPE_TOPUP_ITEM)
+                    }
+                    navigateTo(R.id.action_adminDashboardFragment_to_inputSerialNumberFragment2, bundle)
                 }else viewModel.mMessage.postValue(R.string.error_no_available_locker)
             }
         }
