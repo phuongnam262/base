@@ -181,4 +181,12 @@ Tủ khóa sẽ tự động kích hoạt xác nhận sau 10 giây hoặc khi b�
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="successful">Thành công</string>
 
+    <string name="category">Danh mục</string>
+    <string name="model">Model</string>
+    <string name="select_items">Chọn đồ dùng</string>
+    <string name="please_select_category">Vui lòng chọn danh mục để hiển thị các đồ dùng.</string>
+    <string name="add_to_cart">Thêm vào giỏ</string>
+    <string name="available">"Có sẵn: "</string>
+    <string name="loanable">"Được phép lấy: "</string>
+
 </resources>

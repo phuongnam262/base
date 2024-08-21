@@ -16,8 +16,10 @@ import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProvider
 import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
+import com.lock.smartlocker.data.preference.PreferenceHelper
 import com.lock.smartlocker.databinding.ActivityHomeBinding
 import com.lock.smartlocker.ui.base.BaseActivity
+import com.lock.smartlocker.ui.loan.LoanActivity
 import com.lock.smartlocker.ui.manager_menu.ManagerMenuActivity
 import com.lock.smartlocker.ui.returns.ReturnActivity
 import com.lock.smartlocker.util.ConstantUtils
@@ -68,6 +70,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeLis
         mViewDataBinding?.navMenuLeft?.llAdminConsole?.setOnClickListener(this)
         mViewDataBinding?.tvEn?.setOnClickListener(this)
         mViewDataBinding?.tvVi?.setOnClickListener(this)
+        mViewDataBinding?.containerLoan?.setOnClickListener(this)
         viewModel.checkOpenServer()
         viewModel.isServerOff.observeForever {
             isOpenLocalServer = it
@@ -145,6 +148,9 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeLis
                 }
                 R.id.tv_vi -> {
                     setNewLocale(ConstantUtils.Language.VIETNAMESE)
+                }
+                R.id.container_loan -> {
+                    startActivity(LoanActivity::class.java)
                 }
             }
         }

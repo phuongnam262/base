@@ -2,8 +2,6 @@ package com.lock.smartlocker
 
 import android.app.Application
 import android.content.Context
-import android.content.res.Configuration
-import android.os.Build
 import android.os.Process
 import com.lock.smartlocker.data.db.AppDatabase
 import com.lock.smartlocker.data.network.LockerAPI
@@ -13,19 +11,22 @@ import com.lock.smartlocker.data.network.services.HardwareControlServices
 import com.lock.smartlocker.data.network.services.LockerServives
 import com.lock.smartlocker.data.preference.PreferenceHelper
 import com.lock.smartlocker.data.repositories.HardwareControllerRepository
+import com.lock.smartlocker.data.repositories.LoanRepository
 import com.lock.smartlocker.data.repositories.ManagerRepository
 import com.lock.smartlocker.data.repositories.ReturnRepository
 import com.lock.smartlocker.data.repositories.StartAppRepository
 import com.lock.smartlocker.data.repositories.UserFaceRepository
 import com.lock.smartlocker.ui.admin_dashboard.AdminDashboardViewModelFactory
 import com.lock.smartlocker.ui.admin_login.AdminLoginViewModelFactory
+import com.lock.smartlocker.ui.cart.CartViewModelFactory
+import com.lock.smartlocker.ui.category.CategoryViewModelFactory
 import com.lock.smartlocker.ui.deposit_item.DepositItemViewModelFactory
 import com.lock.smartlocker.ui.facedetect.FaceViewModelFactory
 import com.lock.smartlocker.ui.home.HomeViewModelFactory
 import com.lock.smartlocker.ui.input_serial_number.InputSerialNumberViewModelFactory
-import com.lock.smartlocker.ui.inputemail.InputEmailViewModel
 import com.lock.smartlocker.ui.inputemail.InputEmailViewModelFactory
 import com.lock.smartlocker.ui.inputotp.InputOTPViewModelFactory
+import com.lock.smartlocker.ui.loan.LoanViewModelFactory
 import com.lock.smartlocker.ui.manager_menu.ManagerMenuViewModelFactory
 import com.lock.smartlocker.ui.openlocker.OpenLockerViewModelFactory
 import com.lock.smartlocker.ui.register_face.RegisterFaceViewModelFactory
@@ -41,7 +42,6 @@ import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
 import org.kodein.di.generic.provider
 import org.kodein.di.generic.singleton
-import java.util.Locale
 
 class LockerApplication : Application(), KodeinAware {
 
@@ -85,6 +85,7 @@ class LockerApplication : Application(), KodeinAware {
         bind() from singleton { ManagerRepository(instance(), instance()) }
         bind() from singleton { ReturnRepository(instance()) }
         bind() from singleton { HardwareControllerRepository(instance()) }
+        bind() from singleton { LoanRepository(instance()) }
 
         //bind Factory
         bind() from provider { HomeViewModelFactory(instance(), instance()) }
@@ -103,6 +104,9 @@ class LockerApplication : Application(), KodeinAware {
         bind() from provider { SelectAvailableLockerViewModelFactory(instance(), instance()) }
         bind() from provider { DepositItemViewModelFactory(instance(), instance()) }
         bind() from provider { ThankViewModelFactory() }
+        bind() from provider { LoanViewModelFactory() }
+        bind() from provider { CategoryViewModelFactory(instance()) }
+        bind() from provider { CartViewModelFactory() }
     }
 
 }
