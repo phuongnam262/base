@@ -1,5 +1,6 @@
 package com.lock.smartlocker.ui.register_face
 
+import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.common.api.ApiException
 import com.lock.smartlocker.R
 import com.lock.smartlocker.data.entities.UserLockerModel
@@ -18,6 +19,7 @@ class RegisterFaceViewModel(
     private val userLockerRepository: UserFaceRepository
 ) : BaseViewModel() {
     var registerFaceListener: RegisterFaceListener? = null
+    val emailRegister = MutableLiveData<String>()
     fun detectImage(strBase64: String) {
         ioScope.launch {
             try {
@@ -79,18 +81,18 @@ class RegisterFaceViewModel(
             try {
                 val personCodeGen = generateRandomNumber()
                 val addPersonModel =
-                    AddPersonRequest("1", "x$personCodeGen", "x$personCodeGen", strBase64, 1)
+                    AddPersonRequest("1", "x$personCodeGen", emailRegister.value, strBase64, 1)
                 val getResponse = userLockerRepository.addPerson(addPersonModel)
                 getResponse.errorCode.let {
                     if (it == ConstantUtils.ERROR_CODE_SUCCESS) {
                         val userLockerModel =
                             UserLockerModel(
                                 0,
-                                personCodeGen,
+                                emailRegister.value,
                                 personCodeGen,
                                 "1",
                                 0,
-                                "email@gmail.com"
+                                emailRegister.value
                             )
                         val saveUser = userLockerRepository.saveUser(userLockerModel)
                         if (saveUser > 0) {

@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.util.Base64
 import android.util.Log
@@ -19,6 +18,7 @@ import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.ImageProxy
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.google.mlkit.common.MlKitException
@@ -59,7 +59,8 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
     private var analysisUseCase: ImageAnalysis? = null
     private var imageProcessor: VisionImageProcessor? = null
     private var needUpdateGraphicOverlayImageSourceInfo = false
-    private var lensFacing = CameraSelector.LENS_FACING_FRONT
+    private var lensFacing = CameraSelector.LENS_FACING_EXTERNAL
+    private var rotateCamera = Surface.ROTATION_270
     private var cameraSelector: CameraSelector? = null
     private var imageCapture: ImageCapture? = null
     private var isExited: Boolean = false
@@ -75,7 +76,7 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
         initData()
     }
 
-    private fun initView(){
+    private fun initView() {
         viewModel.titlePage.postValue(getString(R.string.register_face))
         mViewDataBinding?.bottomMenu?.rlHome?.setOnClickListener(this)
         mViewDataBinding?.bottomMenu?.btnProcess?.setOnClickListener(this)
@@ -127,16 +128,16 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
         FaceDetectorProcessor.isSuccess = false
     }
 
-    private fun initData(){
+    private fun initData() {
 
     }
 
     override fun onClick(v: View?) {
-        when(v?.id){
+        when (v?.id) {
             R.id.rl_home -> activity?.finish()
             R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
             R.id.btn_process -> {
-                if (isExited){
+                if (isExited) {
                     isExited = false
                     viewModel.showStatusText.value = false
                     FaceDetectorProcessor.isSuccess = false
@@ -149,7 +150,7 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
     override fun handleSuccess(personCode: String, email: String) {
         viewModel.showButtonProcess.postValue(false)
         viewModel.titlePage.postValue(getString(R.string.face_register_success))
-        mViewDataBinding?.tvHeaderInfo?.text = getString(R.string.face_hello, personCode)
+        mViewDataBinding?.tvHeaderInfo?.text = getString(R.string.face_hello, email)
     }
 
     override fun faceNotFound() {
@@ -179,22 +180,45 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
             cameraProvider!!.unbind(previewUseCase)
         }
 
-        val builder = Preview.Builder()
-//        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O){
-//            previewUseCase?.targetRotation = Surface.ROTATION_180
-//        }else {
-//            builder.setTargetRotation(Surface.ROTATION_180)
-//        }
-        previewUseCase = builder.build()
-        imageCapture = ImageCapture.Builder().setTargetRotation(Surface.ROTATION_180).build()
-        previewUseCase!!.setSurfaceProvider(mViewDataBinding?.previewView?.surfaceProvider)
-        camera =
+        imageCapture =
+            ImageCapture.Builder()
+                .setTargetRotation(rotateCamera)
+                .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
+                .build()
+
+        val previewView = mViewDataBinding?.previewView
+        previewView?.scaleType = PreviewView.ScaleType.FILL_CENTER
+        previewView?.implementationMode = PreviewView.ImplementationMode.COMPATIBLE
+
+        previewUseCase = Preview.Builder()
+            .setTargetRotation(rotateCamera)
+            .build().apply {
+                setSurfaceProvider(previewView?.surfaceProvider)
+            }
+
+        cameraSelector = CameraSelector.Builder()
+            .apply {
+                val cameraList = cameraProvider!!.availableCameraInfos
+                if (cameraList.isNotEmpty()) {
+                    requireLensFacing(lensFacing)
+                } else {
+                    Log.e("CameraDebug", "No available cameras on the device")
+                    return@apply
+                }
+            }
+            .build()
+
+        try {
+            cameraProvider!!.unbindAll()
             cameraProvider!!.bindToLifecycle(
                 this,
                 cameraSelector!!,
                 previewUseCase,
                 imageCapture
             )
+        } catch (exc: Exception) {
+            Log.e("CameraDebug", "Error binding camera: ${exc.message}")
+        }
     }
 
     private fun bindAnalysisUseCase() {
@@ -224,8 +248,9 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
             }
 
         val builder = ImageAnalysis.Builder()
-        //builder.setTargetRotation(Surface.ROTATION_180)
-        analysisUseCase = builder.build()
+        analysisUseCase = builder
+            .setTargetRotation(rotateCamera)
+            .build()
 
         needUpdateGraphicOverlayImageSourceInfo = true
 
@@ -236,19 +261,18 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
                 it
             ) { imageProxy: ImageProxy ->
                 if (needUpdateGraphicOverlayImageSourceInfo) {
-                    val isImageFlipped = lensFacing == CameraSelector.LENS_FACING_EXTERNAL
                     val rotationDegrees = imageProxy.imageInfo.rotationDegrees
                     if (rotationDegrees == 0 || rotationDegrees == 180) {
                         mViewDataBinding?.graphicOverlay?.setImageSourceInfo(
                             imageProxy.width,
                             imageProxy.height,
-                            isImageFlipped
+                            true
                         )
                     } else {
                         mViewDataBinding?.graphicOverlay?.setImageSourceInfo(
                             imageProxy.height,
                             imageProxy.width,
-                            isImageFlipped
+                            true
                         )
                     }
                     needUpdateGraphicOverlayImageSourceInfo = false
@@ -262,7 +286,7 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
                 }
             }
         }
-        cameraProvider!!.bindToLifecycle(/* lifecycleOwner= */ this,
+        cameraProvider!!.bindToLifecycle(this,
             cameraSelector!!,
             analysisUseCase
         )

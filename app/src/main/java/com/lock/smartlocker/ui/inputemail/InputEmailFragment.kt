@@ -9,6 +9,8 @@ import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
 import com.lock.smartlocker.databinding.FragmentInputEmailBinding
 import com.lock.smartlocker.ui.base.BaseFragment
+import com.lock.smartlocker.ui.input_serial_number.InputSerialNumberFragment
+import com.lock.smartlocker.util.ConstantUtils
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
@@ -25,6 +27,10 @@ class InputEmailFragment : BaseFragment<FragmentInputEmailBinding, InputEmailVie
 
     override val viewModel: InputEmailViewModel
         get() = ViewModelProvider(this, factory)[InputEmailViewModel::class.java]
+
+    companion object {
+        const val EMAIL_REGISTER = "email_register"
+    }
 
     private val items = listOf("@gmail.com", "@yahoo.com", "@hotmail.com", "@edu")
 
@@ -75,7 +81,10 @@ class InputEmailFragment : BaseFragment<FragmentInputEmailBinding, InputEmailVie
         }
     }
 
-    override fun consumerLoginSuccess() {
-        navigateTo(R.id.action_navigation_input_email_to_inputOTPFragment, null)
+    override fun consumerLoginSuccess(email: String) {
+        val bundle = Bundle().apply {
+            putString(EMAIL_REGISTER, email)
+        }
+        navigateTo(R.id.action_navigation_input_email_to_inputOTPFragment, bundle)
     }
 }

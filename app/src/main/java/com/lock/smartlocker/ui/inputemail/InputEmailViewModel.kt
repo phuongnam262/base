@@ -29,7 +29,7 @@ class InputEmailViewModel(
             managerRepository.consumerLogin(param).apply {
                 if (isSuccessful) {
                     if (data != null) {
-                        inputEmailListener?.consumerLoginSuccess()
+                        inputEmailListener?.consumerLoginSuccess(param.email!!)
                         showStatusText.postValue(false)
                     }
                 }else handleError(status)

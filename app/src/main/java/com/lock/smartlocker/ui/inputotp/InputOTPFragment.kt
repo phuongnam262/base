@@ -7,6 +7,8 @@ import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
 import com.lock.smartlocker.databinding.FragmentInputOtpBinding
 import com.lock.smartlocker.ui.base.BaseFragment
+import com.lock.smartlocker.ui.input_serial_number.InputSerialNumberFragment
+import com.lock.smartlocker.ui.inputemail.InputEmailFragment
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
@@ -47,7 +49,11 @@ class InputOTPFragment : BaseFragment<FragmentInputOtpBinding, InputOTPViewModel
             R.id.rl_home -> activity?.finish()
             R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
             R.id.btn_process -> {
-                navigateTo(R.id.action_inputOTPFragment_to_registerFaceFragment, null)
+                val bundle = Bundle().apply {
+                    putString(InputEmailFragment.EMAIL_REGISTER, arguments?.getString(
+                        InputEmailFragment.EMAIL_REGISTER))
+                }
+                navigateTo(R.id.action_inputOTPFragment_to_registerFaceFragment, bundle)
             }
         }
     }
