@@ -106,7 +106,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="successful">Thành công</string>
 
-
+    <!-- loan   -->
     <string name="category">Danh mục</string>
     <string name="model">Model</string>
     <string name="select_items">Chọn đồ dùng</string>
@@ -114,7 +114,9 @@
     <string name="add_to_cart">Thêm vào giỏ</string>
     <string name="available">"Có sẵn: "</string>
     <string name="loanable">"Được phép lấy: "</string>
-
+    <string name="please_review_cart_info">Please review them. When ready, press "PROCEED" to collect your items. The locker will automatically open at that time</string>
+    <string name="cart">Cart</string>
+    <string name="cart_item_quantity_format">x%d</string>
 
     <!-- Strings for camera settings. -->
     <string name="pref_category_key_camera" translatable="false">pckc</string>

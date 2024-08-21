@@ -65,7 +65,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeLis
             getRuntimePermissions()
         }
         mViewDataBinding?.btnMenu?.setOnClickListener(this)
-        mViewDataBinding?.navMenuLeft?.llRegisterFace?.s
+        mViewDataBinding?.navMenuLeft?.llRegisterFace?.setOnClickListener(this)
         viewModel.checkOpenServer()
         viewModel.isServerOff.observeForever {
             isOpenLocalServer = it

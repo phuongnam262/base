@@ -139,7 +139,6 @@
                 layout="@layout/bottom_menu_2"
                 app:ownerText="@{viewmodel.ownerText}"
                 app:timerHour="@{viewmodel.timerHour}"
-                app:showMenuCart="@{true}"
                 app:numberCart="@{String.valueOf(viewmodel.cartItems.size())}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
