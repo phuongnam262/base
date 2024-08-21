@@ -5,5 +5,5 @@
     <corners android:radius="@dimen/dp_30" /> <!-- Radius 15dp -->
     <stroke
         android:width="@dimen/dp_2"
-        android:color="#706F6F" /> <!-- Border 1px màu đen -->
+        android:color="#06D706" /> <!-- Border 1px màu đen -->
 </shape>

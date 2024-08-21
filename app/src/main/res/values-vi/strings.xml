@@ -2,6 +2,120 @@
 <resources>
     <string name="app_name">SmartLocker</string>
 
+    <string name="network_error">Make sure you have an active data connection</string>
+    <string name="close">Close</string>
+
+    <string name="server_error">There is an error from server. Please try again.</string>
+    <string name="error_api">Cal API Error</string>
+    <string name="error_network">Please check your network.</string>
+    <string name="error_all">Some error please check it</string>
+    <string name="error_response">Error response</string>
+    <string name="error_message">An internal error has occurred. Please try again.</string>
+
+    <!-- login -->
+    <string name="login_error_1001">Email không tồn tại</string>
+    <string name="login_error_1002">Sai mật khẩu</string>
+    <string name="email_not_correct_format">Invalid email format</string>
+
+    <!-- Error -->
+    <string name="unauthorized">Unauthorized</string>
+
+    <!-- Home -->
+    <string name="menu_item">ITEMS</string>
+    <string name="menu_register_face">Đăng ký khuôn mặt</string>
+    <string name="menu_manager_face">Quản lý khuôn mặt</string>
+    <string name="menu_admin_console">Bảng điều khiển quản trị</string>
+    <string name="loan_button">MƯỢN ĐỒ DÙNG</string>
+    <string name="loan_button_label">Bạn có thể mượn đồ dùng từ tủ và phải trả lại trước thời gian quy định</string>
+    <string name="return_button">TRẢ ĐỒ DÙNG</string>
+    <string name="return_button_label">Hãy chọn một ngăn tủ để trả lại đồ dùng đã mượn</string>
+    <string name="collect_button">LẤY ĐỒ DÙNG</string>
+    <string name="collect_button_label">Bạn có thể lấy đồ dùng theo quy định và không cần hoàn trả </string>
+    <string name="using_mail_button">DÙNG EMAIL</string>
+    <string name="retry_button">THỬ LẠI</string>
+    <string name="process_button">TIẾP TỤC</string>
+
+    <!-- Recognize face -->
+    <string name="recognize_face">Nhận Diện Khuôn Mặt Của Bạn</string>
+    <string name="error_no_face_detect">Không tìm thấy dữ liệu.\nHãy thử lại hoặc sử dụng phương pháp khác.</string>
+    <string name="welcome_back">Chào mừng trở lại %1$s</string>
+
+    <!-- Input email -->
+    <string name="auth_required">Yêu Cầu Xác Thực</string>
+    <string name="enter_email_continue">Nhập email của bạn để tiếp tục.</string>
+    <string name="enter_email">Nhập email của bạn:</string>
+    <string name="error_email_empty">Vui lòng nhập email</string>
+
+    <!-- Admin Login -->
+    <string name="enter_username_continue">Nhập tên người dùng của bạn để tiếp tục..</string>
+    <string name="username">Tên người dùng:</string>
+    <string name="password">Mật khẩu:</string>
+    <string name="error_username_empty">Vui lòng nhập tên người dùng</string>
+    <string name="error_password_empty">Vui lòng nhập mật khẩu</string>
+    <string name="error_username_password">Tên người dùng hoặc mật khẩu không chính xác</string>
+    <string name="error_account_locked">Tài khoản này đã bị khóa</string>
+
+    <!-- input OTP -->
+    <string name="enter_otp_verify">Nhập OTP được gửi đến thiết bị của bạn để xác minh tài khoản..</string>
+    <string name="enter_otp">Nhập OTP::</string>
+    <string name="resend_otp_button">Gửi lại OTP</string>
+
+    <!-- Register face -->
+    <string name="register_face">Đăng Ký Khuôn Mặt Của Bạn</string>
+    <string name="register_face_info">Vui lòng đứng gần tủ và nhìn thẳng vào máy ảnh để chúng tôi có thể chụp rõ khuôn mặt của bạn.</string>
+    <string name="face_exits">Face ID này đã tồn tại.</string>
+    <string name="save_user_fail">Lưu người dùng thất bại</string>
+    <string name="face_not_found">Không tìm thấy khuôn mặt</string>
+    <string name="face_register_success">Đăng Ký Khuôn Mặt Thành Công</string>
+    <string name="face_hello">Hello %1$s, \nFace ID của bạn đã được thêm thành công.</string>
+    <string name="btn_retry">THỬ LẠI</string>
+
+    <!-- Admin Dashboard -->
+    <string name="topup_items">THÊM ĐỒ DÙNG\n(%1$s)</string>
+    <string name="retrieve_faulty">THU HỒI ĐỒ DÙNG LỖI\n(%1$s)</string>
+    <string name="retrieve_items">THU HỒI ĐỒ DÙNG </string>
+    <string name="manage_lockers">QUẢN LÝ TỦ KHÓA</string>
+    <string name="settings">CÀI ĐẶT</string>
+    <string name="close_app">ĐÓNG ỨNG DỤNG</string>
+    <string name="admin_menu">Danh Mục</string>
+    <string name="error_no_available_locker">Hiện tại không có tủ khóa để thêm đồ dùng</string>
+
+    <!-- Scan serial number   -->
+    <string name="scan_or_enter_serial_number">Quét hoặc Nhập Số sê-ri</string>
+    <string name="enter_serial_number_verify">Vui lòng quét số sê-ri bằng đầu đọc mã vạch bên dưới hoặc nhập thủ công..</string>
+    <string name="enter_serial_number">Nhập số sê-ri</string>
+    <string name="select_a_faulty">Chọn một lý do lỗi</string>
+    <string name="select_faulty_reason_info">Chọn lý do lỗi sau đây giúp người quản trị hiểu được hiện trạng của các đồ dùng.\nNếu không có lý do phổ biến nào phù hợp với tình huống của bạn, vui lòng nhập lý do của riêng bạn.</string>
+    <string name="select_available_locker_info">Chọn tủ khóa để cất đồ dùng của bạn. \nSau khi chọn, cửa tủ khóa sẽ tự động mở.</string>
+    <string name="select_an_available_locker">Chọn Tủ Khóa Khả Dụng</string>
+    <string name="deposit_item">Gửi Đồ Dùng</string>
+    <string name="deposit_item_info">Vui lòng đặt đồ dùng vào tủ khóa đang mở và đóng cửa.\nTủ khóa sẽ tự động kích hoạt xác nhận sau 10 giây hoặc khi bạn nhấn nút xác nhận.</string>
+    <string name="door_has_not_been_closed">Cửa chưa được đóng. Nhấn XÁC NHẬN để tiếp tục..</string>
+    <string name="error_invalid_serial">Số sê-ri không hợp lệ.</string>
+    <string name="dialog_attention">Đồ dùng này có vấn đề gì không?</string>
+    <string name="error_input_serial_empty">Vui lòng quét hoặc nhập số sê-ri của đồ dùng</string>
+    <string name="serial_number_is_not_available">Số sê-ri này không còn khả dụng nữa</string>
+    <string name="error_logic">Bị sai logic</string>
+
+    <!-- Deposit item   -->
+    <string name="deposit_topup_success">Thêm đồ dùng thành công!\nBạn còn đồ dùng nào cần thêm không?</string>
+
+    <!-- hwc   -->
+    <string name="error_open_failed">Cửa không được mở thành công.</string>
+    <string name="error_door_has_not_close">Cửa chưa được đóng.</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="successful">Thành công</string>
+
+
+    <string name="category">Danh mục</string>
+    <string name="model">Model</string>
+    <string name="select_items">Chọn đồ dùng</string>
+    <string name="please_select_category">Vui lòng chọn danh mục để hiển thị các đồ dùng.</string>
+    <string name="add_to_cart">Thêm vào giỏ</string>
+    <string name="available">"Có sẵn: "</string>
+    <string name="loanable">"Được phép lấy: "</string>
+
+
     <!-- Strings for camera settings. -->
     <string name="pref_category_key_camera" translatable="false">pckc</string>
     <string name="pref_category_title_camera" translatable="false">Camera</string>
@@ -76,117 +190,11 @@
     <string name="pref_entry_values_pose_detector_performance_mode_fast" translatable="false">1</string>
     <string name="pref_entry_values_pose_detector_performance_mode_accurate" translatable="false">2</string>
 
-
     <!-- Settings related strings. -->
     <string name="pref_screen" translatable="false">ps</string>
     <string name="pref_category_info" translatable="false">Detection Info</string>
     <string name="pref_category_face_detection" translatable="false">Face Detection</string>
     <string name="pref_screen_title_camerax_live_preview" translatable="false">CameraX live preview settings</string>
     <string name="pref_screen_title_live_preview" translatable="false">Live preview settings</string>
-
-    <string name="network_error">Make sure you have an active data connection</string>
-    <string name="close">Close</string>
-
-    <string name="server_error">There is an error from server. Please try again.</string>
-    <string name="error_api">Cal API Error</string>
-    <string name="error_network">Please check your network.</string>
-    <string name="error_all">Some error please check it</string>
-    <string name="error_response">Error response</string>
-    <string name="error_message">An internal error has occurred. Please try again.</string>
-
-    <!-- login -->
-    <string name="login_error_1001">Email không tồn tại</string>
-    <string name="login_error_1002">Sai mật khẩu</string>
-    <string name="email_not_correct_format">Invalid email format</string>
-
-    <!-- Error -->
-    <string name="unauthorized">Unauthorized</string>
-
-    <!-- Home -->
-    <string name="menu_item">ITEMS</string>
-    <string name="menu_register_face">Đăng ký khuôn mặt</string>
-    <string name="menu_manager_face">Quản lý khuôn mặt</string>
-    <string name="menu_admin_console">Bảng điều khiển quản trị</string>
-    <string name="loan_button">MƯỢN ĐỒ DÙNG</string>
-    <string name="loan_button_label">Bạn có thể mượn đồ dùng từ tủ và phải trả lại trước thời gian quy định</string>
-    <string name="return_button">TRẢ ĐỒ DÙNG</string>
-    <string name="return_button_label">Hãy chọn một ngăn tủ để trả lại đồ dùng đã mượn</string>
-    <string name="collect_button">LẤY ĐỒ DÙNG</string>
-    <string name="collect_button_label">Bạn có thể lấy đồ dùng theo quy định và không cần hoàn trả </string>
-    <string name="using_mail_button">DÙNG EMAIL</string>
-    <string name="retry_button">THỬ LẠI</string>
-    <string name="process_button">TIẾP TỤC</string>
-
-    <!-- Input email -->
-    <string name="auth_required">Yêu Cầu Xác Thực</string>
-    <string name="enter_email_continue">Nhập email của bạn để tiếp tục.</string>
-    <string name="enter_email">Nhập email của bạn:</string>
-    <string name="error_email_empty">Vui lòng nhập email</string>
-
-    <!-- Admin Login -->
-    <string name="enter_username_continue">Nhập tên người dùng của bạn để tiếp tục..</string>
-    <string name="username">Tên người dùng:</string>
-    <string name="password">Mật khẩu:</string>
-    <string name="error_username_empty">Vui lòng nhập tên người dùng</string>
-    <string name="error_password_empty">Vui lòng nhập mật khẩu</string>
-    <string name="error_username_password">Tên người dùng hoặc mật khẩu không chính xác</string>
-    <string name="error_account_locked">Tài khoản này đã bị khóa</string>
-
-    <!-- input OTP -->
-    <string name="enter_otp_verify">Nhập OTP được gửi đến thiết bị của bạn để xác minh tài khoản..</string>
-    <string name="enter_otp">Nhập OTP::</string>
-    <string name="resend_otp_button">Gửi lại OTP</string>
-
-    <!-- Register face -->
-    <string name="register_face">Đăng Ký Khuôn Mặt Của Bạn</string>
-    <string name="register_face_info">Vui lòng đứng gần tủ và nhìn thẳng vào máy ảnh để chúng tôi có thể chụp rõ khuôn mặt của bạn.</string>
-    <string name="face_exits">Face ID này đã tồn tại.</string>
-    <string name="save_user_fail">Lưu người dùng thất bại</string>
-    <string name="face_not_found">Không tìm thấy khuôn mặt</string>
-    <string name="face_register_success">Đăng Ký Khuôn Mặt Thành Công</string>
-    <string name="face_hello">hello someone@something.com, \nFace ID của bạn đã được thêm thành công.</string>
-
-    <!-- Admin Dashboard -->
-    <string name="topup_items">THÊM ĐỒ DÙNG\n(%1$s)</string>
-    <string name="retrieve_faulty">THU HỒI ĐỒ DÙNG LỖI\n(%1$s)</string>
-    <string name="retrieve_items">THU HỒI ĐỒ DÙNG </string>
-    <string name="manage_lockers">QUẢN LÝ TỦ KHÓA</string>
-    <string name="settings">CÀI ĐẶT</string>
-    <string name="close_app">ĐÓNG ỨNG DỤNG</string>
-    <string name="admin_menu">Danh Mục</string>
-    <string name="error_no_available_locker">Hiện tại không có tủ khóa để thêm đồ dùng</string>
-
-    <!-- Scan serial number   -->
-    <string name="scan_or_enter_serial_number">Quét hoặc Nhập Số sê-ri</string>
-    <string name="enter_serial_number_verify">Vui lòng quét số sê-ri bằng đầu đọc mã vạch bên dưới hoặc nhập thủ công..</string>
-    <string name="enter_serial_number">Nhập số sê-ri</string>
-    <string name="select_a_faulty">Chọn một lý do lỗi</string>
-    <string name="select_faulty_reason_info">Chọn lý do lỗi sau đây giúp người quản trị hiểu được hiện trạng của các đồ dùng.\nNếu không có lý do phổ biến nào phù hợp với tình huống của bạn, vui lòng nhập lý do của riêng bạn.</string>
-    <string name="select_available_locker_info">Chọn tủ khóa để cất đồ dùng của bạn. \nSau khi chọn, cửa tủ khóa sẽ tự động mở.</string>
-    <string name="select_an_available_locker">Chọn Tủ Khóa Khả Dụng</string>
-    <string name="deposit_item">Gửi Đồ Dùng</string>
-    <string name="deposit_item_info">Vui lòng đặt đồ dùng vào tủ khóa đang mở và đóng cửa.
-Tủ khóa sẽ tự động kích hoạt xác nhận sau 10 giây hoặc khi bạn nhấn nút xác nhận.</string>
-    <string name="door_has_not_been_closed">Cửa chưa được đóng. Nhấn XÁC NHẬN để tiếp tục..</string>
-    <string name="error_invalid_serial">Số sê-ri không hợp lệ.</string>
-    <string name="dialog_attention">Đồ dùng này có vấn đề gì không?</string>
-    <string name="error_input_serial_empty">Vui lòng quét hoặc nhập số sê-ri của đồ dùng</string>
-    <string name="serial_number_is_not_available">Số sê-ri này không còn khả dụng nữa</string>
-    <string name="does_this_item_require_attention">Đồ dùng này có vấn đề gì không?</string>
-
-    <!-- hwc   -->
-    <string name="error_open_failed">Cửa không được mở thành công.</string>
-    <string name="error_door_has_not_close">Cửa chưa được đóng.</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="successful">Thành công</string>
-
-    <string name="category">Danh mục</string>
-    <string name="model">Model</string>
-    <string name="select_items">Chọn đồ dùng</string>
-    <string name="please_select_category">Vui lòng chọn danh mục để hiển thị các đồ dùng.</string>
-    <string name="add_to_cart">Thêm vào giỏ</string>
-    <string name="available">"Có sẵn: "</string>
-    <string name="loanable">"Được phép lấy: "</string>
 
 </resources>

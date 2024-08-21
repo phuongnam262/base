@@ -7,10 +7,6 @@
         <import type="android.view.View" />
 
         <variable
-            name="showMenuCart"
-            type="Boolean" />
-
-        <variable
             name="showButtonProcess"
             type="Boolean" />
 
@@ -140,7 +136,7 @@
                         android:layout_centerInParent="true"
                         android:clickable="true"
                         android:focusable="true"
-                        android:visibility="@{showMenuCart ? View.VISIBLE : View.GONE}">
+                        android:visibility="@{showButtonProcess ? View.GONE : View.VISIBLE}">
 
                         <ImageView
                             android:id="@+id/iv_cart"

@@ -25,6 +25,10 @@ class ConstantUtils {
         const val TYPE_ADMIN_CONSOLE = "TYPE_ADMIN_CONSOLE"
         const val TYPE_MANAGER_FACE = "TYPE_MANAGER_FACE"
 
+        //Type Consumer
+        const val TYPE_LOAN = "TYPE_LOAN"
+        const val TYPE_COLLECT = "TYPE_COLLECT"
+
         //Type input serial
         const val TYPE_RETURN = "TYPE_RETURN"
         const val TYPE_TOPUP_ITEM = "TYPE_TOPUP_ITEM"

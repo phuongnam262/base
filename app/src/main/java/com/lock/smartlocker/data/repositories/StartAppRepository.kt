@@ -9,8 +9,7 @@ import com.lock.smartlocker.data.network.SafeApiRequest
 import com.lock.smartlocker.data.network.LockerAPI
 
 class StartAppRepository (
-    private val api: LockerAPI,
-    private val db: AppDatabase
+    private val api: LockerAPI
 ) : SafeApiRequest() {
 
     suspend fun terminalLogin(): BaseResponse<TerminalLoginResponse> {

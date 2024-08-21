@@ -36,9 +36,9 @@ class RegisterFaceViewModel(
                     }
                 }
             } catch (e: ApiException) {
-                //mSnackbar.postValue(e.message!!)
+                mMessage.postValue(R.string.error_message)
             } catch (e: NoInternetException) {
-                //mSnackbar.postValue(e.message!!)
+                mMessage.postValue(R.string.error_network)
             }
         }
     }
@@ -81,7 +81,7 @@ class RegisterFaceViewModel(
             try {
                 val personCodeGen = generateRandomNumber()
                 val addPersonModel =
-                    AddPersonRequest("1", "x$personCodeGen", emailRegister.value, strBase64, 1)
+                    AddPersonRequest("1", personCodeGen, emailRegister.value, strBase64, 1)
                 val getResponse = userLockerRepository.addPerson(addPersonModel)
                 getResponse.errorCode.let {
                     if (it == ConstantUtils.ERROR_CODE_SUCCESS) {
@@ -89,10 +89,11 @@ class RegisterFaceViewModel(
                             UserLockerModel(
                                 0,
                                 emailRegister.value,
-                                personCodeGen,
-                                "1",
+                                addPersonModel.personCode,
+                                addPersonModel.personGroup,
                                 0,
-                                emailRegister.value
+                                emailRegister.value,
+                                0
                             )
                         val saveUser = userLockerRepository.saveUser(userLockerModel)
                         if (saveUser > 0) {

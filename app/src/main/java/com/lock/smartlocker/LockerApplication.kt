@@ -21,14 +21,13 @@ import com.lock.smartlocker.ui.admin_login.AdminLoginViewModelFactory
 import com.lock.smartlocker.ui.cart.CartViewModelFactory
 import com.lock.smartlocker.ui.category.CategoryViewModelFactory
 import com.lock.smartlocker.ui.deposit_item.DepositItemViewModelFactory
-import com.lock.smartlocker.ui.facedetect.FaceViewModelFactory
 import com.lock.smartlocker.ui.home.HomeViewModelFactory
 import com.lock.smartlocker.ui.input_serial_number.InputSerialNumberViewModelFactory
 import com.lock.smartlocker.ui.inputemail.InputEmailViewModelFactory
 import com.lock.smartlocker.ui.inputotp.InputOTPViewModelFactory
 import com.lock.smartlocker.ui.loan.LoanViewModelFactory
 import com.lock.smartlocker.ui.manager_menu.ManagerMenuViewModelFactory
-import com.lock.smartlocker.ui.openlocker.OpenLockerViewModelFactory
+import com.lock.smartlocker.ui.recognize_face.RecognizeFaceViewModelFactory
 import com.lock.smartlocker.ui.register_face.RegisterFaceViewModelFactory
 import com.lock.smartlocker.ui.returns.ReturnViewModelFactory
 import com.lock.smartlocker.ui.select_available_locker.SelectAvailableLockerViewModelFactory
@@ -81,16 +80,14 @@ class LockerApplication : Application(), KodeinAware {
 
         //bind Repository
         bind() from singleton { UserFaceRepository(instance(), instance()) }
-        bind() from singleton { StartAppRepository(instance(), instance()) }
-        bind() from singleton { ManagerRepository(instance(), instance()) }
+        bind() from singleton { StartAppRepository(instance()) }
+        bind() from singleton { ManagerRepository(instance()) }
         bind() from singleton { ReturnRepository(instance()) }
         bind() from singleton { HardwareControllerRepository(instance()) }
         bind() from singleton { LoanRepository(instance()) }
 
         //bind Factory
         bind() from provider { HomeViewModelFactory(instance(), instance()) }
-        bind() from provider { FaceViewModelFactory(instance()) }
-        bind() from provider { OpenLockerViewModelFactory(instance()) }
         bind() from provider { SplashViewModelFactory(instance()) }
         bind() from provider { ManagerMenuViewModelFactory(instance()) }
         bind() from provider { InputEmailViewModelFactory(instance()) }
@@ -107,6 +104,7 @@ class LockerApplication : Application(), KodeinAware {
         bind() from provider { LoanViewModelFactory() }
         bind() from provider { CategoryViewModelFactory(instance()) }
         bind() from provider { CartViewModelFactory() }
+        bind() from provider { RecognizeFaceViewModelFactory(instance(), instance()) }
     }
 
 }

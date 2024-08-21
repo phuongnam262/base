@@ -1,5 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SmartLocker</string>
+
+    <string name="network_error">Make sure you have an active data connection</string>
+    <string name="close">Close</string>
+
+    <string name="server_error">There is an error from server. Please try again.</string>
+    <string name="error_api">Cal API Error</string>
+    <string name="error_network">Please check your network.</string>
+    <string name="error_all">Some error please check it</string>
+    <string name="error_response">Error response</string>
+    <string name="error_message">An internal error has occurred. Please try again.</string>
+
+    <!-- login -->
+    <string name="login_error_1001">Email is not existed</string>
+    <string name="login_error_1002">Wrong password</string>
+    <string name="email_not_correct_format">Invalid email format</string>
+
+    <!-- Error -->
+    <string name="unauthorized">Unauthorized</string>
+
+    <!-- Home -->
+    <string name="menu_item">ITEMS</string>
+    <string name="menu_register_face">Register Face</string>
+    <string name="menu_manager_face">Manage Face</string>
+    <string name="menu_admin_console">Admin Console</string>
+    <string name="loan_button">LOAN</string>
+    <string name="loan_button_label">Users can loan items from lockers, with mandatory return by a specified time</string>
+    <string name="return_button">RETURN</string>
+    <string name="return_button_label">Return your loaned item into the locker easily to complete the borrowing</string>
+    <string name="collect_button">COLLECT</string>
+    <string name="collect_button_label">Allows users to take items, like gloves,… without needing to return them</string>
+    <string name="using_mail_button">USING EMAIL</string>
+    <string name="retry_button">RETRY</string>
+    <string name="process_button">PROCESS</string>
+
+    <!-- Recognize face -->
+    <string name="recognize_face">Recognize Your Face</string>
+    <string name="error_no_face_detect">No face detected.\nTry again or use another authentication method.</string>
+    <string name="welcome_back">Welcome back %1$s</string>
+
+    <!-- Input email -->
+    <string name="auth_required">Authentication Required</string>
+    <string name="enter_email_continue">Enter your email to continue.</string>
+    <string name="enter_email">Enter your email:</string>
+    <string name="error_email_empty">Please enter email</string>
+
+    <!-- Admin Login -->
+    <string name="enter_username_continue">Enter your username to continue.</string>
+    <string name="username">Username:</string>
+    <string name="password">Password:</string>
+    <string name="error_username_empty">Please enter username</string>
+    <string name="error_password_empty">Please enter password</string>
+    <string name="error_username_password">Incorrect username or password</string>
+    <string name="error_account_locked">This account has been locked</string>
+
+    <!-- input OTP -->
+    <string name="enter_otp_verify">Enter the OTP sent to your device to verify your account.</string>
+    <string name="enter_otp">Enter OTP:</string>
+    <string name="resend_otp_button">Resend OTP</string>
+
+    <!-- Register face -->
+    <string name="register_face">Register Your Face</string>
+    <string name="register_face_info">Please stand close to the locker and look straight at the camera so we can capture your face clearly.</string>
+    <string name="face_exits">Face ID already exits</string>
+    <string name="save_user_fail">Save user fail</string>
+    <string name="face_not_found">Face not found</string>
+    <string name="face_register_success">Face Registered Successfully</string>
+    <string name="face_hello">Hello %1$s,\nYour Face ID has been successfully added.</string>
+    <string name="btn_retry">RETRY</string>
+
+    <!-- Admin Dashboard -->
+    <string name="topup_items">TOPUP ITEMS\n(%1$s)</string>
+    <string name="retrieve_faulty">RETRIEVE FAULTY\n(%1$s)</string>
+    <string name="retrieve_items">RETRIEVE ITEMS</string>
+    <string name="manage_lockers">MANAGE LOCKERS</string>
+    <string name="settings">SETTINGS</string>
+    <string name="close_app">CLOSE APPLICATION</string>
+    <string name="admin_menu">Menu</string>
+    <string name="error_no_available_locker">No available lockers for topup at this time</string>
+
+    <!-- Scan serial number   -->
+    <string name="scan_or_enter_serial_number">Scan or Enter Serial Number</string>
+    <string name="enter_serial_number_verify">Please scan the serial number using the barcode reader below or enter it manually.</string>
+    <string name="enter_serial_number">Enter Serial Number</string>
+    <string name="select_a_faulty">Select A Faulty Reason</string>
+    <string name="select_faulty_reason_info">The faulty reason helps the administrator understand the current state of the items.\nIf none of the common reasons match your situation, please enter your own.</string>
+    <string name="select_available_locker_info">Choose a locker to store your items. \nOnce selected, the locker door will automatically open. </string>
+    <string name="select_an_available_locker">Select An Available Locker</string>
+    <string name="deposit_item">Deposit Item</string>
+    <string name="deposit_item_info">Please deposit the item into the opening locker and close the door.\nLocker will auto-trigger confirmation after 10 seconds or when you tap confirm button.</string>
+    <string name="door_has_not_been_closed">Door has not been closed. Tap CONFIRM to continue.</string>
+    <string name="error_invalid_serial">Invalid serial number</string>
+    <string name="dialog_attention">Does this item require attention?</string>
+    <string name="error_input_serial_empty">Please scan or enter item serial number</string>
+    <string name="serial_number_is_not_available">This Serial number is no longer available</string>
+    <string name="error_logic">Invalid status logic</string>
+
+    <!-- Deposit item   -->
+    <string name="deposit_topup_success">Deposit successful!\nDo you have more items to top-up?</string>
+
+    <!-- hwc   -->
+    <string name="error_open_failed">Door has not been opened successfully.</string>
+    <string name="error_door_has_not_close">Door has not been closed.</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="successful">Successful</string>
+
+    <!-- loan   -->
+    <string name="category">Category</string>
+    <string name="model">Model</string>
+    <string name="select_items">Select item(s)</string>
+    <string name="please_select_category">Please select a category to show items.</string>
+    <string name="add_to_cart">Add To Cart</string>
+    <string name="available">"Available: "</string>
+    <string name="loanable">"Loanable: "</string>
+    <string name="please_review_cart_info">Please review them. When ready, press "PROCEED" to collect your items. The locker will automatically open at that time</string>
+    <string name="cart">Cart</string>
+    <string name="cart_item_quantity_format">x%d</string>
 
     <!-- Strings for camera settings. -->
     <string name="pref_category_key_camera" translatable="false">pckc</string>
@@ -82,114 +199,4 @@
     <string name="pref_screen_title_camerax_live_preview" translatable="false">CameraX live preview settings</string>
     <string name="pref_screen_title_live_preview" translatable="false">Live preview settings</string>
 
-    <string name="network_error">Make sure you have an active data connection</string>
-    <string name="close">Close</string>
-
-    <string name="server_error">There is an error from server. Please try again.</string>
-    <string name="error_api">Cal API Error</string>
-    <string name="error_network">Please check your network.</string>
-    <string name="error_all">Some error please check it</string>
-    <string name="error_response">Error response</string>
-    <string name="error_message">An internal error has occurred. Please try again.</string>
-
-    <!-- login -->
-    <string name="login_error_1001">Email is not existed</string>
-    <string name="login_error_1002">Wrong password</string>
-    <string name="email_not_correct_format">Invalid email format</string>
-
-    <!-- Error -->
-    <string name="unauthorized">Unauthorized</string>
-
-    <!-- Home -->
-    <string name="menu_item">ITEMS</string>
-    <string name="menu_register_face">Register Face</string>
-    <string name="menu_manager_face">Manage Face</string>
-    <string name="menu_admin_console">Admin Console</string>
-    <string name="loan_button">LOAN</string>
-    <string name="loan_button_label">Users can loan items from lockers, with mandatory return by a specified time</string>
-    <string name="return_button">RETURN</string>
-    <string name="return_button_label">Return your loaned item into the locker easily to complete the borrowing</string>
-    <string name="collect_button">COLLECT</string>
-    <string name="collect_button_label">Allows users to take items, like gloves,… without needing to return them</string>
-    <string name="using_mail_button">USING EMAIL</string>
-    <string name="retry_button">RETRY</string>
-    <string name="process_button">PROCESS</string>
-
-    <!-- Input email -->
-    <string name="auth_required">Authentication Required</string>
-    <string name="enter_email_continue">Enter your email to continue.</string>
-    <string name="enter_email">Enter your email:</string>
-    <string name="error_email_empty">Please enter email</string>
-
-    <!-- Admin Login -->
-    <string name="enter_username_continue">Enter your username to continue.</string>
-    <string name="username">Username:</string>
-    <string name="password">Password:</string>
-    <string name="error_username_empty">Please enter username</string>
-    <string name="error_password_empty">Please enter password</string>
-    <string name="error_username_password">Incorrect username or password</string>
-    <string name="error_account_locked">This account has been locked</string>
-
-    <!-- input OTP -->
-    <string name="enter_otp_verify">Enter the OTP sent to your device to verify your account.</string>
-    <string name="enter_otp">Enter OTP:</string>
-    <string name="resend_otp_button">Resend OTP</string>
-
-    <!-- Register face -->
-    <string name="register_face">Register Your Face</string>
-    <string name="register_face_info">Please stand close to the locker and look straight at the camera so we can capture your face clearly.</string>
-    <string name="face_exits">Face ID already exits</string>
-    <string name="save_user_fail">Save user fail</string>
-    <string name="face_not_found">Face not found</string>
-    <string name="face_register_success">Face Registered Successfully</string>
-    <string name="face_hello">Hello %1$s,\nYour Face ID has been successfully added.</string>
-    <string name="btn_retry">RETRY</string>
-
-    <!-- Admin Dashboard -->
-    <string name="topup_items">TOPUP ITEMS\n(%1$s)</string>
-    <string name="retrieve_faulty">RETRIEVE FAULTY\n(%1$s)</string>
-    <string name="retrieve_items">RETRIEVE ITEMS</string>
-    <string name="manage_lockers">MANAGE LOCKERS</string>
-    <string name="settings">SETTINGS</string>
-    <string name="close_app">CLOSE APPLICATION</string>
-    <string name="admin_menu">Menu</string>
-    <string name="error_no_available_locker">No available lockers for topup at this time</string>
-
-    <!-- Scan serial number   -->
-    <string name="scan_or_enter_serial_number">Scan or Enter Serial Number</string>
-    <string name="enter_serial_number_verify">Please scan the serial number using the barcode reader below or enter it manually.</string>
-    <string name="enter_serial_number">Enter Serial Number</string>
-    <string name="select_a_faulty">Select A Faulty Reason</string>
-    <string name="select_faulty_reason_info">The faulty reason helps the administrator understand the current state of the items.\nIf none of the common reasons match your situation, please enter your own.</string>
-    <string name="select_available_locker_info">Choose a locker to store your items. \nOnce selected, the locker door will automatically open. </string>
-    <string name="select_an_available_locker">Select An Available Locker</string>
-    <string name="deposit_item">Deposit Item</string>
-    <string name="deposit_item_info">Please deposit the item into the opening locker and close the door.\nLocker will auto-trigger confirmation after 10 seconds or when you tap confirm button.</string>
-    <string name="door_has_not_been_closed">Door has not been closed. Tap CONFIRM to continue.</string>
-    <string name="error_invalid_serial">Invalid serial number</string>
-    <string name="dialog_attention">Does this item require attention?</string>
-    <string name="error_input_serial_empty">Please scan or enter item serial number</string>
-    <string name="serial_number_is_not_available">This Serial number is no longer available</string>
-    <string name="error_logic">Invalid status logic</string>
-
-    <!-- Deposit item   -->
-    <string name="deposit_topup_success">Deposit successful!\nDo you have more items to top-up?</string>
-
-    <!-- hwc   -->
-    <string name="error_open_failed">Door has not been opened successfully.</string>
-    <string name="error_door_has_not_close">Door has not been closed.</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="successful">Successful</string>
-
-    <!-- loan   -->
-    <string name="category">Category</string>
-    <string name="model">Model</string>
-    <string name="select_items">Select item(s)</string>
-    <string name="please_select_category">Please select a category to show items.</string>
-    <string name="add_to_cart">Add To Cart</string>
-    <string name="available">"Available: "</string>
-    <string name="loanable">"Loanable: "</string>
-    <string name="please_review_cart_info">Please review them. When ready, press "PROCEED" to collect your items. The locker will automatically open at that time</string>
-    <string name="cart">Cart</string>
-    <string name="cart_item_quantity_format">x%d</string>
 </resources>
