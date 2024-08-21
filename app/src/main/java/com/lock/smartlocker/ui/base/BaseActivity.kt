@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
 import com.lock.smartlocker.R
 import com.lock.smartlocker.util.CommonUtils
+import com.lock.smartlocker.util.ConstantUtils
 
 /**
  * process base logic for all activities
@@ -127,13 +128,18 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : BaseAppCom
     }
 
     // In ManagerMenuActivity.kt
-    fun showFragment(fragment: Fragment, navGraphId: Int, addToBackStack: Boolean = false) {
+    fun showFragment(fragment: Fragment, navGraphId: Int, addToBackStack: Boolean = false, typeOpen: String? = null) {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment_main) as NavHostFragment
         val navController = navHostFragment.navController
         val navInflater = navController.navInflater
         val graph = navInflater.inflate(navGraphId)
         navController.graph = graph
 
+        if (typeOpen != null){
+            val bundle = Bundle()
+            bundle.putString(ConstantUtils.TYPE_OPEN, typeOpen)
+            fragment.arguments = bundle
+        }
         if (addToBackStack) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_main, fragment)

@@ -36,6 +36,7 @@ abstract class BaseViewModel() : ViewModel() {
     var statusText = MutableLiveData<String>()
     var numberCart = MutableLiveData<String>()
     var showButtonProcess = MutableLiveData<Boolean>(true)
+    var showButtonUsingMail = MutableLiveData<Boolean>(true)
     var showStatusText = MutableLiveData<Boolean>()
     var isErrorText = MutableLiveData<Boolean>()
     var timerHour = MutableLiveData<String>()

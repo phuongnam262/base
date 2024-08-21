@@ -12,10 +12,18 @@
         <action
             android:id="@+id/action_recognizeFaceFragment_to_inputOTPFragment2"
             app:destination="@id/inputOTPFragment2" />
+        <action
+            android:id="@+id/action_recognizeFaceFragment_to_thankFragment2"
+            app:destination="@id/thankFragment2" />
     </fragment>
     <fragment
         android:id="@+id/inputOTPFragment2"
         android:name="com.lock.smartlocker.ui.inputotp.InputOTPFragment"
         android:label="fragment_input_otp"
         tools:layout="@layout/fragment_input_otp" />
+    <fragment
+        android:id="@+id/thankFragment2"
+        android:name="com.lock.smartlocker.ui.thank.ThankFragment"
+        android:label="fragment_thank"
+        tools:layout="@layout/fragment_thank" />
 </navigation>

@@ -14,15 +14,16 @@
  * limitations under the License.
  */
 
-package com.lock.smartlocker.facedetector
+package com.example.demofacedetect.facedetector
 
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
-import com.lock.smartlocker.facedetector.GraphicOverlay.Graphic
 import com.google.mlkit.vision.face.Face
 import com.google.mlkit.vision.face.FaceLandmark
 import com.google.mlkit.vision.face.FaceLandmark.LandmarkType
+import com.lock.smartlocker.facedetector.GraphicOverlay
+import com.lock.smartlocker.facedetector.GraphicOverlay.Graphic
 import java.util.Locale
 import kotlin.math.abs
 import kotlin.math.max
@@ -226,11 +227,11 @@ class FaceGraphic constructor(overlay: GraphicOverlay?, private val face: Face) 
       )
     }
 
-   /* canvas.drawText("EulerX: " + face.headEulerAngleX, left, top + yLabelOffset, idPaints[colorID])
-    yLabelOffset += lineHeight
-    canvas.drawText("EulerY: " + face.headEulerAngleY, left, top + yLabelOffset, idPaints[colorID])
-    yLabelOffset += lineHeight
-    canvas.drawText("EulerZ: " + face.headEulerAngleZ, left, top + yLabelOffset, idPaints[colorID])*/
+    /* canvas.drawText("EulerX: " + face.headEulerAngleX, left, top + yLabelOffset, idPaints[colorID])
+     yLabelOffset += lineHeight
+     canvas.drawText("EulerY: " + face.headEulerAngleY, left, top + yLabelOffset, idPaints[colorID])
+     yLabelOffset += lineHeight
+     canvas.drawText("EulerZ: " + face.headEulerAngleZ, left, top + yLabelOffset, idPaints[colorID])*/
 
     // Draw facial landmarks
     drawFaceLandmark(canvas, FaceLandmark.LEFT_EYE)

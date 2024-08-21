@@ -27,7 +27,7 @@
             type="String" />
 
         <variable
-            name="showProcessButton"
+            name="showButtonUsingMail"
             type="Boolean" />
 
     </data>
@@ -115,7 +115,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:visibility="@{showProcessButton ? View.GONE : View.VISIBLE}">
+                    android:visibility="@{showButtonUsingMail ? View.VISIBLE : View.GONE}">
 
 
                     <androidx.appcompat.widget.AppCompatButton
@@ -139,7 +139,7 @@
                         android:layout_width="@dimen/dp_120"
                         android:layout_height="wrap_content"
                         android:text="@string/retry_button"
-                        android:visibility="@{showProcessButton ? View.GONE : View.VISIBLE}"
+                        android:visibility="@{showButtonUsingMail ? View.VISIBLE : View.GONE}"
                         android:layout_centerInParent="true"/>
 
                     <androidx.appcompat.widget.AppCompatButton
@@ -148,7 +148,7 @@
                         android:layout_width="@dimen/dp_120"
                         android:layout_height="wrap_content"
                         android:text="@string/process_button"
-                        android:visibility="@{showProcessButton ? View.VISIBLE : View.GONE}"
+                        android:visibility="@{showButtonUsingMail ? View.GONE : View.VISIBLE}"
                         android:layout_centerInParent="true"/>
 
                 </RelativeLayout>

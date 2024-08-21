@@ -41,7 +41,7 @@ class ReturnActivity : BaseActivity<ActivityReturnBinding, ReturnViewModel>(),
     private fun initView() {
         when (intent.getStringExtra(ConstantUtils.TYPE_OPEN)) {
             ConstantUtils.TYPE_LOAN -> {
-                showFragment(RecognizeFaceFragment(), R.navigation.loan_collect_navigation)
+                showFragment(RecognizeFaceFragment(), R.navigation.loan_collect_navigation, typeOpen = ConstantUtils.TYPE_LOAN)
             }
 
             ConstantUtils.TYPE_RETURN -> {
@@ -49,7 +49,7 @@ class ReturnActivity : BaseActivity<ActivityReturnBinding, ReturnViewModel>(),
             }
 
             ConstantUtils.TYPE_COLLECT -> {
-                showFragment(RecognizeFaceFragment(), R.navigation.loan_collect_navigation)
+                showFragment(RecognizeFaceFragment(), R.navigation.loan_collect_navigation, typeOpen = ConstantUtils.TYPE_COLLECT)
             }
         }
     }

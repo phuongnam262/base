@@ -2,13 +2,15 @@ package com.lock.smartlocker.ui.recognize_face
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.lock.smartlocker.data.repositories.ManagerRepository
 import com.lock.smartlocker.data.repositories.UserFaceRepository
 
 class RecognizeFaceViewModelFactory(
-    private val repository: UserFaceRepository
+    private val repository: UserFaceRepository,
+    private val managerRepository: ManagerRepository
 ) : ViewModelProvider.NewInstanceFactory() {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return RecognizeFaceViewModel(repository) as T
+        return RecognizeFaceViewModel(repository, managerRepository) as T
     }
 }

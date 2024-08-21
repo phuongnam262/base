@@ -19,6 +19,7 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import com.google.mlkit.common.MlKitException
 import com.lock.smartlocker.BR
@@ -30,7 +31,8 @@ import com.lock.smartlocker.facedetector.FaceDetectorProcessor
 import com.lock.smartlocker.facedetector.VisionImageProcessor
 import com.lock.smartlocker.facedetector.preference.PreferenceUtils
 import com.lock.smartlocker.ui.base.BaseFragment
-import com.lock.smartlocker.ui.inputemail.InputEmailFragment
+import com.lock.smartlocker.ui.inputemail.InputEmailFragment.Companion.EMAIL_REGISTER
+import com.lock.smartlocker.util.ConstantUtils
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
@@ -58,10 +60,11 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
     private var analysisUseCase: ImageAnalysis? = null
     private var imageProcessor: VisionImageProcessor? = null
     private var needUpdateGraphicOverlayImageSourceInfo = false
-    private var lensFacing = CameraSelector.LENS_FACING_FRONT
-    private var rotateCamera = Surface.ROTATION_0
+    private var lensFacing = CameraSelector.LENS_FACING_EXTERNAL
+    private var rotateCamera = Surface.ROTATION_270
     private var cameraSelector: CameraSelector? = null
     private var imageCapture: ImageCapture? = null
+    private var typeOpen : String? = null
 
     companion object {
         private const val TAG = "RecognizeFaceFragment"
@@ -77,6 +80,8 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
     private fun initView() {
         viewModel.titlePage.postValue(getString(R.string.recognize_face))
         mViewDataBinding?.bottomMenu?.rlHome?.setOnClickListener(this)
+        mViewDataBinding?.bottomMenu?.btnUsingMail?.setOnClickListener(this)
+        mViewDataBinding?.bottomMenu?.btnRetry?.setOnClickListener(this)
         mViewDataBinding?.bottomMenu?.btnProcess?.setOnClickListener(this)
         mViewDataBinding?.headerBar?.ivBack?.setOnClickListener(this)
 
@@ -122,18 +127,32 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
     }
 
     private fun initData() {
+        if (arguments?.getString(ConstantUtils.TYPE_OPEN) != null) {
+            typeOpen = arguments?.getString(ConstantUtils.TYPE_OPEN)
+        }
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.rl_home -> activity?.finish()
             R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
+            R.id.btn_retry -> {
+                mViewDataBinding?.ivFrame?.setBackgroundResource(R.drawable.bg_face_register)
+                viewModel.showStatusText.value = false
+                FaceDetectorProcessor.isSuccess = false
+                bindAllCameraUseCases()
+            }
             R.id.btn_process -> {
+                viewModel.consumerLogin()
+            }
+            R.id.btn_using_mail -> {
+
             }
         }
     }
 
     override fun handleSuccess(personCode: String, email: String) {
+        mViewDataBinding?.ivFrame?.setBackgroundResource(R.drawable.bg_face_success)
         mViewDataBinding?.bottomMenu?.tvStatus?.text = getString(R.string.welcome_back, email)
         mViewDataBinding?.bottomMenu?.llButton?.weightSum = 2.0f
     }
@@ -143,7 +162,15 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
         bindAnalysisUseCase()
     }
 
+    override fun consumerLoginSuccess() {
+        val bundle = Bundle().apply {
+            putString(ConstantUtils.TYPE_OPEN, typeOpen )
+        }
+        navigateTo(R.id.action_recognizeFaceFragment_to_inputOTPFragment2, bundle)
+    }
+
     override fun faceExited() {
+        mViewDataBinding?.ivFrame?.setBackgroundResource(R.drawable.bg_face_fail)
     }
 
     private fun bindAllCameraUseCases() {
@@ -170,7 +197,6 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
                 .build()
 
         val previewView = mViewDataBinding?.previewView
-        previewView?.scaleType = PreviewView.ScaleType.FILL_CENTER
         previewView?.implementationMode = PreviewView.ImplementationMode.COMPATIBLE
 
         previewUseCase = Preview.Builder()
@@ -217,7 +243,7 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
         imageProcessor =
             try {
                 Log.i(TAG, "Using Face Detector Processor")
-                val faceDetectorOptions = PreferenceUtils.getFaceDetectorOptions(activity)
+                val faceDetectorOptions = PreferenceUtils.getFaceDetectorOptions(requireActivity())
                 activity?.let { FaceDetectorProcessor(it, faceDetectorOptions) }
             } catch (e: Exception) {
                 Log.e(TAG, "Can not create image processor: FACE_DETECTION", e)
@@ -232,7 +258,7 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
 
         val builder = ImageAnalysis.Builder()
         analysisUseCase = builder
-            .setTargetRotation(rotateCamera)
+            .setTargetRotation(Surface.ROTATION_90)
             .build()
 
         needUpdateGraphicOverlayImageSourceInfo = true
@@ -249,13 +275,13 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
                         mViewDataBinding?.graphicOverlay?.setImageSourceInfo(
                             imageProxy.width,
                             imageProxy.height,
-                            true
+                            false
                         )
                     } else {
                         mViewDataBinding?.graphicOverlay?.setImageSourceInfo(
                             imageProxy.height,
                             imageProxy.width,
-                            true
+                            false
                         )
                     }
                     needUpdateGraphicOverlayImageSourceInfo = false
@@ -276,7 +302,6 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
     }
 
     override fun onSuccess() {
-        //mViewDataBinding?.ivFaceTrue?.visibility = View.VISIBLE
         captureImage()
     }
 
@@ -298,7 +323,6 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
                 object : ImageCapture.OnImageSavedCallback {
                     override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
                         val savedUri = Uri.fromFile(photoFile)
-                        Log.e(TAG, savedUri.toString())
                         imageProcessor?.run { this.stop() }
                         if (cameraProvider != null) {
                             cameraProvider!!.unbindAll()

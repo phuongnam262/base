@@ -18,6 +18,7 @@ package com.lock.smartlocker.facedetector
 
 import android.content.Context
 import android.util.Log
+import com.example.demofacedetect.facedetector.FaceGraphic
 import com.google.android.gms.tasks.Task
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.face.Face
@@ -76,9 +77,9 @@ class FaceDetectorProcessor(context: Context, detectorOptions: FaceDetectorOptio
     private fun logExtrasForTesting(face: Face?) {
       if (isSuccess.not())
         if (face != null) {
-          if ((-10 < face.headEulerAngleX &&  face.headEulerAngleX < 3) &&
-            (-3 < face.headEulerAngleY &&  face.headEulerAngleY < 3) &&
-            (-2 < face.headEulerAngleZ &&  face.headEulerAngleZ < 2)){
+          if ((-10 < face.headEulerAngleX &&  face.headEulerAngleX < 12) &&
+            (-10 < face.headEulerAngleY &&  face.headEulerAngleY < 10) &&
+            (-4 < face.headEulerAngleZ &&  face.headEulerAngleZ < 4)){
             callback?.onSuccess()
             isSuccess = true
           }

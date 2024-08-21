@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="isSelected"
             type="Boolean" />
@@ -15,25 +16,26 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:paddingHorizontal="30dp"
-        android:paddingVertical="20dp"
+        android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/dp_5"
         android:background="@{isSelected ? @drawable/bg_selected_available_locker : @drawable/bg_ractangle_rounded}"
-        android:layout_height="wrap_content">
+        android:paddingHorizontal="@dimen/dp_10"
+        android:paddingVertical="@dimen/dp_10">
 
         <LinearLayout
             android:id="@+id/linearLayout3"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="horizontal"
+            android:gravity="center_vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/ivArrowLeft"
-                android:layout_width="36dp"
-                android:layout_height="80dp"
+                android:layout_width="@dimen/dp_20"
+                android:layout_height="@dimen/dp_50"
                 android:layout_gravity="center_vertical"
                 android:visibility="invisible"
                 app:srcCompat="@drawable/arrow_left_icon" />
@@ -41,17 +43,16 @@
             <Button
                 android:id="@+id/btnLocker"
                 style="@style/CustomLockerButton"
-                android:clickable="false"
+                android:layout_marginHorizontal="@dimen/dp_7"
                 android:background="@drawable/bg_border_ractangle_rounded"
-                android:layout_marginHorizontal="10dp"
+                android:clickable="false"
                 android:text="@{model.name}" />
 
             <ImageView
                 android:id="@+id/ivArrowRight"
-                android:layout_width="36dp"
-                android:layout_height="80dp"
+                android:layout_width="@dimen/dp_20"
+                android:layout_height="@dimen/dp_50"
                 android:layout_gravity="center_vertical"
-                android:layout_weight="1"
                 android:visibility="invisible"
                 app:srcCompat="@drawable/arrow_right_icon" />
 
@@ -72,9 +73,9 @@
                 android:id="@+id/tvSizeLable"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:fontFamily="@font/segoe_ui_regular"
                 android:text="Size: "
-                android:layout_gravity="center_vertical"
                 android:textColor="@color/colorBlack"
                 android:textSize="@dimen/sp_16" />
 
@@ -82,9 +83,9 @@
                 android:id="@+id/tvLockerSize"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:fontFamily="@font/segoe_ui_semibold"
                 android:text="@{model.lockerSizeKey}"
-                android:layout_gravity="center_vertical"
                 android:textColor="@color/colorBlack"
                 android:textSize="@dimen/sp_16" />
         </LinearLayout>

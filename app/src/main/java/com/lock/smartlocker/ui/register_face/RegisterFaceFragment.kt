@@ -58,8 +58,8 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
     private var analysisUseCase: ImageAnalysis? = null
     private var imageProcessor: VisionImageProcessor? = null
     private var needUpdateGraphicOverlayImageSourceInfo = false
-    private var lensFacing = CameraSelector.LENS_FACING_FRONT
-    private var rotateCamera = Surface.ROTATION_0
+    private var lensFacing = CameraSelector.LENS_FACING_EXTERNAL
+    private var rotateCamera = Surface.ROTATION_270
     private var cameraSelector: CameraSelector? = null
     private var imageCapture: ImageCapture? = null
     private var isExited: Boolean = false
@@ -138,15 +138,18 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
             R.id.btn_process -> {
                 if (isExited) {
                     isExited = false
+                    mViewDataBinding?.ivFrame?.setBackgroundResource(R.drawable.bg_face_register)
+                    mViewDataBinding?.bottomMenu?.btnProcess?.text = getString(R.string.process_button)
                     viewModel.showStatusText.value = false
                     FaceDetectorProcessor.isSuccess = false
-                    bindAnalysisUseCase()
+                    bindAllCameraUseCases()
                 }
             }
         }
     }
 
     override fun handleSuccess(personCode: String, email: String) {
+        mViewDataBinding?.ivFrame?.setBackgroundResource(R.drawable.bg_face_success)
         viewModel.showButtonProcess.postValue(false)
         viewModel.titlePage.postValue(getString(R.string.face_register_success))
         mViewDataBinding?.tvHeaderInfo?.text = getString(R.string.face_hello, email)
@@ -159,6 +162,7 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
 
     override fun faceExited() {
         mViewDataBinding?.bottomMenu?.btnProcess?.text = getString(R.string.btn_retry)
+        mViewDataBinding?.ivFrame?.setBackgroundResource(R.drawable.bg_face_fail)
         isExited = true
     }
 
@@ -186,7 +190,6 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
                 .build()
 
         val previewView = mViewDataBinding?.previewView
-        previewView?.scaleType = PreviewView.ScaleType.FILL_CENTER
         previewView?.implementationMode = PreviewView.ImplementationMode.COMPATIBLE
 
         previewUseCase = Preview.Builder()
@@ -248,7 +251,7 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
 
         val builder = ImageAnalysis.Builder()
         analysisUseCase = builder
-            .setTargetRotation(rotateCamera)
+            .setTargetRotation(Surface.ROTATION_90)
             .build()
 
         needUpdateGraphicOverlayImageSourceInfo = true
@@ -265,13 +268,13 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
                         mViewDataBinding?.graphicOverlay?.setImageSourceInfo(
                             imageProxy.width,
                             imageProxy.height,
-                            true
+                            false
                         )
                     } else {
                         mViewDataBinding?.graphicOverlay?.setImageSourceInfo(
                             imageProxy.height,
                             imageProxy.width,
-                            true
+                            false
                         )
                     }
                     needUpdateGraphicOverlayImageSourceInfo = false
@@ -292,7 +295,6 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
     }
 
     override fun onSuccess() {
-        //mViewDataBinding?.ivFaceTrue?.visibility = View.VISIBLE
         captureImage()
     }
 

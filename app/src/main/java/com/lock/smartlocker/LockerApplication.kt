@@ -99,7 +99,7 @@ class LockerApplication : Application(), KodeinAware {
         bind() from provider { SelectAvailableLockerViewModelFactory(instance(), instance()) }
         bind() from provider { DepositItemViewModelFactory(instance(), instance()) }
         bind() from provider { ThankViewModelFactory() }
-        bind() from provider { RecognizeFaceViewModelFactory(instance()) }
+        bind() from provider { RecognizeFaceViewModelFactory(instance(), instance()) }
     }
 
 }
