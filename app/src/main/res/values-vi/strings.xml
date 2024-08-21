@@ -76,7 +76,6 @@
     <string name="pref_entry_values_pose_detector_performance_mode_fast" translatable="false">1</string>
     <string name="pref_entry_values_pose_detector_performance_mode_accurate" translatable="false">2</string>
 
-
     <!-- Settings related strings. -->
     <string name="pref_screen" translatable="false">ps</string>
     <string name="pref_category_info" translatable="false">Detection Info</string>
@@ -144,7 +143,8 @@
     <string name="save_user_fail">Lưu người dùng thất bại</string>
     <string name="face_not_found">Không tìm thấy khuôn mặt</string>
     <string name="face_register_success">Đăng Ký Khuôn Mặt Thành Công</string>
-    <string name="face_hello">hello someone@something.com, \nFace ID của bạn đã được thêm thành công.</string>
+    <string name="face_hello">Hello %1$s, \nFace ID của bạn đã được thêm thành công.</string>
+    <string name="btn_retry">THỬ LẠI</string>
 
     <!-- Admin Dashboard -->
     <string name="topup_items">THÊM ĐỒ DÙNG\n(%1$s)</string>
@@ -165,19 +165,20 @@
     <string name="select_available_locker_info">Chọn tủ khóa để cất đồ dùng của bạn. \nSau khi chọn, cửa tủ khóa sẽ tự động mở.</string>
     <string name="select_an_available_locker">Chọn Tủ Khóa Khả Dụng</string>
     <string name="deposit_item">Gửi Đồ Dùng</string>
-    <string name="deposit_item_info">Vui lòng đặt đồ dùng vào tủ khóa đang mở và đóng cửa.
-Tủ khóa sẽ tự động kích hoạt xác nhận sau 10 giây hoặc khi bạn nhấn nút xác nhận.</string>
+    <string name="deposit_item_info">Vui lòng đặt đồ dùng vào tủ khóa đang mở và đóng cửa.\nTủ khóa sẽ tự động kích hoạt xác nhận sau 10 giây hoặc khi bạn nhấn nút xác nhận.</string>
     <string name="door_has_not_been_closed">Cửa chưa được đóng. Nhấn XÁC NHẬN để tiếp tục..</string>
     <string name="error_invalid_serial">Số sê-ri không hợp lệ.</string>
     <string name="dialog_attention">Đồ dùng này có vấn đề gì không?</string>
     <string name="error_input_serial_empty">Vui lòng quét hoặc nhập số sê-ri của đồ dùng</string>
     <string name="serial_number_is_not_available">Số sê-ri này không còn khả dụng nữa</string>
-    <string name="does_this_item_require_attention">Đồ dùng này có vấn đề gì không?</string>
+    <string name="error_logic">Bị sai logic</string>
+
+    <!-- Deposit item   -->
+    <string name="deposit_topup_success">Thêm đồ dùng thành công!\nBạn còn đồ dùng nào cần thêm không?</string>
 
     <!-- hwc   -->
     <string name="error_open_failed">Cửa không được mở thành công.</string>
     <string name="error_door_has_not_close">Cửa chưa được đóng.</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="successful">Thành công</string>
 

@@ -10,7 +10,6 @@ import android.util.Log
 import android.view.Surface
 import android.view.View
 import android.widget.Toast
-import androidx.camera.core.Camera
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageCapture
@@ -54,7 +53,6 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
         get() = ViewModelProvider(this, factory)[RegisterFaceViewModel::class.java]
 
     private var cameraProvider: ProcessCameraProvider? = null
-    private var camera: Camera? = null
     private var previewUseCase: Preview? = null
     private var analysisUseCase: ImageAnalysis? = null
     private var imageProcessor: VisionImageProcessor? = null
@@ -66,7 +64,7 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
     private var isExited: Boolean = false
 
     companion object {
-        private const val TAG = "CameraXLivePreview"
+        private const val TAG = "RegisterFaceFragment"
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
