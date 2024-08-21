@@ -1,6 +1,7 @@
 package com.lock.smartlocker.util.view
 
 import android.annotation.SuppressLint
+import android.graphics.Typeface
 import com.bumptech.glide.request.transition.Transition
 import android.view.View
 import android.widget.ImageView
@@ -84,5 +85,15 @@ fun View.isVisibleView(state: Boolean) {
         View.VISIBLE
     } else {
         View.GONE
+    }
+}
+
+@BindingAdapter("android:textStyle")
+fun setTextStyle(textView: TextView, style: String) {
+    when (style) {
+        "bold" -> textView.setTypeface(null, Typeface.BOLD)
+        "italic" -> textView.setTypeface(null, Typeface.ITALIC)
+        "bold_italic" -> textView.setTypeface(null, Typeface.BOLD_ITALIC)
+        else -> textView.setTypeface(null, Typeface.NORMAL)
     }
 }

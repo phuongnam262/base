@@ -2,11 +2,13 @@ package com.lock.smartlocker.data.network.services
 
 import com.lock.smartlocker.data.entities.request.AminLoginRequest
 import com.lock.smartlocker.data.entities.request.ConsumerLoginRequest
+import com.lock.smartlocker.data.entities.request.GetAvailableItemRequest
 import com.lock.smartlocker.data.entities.request.GetItemReturnRequest
 import com.lock.smartlocker.data.entities.request.ReturnItemRequest
 import com.lock.smartlocker.data.entities.responses.AdminLoginResponse
 import com.lock.smartlocker.data.entities.responses.BaseResponse
 import com.lock.smartlocker.data.entities.responses.ConsumerLoginResponse
+import com.lock.smartlocker.data.entities.responses.GetAvailableItemResponse
 import com.lock.smartlocker.data.entities.responses.GetInformationStaffResponse
 import com.lock.smartlocker.data.entities.responses.GetListCategoryResponse
 import com.lock.smartlocker.data.entities.responses.GetSettingResponse
@@ -68,6 +70,11 @@ interface LockerServives {
     suspend fun topupItem(
         @Body returnItemRequest: ReturnItemRequest
     ): Response<BaseResponse<Map<String, Any>>>
+
+    @POST("/api/inventory-transaction/get-available-item")
+    suspend fun getAvailableItem(
+        @Body getAvailableItemRequest: GetAvailableItemRequest
+    ): Response<BaseResponse<GetAvailableItemResponse>>
 
     companion object {
         operator fun invoke(retrofit: Retrofit): LockerServives {

@@ -106,6 +106,18 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="successful">Successful</string>
 
+    <!-- loan   -->
+    <string name="category">Category</string>
+    <string name="model">Model</string>
+    <string name="select_items">Select item(s)</string>
+    <string name="please_select_category">Please select a category to show items.</string>
+    <string name="add_to_cart">Add To Cart</string>
+    <string name="available">"Available: "</string>
+    <string name="loanable">"Loanable: "</string>
+    <string name="please_review_cart_info">Please review them. When ready, press "PROCEED" to collect your items. The locker will automatically open at that time</string>
+    <string name="cart">Cart</string>
+    <string name="cart_item_quantity_format">x%d</string>
+
     <!-- Strings for camera settings. -->
     <string name="pref_category_key_camera" translatable="false">pckc</string>
     <string name="pref_category_title_camera" translatable="false">Camera</string>
@@ -186,4 +198,5 @@
     <string name="pref_category_face_detection" translatable="false">Face Detection</string>
     <string name="pref_screen_title_camerax_live_preview" translatable="false">CameraX live preview settings</string>
     <string name="pref_screen_title_live_preview" translatable="false">Live preview settings</string>
+
 </resources>

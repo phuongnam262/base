@@ -3,26 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-       <!-- <import type="com.example.categoryexample.ui.component.BindingAdapterKt"/>-->
+        <variable
+            name="viewmodel"
+            type="com.lock.smartlocker.ui.category.CategoryViewModel" />
 
         <variable
             name="model"
-            type="com.lock.smartlocker.data.models.Model" />
+            type="com.lock.smartlocker.data.models.AvailableModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="20dp"
+        android:paddingVertical="@dimen/dp_15"
         android:paddingHorizontal="30dp"
+        android:layout_marginVertical="@dimen/dp_4"
         android:background="@drawable/bg_ractangle_rounded">
 
         <ImageView
             android:id="@+id/ivModelImage"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="@dimen/dp_56"
+            android:layout_height="@dimen/dp_56"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            imageUrl="@{model.modelImage}"
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
@@ -42,24 +46,70 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/segoe_ui_regular"
                 android:gravity="top"
-                android:textSize="20sp"
+                android:textSize="@dimen/sp_14"
                 android:lineSpacingMultiplier="0.8"
-                android:text="Asus VivoBook A512" />
+                android:text="@{model.modelName}" />
 
-            <TextView
-                android:id="@+id/tvModelAvailable"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:fontFamily="@font/segoe_ui_light"
-                android:gravity="bottom"
-                android:layout_weight="1"
-                android:textSize="20sp"
-                android:text="Available: 0 | Loanable: 8" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvAvailableLable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/segoe_ui_light"
+                    android:gravity="bottom"
+                    android:text="@string/available"
+                    android:textSize="@dimen/sp_14" />
+
+                <TextView
+                    android:id="@+id/tvAvailable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/segoe_ui_light"
+                    android:gravity="bottom"
+                    android:text="@{String.valueOf(model.available)}"
+                    android:textSize="@dimen/sp_14" />
+
+
+                <TextView
+                    android:id="@+id/tvDivider"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/segoe_ui_light"
+                    android:gravity="bottom"
+                    android:text=" | "
+                    android:visibility="@{model.loanable != null}"
+                    android:textSize="@dimen/sp_14" />
+
+                <TextView
+                    android:id="@+id/tvLoanableLable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/segoe_ui_light"
+                    android:gravity="bottom"
+                    android:visibility="@{model.loanable != null}"
+                    android:text="@string/loanable"
+                    android:textSize="@dimen/sp_14" />
+
+                <TextView
+                    android:id="@+id/tvLoanable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/segoe_ui_light"
+                    android:gravity="bottom"
+                    android:visibility="@{model.loanable != null}"
+                    android:text="@{String.valueOf(model.loanable)}"
+                    android:textSize="@dimen/sp_14" />
+            </LinearLayout>
+
         </LinearLayout>
 
         <Button
             android:id="@+id/btnAddToCart"
-            android:text="Add To Cart"
+            android:text="@string/add_to_cart"
             style="@style/CustomButton"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
