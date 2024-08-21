@@ -40,4 +40,9 @@ class ConstantUtils {
         const val SERIAL_NUMBER_INVALID_1 = "421"
         const val ERROR_LOGIC = "623"
     }
+
+    object Language {
+        const val ENGLISH = "en"
+        const val VIETNAMESE = "vi"
+    }
 }
