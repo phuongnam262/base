@@ -68,6 +68,8 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeLis
         mViewDataBinding?.navMenuLeft?.llAdminConsole?.setOnClickListener(this)
         mViewDataBinding?.tvEn?.setOnClickListener(this)
         mViewDataBinding?.tvVi?.setOnClickListener(this)
+        mViewDataBinding?.containerLoan?.setOnClickListener(this)
+        mViewDataBinding?.containerCollect?.setOnClickListener(this)
         viewModel.checkOpenServer()
         viewModel.isServerOff.observeForever {
             isOpenLocalServer = it
@@ -130,21 +132,30 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeLis
         if (view != null) {
             when (view.id) {
                 R.id.btnMenu -> mViewDataBinding?.drawerLayout?.openDrawer(GravityCompat.START)
-                R.id.ll_register_face -> {
-                    startActivityWithOneValue(ConstantUtils.TYPE_OPEN,ConstantUtils.TYPE_REGISTER_FACE,
-                        ManagerMenuActivity::class.java)
-                    mViewDataBinding?.drawerLayout?.closeDrawers()
-                }
-                R.id.ll_admin_console -> {
-                    startActivityWithOneValue(ConstantUtils.TYPE_OPEN,ConstantUtils.TYPE_ADMIN_CONSOLE,
-                        ManagerMenuActivity::class.java)
-                    mViewDataBinding?.drawerLayout?.closeDrawers()
-                }
                 R.id.tv_en -> {
                     setNewLocale(ConstantUtils.Language.ENGLISH)
                 }
                 R.id.tv_vi -> {
                     setNewLocale(ConstantUtils.Language.VIETNAMESE)
+                }
+                R.id.ll_register_face -> {
+                    startActivityWithOneValue(ConstantUtils.TYPE_OPEN,ConstantUtils.TYPE_REGISTER_FACE,
+                        ManagerMenuActivity::class.java)
+                    mViewDataBinding?.drawerLayout?.closeDrawers()
+                }
+                R.id.ll_manage_face -> {}
+                R.id.ll_admin_console -> {
+                    startActivityWithOneValue(ConstantUtils.TYPE_OPEN,ConstantUtils.TYPE_ADMIN_CONSOLE,
+                        ManagerMenuActivity::class.java)
+                    mViewDataBinding?.drawerLayout?.closeDrawers()
+                }
+                R.id.container_loan ->{
+                    startActivityWithOneValue(ConstantUtils.TYPE_OPEN,ConstantUtils.TYPE_LOAN,
+                        ReturnActivity::class.java)
+                }
+                R.id.container_collect ->{
+                    startActivityWithOneValue(ConstantUtils.TYPE_OPEN,ConstantUtils.TYPE_COLLECT,
+                        ReturnActivity::class.java)
                 }
             }
         }
@@ -164,6 +175,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeLis
     }
 
     override fun getReturnAvailableLockersSuccess() {
-        startActivity(ReturnActivity::class.java)
+        startActivityWithOneValue(ConstantUtils.TYPE_OPEN,ConstantUtils.TYPE_RETURN,
+            ReturnActivity::class.java)
     }
 }

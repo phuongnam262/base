@@ -25,6 +25,7 @@ import com.lock.smartlocker.ui.input_serial_number.InputSerialNumberViewModelFac
 import com.lock.smartlocker.ui.inputemail.InputEmailViewModelFactory
 import com.lock.smartlocker.ui.inputotp.InputOTPViewModelFactory
 import com.lock.smartlocker.ui.manager_menu.ManagerMenuViewModelFactory
+import com.lock.smartlocker.ui.recognize_face.RecognizeFaceViewModelFactory
 import com.lock.smartlocker.ui.register_face.RegisterFaceViewModelFactory
 import com.lock.smartlocker.ui.returns.ReturnViewModelFactory
 import com.lock.smartlocker.ui.select_available_locker.SelectAvailableLockerViewModelFactory
@@ -78,8 +79,8 @@ class LockerApplication : Application(), KodeinAware {
 
         //bind Repository
         bind() from singleton { UserFaceRepository(instance(), instance()) }
-        bind() from singleton { StartAppRepository(instance(), instance()) }
-        bind() from singleton { ManagerRepository(instance(), instance()) }
+        bind() from singleton { StartAppRepository(instance()) }
+        bind() from singleton { ManagerRepository(instance()) }
         bind() from singleton { ReturnRepository(instance()) }
         bind() from singleton { HardwareControllerRepository(instance()) }
 
@@ -98,6 +99,7 @@ class LockerApplication : Application(), KodeinAware {
         bind() from provider { SelectAvailableLockerViewModelFactory(instance(), instance()) }
         bind() from provider { DepositItemViewModelFactory(instance(), instance()) }
         bind() from provider { ThankViewModelFactory() }
+        bind() from provider { RecognizeFaceViewModelFactory(instance()) }
     }
 
 }

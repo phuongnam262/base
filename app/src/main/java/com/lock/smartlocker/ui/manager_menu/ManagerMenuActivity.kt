@@ -17,7 +17,7 @@ import org.kodein.di.generic.instance
 
 class ManagerMenuActivity : BaseActivity<ActivityManagerMenuBinding, ManagerMenuViewModel>(),
     ManagerMenuListener,
-    KodeinAware, OnClickListener {
+    KodeinAware {
 
     override val kodein by kodein()
     private val factory: ManagerMenuViewModelFactory by instance()
@@ -43,14 +43,6 @@ class ManagerMenuActivity : BaseActivity<ActivityManagerMenuBinding, ManagerMenu
 
             ConstantUtils.TYPE_ADMIN_CONSOLE -> {
                 showFragment(AdminLoginFragment(), R.navigation.admin_console_navigation)
-            }
-        }
-    }
-
-    override fun onClick(v: View?) {
-        if (v != null) {
-            when (v.id) {
-
             }
         }
     }

@@ -1,10 +1,7 @@
-package com.lock.smartlocker.ui.register_face
+package com.lock.smartlocker.ui.recognize_face
 
-import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.common.api.ApiException
 import com.lock.smartlocker.R
-import com.lock.smartlocker.data.entities.UserLockerModel
-import com.lock.smartlocker.data.entities.request.AddPersonRequest
 import com.lock.smartlocker.data.entities.request.ImageBase64Request
 import com.lock.smartlocker.data.entities.request.ImageSearchRequest
 import com.lock.smartlocker.data.entities.responses.DetectImageResponse
@@ -13,13 +10,11 @@ import com.lock.smartlocker.ui.base.BaseViewModel
 import com.lock.smartlocker.util.ConstantUtils
 import com.lock.smartlocker.util.NoInternetException
 import kotlinx.coroutines.launch
-import kotlin.random.Random
 
-class RegisterFaceViewModel(
+class RecognizeFaceViewModel(
     private val userLockerRepository: UserFaceRepository
 ) : BaseViewModel() {
-    var registerFaceListener: RegisterFaceListener? = null
-    val emailRegister = MutableLiveData<String>()
+    var recognizeFaceListener: RecognizeFaceListener? = null
     fun detectImage(strBase64: String) {
         ioScope.launch {
             try {
@@ -52,14 +47,16 @@ class RegisterFaceViewModel(
                     if (it == ConstantUtils.ERROR_CODE_SUCCESS) {
                         if (getSearchResponse.result != null) {
                             if (getSearchResponse.result.similar < 0.7) {
-                                addPerson(strBase64)
-                            } else {
-                                mStatusText.postValue(R.string.face_exits)
+                                mStatusText.postValue(R.string.error_no_face_detect)
                                 isErrorText.postValue(true)
-                                registerFaceListener?.faceExited()
+                            } else {
+                                getSearchResponse.result.personCode?.let { it1 ->
+                                    getUserLocker(it1)
+                                }
                             }
                         } else {
-                            addPerson(strBase64)
+                            mStatusText.postValue(R.string.error_no_face_detect)
+                            isErrorText.postValue(true)
                         }
                         return@launch
                     } else {
@@ -76,59 +73,25 @@ class RegisterFaceViewModel(
         }
     }
 
-    private fun addPerson(strBase64: String) {
-        ioScope.launch {
-            try {
-                val personCodeGen = generateRandomNumber()
-                val addPersonModel =
-                    AddPersonRequest("1", personCodeGen, emailRegister.value, strBase64, 1)
-                val getResponse = userLockerRepository.addPerson(addPersonModel)
-                getResponse.errorCode.let {
-                    if (it == ConstantUtils.ERROR_CODE_SUCCESS) {
-                        val userLockerModel =
-                            UserLockerModel(
-                                0,
-                                emailRegister.value,
-                                addPersonModel.personCode,
-                                addPersonModel.personGroup,
-                                0,
-                                emailRegister.value,
-                                0
-                            )
-                        val saveUser = userLockerRepository.saveUser(userLockerModel)
-                        if (saveUser > 0) {
-                            userLockerModel.email?.let { it1 ->
-                                registerFaceListener?.handleSuccess(
-                                    personCodeGen,
-                                    it1
-                                )
-                            }
-                        } else {
-                            mMessage.postValue(R.string.save_user_fail)
-                        }
-                        return@launch
-                    } else {
-                        mMessage.postValue(R.string.save_user_fail)
-                    }
-                }
-            } catch (e: ApiException) {
-                mMessage.postValue(R.string.error_message)
-            } catch (e: NoInternetException) {
-                mMessage.postValue(R.string.error_network)
+    private fun handelFaceFail(detectImageResponse: DetectImageResponse) {
+        if (detectImageResponse.message.contains("not found")) {
+            uiScope.launch {
+                recognizeFaceListener?.faceNotFound()
+                mMessage.postValue(R.string.face_not_found)
             }
         }
     }
 
-    private fun generateRandomNumber(): String {
-        val randomNumber = Random.nextInt(100000, 999999)
-        return randomNumber.toString()
-    }
-
-    private fun handelFaceFail(detectImageResponse: DetectImageResponse) {
-        if (detectImageResponse.message.contains("not found")) {
-            uiScope.launch {
-                registerFaceListener?.faceNotFound()
-                mMessage.postValue(R.string.face_not_found)
+    private fun getUserLocker(personCode: String) {
+        ioScope.launch {
+            val getUser = userLockerRepository.getUsedLocker(personCode)
+            if (getUser?.id != null) {
+                getUser.email?.let {
+                    isErrorText.postValue(false)
+                    showButtonProcess.postValue(true)
+                    showStatusText.postValue(true)
+                    getUser.personCode?.let { it1 -> recognizeFaceListener?.handleSuccess(it1, it) }
+                }
             }
         }
     }

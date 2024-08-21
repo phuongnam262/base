@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/loan_collect_navigation"
+    app:startDestination="@id/recognizeFaceFragment">
+    <fragment
+        android:id="@+id/recognizeFaceFragment"
+        android:name="com.lock.smartlocker.ui.recognize_face.RecognizeFaceFragment"
+        android:label="fragment_recognize_face"
+        tools:layout="@layout/fragment_recognize_face" >
+        <action
+            android:id="@+id/action_recognizeFaceFragment_to_inputOTPFragment2"
+            app:destination="@id/inputOTPFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/inputOTPFragment2"
+        android:name="com.lock.smartlocker.ui.inputotp.InputOTPFragment"
+        android:label="fragment_input_otp"
+        tools:layout="@layout/fragment_input_otp" />
+</navigation>

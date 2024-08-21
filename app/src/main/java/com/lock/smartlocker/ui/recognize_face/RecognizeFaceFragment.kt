@@ -1,4 +1,4 @@
-package com.lock.smartlocker.ui.register_face
+package com.lock.smartlocker.ui.recognize_face
 
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
@@ -23,7 +23,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.mlkit.common.MlKitException
 import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
-import com.lock.smartlocker.databinding.FragmentRegisterFaceBinding
+import com.lock.smartlocker.databinding.FragmentRecognizeFaceBinding
 import com.lock.smartlocker.facedetector.CameraXViewModel
 import com.lock.smartlocker.facedetector.DetectResultIml
 import com.lock.smartlocker.facedetector.FaceDetectorProcessor
@@ -41,17 +41,17 @@ import java.io.FileNotFoundException
 
 
 @SuppressLint("UnsafeOptInUsageError")
-class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterFaceViewModel>(),
-    KodeinAware, View.OnClickListener, RegisterFaceListener, DetectResultIml {
+class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, RecognizeFaceViewModel>(),
+    KodeinAware, View.OnClickListener, RecognizeFaceListener, DetectResultIml {
 
     override val kodein by kodein()
-    private val factory: RegisterFaceViewModelFactory by instance()
-    override val layoutId: Int = R.layout.fragment_register_face
+    private val factory: RecognizeFaceViewModelFactory by instance()
+    override val layoutId: Int = R.layout.fragment_recognize_face
     override val bindingVariable: Int
         get() = BR.viewmodel
 
-    override val viewModel: RegisterFaceViewModel
-        get() = ViewModelProvider(this, factory)[RegisterFaceViewModel::class.java]
+    override val viewModel: RecognizeFaceViewModel
+        get() = ViewModelProvider(this, factory)[RecognizeFaceViewModel::class.java]
 
     private var cameraProvider: ProcessCameraProvider? = null
     private var previewUseCase: Preview? = null
@@ -62,21 +62,20 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
     private var rotateCamera = Surface.ROTATION_0
     private var cameraSelector: CameraSelector? = null
     private var imageCapture: ImageCapture? = null
-    private var isExited: Boolean = false
 
     companion object {
-        private const val TAG = "RegisterFaceFragment"
+        private const val TAG = "RecognizeFaceFragment"
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.registerFaceListener = this
+        viewModel.recognizeFaceListener = this
         initView()
         initData()
     }
 
     private fun initView() {
-        viewModel.titlePage.postValue(getString(R.string.register_face))
+        viewModel.titlePage.postValue(getString(R.string.recognize_face))
         mViewDataBinding?.bottomMenu?.rlHome?.setOnClickListener(this)
         mViewDataBinding?.bottomMenu?.btnProcess?.setOnClickListener(this)
         mViewDataBinding?.headerBar?.ivBack?.setOnClickListener(this)
@@ -97,13 +96,8 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
                 requireActivity()
             ) { provider: ProcessCameraProvider? ->
                 cameraProvider = provider
-                bindAllCameraUseCases()
+                //bindAllCameraUseCases()
             }
-        /*mViewDataBinding?.btnSetting?.setOnClickListener {
-            val intent = Intent(activity, SettingsActivity::class.java)
-            intent.putExtra(SettingsActivity.EXTRA_LAUNCH_SOURCE, LaunchSource.CAMERAX_LIVE_PREVIEW)
-            startActivity(intent)
-        }*/
         mViewDataBinding?.headerBar?.ivBack?.setOnClickListener {
             activity?.onBackPressedDispatcher?.onBackPressed()
         }
@@ -128,7 +122,6 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
     }
 
     private fun initData() {
-        viewModel.emailRegister.value = arguments?.getString(InputEmailFragment.EMAIL_REGISTER)
     }
 
     override fun onClick(v: View?) {
@@ -136,20 +129,13 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
             R.id.rl_home -> activity?.finish()
             R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
             R.id.btn_process -> {
-                if (isExited) {
-                    isExited = false
-                    viewModel.showStatusText.value = false
-                    FaceDetectorProcessor.isSuccess = false
-                    bindAnalysisUseCase()
-                }
             }
         }
     }
 
     override fun handleSuccess(personCode: String, email: String) {
-        viewModel.showButtonProcess.postValue(false)
-        viewModel.titlePage.postValue(getString(R.string.face_register_success))
-        mViewDataBinding?.tvHeaderInfo?.text = getString(R.string.face_hello, email)
+        mViewDataBinding?.bottomMenu?.tvStatus?.text = getString(R.string.welcome_back, email)
+        mViewDataBinding?.bottomMenu?.llButton?.weightSum = 2.0f
     }
 
     override fun faceNotFound() {
@@ -158,8 +144,6 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
     }
 
     override fun faceExited() {
-        mViewDataBinding?.bottomMenu?.btnProcess?.text = getString(R.string.btn_retry)
-        isExited = true
     }
 
     private fun bindAllCameraUseCases() {

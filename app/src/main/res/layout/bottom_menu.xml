@@ -26,6 +26,10 @@
             name="ownerText"
             type="String" />
 
+        <variable
+            name="showProcessButton"
+            type="Boolean" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -49,8 +53,9 @@
 
             <TextView
                 android:id="@+id/tv_status"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textAlignment="center"
                 android:text="@{statusText}"
                 android:textColor="@{isErrorText ? @color/colorRed : @color/colorGreen}"
                 android:textSize="@dimen/sp_12"
@@ -60,6 +65,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <LinearLayout
+                android:id="@+id/ll_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
@@ -67,7 +73,7 @@
                 android:orientation="horizontal"
                 android:weightSum="3"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_error">
+                app:layout_constraintTop_toBottomOf="@+id/tv_status">
 
                 <RelativeLayout
                     android:id="@+id/rl_menu_1"
@@ -108,7 +114,8 @@
                     android:id="@+id/rl_menu_2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:visibility="@{showProcessButton ? View.GONE : View.VISIBLE}">
 
 
                     <androidx.appcompat.widget.AppCompatButton
@@ -132,6 +139,16 @@
                         android:layout_width="@dimen/dp_120"
                         android:layout_height="wrap_content"
                         android:text="@string/retry_button"
+                        android:visibility="@{showProcessButton ? View.GONE : View.VISIBLE}"
+                        android:layout_centerInParent="true"/>
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_process"
+                        style="@style/CustomButtonBlack"
+                        android:layout_width="@dimen/dp_120"
+                        android:layout_height="wrap_content"
+                        android:text="@string/process_button"
+                        android:visibility="@{showProcessButton ? View.VISIBLE : View.GONE}"
                         android:layout_centerInParent="true"/>
 
                 </RelativeLayout>

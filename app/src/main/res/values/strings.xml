@@ -35,6 +35,11 @@
     <string name="retry_button">RETRY</string>
     <string name="process_button">PROCESS</string>
 
+    <!-- Recognize face -->
+    <string name="recognize_face">Recognize Your Face</string>
+    <string name="error_no_face_detect">No face detected.\nTry again or use another authentication method.</string>
+    <string name="welcome_back">Welcome back %1$s</string>
+
     <!-- Input email -->
     <string name="auth_required">Authentication Required</string>
     <string name="enter_email_continue">Enter your email to continue.</string>

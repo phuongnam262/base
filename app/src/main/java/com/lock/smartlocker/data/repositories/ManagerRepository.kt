@@ -11,8 +11,7 @@ import com.lock.smartlocker.data.network.LockerAPI
 import com.lock.smartlocker.data.network.SafeApiRequest
 
 class ManagerRepository (
-    private val api: LockerAPI,
-    private val db: AppDatabase
+    private val api: LockerAPI
 ) : SafeApiRequest() {
 
     suspend fun consumerLogin(consumerLoginRequest: ConsumerLoginRequest): BaseResponse<ConsumerLoginResponse> {
