@@ -60,8 +60,9 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
     private var analysisUseCase: ImageAnalysis? = null
     private var imageProcessor: VisionImageProcessor? = null
     private var needUpdateGraphicOverlayImageSourceInfo = false
-    private var lensFacing = CameraSelector.LENS_FACING_EXTERNAL
-    private var rotateCamera = Surface.ROTATION_270
+    private var lensFacing = CameraSelector.LENS_FACING_FRONT
+    private var rotateCamera = Surface.ROTATION_0
+    private var rotateDetect = Surface.ROTATION_0
     private var cameraSelector: CameraSelector? = null
     private var imageCapture: ImageCapture? = null
     private var typeOpen : String? = null
@@ -258,7 +259,7 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
 
         val builder = ImageAnalysis.Builder()
         analysisUseCase = builder
-            .setTargetRotation(Surface.ROTATION_90)
+            .setTargetRotation(rotateDetect)
             .build()
 
         needUpdateGraphicOverlayImageSourceInfo = true

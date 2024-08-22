@@ -12,18 +12,33 @@
         <action
             android:id="@+id/action_recognizeFaceFragment_to_inputOTPFragment2"
             app:destination="@id/inputOTPFragment2" />
-        <action
-            android:id="@+id/action_recognizeFaceFragment_to_thankFragment2"
-            app:destination="@id/thankFragment2" />
     </fragment>
     <fragment
         android:id="@+id/inputOTPFragment2"
         android:name="com.lock.smartlocker.ui.inputotp.InputOTPFragment"
         android:label="fragment_input_otp"
-        tools:layout="@layout/fragment_input_otp" />
+        tools:layout="@layout/fragment_input_otp" >
+        <action
+            android:id="@+id/action_inputOTPFragment2_to_categoryFragment"
+            app:destination="@id/categoryFragment" />
+    </fragment>
     <fragment
         android:id="@+id/thankFragment2"
         android:name="com.lock.smartlocker.ui.thank.ThankFragment"
         android:label="fragment_thank"
         tools:layout="@layout/fragment_thank" />
+    <fragment
+        android:id="@+id/categoryFragment"
+        android:name="com.lock.smartlocker.ui.category.CategoryFragment"
+        android:label="fragment_category"
+        tools:layout="@layout/fragment_category" >
+        <action
+            android:id="@+id/action_categoryFragment_to_cartFragment"
+            app:destination="@id/cartFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.lock.smartlocker.ui.cart.CartFragment"
+        android:label="fragment_cart"
+        tools:layout="@layout/fragment_cart" />
 </navigation>

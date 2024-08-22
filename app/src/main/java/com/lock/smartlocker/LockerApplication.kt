@@ -25,7 +25,6 @@ import com.lock.smartlocker.ui.home.HomeViewModelFactory
 import com.lock.smartlocker.ui.input_serial_number.InputSerialNumberViewModelFactory
 import com.lock.smartlocker.ui.inputemail.InputEmailViewModelFactory
 import com.lock.smartlocker.ui.inputotp.InputOTPViewModelFactory
-import com.lock.smartlocker.ui.loan.LoanViewModelFactory
 import com.lock.smartlocker.ui.manager_menu.ManagerMenuViewModelFactory
 import com.lock.smartlocker.ui.recognize_face.RecognizeFaceViewModelFactory
 import com.lock.smartlocker.ui.register_face.RegisterFaceViewModelFactory
@@ -101,9 +100,8 @@ class LockerApplication : Application(), KodeinAware {
         bind() from provider { SelectAvailableLockerViewModelFactory(instance(), instance()) }
         bind() from provider { DepositItemViewModelFactory(instance(), instance()) }
         bind() from provider { ThankViewModelFactory() }
-        bind() from provider { LoanViewModelFactory() }
         bind() from provider { CategoryViewModelFactory(instance()) }
-        bind() from provider { CartViewModelFactory() }
+        bind() from provider { CartViewModelFactory(instance()) }
         bind() from provider { RecognizeFaceViewModelFactory(instance(), instance()) }
     }
 

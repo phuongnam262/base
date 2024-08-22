@@ -35,13 +35,11 @@ class CategoryViewModel(
     private val _cartItems = MutableLiveData<MutableList<CartItem>>()
     val cartItems: LiveData<MutableList<CartItem>> get() = _cartItems
 
-
     init {
         loadCategories()
-        loadAvailableItem()
     }
 
-     fun loadCategories() {
+     private fun loadCategories() {
         val jsonCategory = PreferenceHelper.getString(ConstantUtils.LIST_CATEGORY, "")
         val categoriesResponseType = object : TypeToken<GetListCategoryResponse>() {}.type
         val categoriesResponse: GetListCategoryResponse = Gson().fromJson(jsonCategory, categoriesResponseType)
@@ -49,11 +47,11 @@ class CategoryViewModel(
         _categories.postValue(categoriesResponse.categories)
     }
 
-    private fun loadAvailableItem() {
+    fun loadAvailableItem(openType: Int) {
         ioScope.launch {
             mLoading.postValue(true)
             val param = GetAvailableItemRequest()
-            param.transaction_type = 1
+            param.transaction_type = openType
             loanRepository.getAvailableItem(param).apply {
                 if (isSuccessful) {
                     if (data != null ) {

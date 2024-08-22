@@ -17,7 +17,7 @@
         android:backgroundImage="@{viewmodel.imageBackgroundUrl}"
         tools:context=".ui.returns.ReturnActivity">
 
-        <androidx.fragment.app.FragmentContainerView
+        <fragment
             android:id="@+id/fragment_main"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"

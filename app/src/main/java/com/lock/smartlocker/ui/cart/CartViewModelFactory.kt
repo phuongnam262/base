@@ -6,8 +6,9 @@ import com.lock.smartlocker.data.repositories.LoanRepository
 import com.lock.smartlocker.ui.category.CategoryViewModel
 
 class CartViewModelFactory(
+    private val loanRepository: LoanRepository,
 ) : ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return CartViewModel() as T
+        return CartViewModel(loanRepository) as T
     }
 }

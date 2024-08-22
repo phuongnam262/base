@@ -26,7 +26,7 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(),
     override val bindingVariable: Int
         get() = BR.viewmodel
 
-    val cartAdapter = GroupAdapter<GroupieViewHolder>()
+    private val cartAdapter = GroupAdapter<GroupieViewHolder>()
 
     override val viewModel: CartViewModel
         get() = ViewModelProvider(this, factory)[CartViewModel::class.java]

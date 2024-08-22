@@ -73,9 +73,6 @@
             android:exported="false"
             android:screenOrientation="portrait"
             tools:ignore="DiscouragedApi,LockedOrientationActivity"/>
-        <activity
-            android:name=".ui.loan.LoanActivity"
-            android:exported="false" />
     </application>
 
 </manifest>

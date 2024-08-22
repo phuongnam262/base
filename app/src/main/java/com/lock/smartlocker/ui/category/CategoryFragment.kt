@@ -1,5 +1,6 @@
 package com.lock.smartlocker.ui.category
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
@@ -9,6 +10,7 @@ import com.lock.smartlocker.databinding.FragmentCategoryBinding
 import com.lock.smartlocker.ui.base.BaseFragment
 import com.lock.smartlocker.ui.category.adapter.CategoryItem
 import com.lock.smartlocker.ui.category.adapter.ModelItem
+import com.lock.smartlocker.util.ConstantUtils
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import org.kodein.di.KodeinAware
@@ -29,8 +31,8 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel
     override val bindingVariable: Int
         get() = BR.viewmodel
 
-    val categoryAdapter = GroupAdapter<GroupieViewHolder>()
-    val modelAdapter = GroupAdapter<GroupieViewHolder>()
+    private val categoryAdapter = GroupAdapter<GroupieViewHolder>()
+    private val modelAdapter = GroupAdapter<GroupieViewHolder>()
 
     override val viewModel: CategoryViewModel
         get() = ViewModelProvider(this, factory)[CategoryViewModel::class.java]
@@ -47,7 +49,15 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel
         mViewDataBinding?.bottomMenu?.rlCart?.setOnClickListener(this)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun initData(){
+        if (arguments?.getString(ConstantUtils.TYPE_OPEN) != null) {
+            if (arguments?.getString(ConstantUtils.TYPE_OPEN) == ConstantUtils.TYPE_LOAN) {
+                viewModel.loadAvailableItem(1)
+            } else {
+                viewModel.loadAvailableItem(2)
+            }
+        }
         mViewDataBinding?.rvCategories?.adapter = categoryAdapter
         mViewDataBinding?.rvModels?.adapter = modelAdapter
 
@@ -71,7 +81,6 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel
             R.id.rl_home -> activity?.finish()
             R.id.rl_item -> {}
             R.id.rl_cart -> {
-
                 val cartItemsList = viewModel.cartItems.value
                 if (cartItemsList != null) {
                     val bundle = Bundle().apply {
