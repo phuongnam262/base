@@ -2,12 +2,16 @@ package com.lock.smartlocker.ui.cart
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.gson.Gson
 import com.lock.smartlocker.data.entities.request.CreateInventoryTransactionRequest
 import com.lock.smartlocker.data.entities.request.GetAvailableItemRequest
 import com.lock.smartlocker.data.models.CartItem
 import com.lock.smartlocker.data.models.InventoryItem
+import com.lock.smartlocker.data.models.LockerInfo
+import com.lock.smartlocker.data.preference.PreferenceHelper
 import com.lock.smartlocker.data.repositories.LoanRepository
 import com.lock.smartlocker.ui.base.BaseViewModel
+import com.lock.smartlocker.util.ConstantUtils
 import kotlinx.coroutines.launch
 
 
@@ -21,6 +25,9 @@ class CartViewModel(
         _cartItems.value = items
     }
 
+    val transactionId = MutableLiveData<String>()
+    private val _listLockerInfo = MutableLiveData<MutableList<LockerInfo>>()
+    val listLockerInfo: LiveData<MutableList<LockerInfo>> get() = _listLockerInfo
 
     fun increaseQuantity(cartItem: CartItem) {
         val currentItems = _cartItems.value ?: return
@@ -77,10 +84,12 @@ class CartViewModel(
                     quantity = cartItem.quantity
                 )
             }
-            loanRepository.getAvailableItem(param).apply {
+            loanRepository.createInventoryTransaction(param).apply {
                 if (isSuccessful) {
                     if (data != null ) {
-                        _availableCategories.postValue(data.categories)
+                        transactionId.postValue(data.transaction_id)
+                        _listLockerInfo.postValue(data.locker_infos)
+                        PreferenceHelper.writeString(ConstantUtils.LOCKER_INFOS, Gson().toJson(data))
                     }
                 } else handleError(status)
             }

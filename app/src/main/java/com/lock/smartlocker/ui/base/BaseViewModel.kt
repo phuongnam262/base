@@ -88,6 +88,7 @@ abstract class BaseViewModel() : ViewModel() {
             Status.EXCEPTION.value.toString() -> mMessage.postValue(R.string.error_message)
             Status.UNAUTHORIZED.value.toString() -> mMessage.postValue(R.string.unauthorized)
             Status.NO_RESPONSE.value.toString() -> mMessage.postValue(R.string.server_error)
+            ConstantUtils.ERROR_NO_AVAILABLE_ITEM -> mMessage.postValue(R.string.error_no_available_item)
 
             ConstantUtils.LOGIN_EMAIL_NOT_EXISTED -> {
                 mStatusText.postValue(R.string.login_error_1001)

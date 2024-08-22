@@ -102,7 +102,7 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
                 requireActivity()
             ) { provider: ProcessCameraProvider? ->
                 cameraProvider = provider
-                //bindAllCameraUseCases()
+                bindAllCameraUseCases()
             }
         mViewDataBinding?.headerBar?.ivBack?.setOnClickListener {
             activity?.onBackPressedDispatcher?.onBackPressed()
@@ -111,7 +111,7 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
         faceDetectorProcessor.setCallback(this)
     }
 
-    public override fun onResume() {
+    override fun onResume() {
         super.onResume()
         bindAllCameraUseCases()
     }

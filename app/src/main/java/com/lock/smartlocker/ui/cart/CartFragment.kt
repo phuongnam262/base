@@ -9,6 +9,9 @@ import com.lock.smartlocker.data.models.CartItem
 import com.lock.smartlocker.databinding.FragmentCartBinding
 import com.lock.smartlocker.ui.base.BaseFragment
 import com.lock.smartlocker.ui.category.CategoryFragment
+import com.lock.smartlocker.ui.category.CategoryFragment.Companion.CART_ITEMS
+import com.lock.smartlocker.ui.inputemail.InputEmailFragment.Companion.EMAIL_REGISTER
+import com.lock.smartlocker.util.ConstantUtils
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import org.kodein.di.KodeinAware
@@ -59,6 +62,17 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(),
                 CartItemAdapter(it, viewModel)
             })
         }
+
+        viewModel.listLockerInfo.observe(viewLifecycleOwner) {
+            var listLockerInfo = it
+            if (listLockerInfo != null) {
+                val bundle = Bundle().apply {
+                    putString(ConstantUtils.TRANSACTION_ID, viewModel.transactionId.value)
+                    //putParcelableArrayList(ConstantUtils.LOCKER_INFOS,ArrayList(listLockerInfo))
+                }
+                navigateTo(R.id.action_cartFragment_to_collectItemFragment, bundle,)
+            }
+        }
     }
 
     override fun onClick(v: View?) {
@@ -66,7 +80,15 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(),
             R.id.rl_home -> activity?.finish()
             R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
             R.id.rl_item -> {}
-            R.id.btn_process -> {}
+            R.id.btn_process -> {
+                if (arguments?.getString(ConstantUtils.TYPE_OPEN) != null) {
+                    if (arguments?.getString(ConstantUtils.TYPE_OPEN) == ConstantUtils.TYPE_LOAN) {
+                        viewModel.createInventoryTransaction(1)
+                    } else {
+                        viewModel.createInventoryTransaction(2)
+                    }
+                }
+            }
         }
     }
 }

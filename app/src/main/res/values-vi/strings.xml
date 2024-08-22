@@ -106,7 +106,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="successful">Thành công</string>
 
-    <!-- loan   -->
+    <!-- loan -->
     <string name="category">Danh mục</string>
     <string name="model">Model</string>
     <string name="select_items">Chọn đồ dùng</string>
@@ -114,9 +114,17 @@
     <string name="add_to_cart">Thêm vào giỏ</string>
     <string name="available">"Có sẵn: "</string>
     <string name="loanable">"Được phép lấy: "</string>
-    <string name="please_review_cart_info">Please review them. When ready, press "PROCEED" to collect your items. The locker will automatically open at that time</string>
+    <string name="please_review_cart_info">Vui lòng lấy đồ dùng của bạn từ tủ khóa đã mở.\nNếu tủ khóa không mở, hãy nhấn "MỞ LẠI" để thử lại.\nĐóng cửa sau khi hoàn tất lấy đồ.</string>
     <string name="cart">Cart</string>
     <string name="cart_item_quantity_format">x%d</string>
+
+    <!-- Collect items -->
+    <string name="collect_items">Lấy Đồ Dùng</string>
+    <string name="collect_items_info">Please collect your items from the opened locker.\nIf any locker doesn’t open, press "REOPEN" to try again. Close the door after retrieving your items.</string>
+    <string name="error_all_doors_not_open">Tất cả các cửa không mở</string>
+    <string name="error_some_doors_not_open">Một số tủ không mở</string>
+    <string name="reopen_button">Mở lại tủ</string>
+    <string name="error_no_available_item"> Không có đồ dùng nào tại trạm tủ này</string>
 
     <!-- Strings for camera settings. -->
     <string name="pref_category_key_camera" translatable="false">pckc</string>

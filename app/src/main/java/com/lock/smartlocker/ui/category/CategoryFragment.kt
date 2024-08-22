@@ -6,6 +6,7 @@ import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
+import com.lock.smartlocker.data.preference.PreferenceHelper
 import com.lock.smartlocker.databinding.FragmentCategoryBinding
 import com.lock.smartlocker.ui.base.BaseFragment
 import com.lock.smartlocker.ui.category.adapter.CategoryItem
@@ -43,10 +44,12 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel
         initData()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun initView(){
         mViewDataBinding?.bottomMenu?.rlHome?.setOnClickListener(this)
         mViewDataBinding?.bottomMenu?.rlItem?.setOnClickListener(this)
         mViewDataBinding?.bottomMenu?.rlCart?.setOnClickListener(this)
+        mViewDataBinding?.tvHelloSomething?.text = "Hello ${PreferenceHelper.getString(ConstantUtils.ADMIN_NAME, "Admin")}"
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -85,6 +88,7 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel
                 if (cartItemsList != null) {
                     val bundle = Bundle().apply {
                         putParcelableArrayList(CART_ITEMS, ArrayList(cartItemsList))
+                        putString(ConstantUtils.TYPE_OPEN, arguments?.getString(ConstantUtils.TYPE_OPEN))
                     }
                     navigateTo(R.id.action_categoryFragment_to_cartFragment, bundle)
                 }

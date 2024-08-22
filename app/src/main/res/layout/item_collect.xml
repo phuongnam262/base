@@ -12,8 +12,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="30dp"
-        android:paddingVertical="20dp"
+        android:paddingHorizontal="@dimen/dp_15"
+        android:paddingVertical="@dimen/dp_10"
         android:background="@drawable/bg_ractangle_rounded">
 
         <LinearLayout
@@ -36,7 +36,7 @@
                 android:text="@{lockerInfo.modelName}"
                 tools:text="SSD 480GB Sandisk E30"
                 android:textColor="@color/colorBlack"
-                android:textSize="20sp" />
+                android:textSize="@dimen/sp_16" />
 
             <TextView
                 android:id="@+id/tvQuantity"
@@ -45,15 +45,15 @@
                 android:layout_weight="2"
                 android:fontFamily="@font/segoe_ui_regular"
                 android:gravity="center_horizontal"
-                android:text="x1"
+                android:text="@{lockerInfo.quantity}"
                 android:textColor="@color/colorBlack"
-                android:textSize="20sp" />
+                android:textSize="@dimen/sp_16" />
 
             <Button
                 android:id="@+id/btnReopen"
                 style="@style/CustomButton"
                 android:layout_weight="0.5"
-                android:text="Reopen" />
+                android:text="@string/reopen_button" />
 
         </LinearLayout>
 

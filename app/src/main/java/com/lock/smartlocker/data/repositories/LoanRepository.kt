@@ -3,8 +3,8 @@ package com.lock.smartlocker.data.repositories
 import com.lock.smartlocker.data.entities.request.CreateInventoryTransactionRequest
 import com.lock.smartlocker.data.entities.request.GetAvailableItemRequest
 import com.lock.smartlocker.data.entities.responses.BaseResponse
+import com.lock.smartlocker.data.entities.responses.CreateInventoryResponse
 import com.lock.smartlocker.data.entities.responses.GetAvailableItemResponse
-import com.lock.smartlocker.data.entities.responses.ListReturnAvailableLockerResponse
 import com.lock.smartlocker.data.network.LockerAPI
 import com.lock.smartlocker.data.network.SafeApiRequest
 
@@ -15,7 +15,7 @@ class LoanRepository(
         return apiRequest { api.provideLockerAPIService().getAvailableItem(getAvailableItemRequest) }
     }
 
-    suspend fun createInventoryTransaction(createInventoryTransactionRequest: CreateInventoryTransactionRequest): BaseResponse<GetAvailableItemResponse> {
+    suspend fun createInventoryTransaction(createInventoryTransactionRequest: CreateInventoryTransactionRequest): BaseResponse<CreateInventoryResponse> {
         return apiRequest { api.provideLockerAPIService().createInventoryTransaction(createInventoryTransactionRequest) }
     }
 }

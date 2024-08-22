@@ -1,6 +1,8 @@
 package com.lock.smartlocker.ui.returns
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.view.View.OnClickListener
 import androidx.lifecycle.ViewModelProvider
@@ -35,7 +37,11 @@ class ReturnActivity : BaseActivity<ActivityReturnBinding, ReturnViewModel>(),
         super.onCreate(savedInstanceState)
         //Data binding
         viewModel.returnListener = this
-        initView()
+
+        val handler = Handler(Looper.getMainLooper())
+        handler.postDelayed({
+            initView()
+        }, 50)
     }
 
     private fun initView() {

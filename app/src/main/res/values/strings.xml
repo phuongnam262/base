@@ -118,6 +118,14 @@
     <string name="cart">Cart</string>
     <string name="cart_item_quantity_format">x%d</string>
 
+    <!-- Collect items -->
+    <string name="collect_items">Collect items</string>
+    <string name="collect_items_info">Please collect your items from the opened locker.\nIf any locker doesn’t open, press "REOPEN" to try again.\nClose the door after retrieving your items.</string>
+    <string name="error_all_doors_not_open">All doors do not open</string>
+    <string name="error_some_doors_not_open">Some doors do not open</string>
+    <string name="reopen_button">Reopen</string>
+    <string name="error_no_available_item">There are no available items at this locker station</string>
+
     <!-- Strings for camera settings. -->
     <string name="pref_category_key_camera" translatable="false">pckc</string>
     <string name="pref_category_title_camera" translatable="false">Camera</string>

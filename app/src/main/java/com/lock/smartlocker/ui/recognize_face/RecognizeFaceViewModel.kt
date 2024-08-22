@@ -96,6 +96,7 @@ class RecognizeFaceViewModel(
             val getUser = userLockerRepository.getUsedLocker(personCode)
             if (getUser?.id != null) {
                 getUser.email?.let {
+                    PreferenceHelper.writeString(ConstantUtils.ADMIN_NAME, email)
                     email = it
                     isErrorText.postValue(false)
                     showButtonUsingMail.postValue(false)

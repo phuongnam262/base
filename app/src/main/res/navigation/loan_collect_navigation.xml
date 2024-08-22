@@ -40,5 +40,14 @@
         android:id="@+id/cartFragment"
         android:name="com.lock.smartlocker.ui.cart.CartFragment"
         android:label="fragment_cart"
-        tools:layout="@layout/fragment_cart" />
+        tools:layout="@layout/fragment_cart" >
+        <action
+            android:id="@+id/action_cartFragment_to_collectItemFragment"
+            app:destination="@id/collectItemFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/collectItemFragment"
+        android:name="com.lock.smartlocker.ui.collect_items.CollectItemFragment"
+        android:label="fragment_collect_item"
+        tools:layout="@layout/fragment_collect_item" />
 </navigation>

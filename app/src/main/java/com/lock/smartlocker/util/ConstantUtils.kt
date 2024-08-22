@@ -16,7 +16,6 @@ class ConstantUtils {
         const val CHECK_DOOR_STATUS_ON_CONFIRM = "CHECK_DOOR_STATUS_ON_CONFIRM"
         const val MANDATORY_DOOR_CLOSURE_VERIFICATION = "MANDATORY_DOOR_CLOSURE_VERIFICATION"
         const val RETURN_AVAILABLE_LOCKER_LIST = "RETURN_AVAILABLE_LOCKER_LIST"
-
         const val ERROR_CODE_SUCCESS = "SUCCESS"
 
         //Type Open
@@ -33,6 +32,10 @@ class ConstantUtils {
         const val TYPE_RETURN = "TYPE_RETURN"
         const val TYPE_TOPUP_ITEM = "TYPE_TOPUP_ITEM"
 
+        //Collect
+        const val TRANSACTION_ID = "TRANSACTION_ID"
+        const val LOCKER_INFOS = "LOCKER_INFOS"
+
         //Error code
         const val LOGIN_EMAIL_NOT_EXISTED = "401-001"
         const val LOGIN_WRONG_PASSWORD = "401-002"
@@ -43,6 +46,7 @@ class ConstantUtils {
         const val SERIAL_NUMBER_INVALID = "60101"
         const val SERIAL_NUMBER_INVALID_1 = "421"
         const val ERROR_LOGIC = "623"
+        const val ERROR_NO_AVAILABLE_ITEM = "605"
     }
 
     object Language {
