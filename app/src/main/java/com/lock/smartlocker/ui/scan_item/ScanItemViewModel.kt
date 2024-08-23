@@ -24,10 +24,10 @@ class ScanItemViewModel(
             param.transaction_id = transactionId.value
             param.type_update = 1
             param.serial_numbers = listLockerInfo.value
-                ?.filter { it.scanValue == 0 }
+                ?.filter { it.scanValue == 1 }
                 ?.map { it.serialNumber }
             param.serial_skips = listLockerInfo.value
-                ?.filter { it.scanValue == 1 }
+                ?.filter { it.scanValue == 0 }
                 ?.map { it.serialNumber }
             param.serial_not_founds = listLockerInfo.value
                 ?.filter { it.scanValue == 2 }

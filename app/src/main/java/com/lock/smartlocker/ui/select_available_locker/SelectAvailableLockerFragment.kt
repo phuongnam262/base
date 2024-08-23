@@ -56,9 +56,9 @@ class SelectAvailableLockerFragment : BaseFragment<FragmentSelectAvailableLocker
     @SuppressLint("NotifyDataSetChanged")
     private fun initData(){
         if (arguments?.getString(InputSerialNumberFragment.TYPE_INPUT_SERIAL) != null) {
+            isReturnFlow = arguments?.getString(InputSerialNumberFragment.TYPE_INPUT_SERIAL) == ConstantUtils.TYPE_RETURN
             viewModel.typeInput.value = arguments?.getString(InputSerialNumberFragment.TYPE_INPUT_SERIAL)
-            isReturnFlow = false
-        }else viewModel.typeInput.value = ConstantUtils.TYPE_RETURN
+        }
 
         viewModel.loadListAvailableLockers()
         viewModel.lockers.observe(viewLifecycleOwner) { lockers ->
