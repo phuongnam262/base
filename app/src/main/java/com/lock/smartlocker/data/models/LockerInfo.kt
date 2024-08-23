@@ -11,7 +11,10 @@ data class LockerInfo(
     @SerializedName("model_name") val modelName: String,
     @SerializedName("model_id") val modelId: String,
     @SerializedName("category_name") val categoryName: String,
-    val quantity : String,
+    @SerializedName("door_status") var doorStatus: Int,
+    var quantity : Int = 1,
+    var scanStatus : String,
+    var scanValue : Int = 0,
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString()!!,
@@ -20,7 +23,10 @@ data class LockerInfo(
         parcel.readString()!!,
         parcel.readString()!!,
         parcel.readString()!!,
-        parcel.readString()!!
+        parcel.readInt(),
+        parcel.readInt(),
+        parcel.readString()!!,
+        parcel.readInt()
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -30,7 +36,10 @@ data class LockerInfo(
         parcel.writeString(modelName)
         parcel.writeString(modelId)
         parcel.writeString(categoryName)
-        parcel.writeString(quantity)
+        parcel.writeInt(doorStatus)
+        parcel.writeInt(quantity)
+        parcel.writeString(scanStatus)
+        parcel.writeInt(scanValue)
     }
 
     override fun describeContents(): Int {

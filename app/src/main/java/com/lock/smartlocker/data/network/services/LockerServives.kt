@@ -6,6 +6,7 @@ import com.lock.smartlocker.data.entities.request.CreateInventoryTransactionRequ
 import com.lock.smartlocker.data.entities.request.GetAvailableItemRequest
 import com.lock.smartlocker.data.entities.request.GetItemReturnRequest
 import com.lock.smartlocker.data.entities.request.ReturnItemRequest
+import com.lock.smartlocker.data.entities.request.UpdateInventoryTransactionRequest
 import com.lock.smartlocker.data.entities.responses.AdminLoginResponse
 import com.lock.smartlocker.data.entities.responses.BaseResponse
 import com.lock.smartlocker.data.entities.responses.ConsumerLoginResponse
@@ -82,6 +83,11 @@ interface LockerServives {
     suspend fun createInventoryTransaction(
         @Body createInventoryTransactionRequest: CreateInventoryTransactionRequest
     ): Response<BaseResponse<CreateInventoryResponse>>
+
+    @POST("/api/inventory-transaction/update-inventory-transaction")
+    suspend fun updateInventoryTransaction(
+        @Body updateInventoryTransactionRequest: UpdateInventoryTransactionRequest
+    ): Response<BaseResponse<Any>>
 
     companion object {
         operator fun invoke(retrofit: Retrofit): LockerServives {

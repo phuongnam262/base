@@ -126,6 +126,15 @@
     <string name="reopen_button">Reopen</string>
     <string name="error_no_available_item">There are no available items at this locker station</string>
 
+    <!-- Scan items -->
+    <string name="scan_items">Scan items</string>
+    <string name="scan_items_info">To verify your collected items, please scan the serial label on each item.\nIf an item is not found in the locker, select "Not Found" to notify the admin.\nPress "PROCEED" to continue after scanning all items.</string>
+    <string name="not_found">Not Found</string>
+    <string name="status">Status: </string>
+    <string name="status_scanned">SCANNED</string>
+    <string name="status_unscanned">UNSCANNED</string>
+    <string name="status_not_found">NOT FOUND</string>
+
     <!-- Strings for camera settings. -->
     <string name="pref_category_key_camera" translatable="false">pckc</string>
     <string name="pref_category_title_camera" translatable="false">Camera</string>

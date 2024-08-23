@@ -126,6 +126,15 @@
     <string name="reopen_button">Mở lại tủ</string>
     <string name="error_no_available_item"> Không có đồ dùng nào tại trạm tủ này</string>
 
+    <!-- Scan items -->
+    <string name="scan_items">Quét Xác Thực</string>
+    <string name="scan_items_info">Để xác minh các đồ dùng bạn đã lấy, vui lòng quét sê-ri trên mỗi đồ dùng.\nNếu không tìm thấy đồ dùng trong tủ, hãy chọn "Không  thấy" để thông báo cho quản trị viên.\nNhấn "TIẾP TỤC" sau khi quét tất cả các đồ dùng.</string>
+    <string name="not_found">Không thấy</string>
+    <string name="status">Trạng thái: </string>
+    <string name="status_scanned">ĐÃ QUÉT</string>
+    <string name="status_unscanned">CHƯA QUÉT</string>
+    <string name="status_not_found">CỬA LỖI</string>
+
     <!-- Strings for camera settings. -->
     <string name="pref_category_key_camera" translatable="false">pckc</string>
     <string name="pref_category_title_camera" translatable="false">Camera</string>

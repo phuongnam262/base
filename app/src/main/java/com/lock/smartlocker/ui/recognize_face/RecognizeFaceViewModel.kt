@@ -24,6 +24,7 @@ class RecognizeFaceViewModel(
 
     fun detectImage(strBase64: String) {
         ioScope.launch {
+            mLoading.postValue(true)
             try {
                 val imageBase64Request = ImageBase64Request(strBase64)
                 val getDetectResponse = userLockerRepository.detectImage(imageBase64Request)
@@ -42,11 +43,12 @@ class RecognizeFaceViewModel(
             } catch (e: NoInternetException) {
                 mMessage.postValue(R.string.error_network)
             }
-        }
+        }.invokeOnCompletion { mLoading.postValue(false) }
     }
 
     private fun searchPerson(strBase64: String) {
         ioScope.launch {
+            mLoading.postValue(true)
             try {
                 val imageSearchRequest = ImageSearchRequest(strBase64)
                 val getSearchResponse = userLockerRepository.searchPerson(imageSearchRequest)
@@ -79,7 +81,7 @@ class RecognizeFaceViewModel(
             } catch (e: NoInternetException) {
                 mMessage.postValue(R.string.error_network)
             }
-        }
+        }.invokeOnCompletion { mLoading.postValue(false) }
     }
 
     private fun handelFaceFail(detectImageResponse: DetectImageResponse) {
@@ -93,10 +95,11 @@ class RecognizeFaceViewModel(
 
     private fun getUserLocker(personCode: String) {
         ioScope.launch {
+            mLoading.postValue(true)
             val getUser = userLockerRepository.getUsedLocker(personCode)
             if (getUser?.id != null) {
                 getUser.email?.let {
-                    PreferenceHelper.writeString(ConstantUtils.ADMIN_NAME, email)
+                    PreferenceHelper.writeString(ConstantUtils.ADMIN_NAME, it)
                     email = it
                     isErrorText.postValue(false)
                     showButtonUsingMail.postValue(false)
@@ -104,7 +107,7 @@ class RecognizeFaceViewModel(
                     getUser.personCode?.let { it1 -> recognizeFaceListener?.handleSuccess(it1, it) }
                 }
             }
-        }
+        }.invokeOnCompletion { mLoading.postValue(false) }
     }
 
     fun consumerLogin() {

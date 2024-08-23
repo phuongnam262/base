@@ -22,6 +22,7 @@ class RegisterFaceViewModel(
     val emailRegister = MutableLiveData<String>()
     fun detectImage(strBase64: String) {
         ioScope.launch {
+            mLoading.postValue(true)
             try {
                 val imageBase64Request = ImageBase64Request(strBase64)
                 val getDetectResponse = userLockerRepository.detectImage(imageBase64Request)
@@ -40,11 +41,12 @@ class RegisterFaceViewModel(
             } catch (e: NoInternetException) {
                 mMessage.postValue(R.string.error_network)
             }
-        }
+        }.invokeOnCompletion { mLoading.postValue(false) }
     }
 
     private fun searchPerson(strBase64: String) {
         ioScope.launch {
+            mLoading.postValue(true)
             try {
                 val imageSearchRequest = ImageSearchRequest(strBase64)
                 val getSearchResponse = userLockerRepository.searchPerson(imageSearchRequest)
@@ -73,11 +75,12 @@ class RegisterFaceViewModel(
             } catch (e: NoInternetException) {
                 mMessage.postValue(R.string.error_network)
             }
-        }
+        }.invokeOnCompletion { mLoading.postValue(false) }
     }
 
     private fun addPerson(strBase64: String) {
         ioScope.launch {
+            mLoading.postValue(true)
             try {
                 val personCodeGen = generateRandomNumber()
                 val addPersonModel =
@@ -116,7 +119,7 @@ class RegisterFaceViewModel(
             } catch (e: NoInternetException) {
                 mMessage.postValue(R.string.error_network)
             }
-        }
+        }.invokeOnCompletion { mLoading.postValue(false) }
     }
 
     private fun generateRandomNumber(): String {

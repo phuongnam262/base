@@ -67,11 +67,10 @@ class SelectAvailableLockerViewModel(
                 if (isSuccessful) {
                     if (data != null) {
                         selectAvailableListener?.sendCommandOpenLockerSuccess()
-                        mLoading.postValue(false)
                     }
                 } else handleError(status)
             }
-        }
+        }.invokeOnCompletion { mLoading.postValue(false) }
     }
 }
 

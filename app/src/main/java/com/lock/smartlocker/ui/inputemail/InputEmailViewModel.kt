@@ -24,6 +24,7 @@ class InputEmailViewModel(
             }else{
                 showStatusText.postValue(false)
             }
+            mLoading.postValue(true)
             val param = ConsumerLoginRequest()
             param.email = email.value + subEmail.value
             managerRepository.consumerLogin(param).apply {
@@ -34,6 +35,6 @@ class InputEmailViewModel(
                     }
                 }else handleError(status)
             }
-        }
+        }.invokeOnCompletion { mLoading.postValue(false) }
     }
 }

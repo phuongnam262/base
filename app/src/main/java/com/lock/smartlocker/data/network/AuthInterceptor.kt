@@ -109,10 +109,9 @@ class AuthInterceptor(requireToken: Boolean) : Interceptor {
             val contentType = responseBody.contentType()
             val charset: Charset = contentType?.charset(StandardCharsets.UTF_8)
                 ?: StandardCharsets.UTF_8
-
-            if (contentLength != 0L) {
-                Log.d("API response", buffer.clone().readString(charset))
-            }
+            Log.d("API response", "----------------------------")
+            Log.d("API response", buffer.clone().readString(charset))
+            Log.d("API response", "----------------------------")
         } catch (e: Exception) {
             e.printStackTrace()
         }

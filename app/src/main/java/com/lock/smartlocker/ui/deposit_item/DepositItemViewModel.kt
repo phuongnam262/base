@@ -158,10 +158,9 @@ class DepositItemViewModel(
                 if (isSuccessful) {
                     if (data != null) {
                         doorStatus.postValue(data.locker_list.first().doorStatus)
-                        mLoading.postValue(false)
                     }
                 } else handleError(status)
             }
-        }
+        }.invokeOnCompletion { mLoading.postValue(false) }
     }
 }

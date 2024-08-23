@@ -1,78 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingHorizontal="30dp"
-    android:paddingVertical="20dp"
-    android:background="@drawable/bg_ractangle_rounded">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <data>
 
-        <TextView
-            android:id="@+id/tvModelName"
+        <import type="android.view.View" />
+
+        <variable
+            name="lockerInfo"
+            type="com.lock.smartlocker.data.models.LockerInfo" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_ractangle_rounded"
+        android:layout_marginVertical="@dimen/dp_5"
+        android:paddingHorizontal="@dimen/dp_15"
+        android:paddingVertical="@dimen/dp_10">
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="4"
-            android:ellipsize="end"
-            android:fontFamily="@font/segoe_ui_regular"
-            android:maxLines="2"
-            android:gravity="center_vertical"
-            android:text="SSD 480GB Sandisk E30"
-            android:textColor="@color/colorBlack"
-            android:textSize="20sp" />
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tvModelName"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:ellipsize="end"
+                android:fontFamily="@font/segoe_ui_regular"
+                android:gravity="center_vertical"
+                android:maxLines="2"
+                tools:text="SSD 480GB Sandisk E30"
+                android:text="@{lockerInfo.modelName}"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/sp_14" />
+
+            <TextView
+                android:id="@+id/tvQuantity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:fontFamily="@font/segoe_ui_regular"
+                android:gravity="center_horizontal"
+                android:text='@{"x"+lockerInfo.quantity}'
+                tools:text="x1"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/sp_14" />
+
+            <Button
+                android:id="@+id/btnNotFound"
+                style="@style/CustomButton"
+                android:layout_weight="0.4"
+                android:text="@string/not_found"
+                android:visibility="@{lockerInfo.doorStatus == 0 &amp;&amp; lockerInfo.scanValue == 0 ? View.VISIBLE : View.GONE}"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.4"
+                tools:text="DOOR FAULTY"
+                android:textColor="@color/text_color_error"
+                android:textSize="@dimen/sp_13"
+                android:visibility="@{(lockerInfo.doorStatus == 1 || lockerInfo.doorStatus == -1) ? View.VISIBLE : View.GONE}"/>
+
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/tvQuantity"
-            android:layout_width="0dp"
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_marginTop="@dimen/dp_10"
             android:fontFamily="@font/segoe_ui_regular"
-            android:gravity="center_horizontal"
-            android:text="x2"
+            android:text="@string/status"
             android:textColor="@color/colorBlack"
-            android:textSize="20sp" />
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
-        <Button
-            android:id="@+id/btnNotFound"
-            style="@style/CustomButton"
-            android:layout_weight="0.4"
-            android:text="Not Found" />
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Status: "
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/segoe_ui_regular"
-        android:textColor="@color/colorBlack"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:fontFamily="@font/segoe_ui_semibold"
-        android:text="UNSCANNED"
-        android:textColor="@color/colorBlack"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView4"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintTop_toTopOf="@+id/textView4" />
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:fontFamily="@font/segoe_ui_semibold"
+            android:text="@{lockerInfo.scanStatus}"
+            tools:text="UNSCANNED"
+            android:textColor="@color/colorBlack"
+            android:layout_marginStart="@dimen/dp_2"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintBottom_toBottomOf="@+id/textView4"
+            app:layout_constraintStart_toEndOf="@+id/textView4"
+            app:layout_constraintTop_toTopOf="@+id/textView4" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

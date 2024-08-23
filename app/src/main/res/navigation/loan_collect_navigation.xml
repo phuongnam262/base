@@ -49,5 +49,18 @@
         android:id="@+id/collectItemFragment"
         android:name="com.lock.smartlocker.ui.collect_items.CollectItemFragment"
         android:label="fragment_collect_item"
-        tools:layout="@layout/fragment_collect_item" />
+        tools:layout="@layout/fragment_collect_item" >
+        <action
+            android:id="@+id/action_collectItemFragment_to_scanItemFragment"
+            app:destination="@id/scanItemFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/scanItemFragment"
+        android:name="com.lock.smartlocker.ui.scan_item.ScanItemFragment"
+        android:label="fragment_scan_item"
+        tools:layout="@layout/fragment_scan_item" >
+        <action
+            android:id="@+id/action_scanItemFragment_to_thankFragment2"
+            app:destination="@id/thankFragment2" />
+    </fragment>
 </navigation>

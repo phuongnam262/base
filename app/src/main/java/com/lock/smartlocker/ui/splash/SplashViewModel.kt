@@ -52,13 +52,12 @@ class SplashViewModel(
         ioScope.launch {
             startAppRepository.listCategory().apply {
                 if (isSuccessful) {
-                    mLoading.postValue(false)
                     if (data != null) {
                         PreferenceHelper.writeString(ConstantUtils.LIST_CATEGORY, Gson().toJson(data))
                         allSuccess.postValue(true)
                     }
                 }else handleError(status)
             }
-        }
+        }.invokeOnCompletion { mLoading.postValue(false) }
     }
 }

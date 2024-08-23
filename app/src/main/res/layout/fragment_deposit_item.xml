@@ -32,7 +32,7 @@
                 android:layout_marginTop="@dimen/dp_10"
                 android:text="@string/deposit_item"
                 android:textColor="@color/text_sub_color"
-                android:textSize="@dimen/sp_40" />
+                android:textSize="@dimen/sp_22" />
 
             <TextView
                 android:id="@+id/tv_deposit_info"

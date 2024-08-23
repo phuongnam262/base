@@ -73,6 +73,7 @@ class HomeViewModel(
 
     fun getListReturnAvailableLockers() {
         ioScope.launch {
+            mLoading.postValue(true)
             returnRepository.listReturnAvailableLockers().apply {
                 if (isSuccessful) {
                     if (data != null) {
@@ -85,7 +86,7 @@ class HomeViewModel(
                     }
                 }else handleError(status)
             }
-        }
+        }.invokeOnCompletion { mLoading.postValue(false) }
     }
 
 }
