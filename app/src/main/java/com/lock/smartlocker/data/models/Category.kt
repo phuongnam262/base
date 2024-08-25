@@ -9,5 +9,6 @@ data class Category(
     @SerializedName("position") val position: Int,
     @SerializedName("image") val image: String,
     @SerializedName("models") val models: List<Model>,
-    @SerializedName("reason_faulties") val reasonFaulties: List<String>
+    @SerializedName("reason_faulties") val reasonFaulties: List<String>,
+    var isSelected: Boolean,
 )

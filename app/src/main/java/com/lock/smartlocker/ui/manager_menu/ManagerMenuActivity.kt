@@ -36,7 +36,7 @@ class ManagerMenuActivity : BaseActivity<ActivityManagerMenuBinding, ManagerMenu
     }
 
     private fun initView() {
-        when (intent.getStringExtra(ConstantUtils.TYPE_OPEN)) {
+        when (intent.getStringExtra(ConstantUtils.TYPE_OPEN_MANAGER)) {
             ConstantUtils.TYPE_REGISTER_FACE -> {
                 showFragment(InputEmailFragment(), R.navigation.register_face_navigation)
             }

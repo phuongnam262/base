@@ -20,6 +20,7 @@ class ConstantUtils {
 
         //Type Open
         const val TYPE_OPEN = "TYPE_OPEN"
+        const val TYPE_OPEN_MANAGER = "TYPE_OPEN_MANAGER"
         const val TYPE_REGISTER_FACE = "TYPE_REGISTER_FACE"
         const val TYPE_ADMIN_CONSOLE = "TYPE_ADMIN_CONSOLE"
         const val TYPE_MANAGER_FACE = "TYPE_MANAGER_FACE"

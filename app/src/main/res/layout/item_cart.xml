@@ -25,7 +25,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:fontFamily="@font/segoe_ui_regular"
-            android:text="@{cartItem.model.modelName}"
+            android:text="@{cartItem.modelName}"
             android:textSize="@dimen/sp_12"
             app:layout_constraintWidth_percent="0.333"
             app:layout_constraintBottom_toBottomOf="parent"

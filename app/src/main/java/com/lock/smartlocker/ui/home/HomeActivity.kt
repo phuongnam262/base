@@ -141,13 +141,13 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeLis
                     setNewLocale(ConstantUtils.Language.VIETNAMESE)
                 }
                 R.id.ll_register_face -> {
-                    startActivityWithOneValue(ConstantUtils.TYPE_OPEN,ConstantUtils.TYPE_REGISTER_FACE,
+                    startActivityWithOneValue(ConstantUtils.TYPE_OPEN_MANAGER,ConstantUtils.TYPE_REGISTER_FACE,
                         ManagerMenuActivity::class.java)
                     mViewDataBinding?.drawerLayout?.closeDrawers()
                 }
                 R.id.ll_manage_face -> {}
                 R.id.ll_admin_console -> {
-                    startActivityWithOneValue(ConstantUtils.TYPE_OPEN,ConstantUtils.TYPE_ADMIN_CONSOLE,
+                    startActivityWithOneValue(ConstantUtils.TYPE_OPEN_MANAGER,ConstantUtils.TYPE_ADMIN_CONSOLE,
                         ManagerMenuActivity::class.java)
                     mViewDataBinding?.drawerLayout?.closeDrawers()
                 }

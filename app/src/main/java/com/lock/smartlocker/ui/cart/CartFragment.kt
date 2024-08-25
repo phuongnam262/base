@@ -5,12 +5,10 @@ import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
-import com.lock.smartlocker.data.models.CartItem
 import com.lock.smartlocker.databinding.FragmentCartBinding
 import com.lock.smartlocker.ui.base.BaseFragment
 import com.lock.smartlocker.ui.category.CategoryFragment
-import com.lock.smartlocker.ui.category.CategoryFragment.Companion.CART_ITEMS
-import com.lock.smartlocker.ui.inputemail.InputEmailFragment.Companion.EMAIL_REGISTER
+import com.lock.smartlocker.ui.returns.ReturnActivity
 import com.lock.smartlocker.util.ConstantUtils
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
@@ -52,33 +50,42 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(),
 
     private fun initData(){
         mViewDataBinding?.rvCartItems?.adapter = cartAdapter
-        arguments?.let {
-            val cartItems = it.getParcelableArrayList<CartItem>(CategoryFragment.CART_ITEMS) ?: emptyList()
-            viewModel.setCartItems(cartItems)
-        }
-
-        viewModel.cartItems.observe(viewLifecycleOwner) { categories ->
-            cartAdapter.update(categories.map {
+        viewModel.listCartItem.value = CategoryFragment.listCartItem
+        viewModel.listCartItem.observe(viewLifecycleOwner) { cartItems ->
+            cartAdapter.update(cartItems.map {
                 CartItemAdapter(it, viewModel)
             })
+            CategoryFragment.listCartItem = cartItems
+            if (cartItems.size > 0){
+                mViewDataBinding?.bottomMenu?.btnProcess?.isEnabled = true
+                mViewDataBinding?.bottomMenu?.btnProcess?.alpha = 1f
+            }else{
+                mViewDataBinding?.bottomMenu?.btnProcess?.isEnabled = false
+                mViewDataBinding?.bottomMenu?.btnProcess?.alpha = 0.3f
+            }
         }
 
         viewModel.listLockerInfo.observe(viewLifecycleOwner) {
-            var listLockerInfo = it
+            val listLockerInfo = it
             if (listLockerInfo != null) {
                 val bundle = Bundle().apply {
                     putString(ConstantUtils.TRANSACTION_ID, viewModel.transactionId.value)
-                    //putParcelableArrayList(ConstantUtils.LOCKER_INFOS,ArrayList(listLockerInfo))
                 }
                 navigateTo(R.id.action_cartFragment_to_collectItemFragment, bundle,)
+                CategoryFragment.listCartItem.clear()
             }
         }
     }
 
     override fun onClick(v: View?) {
         when(v?.id){
-            R.id.rl_home -> activity?.finish()
-            R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
+            R.id.rl_home -> {
+                CategoryFragment.listCartItem.clear()
+                activity?.finish()
+            }
+            R.id.iv_back -> {
+                activity?.onBackPressedDispatcher?.onBackPressed()
+            }
             R.id.rl_item -> {}
             R.id.btn_process -> {
                 if (arguments?.getString(ConstantUtils.TYPE_OPEN) != null) {

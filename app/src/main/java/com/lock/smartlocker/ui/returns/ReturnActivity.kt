@@ -5,9 +5,11 @@ import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.view.View.OnClickListener
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
+import com.lock.smartlocker.data.models.CartItem
 import com.lock.smartlocker.databinding.ActivityReturnBinding
 import com.lock.smartlocker.ui.admin_login.AdminLoginFragment
 import com.lock.smartlocker.ui.base.BaseActivity
@@ -31,7 +33,6 @@ class ReturnActivity : BaseActivity<ActivityReturnBinding, ReturnViewModel>(),
         get() = BR.viewmodel
     override val viewModel: ReturnViewModel
         get() = ViewModelProvider(this, factory)[ReturnViewModel::class.java]
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

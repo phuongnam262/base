@@ -13,7 +13,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:backgroundImage="@{viewmodel.imageBackgroundUrl}">
+        android:backgroundImage="@{viewmodel.imageBackgroundUrl}"
+        android:clickable="true"
+        android:focusable="true">
 
         <include
             android:id="@+id/header_bar"

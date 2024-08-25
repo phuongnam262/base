@@ -119,7 +119,7 @@ class RecognizeFaceViewModel(
                 if (isSuccessful) {
                     if (data != null) {
                         PreferenceHelper.writeString(ConstantUtils.USER_TOKEN, data.token)
-                        recognizeFaceListener?.consumerLoginSuccess()
+                        recognizeFaceListener?.consumerLoginSuccess(email)
                     }
                 }else handleError(status)
             }

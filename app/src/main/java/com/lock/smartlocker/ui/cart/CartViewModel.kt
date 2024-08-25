@@ -3,8 +3,8 @@ package com.lock.smartlocker.ui.cart
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
+import com.lock.smartlocker.R
 import com.lock.smartlocker.data.entities.request.CreateInventoryTransactionRequest
-import com.lock.smartlocker.data.entities.request.GetAvailableItemRequest
 import com.lock.smartlocker.data.models.CartItem
 import com.lock.smartlocker.data.models.InventoryItem
 import com.lock.smartlocker.data.models.LockerInfo
@@ -18,58 +18,28 @@ import kotlinx.coroutines.launch
 class CartViewModel(
     private val loanRepository: LoanRepository
 ) : BaseViewModel() {
-    private val _cartItems = MutableLiveData<List<CartItem>>(emptyList())
-    val cartItems: LiveData<List<CartItem>> get() = _cartItems
-
-    fun setCartItems(items: List<CartItem>) {
-        _cartItems.value = items
-    }
-
     val transactionId = MutableLiveData<String>()
     private val _listLockerInfo = MutableLiveData<MutableList<LockerInfo>>()
     val listLockerInfo: LiveData<MutableList<LockerInfo>> get() = _listLockerInfo
+    val listCartItem = MutableLiveData<ArrayList<CartItem>>()
 
     fun increaseQuantity(cartItem: CartItem) {
-        val currentItems = _cartItems.value ?: return
-
-        val categoryLimit = cartItem.category.loanable ?: Int.MAX_VALUE
-
-        val totalQuantityInCategory = currentItems
-            .filter { it.category.categoryId == cartItem.category.categoryId }
-            .sumOf { it.quantity }
-
-        val availableModel = cartItem.model
-        if (availableModel.available > 0 &&
-            (availableModel.loanable == null || availableModel.loanable > 0) &&
-            totalQuantityInCategory < categoryLimit) {
-
-            val updatedItems = currentItems.map { item ->
-                if (item.model.modelId == cartItem.model.modelId) {
-                    item.copy(quantity = item.quantity + 1)
-                } else {
-                    item
-                }
-            }
-            _cartItems.value = updatedItems
+        if (cartItem.quantity < cartItem.available && cartItem.quantity < cartItem.loanable) {
+            cartItem.quantity += 1
+            listCartItem.postValue(listCartItem.value)
+        }else{
+            mMessage.postValue(R.string.maximun_item_quantity)
         }
     }
 
 
     fun decreaseQuantity(cartItem: CartItem) {
-        val currentItems = _cartItems.value ?: return
-
-        val updatedItems = currentItems.mapNotNull { item ->
-            if (item.model.modelId == cartItem.model.modelId) {
-                if (item.quantity > 1) {
-                    item.copy(quantity = item.quantity - 1)
-                } else {
-                    null
-                }
-            } else {
-                item
-            }
+        if (cartItem.quantity == 1){
+            listCartItem.value?.remove(cartItem)
+        }else{
+            cartItem.quantity -= 1
         }
-        _cartItems.value = updatedItems
+        listCartItem.postValue(listCartItem.value)
     }
 
     fun createInventoryTransaction(openType: Int) {
@@ -77,10 +47,10 @@ class CartViewModel(
             mLoading.postValue(true)
             val param = CreateInventoryTransactionRequest()
             param.transaction_type = openType
-            param.data_infos = _cartItems.value?.map { cartItem ->
+            param.data_infos = listCartItem.value?.map { cartItem ->
                 InventoryItem(
-                    modelId = cartItem.model.modelId,
-                    categoryId = cartItem.category.categoryId,
+                    modelId = cartItem.modelId,
+                    categoryId = cartItem.categoryId,
                     quantity = cartItem.quantity
                 )
             }
@@ -88,6 +58,11 @@ class CartViewModel(
                 if (isSuccessful) {
                     if (data != null ) {
                         transactionId.postValue(data.transaction_id)
+                        data.locker_infos.map {
+                            it.quantity = listCartItem.value?.find { cartItem ->
+                                cartItem.modelId == it.modelId
+                            }?.quantity ?: 0
+                        }
                         _listLockerInfo.postValue(data.locker_infos)
                         PreferenceHelper.writeString(ConstantUtils.LOCKER_INFOS, Gson().toJson(data))
                     }

@@ -117,6 +117,7 @@
     <string name="please_review_cart_info">Vui lòng lấy đồ dùng của bạn từ tủ khóa đã mở.\nNếu tủ khóa không mở, hãy nhấn "MỞ LẠI" để thử lại.\nĐóng cửa sau khi hoàn tất lấy đồ.</string>
     <string name="cart">Cart</string>
     <string name="cart_item_quantity_format">x%d</string>
+    <string name="maximun_item_quantity">Giới hạn có sẵn hoặc có thể lấy</string>
 
     <!-- Collect items -->
     <string name="collect_items">Lấy Đồ Dùng</string>
@@ -130,10 +131,11 @@
     <string name="scan_items">Quét Xác Thực</string>
     <string name="scan_items_info">Để xác minh các đồ dùng bạn đã lấy, vui lòng quét sê-ri trên mỗi đồ dùng.\nNếu không tìm thấy đồ dùng trong tủ, hãy chọn "Không  thấy" để thông báo cho quản trị viên.\nNhấn "TIẾP TỤC" sau khi quét tất cả các đồ dùng.</string>
     <string name="not_found">Không thấy</string>
-    <string name="status">Trạng thái: </string>
+    <string name="status">Trạng thái : </string>
     <string name="status_scanned">ĐÃ QUÉT</string>
     <string name="status_unscanned">CHƯA QUÉT</string>
-    <string name="status_not_found">CỬA LỖI</string>
+    <string name="status_not_found">Không thấy</string>
+    <string name="door_faulty">CỬA LỖI</string>
 
     <!-- Strings for camera settings. -->
     <string name="pref_category_key_camera" translatable="false">pckc</string>

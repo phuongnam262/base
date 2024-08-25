@@ -17,8 +17,5 @@ class CategoryItem(
     override fun bind(viewBinding: ItemCategoryBinding, position: Int) {
         viewBinding.category = category
         viewBinding.viewModel = viewModel
-
-        val isSelected = viewModel.selectedCategory.value == category.categoryId
-        viewBinding.isSelected = isSelected
     }
 }

@@ -76,15 +76,23 @@ class InputEmailFragment : BaseFragment<FragmentInputEmailBinding, InputEmailVie
             R.id.rl_home -> activity?.finish()
             R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
             R.id.btn_process -> {
-                viewModel.consumerLogin()
+                viewModel.consumerLogin(arguments?.getString(ConstantUtils.TYPE_OPEN))
             }
         }
     }
 
     override fun consumerLoginSuccess(email: String) {
-        val bundle = Bundle().apply {
-            putString(EMAIL_REGISTER, email)
+        if (arguments?.getString(ConstantUtils.TYPE_OPEN) != null) {
+            val bundle = Bundle().apply {
+                putString(ConstantUtils.TYPE_OPEN, arguments?.getString(ConstantUtils.TYPE_OPEN) )
+                putString(EMAIL_REGISTER, email)
+            }
+            navigateTo(R.id.action_inputEmailFragment2_to_inputOTPFragment2, bundle)
+        }else{
+            val bundle = Bundle().apply {
+                putString(EMAIL_REGISTER, email)
+            }
+            navigateTo(R.id.action_navigation_input_email_to_inputOTPFragment, bundle)
         }
-        navigateTo(R.id.action_navigation_input_email_to_inputOTPFragment, bundle)
     }
 }

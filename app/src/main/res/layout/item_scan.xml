@@ -47,27 +47,29 @@
                 android:id="@+id/tvQuantity"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
+                android:layout_weight="1"
                 android:fontFamily="@font/segoe_ui_regular"
                 android:gravity="center_horizontal"
                 android:text='@{"x"+lockerInfo.quantity}'
                 tools:text="x1"
                 android:textColor="@color/colorBlack"
-                android:textSize="@dimen/sp_14" />
+                android:textSize="@dimen/sp_12" />
 
             <Button
                 android:id="@+id/btnNotFound"
                 style="@style/CustomButton"
-                android:layout_weight="0.4"
+                android:layout_weight="0.3"
                 android:text="@string/not_found"
                 android:visibility="@{lockerInfo.doorStatus == 0 &amp;&amp; lockerInfo.scanValue == 0 ? View.VISIBLE : View.GONE}"/>
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/dp_35"
                 android:layout_weight="0.4"
                 tools:text="DOOR FAULTY"
+                android:text="@string/door_faulty"
                 android:textColor="@color/text_color_error"
+                android:gravity="center_vertical"
                 android:textSize="@dimen/sp_13"
                 android:visibility="@{(lockerInfo.doorStatus == 1 || lockerInfo.doorStatus == -1) ? View.VISIBLE : View.GONE}"/>
 
@@ -94,6 +96,7 @@
             android:text="@{lockerInfo.scanStatus}"
             tools:text="UNSCANNED"
             android:textColor="@color/colorBlack"
+            android:textStyle="bold"
             android:layout_marginStart="@dimen/dp_2"
             android:textSize="@dimen/sp_12"
             app:layout_constraintBottom_toBottomOf="@+id/textView4"

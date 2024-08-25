@@ -80,6 +80,7 @@ class CollectItemFragment : BaseFragment<FragmentCollectItemBinding, CollectItem
 
     @SuppressLint("NotifyDataSetChanged")
     override fun sendCommandOpenLockerSuccess() {
+        collectItemAdapter.notifyDataSetChanged()
     }
 
     override fun updateInventorySuccess() {

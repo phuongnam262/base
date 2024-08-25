@@ -2,11 +2,12 @@ package com.lock.smartlocker.ui.category
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.map
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.lock.smartlocker.data.entities.request.GetAvailableItemRequest
 import com.lock.smartlocker.data.entities.responses.GetListCategoryResponse
-import com.lock.smartlocker.data.models.AvailableCategory
+import com.lock.smartlocker.data.models.AvailableItem
 import com.lock.smartlocker.data.models.AvailableModel
 import com.lock.smartlocker.data.models.CartItem
 import com.lock.smartlocker.data.models.Category
@@ -22,28 +23,23 @@ class CategoryViewModel(
 
     private val _categories = MutableLiveData<List<Category>>()
     val categories: LiveData<List<Category>> get() = _categories
-
-    private val _availableCategories = MutableLiveData<List<AvailableCategory>>()
-    val availableCategories: LiveData<List<AvailableCategory>> get() = _availableCategories
-
+    private val _availableItem = MutableLiveData<List<AvailableItem>>()
+    val availableItem: LiveData<List<AvailableItem>> get() = _availableItem
     private val _availableModels = MutableLiveData<List<AvailableModel>>()
     val availableModels: LiveData<List<AvailableModel>> get() = _availableModels
-
-    private val _selectedCategory = MutableLiveData<String>("")
-    val selectedCategory: LiveData<String> get() = _selectedCategory
-
-    private val _cartItems = MutableLiveData<MutableList<CartItem>>()
-    val cartItems: LiveData<MutableList<CartItem>> get() = _cartItems
+    var categoryIdSelected = MutableLiveData<String>()
+    private val updatedListCart: ArrayList<CartItem> = ArrayList()
+    val listCartItem = MutableLiveData<ArrayList<CartItem>>()
 
     init {
         loadCategories()
     }
 
-     private fun loadCategories() {
+    private fun loadCategories() {
         val jsonCategory = PreferenceHelper.getString(ConstantUtils.LIST_CATEGORY, "")
         val categoriesResponseType = object : TypeToken<GetListCategoryResponse>() {}.type
-        val categoriesResponse: GetListCategoryResponse = Gson().fromJson(jsonCategory, categoriesResponseType)
-
+        val categoriesResponse: GetListCategoryResponse =
+            Gson().fromJson(jsonCategory, categoriesResponseType)
         _categories.postValue(categoriesResponse.categories)
     }
 
@@ -54,82 +50,72 @@ class CategoryViewModel(
             param.transaction_type = openType
             loanRepository.getAvailableItem(param).apply {
                 if (isSuccessful) {
-                    if (data != null ) {
-                        _availableCategories.postValue(data.categories)
+                    if (data != null) {
+                            listCartItem.value?.let { listCart ->
+                                val listModel = data.categories.flatMap { it.models }
+                                listModel.map { item ->
+                                    listCart.map { cart ->
+                                        if (item.modelId == cart.modelId) {
+                                            item.available -= cart.quantity
+                                        }
+                                    }
+
+                                }
+                            }
+
+                        _availableItem.postValue(data.categories)
+
                     }
                 } else handleError(status)
             }
         }.invokeOnCompletion { mLoading.postValue(false) }
     }
 
-    private fun loadAvailableModels(categoryId: String) {
-        val availableCategory = availableCategories.value?.find { it.categoryId == categoryId }
-        _availableModels.postValue(availableCategory?.models ?: emptyList())
+    fun onCategorySelected(category: Category) {
+        _categories.value?.map { it.isSelected = false }
+        categoryIdSelected.postValue(category.categoryId)
+        category.isSelected = true
+        val availableItem =
+            _availableItem.value?.find { it.categoryId == category.categoryId }
+        _availableModels.postValue(availableItem?.models ?: emptyList())
     }
 
-    fun onCategorySelected(categoryId: String) {
-        _selectedCategory.value = categoryId
-        loadAvailableModels(categoryId)
+    fun updateAvailableModels() {
+        if (categoryIdSelected.value != null){
+            val availableItem =
+                availableItem.value?.find { it.categoryId == categoryIdSelected.value }
+            _availableModels.postValue(
+                availableItem?.models ?: emptyList()
+            )
+        }
     }
 
     fun addToCart(model: AvailableModel) {
-        val category = availableCategories.value?.find {
-            it.models.any { availableModel -> availableModel.modelId == model.modelId }
-        } ?: return
-
-        if (model.available == 0 || (model.loanable != null && model.loanable == 0)) {
-            return
-        }
-
-        val updatedModel = model.copy(
-            available = if (model.available > 0) model.available - 1 else model.available,
-            loanable = model.loanable?.let {
-                if (it > 0) it - 1 else it
-            }
-        )
-
-        _availableModels.value = _availableModels.value?.map {
-            if (it.modelId == model.modelId) updatedModel else it
-        }
-
-        val updatedCategories = availableCategories.value?.map { availableCategory ->
-            if (availableCategory.categoryId == category.categoryId) {
-                val updatedModels = availableCategory.models.map {
-                    if (it.modelId == model.modelId) updatedModel else it
-                }
-                availableCategory.copy(models = updatedModels)
-            } else {
-                availableCategory
-            }
-        }
-        _availableCategories.postValue(updatedCategories!!)
-
-        // Thêm vào giỏ hàng
-        val currentCartItems = _cartItems.value?.toMutableList() ?: mutableListOf()
-
-        val existingCartItem = currentCartItems.find { it.model.modelId == model.modelId }
-
-        val categoryLimit = category.loanable ?: Int.MAX_VALUE
-        val totalQuantityInCategory = currentCartItems
-            .filter { it.category.categoryId == category.categoryId }
-            .sumOf { it.quantity }
-
-        if (existingCartItem != null) {
-            // Kiểm tra nếu tổng số lượng trong giỏ hàng chưa vượt quá giới hạn của category
-            if (existingCartItem.quantity < (categoryLimit - totalQuantityInCategory)) {
-                existingCartItem.quantity += 1
+        val cartItem = listCartItem.value?.find { it.modelId == model.modelId }
+        if (cartItem != null) {
+            if (model.available > 0 && cartItem.quantity < model.loanable) {
+                cartItem.quantity += 1
+                model.available -= 1
+                listCartItem.postValue(listCartItem.value)
             }
         } else {
-            if (totalQuantityInCategory < categoryLimit) {
-                val cartItem = CartItem(
-                    model = updatedModel,
-                    category = category,
+            val cart = categoryIdSelected.value?.let {
+                CartItem(
+                    modelId = model.modelId,
+                    modelName = model.modelName,
+                    categoryId = it,
+                    loanable = model.loanable,
+                    available = model.available,
                     quantity = 1
                 )
-                currentCartItems.add(cartItem)
+            }
+            if (cart != null) {
+                updatedListCart.add(cart)
+                listCartItem.postValue(updatedListCart)
+            }
+            if (model.available > 0) {
+                model.available -= 1
             }
         }
-
-        _cartItems.postValue(currentCartItems)
     }
 }

@@ -147,7 +147,14 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
                 viewModel.consumerLogin()
             }
             R.id.btn_using_mail -> {
-
+                imageProcessor?.run { this.stop() }
+                if (cameraProvider != null) {
+                    cameraProvider!!.unbindAll()
+                }
+                val bundle = Bundle().apply {
+                    putString(ConstantUtils.TYPE_OPEN, typeOpen )
+                }
+                navigateTo(R.id.action_recognizeFaceFragment_to_inputEmailFragment2, bundle)
             }
         }
     }
@@ -163,9 +170,10 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
         bindAnalysisUseCase()
     }
 
-    override fun consumerLoginSuccess() {
+    override fun consumerLoginSuccess(email: String?) {
         val bundle = Bundle().apply {
             putString(ConstantUtils.TYPE_OPEN, typeOpen )
+            putString(EMAIL_REGISTER, email)
         }
         navigateTo(R.id.action_recognizeFaceFragment_to_inputOTPFragment2, bundle)
     }
@@ -323,7 +331,6 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
                 it,
                 object : ImageCapture.OnImageSavedCallback {
                     override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-                        val savedUri = Uri.fromFile(photoFile)
                         imageProcessor?.run { this.stop() }
                         if (cameraProvider != null) {
                             cameraProvider!!.unbindAll()
@@ -344,7 +351,6 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
     }
 
     private fun encodeImage(file: File): String {
-        //val imageFile = File(path)
         var fis: FileInputStream? = null
         try {
             fis = FileInputStream(file)

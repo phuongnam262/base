@@ -144,6 +144,7 @@
                             android:layout_height="@dimen/dp_30"
                             android:background="@color/colorWhite"
                             android:scaleType="centerCrop"
+                            android:padding="@dimen/dp_2"
                             android:src="@drawable/power_menu_cart_icon" />
 
                         <TextView

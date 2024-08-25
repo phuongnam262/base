@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_recognizeFaceFragment_to_inputOTPFragment2"
             app:destination="@id/inputOTPFragment2" />
+        <action
+            android:id="@+id/action_recognizeFaceFragment_to_inputEmailFragment2"
+            app:destination="@id/inputEmailFragment2" />
     </fragment>
     <fragment
         android:id="@+id/inputOTPFragment2"
@@ -20,7 +23,9 @@
         tools:layout="@layout/fragment_input_otp" >
         <action
             android:id="@+id/action_inputOTPFragment2_to_categoryFragment"
-            app:destination="@id/categoryFragment" />
+            app:destination="@id/categoryFragment"
+            app:popUpTo="@id/inputOTPFragment2"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/thankFragment2"
@@ -61,6 +66,17 @@
         tools:layout="@layout/fragment_scan_item" >
         <action
             android:id="@+id/action_scanItemFragment_to_thankFragment2"
-            app:destination="@id/thankFragment2" />
+            app:destination="@id/thankFragment2"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/scanItemFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/inputEmailFragment2"
+        android:name="com.lock.smartlocker.ui.inputemail.InputEmailFragment"
+        android:label="fragment_input_email"
+        tools:layout="@layout/fragment_input_email" >
+        <action
+            android:id="@+id/action_inputEmailFragment2_to_inputOTPFragment2"
+            app:destination="@id/inputOTPFragment2" />
     </fragment>
 </navigation>

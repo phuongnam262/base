@@ -1,7 +1,9 @@
 package com.lock.smartlocker.ui.input_serial_number
 
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
@@ -50,6 +52,17 @@ class InputSerialNumberFragment : BaseFragment<FragmentInputSerialNumberBinding,
         mViewDataBinding?.bottomMenu?.rlHome?.setOnClickListener(this)
         mViewDataBinding?.bottomMenu?.btnProcess?.setOnClickListener(this)
         mViewDataBinding?.headerBar?.ivBack?.setOnClickListener(this)
+        mViewDataBinding?.etSerialNumber?.setOnKeyListener(object : View.OnKeyListener {
+            override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
+                if (event?.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+                    // Xử lý dữ liệu đầu vào từ thiết bị quét thẻ
+                    val inputData =  mViewDataBinding?.etSerialNumber?.text.toString()
+                    Toast.makeText(activity, "Scanned data: $inputData", Toast.LENGTH_SHORT).show()
+                    return true
+                }
+                return false
+            }
+        })
     }
 
     private fun initData(){
@@ -66,7 +79,7 @@ class InputSerialNumberFragment : BaseFragment<FragmentInputSerialNumberBinding,
             R.id.btn_process -> {
                 val newSerialNumber = viewModel.serialNumber.value
                 if (isReturnFlow) {
-                    if (viewModel.isItemDetailVisible.value == true && newSerialNumber == viewModel.itemReturnData.value?.serialNumber) {
+                    if (viewModel.isItemDetailVisible.value == true && newSerialNumber?.lowercase() == viewModel.itemReturnData.value?.serialNumber?.lowercase()) {
                         val dialog = CustomConfirmDialog.newInstance(
                             message = getString(R.string.dialog_attention),
                         )
@@ -99,7 +112,7 @@ class InputSerialNumberFragment : BaseFragment<FragmentInputSerialNumberBinding,
             putString(CATEGORY_ID_KEY, categoryId)
             putSerializable(RETURN_ITEM_REQUEST_KEY, viewModel.itemReturnData.value)
         }
-        navigateTo(R.id.action_inputSerialNumberFragment_to_selectFaultyFragment, bundle)
+        navigateTo(R.id.action_inputSerialNumberFragment_to_selectFaultyFragment2, bundle)
     }
 
     private fun navigateToSelectAvailableLockerFragment() {

@@ -4,10 +4,6 @@
 
     <data>
         <variable
-            name="viewmodel"
-            type="com.lock.smartlocker.ui.category.CategoryViewModel" />
-
-        <variable
             name="model"
             type="com.lock.smartlocker.data.models.AvailableModel" />
     </data>
@@ -81,7 +77,6 @@
                     android:fontFamily="@font/segoe_ui_light"
                     android:gravity="bottom"
                     android:text=" | "
-                    android:visibility="@{model.loanable != null}"
                     android:textSize="@dimen/sp_14" />
 
                 <TextView
@@ -90,7 +85,6 @@
                     android:layout_height="match_parent"
                     android:fontFamily="@font/segoe_ui_light"
                     android:gravity="bottom"
-                    android:visibility="@{model.loanable != null}"
                     android:text="@string/loanable"
                     android:textSize="@dimen/sp_14" />
 
@@ -100,7 +94,6 @@
                     android:layout_height="match_parent"
                     android:fontFamily="@font/segoe_ui_light"
                     android:gravity="bottom"
-                    android:visibility="@{model.loanable != null}"
                     android:text="@{String.valueOf(model.loanable)}"
                     android:textSize="@dimen/sp_14" />
             </LinearLayout>

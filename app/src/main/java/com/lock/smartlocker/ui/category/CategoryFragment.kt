@@ -4,13 +4,16 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
+import com.lock.smartlocker.data.models.CartItem
 import com.lock.smartlocker.data.preference.PreferenceHelper
 import com.lock.smartlocker.databinding.FragmentCategoryBinding
 import com.lock.smartlocker.ui.base.BaseFragment
 import com.lock.smartlocker.ui.category.adapter.CategoryItem
 import com.lock.smartlocker.ui.category.adapter.ModelItem
+import com.lock.smartlocker.ui.returns.ReturnActivity
 import com.lock.smartlocker.util.ConstantUtils
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
@@ -21,10 +24,6 @@ import org.kodein.di.generic.instance
 class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel>(),
     KodeinAware,
     View.OnClickListener {
-
-    companion object {
-        const val CART_ITEMS = "CART_ITEMS"
-    }
 
     override val kodein by kodein()
     private val factory: CategoryViewModelFactory by instance()
@@ -44,6 +43,10 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel
         initData()
     }
 
+    companion object{
+        var listCartItem = ArrayList<CartItem>()
+    }
+
     @SuppressLint("SetTextI18n")
     private fun initView(){
         mViewDataBinding?.bottomMenu?.rlHome?.setOnClickListener(this)
@@ -54,6 +57,8 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel
 
     @SuppressLint("NotifyDataSetChanged")
     private fun initData(){
+        viewModel.listCartItem.value = listCartItem
+
         if (arguments?.getString(ConstantUtils.TYPE_OPEN) != null) {
             if (arguments?.getString(ConstantUtils.TYPE_OPEN) == ConstantUtils.TYPE_LOAN) {
                 viewModel.loadAvailableItem(1)
@@ -61,6 +66,7 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel
                 viewModel.loadAvailableItem(2)
             }
         }
+
         mViewDataBinding?.rvCategories?.adapter = categoryAdapter
         mViewDataBinding?.rvModels?.adapter = modelAdapter
 
@@ -74,8 +80,25 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel
             modelAdapter.update(models.map { ModelItem(it, viewModel) })
         }
 
-        viewModel.selectedCategory.observe(viewLifecycleOwner) {
+        viewModel.categoryIdSelected.observe(viewLifecycleOwner) {
             categoryAdapter.notifyDataSetChanged()
+        }
+
+        viewModel.listCartItem.observe(viewLifecycleOwner) {
+            modelAdapter.notifyDataSetChanged()
+            listCartItem = it
+            if (it.size > 0){
+                mViewDataBinding?.bottomMenu?.rlCart?.isEnabled = true
+                mViewDataBinding?.bottomMenu?.rlCart?.alpha = 1f
+            }else{
+                mViewDataBinding?.bottomMenu?.rlCart?.isEnabled = false
+                mViewDataBinding?.bottomMenu?.rlCart?.alpha = 0.3f
+            }
+        }
+
+
+        viewModel.availableItem.observe(viewLifecycleOwner) {
+            viewModel.updateAvailableModels()
         }
     }
 
@@ -84,14 +107,10 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel
             R.id.rl_home -> activity?.finish()
             R.id.rl_item -> {}
             R.id.rl_cart -> {
-                val cartItemsList = viewModel.cartItems.value
-                if (cartItemsList != null) {
-                    val bundle = Bundle().apply {
-                        putParcelableArrayList(CART_ITEMS, ArrayList(cartItemsList))
-                        putString(ConstantUtils.TYPE_OPEN, arguments?.getString(ConstantUtils.TYPE_OPEN))
-                    }
-                    navigateTo(R.id.action_categoryFragment_to_cartFragment, bundle)
+                val bundle = Bundle().apply {
+                    putString(ConstantUtils.TYPE_OPEN, arguments?.getString(ConstantUtils.TYPE_OPEN))
                 }
+                navigateTo(R.id.action_categoryFragment_to_cartFragment, bundle)
             }
         }
     }

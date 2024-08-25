@@ -16,7 +16,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:backgroundImage="@{viewmodel.imageBackgroundUrl}">
+        android:backgroundImage="@{viewmodel.imageBackgroundUrl}"
+        android:clickable="true"
+        android:focusable="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
@@ -100,7 +102,7 @@
                 android:text="@string/please_select_category"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/sp_16"
-                android:visibility="@{viewmodel.selectedCategory.isEmpty()}"
+                android:visibility="@{viewmodel.availableModels.size() == 0}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvModelLabel" />
@@ -110,11 +112,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
-                android:fontFamily="@font/segoe_ui_semibold"
+                android:fontFamily="@font/segoe_ui_regular"
                 android:text="@string/select_items"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/sp_16"
-                android:visibility="@{viewmodel.selectedCategory.isEmpty() ? View.GONE : View.VISIBLE}"
+                android:visibility="@{viewmodel.availableModels.size() == 0 ? View.GONE : View.VISIBLE}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvModelLabel"
@@ -142,7 +144,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:numberCart="@{String.valueOf(viewmodel.cartItems.size())}"
+            app:numberCart="@{String.valueOf(viewmodel.listCartItem.size())}"
             app:ownerText="@{viewmodel.ownerText}"
             app:timerHour="@{viewmodel.timerHour}" />
     </androidx.constraintlayout.widget.ConstraintLayout>

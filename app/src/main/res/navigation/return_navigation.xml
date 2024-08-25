@@ -5,43 +5,50 @@
     android:id="@+id/return_navigation"
     app:startDestination="@id/inputSerialNumberFragment">
     <fragment
-        android:id="@+id/inputSerialNumberFragment"
-        android:name="com.lock.smartlocker.ui.input_serial_number.InputSerialNumberFragment"
-        android:label="InputSerialNumberFragment" >
-        <action
-            android:id="@+id/action_inputSerialNumberFragment_to_selectFaultyFragment"
-            app:destination="@id/selectFaultyFragment" />
-        <action
-            android:id="@+id/action_inputSerialNumberFragment_to_selectAvailableLockerFragment"
-            app:destination="@id/selectAvailableLockerFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/selectFaultyFragment"
-        android:name="com.lock.smartlocker.ui.select_faulty.SelectFaultyFragment"
-        android:label="SelectFaultyFragment" >
-        <action
-            android:id="@+id/action_selectFaultyFragment_to_selectAvailableLockerFragment"
-            app:destination="@id/selectAvailableLockerFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/selectAvailableLockerFragment"
         android:name="com.lock.smartlocker.ui.select_available_locker.SelectAvailableLockerFragment"
         android:label="fragment_select_available_locker"
         tools:layout="@layout/fragment_select_available_locker" >
         <action
             android:id="@+id/action_selectAvailableLockerFragment_to_depositItemFragment"
-            app:destination="@id/depositItemFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/depositItemFragment"
-        android:name="com.lock.smartlocker.ui.deposit_item.DepositItemFragment"
-        android:label="DepositItemFragment" >
-        <action
-            android:id="@+id/action_depositItemFragment_to_thankFragment"
-            app:destination="@id/thankFragment" />
+            app:destination="@id/depositItemFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/thankFragment"
         android:name="com.lock.smartlocker.ui.thank.ThankFragment"
-        android:label="ThankFragment" />
+        android:label="fragment_thank"
+        tools:layout="@layout/fragment_thank" />
+    <fragment
+        android:id="@+id/depositItemFragment"
+        android:name="com.lock.smartlocker.ui.deposit_item.DepositItemFragment"
+        android:label="fragment_deposit_item"
+        tools:layout="@layout/fragment_deposit_item" >
+        <action
+            android:id="@+id/action_depositItemFragment_to_thankFragment"
+            app:destination="@id/thankFragment"
+            app:popUpTo="@id/depositItemFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/selectFaultyFragment"
+        android:name="com.lock.smartlocker.ui.select_faulty.SelectFaultyFragment"
+        android:label="fragment_select_faulty"
+        tools:layout="@layout/fragment_select_faulty" >
+        <action
+            android:id="@+id/action_selectFaultyFragment_to_selectAvailableLockerFragment"
+            app:destination="@id/selectAvailableLockerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/inputSerialNumberFragment"
+        android:name="com.lock.smartlocker.ui.input_serial_number.InputSerialNumberFragment"
+        android:label="fragment_input_serial_number"
+        tools:layout="@layout/fragment_input_serial_number" >
+        <action
+            android:id="@+id/action_inputSerialNumberFragment_to_selectFaultyFragment2"
+            app:destination="@id/selectFaultyFragment" />
+        <action
+            android:id="@+id/action_inputSerialNumberFragment_to_selectAvailableLockerFragment"
+            app:destination="@id/selectAvailableLockerFragment" />
+    </fragment>
 </navigation>

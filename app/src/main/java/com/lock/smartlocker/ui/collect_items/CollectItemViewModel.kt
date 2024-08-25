@@ -39,7 +39,7 @@ class CollectItemViewModel(
                                 lockerInfo.doorStatus = matchingStatus.doorStatus
                             }
                         }
-                        collectItemListener?.sendCommandOpenLockerSuccess()
+                        uiScope.launch { collectItemListener?.sendCommandOpenLockerSuccess() }
                     }
                 } else handleError(status)
             }
@@ -57,16 +57,13 @@ class CollectItemViewModel(
             hardwareControllerRepository.openMassLocker(request).apply {
                 if (isSuccessful) {
                     if (data != null) {
-                        val updatedLockerInfoList = listLockerInfo.value?.map { lockerInfo ->
+                        listLockerInfo.value?.map { lockerInfo ->
                             val matchingStatus = data.locker_list.find { it.lockerId == lockerInfo.lockerId }
                             if (matchingStatus != null) {
-                                lockerInfo.copy(doorStatus = matchingStatus.doorStatus)
-                            } else {
-                                lockerInfo
+                                lockerInfo.doorStatus = matchingStatus.doorStatus
                             }
                         }
-                        listLockerInfo.postValue(updatedLockerInfoList)
-                        collectItemListener?.sendCommandOpenLockerSuccess()
+                        uiScope.launch { collectItemListener?.sendCommandOpenLockerSuccess() }
                     }
                 } else handleError(status)
             }
