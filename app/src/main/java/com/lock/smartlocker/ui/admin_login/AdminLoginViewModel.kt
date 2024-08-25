@@ -28,12 +28,10 @@ class AdminLoginViewModel(
             mLoading.postValue(true)
             if (username.value.isNullOrEmpty()) {
                 mStatusText.postValue(R.string.error_username_empty)
-                isErrorText.postValue(true)
                 return@launch
             }
             if (password.value.isNullOrEmpty()) {
                 mStatusText.postValue(R.string.error_password_empty)
-                isErrorText.postValue(true)
                 return@launch
             }
             val param = AminLoginRequest()

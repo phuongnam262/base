@@ -7,7 +7,6 @@ import android.widget.ArrayAdapter
 import androidx.lifecycle.ViewModelProvider
 import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
-import com.lock.smartlocker.data.entities.request.ReturnItemRequest
 import com.lock.smartlocker.data.models.ItemReturn
 import com.lock.smartlocker.databinding.FragmentSelectFaultyBinding
 import com.lock.smartlocker.ui.base.BaseFragment

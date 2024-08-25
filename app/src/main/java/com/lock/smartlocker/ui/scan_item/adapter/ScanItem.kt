@@ -18,9 +18,18 @@ class ScanItem(
     override fun bind(viewBinding: ItemScanBinding, position: Int) {
         viewBinding.lockerInfo = lockerInfo
         when (lockerInfo.scanValue) {
-            0 -> lockerInfo.scanStatus = context.getString(R.string.status_unscanned)
-            1 -> lockerInfo.scanStatus = context.getString(R.string.status_scanned)
-            2 -> lockerInfo.scanStatus = context.getString(R.string.status_not_found)
+            0 -> {
+                lockerInfo.scanStatus = context.getString(R.string.status_unscanned)
+                viewBinding.tvScanStatus.setTextColor(context.getColorStateList(R.color.colorBlack))
+            }
+            1 -> {
+                lockerInfo.scanStatus = context.getString(R.string.status_scanned)
+                viewBinding.tvScanStatus.setTextColor(context.getColorStateList(R.color.green009C2C))
+            }
+            2 -> {
+                lockerInfo.scanStatus = context.getString(R.string.status_not_found)
+                viewBinding.tvScanStatus.setTextColor(context.getColorStateList(R.color.colorOrange))
+            }
         }
         viewBinding.btnNotFound.setOnClickListener {
             lockerInfo.scanValue = 2

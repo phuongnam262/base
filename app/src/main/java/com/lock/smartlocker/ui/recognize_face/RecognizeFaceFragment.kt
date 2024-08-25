@@ -121,7 +121,7 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
         imageProcessor?.run { this.stop() }
     }
 
-    public override fun onDestroy() {
+    override fun onDestroy() {
         super.onDestroy()
         imageProcessor?.run { this.stop() }
         FaceDetectorProcessor.isSuccess = false
@@ -162,6 +162,8 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
     override fun handleSuccess(personCode: String, email: String) {
         mViewDataBinding?.ivFrame?.setBackgroundResource(R.drawable.bg_face_success)
         mViewDataBinding?.bottomMenu?.tvStatus?.text = getString(R.string.welcome_back, email)
+        activity?.resources?.getColor(R.color.colorGreen)
+            ?.let { mViewDataBinding?.bottomMenu?.tvStatus?.setTextColor(it) }
         mViewDataBinding?.bottomMenu?.llButton?.weightSum = 2.0f
     }
 

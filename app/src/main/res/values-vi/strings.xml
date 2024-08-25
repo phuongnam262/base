@@ -59,6 +59,7 @@
     <string name="enter_otp_verify">Nhập OTP được gửi đến thiết bị của bạn để xác minh tài khoản..</string>
     <string name="enter_otp">Nhập OTP::</string>
     <string name="resend_otp_button">Gửi lại OTP</string>
+    <string name="error_invalid_otp">Mã OTP không hợp lệ. Vui lòng thử lại hoặc yêu cầu mã OTP mới</string>
 
     <!-- Register face -->
     <string name="register_face">Đăng Ký Khuôn Mặt Của Bạn</string>
@@ -84,10 +85,6 @@
     <string name="scan_or_enter_serial_number">Quét hoặc Nhập Số sê-ri</string>
     <string name="enter_serial_number_verify">Vui lòng quét số sê-ri bằng đầu đọc mã vạch bên dưới hoặc nhập thủ công..</string>
     <string name="enter_serial_number">Nhập số sê-ri</string>
-    <string name="select_a_faulty">Chọn một lý do lỗi</string>
-    <string name="select_faulty_reason_info">Chọn lý do lỗi sau đây giúp người quản trị hiểu được hiện trạng của các đồ dùng.\nNếu không có lý do phổ biến nào phù hợp với tình huống của bạn, vui lòng nhập lý do của riêng bạn.</string>
-    <string name="select_available_locker_info">Chọn tủ khóa để cất đồ dùng của bạn. \nSau khi chọn, cửa tủ khóa sẽ tự động mở.</string>
-    <string name="select_an_available_locker">Chọn Tủ Khóa Khả Dụng</string>
     <string name="deposit_item">Gửi Đồ Dùng</string>
     <string name="deposit_item_info">Vui lòng đặt đồ dùng vào tủ khóa đang mở và đóng cửa.\nTủ khóa sẽ tự động kích hoạt xác nhận sau 10 giây hoặc khi bạn nhấn nút xác nhận.</string>
     <string name="door_has_not_been_closed">Cửa chưa được đóng. Nhấn XÁC NHẬN để tiếp tục..</string>
@@ -96,6 +93,20 @@
     <string name="error_input_serial_empty">Vui lòng quét hoặc nhập số sê-ri của đồ dùng</string>
     <string name="serial_number_is_not_available">Số sê-ri này không còn khả dụng nữa</string>
     <string name="error_logic">Bị sai logic</string>
+    <string name="error_unable_locker">Bạn không thể trả hàng tại trạm tủ khóa này</string>
+
+    <!-- Faulty reason   -->
+    <string name="select_a_faulty">Chọn một lý do lỗi</string>
+    <string name="select_faulty_reason_info">Chọn lý do lỗi sau đây giúp người quản trị hiểu được hiện trạng của các đồ dùng.\nNếu không có lý do phổ biến nào phù hợp với tình huống của bạn, vui lòng nhập lý do của riêng bạn.</string>
+    <string name="no_faulty">Không có lý do lỗi</string>
+
+    <!-- Available Locker  -->
+    <string name="select_available_locker_info">Chọn tủ khóa để cất đồ dùng của bạn. \nSau khi chọn, cửa tủ khóa sẽ tự động mở.</string>
+    <string name="select_an_available_locker">Chọn Tủ Khóa Khả Dụng</string>
+    <string name="locker_size">Kích thước:</string>
+    <string name="locker_s">Nhỏ</string>
+    <string name="locker_m">Vừa</string>
+    <string name="locker_l">Lớn</string>
 
     <!-- Deposit item   -->
     <string name="deposit_topup_success">Thêm đồ dùng thành công!\nBạn còn đồ dùng nào cần thêm không?</string>
@@ -114,10 +125,13 @@
     <string name="add_to_cart">Thêm vào giỏ</string>
     <string name="available">"Có sẵn: "</string>
     <string name="loanable">"Được phép lấy: "</string>
+
+    <!-- Cart -->
     <string name="please_review_cart_info">Vui lòng lấy đồ dùng của bạn từ tủ khóa đã mở.\nNếu tủ khóa không mở, hãy nhấn "MỞ LẠI" để thử lại.\nĐóng cửa sau khi hoàn tất lấy đồ.</string>
     <string name="cart">Cart</string>
     <string name="cart_item_quantity_format">x%d</string>
-    <string name="maximun_item_quantity">Giới hạn có sẵn hoặc có thể lấy</string>
+    <string name="maximum_item_quantity">Giới hạn có sẵn hoặc có thể lấy</string>
+    <string name="error_create_transaction_failed">Đã xảy ra lỗi. Vui lòng thử lại hoặc liên hệ với bộ phận hỗ trợ</string>
 
     <!-- Collect items -->
     <string name="collect_items">Lấy Đồ Dùng</string>
@@ -136,6 +150,9 @@
     <string name="status_unscanned">CHƯA QUÉT</string>
     <string name="status_not_found">Không thấy</string>
     <string name="door_faulty">CỬA LỖI</string>
+
+    <!-- Thanks -->
+    <string name="thank_using_mail">Cảm ơn đã sử dụng dịch vụ của chúng tôi!</string>
 
     <!-- Strings for camera settings. -->
     <string name="pref_category_key_camera" translatable="false">pckc</string>

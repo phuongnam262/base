@@ -93,21 +93,42 @@ class CategoryViewModel(
     fun addToCart(model: AvailableModel) {
         val cartItem = listCartItem.value?.find { it.modelId == model.modelId }
         if (cartItem != null) {
-            if (model.available > 0 && cartItem.quantity < model.loanable) {
-                cartItem.quantity += 1
-                model.available -= 1
-                listCartItem.postValue(listCartItem.value)
+            if(model.loanable != null){
+                if (model.available > 0 && cartItem.quantity < model.loanable.toInt()) {
+                    cartItem.quantity += 1
+                    model.available -= 1
+                    listCartItem.postValue(listCartItem.value)
+                }
+            }else{
+                if (model.available > 0) {
+                    cartItem.quantity += 1
+                    model.available -= 1
+                    listCartItem.postValue(listCartItem.value)
+                }
             }
         } else {
             val cart = categoryIdSelected.value?.let {
-                CartItem(
-                    modelId = model.modelId,
-                    modelName = model.modelName,
-                    categoryId = it,
-                    loanable = model.loanable,
-                    available = model.available,
-                    quantity = 1
-                )
+                if(model.loanable != null) {
+                    model.loanable?.toInt()?.let { it1 ->
+                        CartItem(
+                            modelId = model.modelId,
+                            modelName = model.modelName,
+                            categoryId = it,
+                            loanable = it1,
+                            available = model.available,
+                            quantity = 1
+                        )
+                    }
+                }else{
+                    CartItem(
+                        modelId = model.modelId,
+                        modelName = model.modelName,
+                        categoryId = it,
+                        loanable = 9999,
+                        available = model.available,
+                        quantity = 1
+                    )
+                }
             }
             if (cart != null) {
                 updatedListCart.add(cart)

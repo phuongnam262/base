@@ -89,7 +89,7 @@
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/tv_scan_status"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:fontFamily="@font/segoe_ui_semibold"

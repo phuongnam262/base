@@ -7,6 +7,7 @@ import com.lock.smartlocker.data.repositories.LoanRepository
 class ScanItemViewModelFactory(
     private val loanRepository: LoanRepository
 ) : ViewModelProvider.NewInstanceFactory() {
+    @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return ScanItemViewModel(loanRepository) as T
     }

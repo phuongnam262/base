@@ -15,7 +15,6 @@ import com.lock.smartlocker.util.ConstantUtils
 import kotlinx.coroutines.launch
 
 class SelectAvailableLockerViewModel(
-    private val returnRepository: ReturnRepository,
     private val hardwareControllerRepository: HardwareControllerRepository
 ) : BaseViewModel() {
     var selectAvailableListener: SelectAvailableLockerListener? = null
@@ -39,16 +38,10 @@ class SelectAvailableLockerViewModel(
             if (jsonSetting.isNotEmpty()) {
                 val settingResponseType = object : TypeToken<GetSettingResponse>() {}.type
                 val settingsResponse: GetSettingResponse = Gson().fromJson(jsonSetting, settingResponseType)
-
                 val allLockers = settingsResponse.lockers
-
-                // Lọc các locker có sẵn từ danh sách tất cả lockers
                 val availableLockers = allLockers.filter { it.lockerId in availableLockerIds }
-
                 _lockers.postValue(availableLockers)
-
             } else {
-                // Xử lý trường hợp không có cài đặt
                 _lockers.postValue(emptyList())
             }
         }

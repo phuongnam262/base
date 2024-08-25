@@ -57,7 +57,6 @@ class RegisterFaceViewModel(
                                 addPerson(strBase64)
                             } else {
                                 mStatusText.postValue(R.string.face_exits)
-                                isErrorText.postValue(true)
                                 registerFaceListener?.faceExited()
                             }
                         } else {
@@ -67,7 +66,6 @@ class RegisterFaceViewModel(
                     } else {
                         statusText.postValue(getSearchResponse.message)
                         showStatusText.postValue(true)
-                        isErrorText.postValue(true)
                     }
                 }
             } catch (e: ApiException) {

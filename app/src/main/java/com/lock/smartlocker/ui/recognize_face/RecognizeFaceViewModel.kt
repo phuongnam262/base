@@ -57,7 +57,6 @@ class RecognizeFaceViewModel(
                         if (getSearchResponse.result != null) {
                             if (getSearchResponse.result.similar < 0.7) {
                                 mStatusText.postValue(R.string.error_no_face_detect)
-                                isErrorText.postValue(true)
                                 recognizeFaceListener?.faceExited()
                             } else {
                                 getSearchResponse.result.personCode?.let { it1 ->
@@ -66,14 +65,12 @@ class RecognizeFaceViewModel(
                             }
                         } else {
                             mStatusText.postValue(R.string.error_no_face_detect)
-                            isErrorText.postValue(true)
                             recognizeFaceListener?.faceExited()
                         }
                         return@launch
                     } else {
                         statusText.postValue(getSearchResponse.message)
                         showStatusText.postValue(true)
-                        isErrorText.postValue(true)
                     }
                 }
             } catch (e: ApiException) {
@@ -101,7 +98,6 @@ class RecognizeFaceViewModel(
                 getUser.email?.let {
                     PreferenceHelper.writeString(ConstantUtils.ADMIN_NAME, it)
                     email = it
-                    isErrorText.postValue(false)
                     showButtonUsingMail.postValue(false)
                     showStatusText.postValue(true)
                     getUser.personCode?.let { it1 -> recognizeFaceListener?.handleSuccess(it1, it) }

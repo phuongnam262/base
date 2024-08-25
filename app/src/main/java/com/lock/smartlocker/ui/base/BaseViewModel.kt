@@ -34,11 +34,9 @@ abstract class BaseViewModel() : ViewModel() {
     var ownerText = PreferenceHelper.getString(ConstantUtils.OWNER_TEXT, "")
     var titlePage = MutableLiveData<String>()
     var statusText = MutableLiveData<String>()
-    var numberCart = MutableLiveData<String>()
     var showButtonProcess = MutableLiveData<Boolean>(true)
     var showButtonUsingMail = MutableLiveData<Boolean>(true)
     var showStatusText = MutableLiveData<Boolean>()
-    var isErrorText = MutableLiveData<Boolean>()
     var timerHour = MutableLiveData<String>()
     var imageBackgroundUrl = PreferenceHelper.getString(
         ConstantUtils.BACKGROUND,
@@ -92,41 +90,46 @@ abstract class BaseViewModel() : ViewModel() {
 
             ConstantUtils.LOGIN_EMAIL_NOT_EXISTED -> {
                 mStatusText.postValue(R.string.login_error_1001)
-                isErrorText.postValue(true)
             }
 
             ConstantUtils.LOGIN_WRONG_PASSWORD ->  {
                 mStatusText.postValue(R.string.login_error_1002)
-                isErrorText.postValue(true)
             }
 
             ConstantUtils.EMAIL_NOT_CORRECT_FORMAT -> {
                 mStatusText.postValue(R.string.email_not_correct_format)
-                isErrorText.postValue(true)
             }
 
             ConstantUtils.ADMIN_WRONG_USERNAME_PASS -> {
                 mStatusText.postValue(R.string.error_username_password)
-                isErrorText.postValue(true)
             }
 
             ConstantUtils.ADMIN_ACCOUNT_LOCKED -> {
                 mStatusText.postValue(R.string.error_account_locked)
-                isErrorText.postValue(true)
             }
 
             ConstantUtils.DOOR_HAS_NOT_BEEN_CLOSE -> {
                 mStatusText.postValue(R.string.door_has_not_been_closed)
-                isErrorText.postValue(true)
             }
 
             ConstantUtils.SERIAL_NUMBER_INVALID, ConstantUtils.SERIAL_NUMBER_INVALID_1 -> {
                 mStatusText.postValue(R.string.error_invalid_serial)
-                isErrorText.postValue(true)
             }
 
             ConstantUtils.ERROR_LOGIC -> {
                 mMessage.postValue(R.string.error_logic)
+            }
+
+            ConstantUtils.INVALID_OTP -> {
+                mMessage.postValue(R.string.error_invalid_otp)
+            }
+
+            ConstantUtils.CREATE_TRANSACTION_FAILED -> {
+                mMessage.postValue(R.string.error_create_transaction_failed)
+            }
+
+            ConstantUtils.ERROR_UNABLE_LOCKER -> {
+                mMessage.postValue(R.string.error_unable_locker)
             }
 
             else -> mMessage.postValue(R.string.error_all)

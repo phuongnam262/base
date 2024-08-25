@@ -26,8 +26,8 @@
             android:id="@+id/linearLayout3"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
             android:gravity="center_vertical"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:fontFamily="@font/segoe_ui_regular"
-                android:text="Size: "
+                android:text="@string/locker_size"
                 android:textColor="@color/colorBlack"
                 android:textSize="@dimen/sp_16" />
 
@@ -84,6 +84,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/dp_5"
                 android:fontFamily="@font/segoe_ui_semibold"
                 android:text="@{model.lockerSizeKey}"
                 android:textColor="@color/colorBlack"

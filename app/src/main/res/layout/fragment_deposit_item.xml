@@ -60,7 +60,6 @@
             app:statusText="@{viewmodel.statusText}"
             app:ownerText="@{viewmodel.ownerText}"
             app:showStatusText="@{viewmodel.showStatusText}"
-            app:isErrorText="@{viewmodel.isErrorText}"
             app:timerHour="@{viewmodel.timerHour}"
             app:showProcessButton="@{viewmodel.showButtonProcess}"
             app:layout_constraintBottom_toBottomOf="parent"

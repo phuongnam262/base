@@ -59,6 +59,7 @@
     <string name="enter_otp_verify">Enter the OTP sent to your device to verify your account.</string>
     <string name="enter_otp">Enter OTP:</string>
     <string name="resend_otp_button">Resend OTP</string>
+    <string name="error_invalid_otp">Invalid OTP. Please try again or request a new OTP</string>
 
     <!-- Register face -->
     <string name="register_face">Register Your Face</string>
@@ -84,10 +85,6 @@
     <string name="scan_or_enter_serial_number">Scan or Enter Serial Number</string>
     <string name="enter_serial_number_verify">Please scan the serial number using the barcode reader below or enter it manually.</string>
     <string name="enter_serial_number">Enter Serial Number</string>
-    <string name="select_a_faulty">Select A Faulty Reason</string>
-    <string name="select_faulty_reason_info">The faulty reason helps the administrator understand the current state of the items.\nIf none of the common reasons match your situation, please enter your own.</string>
-    <string name="select_available_locker_info">Choose a locker to store your items. \nOnce selected, the locker door will automatically open. </string>
-    <string name="select_an_available_locker">Select An Available Locker</string>
     <string name="deposit_item">Deposit Item</string>
     <string name="deposit_item_info">Please deposit the item into the opening locker and close the door.\nLocker will auto-trigger confirmation after 10 seconds or when you tap confirm button.</string>
     <string name="door_has_not_been_closed">Door has not been closed. Tap CONFIRM to continue.</string>
@@ -96,6 +93,20 @@
     <string name="error_input_serial_empty">Please scan or enter item serial number</string>
     <string name="serial_number_is_not_available">This Serial number is no longer available</string>
     <string name="error_logic">Invalid status logic</string>
+    <string name="error_unable_locker">You are unable to return the item at this locker station</string>
+
+    <!-- Faulty reason   -->
+    <string name="select_a_faulty">Select A Faulty Reason</string>
+    <string name="select_faulty_reason_info">The faulty reason helps the administrator understand the current state of the items.\nIf none of the common reasons match your situation, please enter your own.</string>
+    <string name="no_faulty">No faulty available</string>
+
+    <!-- Available Locker  -->
+    <string name="select_available_locker_info">Choose a locker to store your items. \nOnce selected, the locker door will automatically open. </string>
+    <string name="select_an_available_locker">Select An Available Locker</string>
+    <string name="locker_size">Size :</string>
+    <string name="locker_s">Small</string>
+    <string name="locker_m">Medium</string>
+    <string name="locker_l">Lager</string>
 
     <!-- Deposit item   -->
     <string name="deposit_topup_success">Deposit successful!\nDo you have more items to top-up?</string>
@@ -114,10 +125,13 @@
     <string name="add_to_cart">Add To Cart</string>
     <string name="available">"Available: "</string>
     <string name="loanable">"Loanable: "</string>
+
+    <!-- Cart -->
     <string name="please_review_cart_info">Please review them. When ready, press "PROCEED" to collect your items. The locker will automatically open at that time</string>
     <string name="cart">Cart</string>
     <string name="cart_item_quantity_format">x%d</string>
-    <string name="maximun_item_quantity">Maximum available or loanable</string>
+    <string name="maximum_item_quantity">Maximum available or loanable</string>
+    <string name="error_create_transaction_failed">Somethings went wrong. Please try again or contact support</string>
 
     <!-- Collect items -->
     <string name="collect_items">Collect items</string>
@@ -136,6 +150,9 @@
     <string name="status_unscanned">UNSCANNED</string>
     <string name="status_not_found">NOT FOUND</string>
     <string name="door_faulty">DOOR FAULTY</string>
+
+    <!-- Thanks -->
+    <string name="thank_using_mail">Thank you for using our service!</string>
 
     <!-- Strings for camera settings. -->
     <string name="pref_category_key_camera" translatable="false">pckc</string>

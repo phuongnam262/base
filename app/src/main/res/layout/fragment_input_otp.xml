@@ -13,6 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorWhite"
         android:backgroundImage="@{viewmodel.imageBackgroundUrl}"
         android:clickable="true"
         android:focusable="true">
@@ -85,7 +86,6 @@
             app:statusText="@{viewmodel.statusText}"
             app:ownerText="@{viewmodel.ownerText}"
             app:showStatusText="@{viewmodel.showStatusText}"
-            app:isErrorText="@{viewmodel.isErrorText}"
             app:timerHour="@{viewmodel.timerHour}"
             app:showProcessButton="@{viewmodel.showButtonProcess}"/>
     </androidx.constraintlayout.widget.ConstraintLayout>

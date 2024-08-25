@@ -154,7 +154,7 @@
                             android:layout_below="@+id/iv_cart"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="@dimen/dp_7"
-                            android:text="@{numberCart}"
+                            android:text='@{"(" + numberCart + ")"}'
                             android:textColor="@color/text_sub_color"
                             android:textSize="@dimen/sp_11" />
                     </RelativeLayout>

@@ -21,7 +21,6 @@ class InputEmailViewModel(
         ioScope.launch {
             if (email.value.isNullOrEmpty()) {
                 mStatusText.postValue(R.string.error_email_empty)
-                isErrorText.postValue(true)
                 return@launch
             }else{
                 showStatusText.postValue(false)

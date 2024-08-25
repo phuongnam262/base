@@ -99,7 +99,7 @@ class LockerApplication : Application(), KodeinAware {
         bind() from provider { ReturnViewModelFactory(instance()) }
         bind() from provider { InputSerialNumberViewModelFactory(instance()) }
         bind() from provider { SelectFaultyViewModelFactory() }
-        bind() from provider { SelectAvailableLockerViewModelFactory(instance(), instance()) }
+        bind() from provider { SelectAvailableLockerViewModelFactory(instance()) }
         bind() from provider { DepositItemViewModelFactory(instance(), instance()) }
         bind() from provider { ThankViewModelFactory() }
         bind() from provider { CategoryViewModelFactory(instance()) }

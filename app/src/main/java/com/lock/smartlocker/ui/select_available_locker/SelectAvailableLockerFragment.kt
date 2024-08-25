@@ -6,7 +6,6 @@ import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
-import com.lock.smartlocker.data.entities.request.ReturnItemRequest
 import com.lock.smartlocker.data.models.ItemReturn
 import com.lock.smartlocker.databinding.FragmentSelectAvailableLockerBinding
 import com.lock.smartlocker.ui.base.BaseFragment
@@ -62,7 +61,10 @@ class SelectAvailableLockerFragment : BaseFragment<FragmentSelectAvailableLocker
 
         viewModel.loadListAvailableLockers()
         viewModel.lockers.observe(viewLifecycleOwner) { lockers ->
-            availableLockerAdapter.update(lockers.map { AvailableLockerItem(it, viewModel) })
+            availableLockerAdapter.update(lockers.map { activity?.let { it1 ->
+                AvailableLockerItem(
+                    it1, it, viewModel)
+            } })
         }
         viewModel.selectedLocker.observe(viewLifecycleOwner) {
             availableLockerAdapter.notifyDataSetChanged() // Cập nhật adapter khi locker được chọn thay đổi

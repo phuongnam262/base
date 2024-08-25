@@ -15,10 +15,6 @@
             type="Boolean" />
 
         <variable
-            name="isErrorText"
-            type="Boolean" />
-
-        <variable
             name="timerHour"
             type="String" />
 
@@ -56,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{statusText}"
-                android:textColor="@{isErrorText ? @color/colorRed : @color/colorGreen}"
+                android:textColor="@color/colorRed"
                 android:textSize="@dimen/sp_12"
                 android:visibility="@{showStatusText ? View.VISIBLE : View.GONE}"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -28,7 +28,7 @@ class CartViewModel(
             cartItem.quantity += 1
             listCartItem.postValue(listCartItem.value)
         }else{
-            mMessage.postValue(R.string.maximun_item_quantity)
+            mMessage.postValue(R.string.maximum_item_quantity)
         }
     }
 

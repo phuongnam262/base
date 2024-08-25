@@ -48,14 +48,13 @@
             app:statusText="@{viewmodel.statusText}"
             app:ownerText="@{viewmodel.ownerText}"
             app:showStatusText="@{viewmodel.showStatusText}"
-            app:isErrorText="@{viewmodel.isErrorText}"
             app:timerHour="@{viewmodel.timerHour}" />
 
         <TextView
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Thank you for using our service!"
+            android:text="@string/thank_using_mail"
             app:layout_constraintEnd_toEndOf="parent"
             android:fontFamily="@font/segoe_ui_bold"
             android:textColor="@color/text_color"

@@ -80,7 +80,6 @@
         <include
             android:id="@+id/bottom_menu"
             layout="@layout/bottom_menu_1"
-            app:isErrorText="@{viewmodel.isErrorText}"
             app:ownerText="@{viewmodel.ownerText}"
             app:showProcessButton="@{viewmodel.showButtonProcess}"
             app:showStatusText="@{viewmodel.showStatusText}"

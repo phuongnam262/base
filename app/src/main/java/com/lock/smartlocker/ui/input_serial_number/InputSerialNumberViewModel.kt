@@ -28,7 +28,6 @@ class InputSerialNumberViewModel(
         ioScope.launch {
             if (serialNumber.value.isNullOrEmpty()) {
                 mStatusText.postValue(R.string.error_input_serial_empty)
-                isErrorText.postValue(true)
                 return@launch
             }
             mLoading.postValue(true)
@@ -56,7 +55,6 @@ class InputSerialNumberViewModel(
         ioScope.launch {
             if (serialNumber.value.isNullOrEmpty()) {
                 mStatusText.postValue(R.string.error_input_serial_empty)
-                isErrorText.postValue(true)
                 return@launch
             }
             mLoading.postValue(true)

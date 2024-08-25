@@ -7,7 +7,7 @@ data class Locker(
     @SerializedName("name") val name: String,
     @SerializedName("hardware_address") val hardwareAddress: Int,
     @SerializedName("size_id") val sizeId: Int,
-    @SerializedName("locker_size_key") val lockerSizeKey: String,
+    @SerializedName("locker_size_key") var lockerSizeKey: String,
     @SerializedName("position") val position: Int,
     @SerializedName("width") val width: Double,
     @SerializedName("height") val height: Double,

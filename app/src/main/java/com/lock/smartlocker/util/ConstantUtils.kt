@@ -40,14 +40,19 @@ class ConstantUtils {
         //Error code
         const val LOGIN_EMAIL_NOT_EXISTED = "401-001"
         const val LOGIN_WRONG_PASSWORD = "401-002"
+        const val SERIAL_NUMBER_INVALID_1 = "421"
         const val EMAIL_NOT_CORRECT_FORMAT = "422"
+        const val DOOR_HAS_NOT_BEEN_CLOSE = "423-001"
+
+        const val INVALID_OTP = "601"
+        const val SERIAL_NUMBER_INVALID = "60101"
         const val ADMIN_WRONG_USERNAME_PASS = "60104"
         const val ADMIN_ACCOUNT_LOCKED = "602"
-        const val DOOR_HAS_NOT_BEEN_CLOSE = "423-001"
-        const val SERIAL_NUMBER_INVALID = "60101"
-        const val SERIAL_NUMBER_INVALID_1 = "421"
-        const val ERROR_LOGIC = "623"
+        const val CREATE_TRANSACTION_FAILED = "604"
         const val ERROR_NO_AVAILABLE_ITEM = "605"
+        const val ERROR_UNABLE_LOCKER = "606"
+        const val ERROR_LOGIC = "623"
+
     }
 
     object Language {
