@@ -87,6 +87,8 @@ class RecognizeFaceViewModel(
                 recognizeFaceListener?.faceNotFound()
                 mMessage.postValue(R.string.face_not_found)
             }
+        }else{
+            mOtherError.postValue(detectImageResponse.message)
         }
     }
 

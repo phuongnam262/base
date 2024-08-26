@@ -99,10 +99,10 @@ class RegisterFaceViewModel(
                         val saveUser = userLockerRepository.saveUser(userLockerModel)
                         if (saveUser > 0) {
                             userLockerModel.email?.let { it1 ->
-                                registerFaceListener?.handleSuccess(
+                                uiScope.launch { registerFaceListener?.handleSuccess(
                                     personCodeGen,
                                     it1
-                                )
+                                ) }
                             }
                         } else {
                             mMessage.postValue(R.string.save_user_fail)
@@ -131,6 +131,8 @@ class RegisterFaceViewModel(
                 registerFaceListener?.faceNotFound()
                 mMessage.postValue(R.string.face_not_found)
             }
+        }else{
+            mOtherError.postValue(detectImageResponse.message)
         }
     }
 }

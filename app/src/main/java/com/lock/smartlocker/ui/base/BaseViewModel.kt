@@ -20,6 +20,7 @@ abstract class BaseViewModel() : ViewModel() {
     val mLoading = MutableLiveData<Boolean>().apply { value = false }
     val mMessage = MutableLiveData<Int>()
     val mStatusText = MutableLiveData<Int>()
+    val mOtherError = MutableLiveData<String>()
 
     // coroutines
     private var viewModelJob = Job()

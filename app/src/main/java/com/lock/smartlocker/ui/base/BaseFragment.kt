@@ -108,6 +108,9 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
                 it?.let { mViewModel?.statusText?.postValue(getString(it)) }
                 mViewModel?.showStatusText?.postValue(true)
             })
+            mViewModel?.mOtherError?.observe(activity, Observer {
+                it?.let { CommonUtils.showErrorDialog(activity, "", it) }
+            })
         }
     }
 
