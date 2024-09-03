@@ -18,7 +18,8 @@ import org.kodein.di.generic.instance
 
 
 class ManageLockerFragment : BaseFragment<FragmentManageLockerBinding, ManageLockerViewModel>(),
-    KodeinAware, View.OnClickListener, ManageLockerListener, CustomConfirmDialog.ConfirmationDialogListener {
+    KodeinAware, View.OnClickListener, ManageLockerListener,
+    CustomConfirmDialog.ConfirmationDialogListener {
 
     override val kodein by kodein()
     private val factory: ManageLockerViewModelFactory by instance()
@@ -38,7 +39,7 @@ class ManageLockerFragment : BaseFragment<FragmentManageLockerBinding, ManageLoc
         initData()
     }
 
-    private fun initView(){
+    private fun initView() {
         viewModel.titlePage.postValue(getString(R.string.manage_locker))
         mViewDataBinding?.bottomMenu?.rlHome?.setOnClickListener(this)
         mViewDataBinding?.headerBar?.ivBack?.setOnClickListener(this)
@@ -49,30 +50,34 @@ class ManageLockerFragment : BaseFragment<FragmentManageLockerBinding, ManageLoc
         mViewDataBinding?.rvLockers?.adapter = lockerAdapter
     }
 
-    private fun initData(){
+    private fun initData() {
         viewModel.getListLocker()
         viewModel.lockers.observe(viewLifecycleOwner) { lockers ->
             viewModel.listLockerId.value = lockers?.map { it.lockerId } ?: emptyList()
-            lockerAdapter.update(lockers?.map { activity?.let { it1 ->
-                LockerItem(
-                    it1, it, viewModel, childFragmentManager)
-            } } ?: emptyList())
+            lockerAdapter.update(lockers?.map {
+                activity?.let { it1 ->
+                    LockerItem(
+                        it1, it, viewModel, childFragmentManager
+                    )
+                }
+            } ?: emptyList())
         }
         viewModel.listLockerId.observe(viewLifecycleOwner) {
-            if (it.isNotEmpty()){
-                viewModel.openAllLocker()
+            if (it.isNotEmpty()) {
+                viewModel.checkDoorStatus()
             }
         }
-        }
+    }
 
     override fun onClick(v: View?) {
-        when(v?.id){
+        when (v?.id) {
             R.id.rl_home -> activity?.finish()
             R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
-            R.id.btn_using_mail ->{
+            R.id.btn_using_mail -> {
                 viewModel.openAllLocker()
             }
-            R.id.btn_process ->{
+
+            R.id.btn_process -> {
                 viewModel.checkDoorStatus()
             }
         }
@@ -80,7 +85,7 @@ class ManageLockerFragment : BaseFragment<FragmentManageLockerBinding, ManageLoc
 
     @SuppressLint("NotifyDataSetChanged")
     override fun openLockerSuccess() {
-       lockerAdapter.notifyDataSetChanged()
+        lockerAdapter.notifyDataSetChanged()
     }
 
     override fun onDialogConfirmClick(dialogTag: String?) {

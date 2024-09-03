@@ -80,7 +80,7 @@
             <Button
                 android:id="@+id/btnLocker"
                 style="@style/CustomLockerButton"
-                android:background="@{doorStatus == 0 ? @drawable/bg_custom_locker_success_button : @drawable/bg_custom_locker_failed_button}" />
+                android:background="@{doorStatus == 0 ? @drawable/bg_locker_open : @drawable/bg_locker_close}" />
 
             <ImageView
                 android:id="@+id/ivArrowRight"

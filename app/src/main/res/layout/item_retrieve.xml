@@ -61,7 +61,7 @@
                 <Button
                     android:id="@+id/btnLocker"
                     style="@style/CustomLockerButton"
-                    android:background="@{lockerRetrieve.doorStatus == 0 ? @drawable/bg_custom_locker_success_button : @drawable/bg_custom_locker_failed_button}"
+                    android:background="@{lockerRetrieve.doorStatus == 0 ? @drawable/bg_locker_open : @drawable/bg_locker_close}"
                     android:text="@{lockerRetrieve.lockerName}"
                     tools:text="001" />
 

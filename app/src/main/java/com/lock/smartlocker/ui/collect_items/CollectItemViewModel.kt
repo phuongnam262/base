@@ -64,9 +64,13 @@ class CollectItemViewModel(
                             val matchingStatus = data.locker_list.find { it.lockerId == lockerInfo.lockerId }
                             if (matchingStatus != null) {
                                 lockerInfo.doorStatus = matchingStatus.doorStatus
+                                if (matchingStatus.doorStatus == 1 || matchingStatus.doorStatus == -1) {
+                                    mStatusText.postValue(R.string.error_open_failed)
+                                }else{
+                                    showStatusText.postValue(false)
+                                }
                             }
                         }
-                        checkStatusDoor(data.locker_list)
                         uiScope.launch { collectItemListener?.sendCommandOpenLockerSuccess() }
                     }
                 } else handleError(status)

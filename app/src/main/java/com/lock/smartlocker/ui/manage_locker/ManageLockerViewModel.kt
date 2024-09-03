@@ -81,9 +81,13 @@ class ManageLockerViewModel(
                                 data.locker_list.find { it.lockerId == locker.lockerId }
                             if (matchingStatus != null) {
                                 locker.doorStatus = matchingStatus.doorStatus
+                                if (matchingStatus.doorStatus == 1 || matchingStatus.doorStatus == -1) {
+                                    mStatusText.postValue(R.string.error_open_failed)
+                                }else{
+                                    showStatusText.postValue(false)
+                                }
                             }
                         }
-                        checkStatusDoor(_lockers.value)
                         uiScope.launch { manageLockerListener?.openLockerSuccess() }
                     }
                 } else handleError(status)
@@ -107,6 +111,7 @@ class ManageLockerViewModel(
     fun checkDoorStatus() {
         ioScope.launch {
             mLoading.postValue(true)
+            showStatusText.postValue(false)
             val request = HardwareControllerRequest(
                 lockerIds = listLockerId.value,
                 userHandler = PreferenceHelper.getString(ConstantUtils.ADMIN_NAME, "Admin"),
@@ -122,7 +127,6 @@ class ManageLockerViewModel(
                                 locker.doorStatus = matchingStatus.doorStatus
                             }
                         }
-                        checkStatusDoor(_lockers.value)
                         uiScope.launch { manageLockerListener?.openLockerSuccess() }
                     }
                 } else handleError(status)
