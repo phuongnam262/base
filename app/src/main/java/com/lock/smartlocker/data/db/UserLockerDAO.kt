@@ -23,7 +23,12 @@ interface UserLockerDAO{
     @Query("DELETE FROM UserLockerModel WHERE personCode = :personCode")
     fun deleteUserByCode(personCode: String) : Int
 
+    @Query("DELETE FROM UserLockerModel")
+    fun deleteAllUser() : Int
+
     @Query("SELECT * FROM UserLockerModel WHERE personCode = :personCode")
     suspend fun getUserLocker(personCode: String) : UserLockerModel?
 
+    @Query("SELECT * FROM UserLockerModel")
+    suspend fun getAllUserLocker() : List<UserLockerModel>
 }

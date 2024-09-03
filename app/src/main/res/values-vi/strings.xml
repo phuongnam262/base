@@ -54,6 +54,10 @@
     <string name="error_password_empty">Vui lòng nhập mật khẩu</string>
     <string name="error_username_password">Tên người dùng hoặc mật khẩu không chính xác</string>
     <string name="error_account_locked">Tài khoản này đã bị khóa</string>
+    <string name="error_password_policy_update">Chính sách mật khẩu đã được thay đổi. Vào LMS để đặt mật khẩu mới</string>
+    <string name="error_password_expired">Mật khẩu hết hạn. Vào LMS để đặt mật khẩu mới</string>
+    <string name="error_no_permission_locker">Bạn không có quyền truy cập vào trạm tủ  này</string>
+    <string name="error_no_permission_console">Bạn không có quyền truy cập vào Bảng điều khiển Quản trị</string>
 
     <!-- input OTP -->
     <string name="enter_otp_verify">Nhập OTP được gửi đến thiết bị của bạn để xác minh tài khoản..</string>
@@ -80,6 +84,7 @@
     <string name="close_app">ĐÓNG ỨNG DỤNG</string>
     <string name="admin_menu">Danh Mục</string>
     <string name="error_no_available_locker">Hiện tại không có tủ khóa để thêm đồ dùng</string>
+    <string name="dialog_close_app">Bạn có muốn đóng ứng dụng không?</string>
 
     <!-- Scan serial number   -->
     <string name="scan_or_enter_serial_number">Quét hoặc Nhập Số sê-ri</string>
@@ -92,7 +97,7 @@
     <string name="dialog_attention">Đồ dùng này có vấn đề gì không?</string>
     <string name="error_input_serial_empty">Vui lòng quét hoặc nhập số sê-ri của đồ dùng</string>
     <string name="serial_number_is_not_available">Số sê-ri này không còn khả dụng nữa</string>
-    <string name="error_logic">Bị sai logic</string>
+    <string name="error_logic">Bị sai logic ở mã này</string>
     <string name="error_unable_locker">Bạn không thể trả hàng tại trạm tủ khóa này</string>
 
     <!-- Faulty reason   -->
@@ -151,8 +156,48 @@
     <string name="status_not_found">Không thấy</string>
     <string name="door_faulty">CỬA LỖI</string>
 
+    <!-- Face List -->
+    <string name="face_list">Danh sách khuôn mặt</string>
+    <string name="face_list_info">Chọn "Xóa" để xóa từng người dùng.\nChọn "Xóa tất cả" để xóa tất cả khuôn mặt đã đăng ký trên thiết bị này.\nKhông thể hoàn tác hành động này. Người dùng có thể đăng ký khuôn mặt mới trong mục "Đăng ký khuôn mặt".</string>
+    <string name="remove_button">Xóa</string>
+    <string name="remove_all_button">XÓA TẤT CẢ</string>
+    <string name="empty_face_list">Không có khuôn mặt nào</string>
+    <string name="yes_button">CÓ</string>
+    <string name="no_button">KHÔNG</string>
+    <string name="dialog_remove_all">Bạn có muốn xóa tất cả khuôn mặt không?</string>
+
+    <!-- Setting -->
+    <string name="setting">Cài đặt</string>
+    <string name="setting_info">Đây là tất cả các cài đặt cho thiết bị này.\nVui lòng làm theo hướng dẫn để thiết lập, đặc biệt là đối với cài đặt nhận dạng khuôn mặt.</string>
+    <string name="media_path">Đường Dẫn Phương Tiện</string>
+    <string name="disable_button">Vô Hiệu</string>
+    <string name="sound">Âm Thanh</string>
+    <string name="background_music">Nhạc Nền</string>
+
     <!-- Thanks -->
     <string name="thank_using_mail">Cảm ơn đã sử dụng dịch vụ của chúng tôi!</string>
+
+    <!-- Manage Locker -->
+    <string name="manage_locker">Quản Lý Tủ Khóa</string>
+    <string name="manage_locker_info">Chạm vào tủ khóa để mở từng ngăn.\nSau khi chạm, cửa sẽ tự động mở.</string>
+    <string name="enable_button">Kích Hoạt</string>
+    <string name="occupied_status">Đang sử dụng</string>
+    <string name="available_status">Khả Dụng</string>
+    <string name="disabled_status">Vô Hiệu </string>
+    <string name="open_all_button">MỞ TẤT CẢ</string>
+    <string name="check_door_button">KIỂM TRA CỬA</string>
+    <string name="dialog_disable">Bạn có muốn vô hiệu tủ khóa này không?</string>
+    <string name="dialog_enable">Bạn có muốn kích hoạt tủ khóa này không?</string>
+
+    <!-- Retrieve -->
+    <string name="retrieve_item">Chọn Đồ Dùng Cần Thu Hồi</string>
+    <string name="retrieve_info">Đây là cách thu hồi các đồ dùng bị lỗi.\nChạm vào từng tủ khóa để mở riêng lẻ hoặc chạm vào "Thu hồi lại tất cả" để mở tất cả các tủ khóa trong danh sách này.</string>
+    <string name="not_retrieved">CHƯA THU HỒI</string>
+    <string name="retrieved">ĐÃ THU HỒI</string>
+    <string name="button_retrieve_all">THU HỒI TẤT CẢ</string>
+    <string name="dialog_retrieve_all">Bạn có muốn thu hồi tất cả các mục không?</string>
+    <string name="error_no_faulty">Hiện tại không có đồ dùng lỗi</string>
+    <string name="error_no_item_available">Không có đồ dùng nào tại trạm tủ này</string>
 
     <!-- Strings for camera settings. -->
     <string name="pref_category_key_camera" translatable="false">pckc</string>

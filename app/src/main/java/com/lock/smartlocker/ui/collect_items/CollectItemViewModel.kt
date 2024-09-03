@@ -76,11 +76,10 @@ class CollectItemViewModel(
 
     private fun checkStatusDoor(lockerStatus: ArrayList<LockerStatus>){
         val allNotOpen = lockerStatus.all { it.doorStatus == 1 || it.doorStatus == -1 }
-        val someOpen = lockerStatus.all { it.doorStatus == 0 || it.doorStatus == 1 || it.doorStatus == -1}
         val allOpen = lockerStatus.all { it.doorStatus == 0 }
         if (allNotOpen) {
             mStatusText.postValue(R.string.error_all_doors_not_open)
-        }else if (someOpen) {
+        }else if (allOpen.not()) {
             mStatusText.postValue(R.string.error_some_doors_not_open)
         }
         if (allOpen) {

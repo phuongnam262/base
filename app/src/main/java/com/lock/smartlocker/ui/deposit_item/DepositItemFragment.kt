@@ -89,11 +89,11 @@ class DepositItemFragment : BaseFragment<FragmentDepositItemBinding, DepositItem
         dialog.show(childFragmentManager, InputSerialNumberFragment.CONFIRMATION_DIALOG_TAG)
     }
 
-    override fun onDialogPositiveClick(dialogTag: String?) {
+    override fun onDialogConfirmClick(dialogTag: String?) {
         navigateTo(R.id.action_depositItemFragment2_to_adminDashboardFragment, null)
     }
 
-    override fun onDialogNegativeClick(dialogTag: String?) {
+    override fun onDialogCancelClick() {
         navigateTo(R.id.action_depositItemFragment2_to_adminDashboardFragment, null)
     }
 }

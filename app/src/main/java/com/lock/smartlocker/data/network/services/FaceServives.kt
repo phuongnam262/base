@@ -45,6 +45,11 @@ interface FaceServives {
         @Query("personCode") personCode: String
     ): Response<BaseFaceResponse>
 
+    @DELETE("deletePerson")
+    suspend fun deleteAllPerson(
+        @Query("groupId") groupId: String
+    ): Response<BaseFaceResponse>
+
     companion object {
         operator fun invoke(retrofit: Retrofit): FaceServives {
             return retrofit.create(FaceServives::class.java)

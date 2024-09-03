@@ -41,8 +41,12 @@ class ManagerMenuActivity : BaseActivity<ActivityManagerMenuBinding, ManagerMenu
                 showFragment(InputEmailFragment(), R.navigation.register_face_navigation)
             }
 
+            ConstantUtils.TYPE_MANAGER_FACE -> {
+                showFragment(AdminLoginFragment(), R.navigation.admin_console_navigation, typeManager = ConstantUtils.TYPE_MANAGER_FACE)
+            }
+
             ConstantUtils.TYPE_ADMIN_CONSOLE -> {
-                showFragment(AdminLoginFragment(), R.navigation.admin_console_navigation)
+                showFragment(AdminLoginFragment(), R.navigation.admin_console_navigation, typeManager = ConstantUtils.TYPE_ADMIN_CONSOLE)
             }
         }
     }

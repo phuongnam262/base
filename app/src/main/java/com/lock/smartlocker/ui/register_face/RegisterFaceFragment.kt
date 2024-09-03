@@ -58,9 +58,9 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
     private var analysisUseCase: ImageAnalysis? = null
     private var imageProcessor: VisionImageProcessor? = null
     private var needUpdateGraphicOverlayImageSourceInfo = false
-    private var lensFacing = CameraSelector.LENS_FACING_EXTERNAL
-    private var rotateCamera = Surface.ROTATION_270
-    private var rotateDetect = Surface.ROTATION_90
+    private var lensFacing = CameraSelector.LENS_FACING_FRONT
+    private var rotateCamera = Surface.ROTATION_0
+    private var rotateDetect = Surface.ROTATION_0
     private var cameraSelector: CameraSelector? = null
     private var imageCapture: ImageCapture? = null
     private var isExited: Boolean = false

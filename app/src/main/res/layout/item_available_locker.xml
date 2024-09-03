@@ -43,7 +43,6 @@
             <Button
                 android:id="@+id/btnLocker"
                 style="@style/CustomLockerButton"
-                android:layout_marginHorizontal="@dimen/dp_7"
                 android:background="@drawable/bg_border_ractangle_rounded"
                 android:clickable="false"
                 android:text="@{model.name}" />

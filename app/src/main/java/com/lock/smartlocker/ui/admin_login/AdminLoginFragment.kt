@@ -10,6 +10,8 @@ import com.lock.smartlocker.R
 import com.lock.smartlocker.data.entities.responses.AdminLoginResponse
 import com.lock.smartlocker.databinding.FragmentAdminLoginBinding
 import com.lock.smartlocker.ui.base.BaseFragment
+import com.lock.smartlocker.ui.inputemail.InputEmailFragment
+import com.lock.smartlocker.util.ConstantUtils
 import com.lock.smartlocker.util.Coroutines
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
@@ -57,6 +59,28 @@ class AdminLoginFragment : BaseFragment<FragmentAdminLoginBinding, AdminLoginVie
     }
 
     override fun adminLoginSuccess(adminLoginResponse: AdminLoginResponse) {
-        navigateTo(R.id.action_adminLoginFragment_to_adminDashboardFragment, null)
+        //Đăng nhập thành công -> check permission is_admin_console = false
+        if (adminLoginResponse.staff.isAdminConsole) {
+            if (adminLoginResponse.staff.isOtp) {
+                // OTP true thì qua màn OTP
+                val bundle = Bundle().apply {
+                    putString(InputEmailFragment.EMAIL_REGISTER, adminLoginResponse.staff.email)
+                    putString(
+                        ConstantUtils.TYPE_OPEN_MANAGER,
+                        arguments?.getString(ConstantUtils.TYPE_OPEN_MANAGER)
+                    )
+                }
+                navigateTo(R.id.action_adminLoginFragment_to_inputOTPFragment, bundle)
+            } else {
+                // OTP false thì qua màn menu hoặc face list
+                if(arguments?.getString(ConstantUtils.TYPE_OPEN_MANAGER) == ConstantUtils.TYPE_ADMIN_CONSOLE){
+                    navigateTo(R.id.action_adminLoginFragment_to_adminDashboardFragment, null)
+                }else{
+                    navigateTo(R.id.action_adminLoginFragment_to_faceListFragment, null)
+                }
+            }
+        }else{
+            viewModel.mStatusText.postValue(R.string.error_no_permission_console)
+        }
     }
 }

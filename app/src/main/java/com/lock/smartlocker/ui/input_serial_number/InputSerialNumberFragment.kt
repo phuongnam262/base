@@ -7,7 +7,6 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
-import com.lock.smartlocker.data.entities.request.ReturnItemRequest
 import com.lock.smartlocker.databinding.FragmentInputSerialNumberBinding
 import com.lock.smartlocker.ui.base.BaseFragment
 import com.lock.smartlocker.util.ConstantUtils
@@ -99,11 +98,11 @@ class InputSerialNumberFragment : BaseFragment<FragmentInputSerialNumberBinding,
     }
 
 
-    override fun onDialogPositiveClick(dialogTag: String?) {
+    override fun onDialogConfirmClick(dialogTag: String?) {
         navigateToSelectFaultyFragment(viewModel.itemReturnData.value!!.categoryId)
     }
 
-    override fun onDialogNegativeClick(dialogTag: String?) {
+    override fun onDialogCancelClick() {
         navigateToSelectAvailableLockerFragment()
     }
 

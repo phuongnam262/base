@@ -145,22 +145,11 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeLis
                         setNewLocale(ConstantUtils.Language.VIETNAMESE)
                     }
 
-                    R.id.ll_register_face -> {
-                        startActivityWithOneValue(
-                            ConstantUtils.TYPE_OPEN_MANAGER, ConstantUtils.TYPE_REGISTER_FACE,
-                            ManagerMenuActivity::class.java
-                        )
-                        mViewDataBinding?.drawerLayout?.closeDrawers()
-                    }
+                    R.id.ll_register_face -> openManagerFromLeftMenu(ConstantUtils.TYPE_REGISTER_FACE)
 
-                    R.id.ll_manage_face -> {}
-                    R.id.ll_admin_console -> {
-                        startActivityWithOneValue(
-                            ConstantUtils.TYPE_OPEN_MANAGER, ConstantUtils.TYPE_ADMIN_CONSOLE,
-                            ManagerMenuActivity::class.java
-                        )
-                        mViewDataBinding?.drawerLayout?.closeDrawers()
-                    }
+                    R.id.ll_manage_face -> openManagerFromLeftMenu(ConstantUtils.TYPE_MANAGER_FACE)
+
+                    R.id.ll_admin_console -> openManagerFromLeftMenu(ConstantUtils.TYPE_ADMIN_CONSOLE)
 
                     R.id.container_loan -> {
                         startActivityWithOneValue(
@@ -180,6 +169,14 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeLis
         }else{
             CommonUtils.showErrorDialog(this, "","Please Open ATIN Services")
         }
+    }
+
+    private fun openManagerFromLeftMenu(type: String) {
+        startActivityWithOneValue(
+            ConstantUtils.TYPE_OPEN_MANAGER, type,
+            ManagerMenuActivity::class.java
+        )
+        mViewDataBinding?.drawerLayout?.closeDrawers()
     }
 
     private fun setNewLocale(language: String) {

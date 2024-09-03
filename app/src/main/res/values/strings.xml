@@ -54,6 +54,10 @@
     <string name="error_password_empty">Please enter password</string>
     <string name="error_username_password">Incorrect username or password</string>
     <string name="error_account_locked">This account has been locked</string>
+    <string name="error_password_policy_update">Password policy has been updated. Login LMS to reset password</string>
+    <string name="error_password_expired">Your password has expired. Login LMS to reset password</string>
+    <string name="error_no_permission_locker">You don\'t have permission to access this locker station</string>
+    <string name="error_no_permission_console">You don\'t have permission to access Admin Console</string>
 
     <!-- input OTP -->
     <string name="enter_otp_verify">Enter the OTP sent to your device to verify your account.</string>
@@ -80,6 +84,7 @@
     <string name="close_app">CLOSE APPLICATION</string>
     <string name="admin_menu">Menu</string>
     <string name="error_no_available_locker">No available lockers for topup at this time</string>
+    <string name="dialog_close_app">Do you want to close application?</string>
 
     <!-- Scan serial number   -->
     <string name="scan_or_enter_serial_number">Scan or Enter Serial Number</string>
@@ -92,7 +97,7 @@
     <string name="dialog_attention">Does this item require attention?</string>
     <string name="error_input_serial_empty">Please scan or enter item serial number</string>
     <string name="serial_number_is_not_available">This Serial number is no longer available</string>
-    <string name="error_logic">Invalid status logic</string>
+    <string name="error_logic">Invalid status logic with serial</string>
     <string name="error_unable_locker">You are unable to return the item at this locker station</string>
 
     <!-- Faulty reason   -->
@@ -151,8 +156,49 @@
     <string name="status_not_found">NOT FOUND</string>
     <string name="door_faulty">DOOR FAULTY</string>
 
+    <!-- Face List -->
+    <string name="face_list">Face List</string>
+    <string name="face_list_info">Select "Remove" to remove the individual user.\nSelect "Remove All" to wipe all faces registered on this device.\nThis action cannot be undone. Users can register a new face in the "Register Face" menu.</string>
+    <string name="remove_button">Remove</string>
+    <string name="remove_all_button">REMOVE ALL</string>
+    <string name="empty_face_list">No face register on device</string>
+    <string name="yes_button">YES</string>
+    <string name="no_button">NO</string>
+    <string name="dialog_remove_all">Do you want to remove all faces?</string>
+
+    <!-- Setting -->
+    <string name="setting">Settings</string>
+    <string name="setting_info">These are all the settings for this device.\nPlease follow the instructions to set it up, especially for face recognition settings.</string>
+    <string name="media_path">Media Path</string>
+    <string name="disable_button">Disable</string>
+    <string name="sound">Sound</string>
+    <string name="background_music">Background Music</string>
+
     <!-- Thanks -->
     <string name="thank_using_mail">Thank you for using our service!</string>
+
+    <!-- Manage Locker -->
+    <string name="manage_locker">Manage Lockers</string>
+    <string name="manage_locker_info">Tap on locker to open it individually.\nOnce tapped, the door will automatically open.</string>
+    <string name="enable_button">Enable</string>
+    <string name="occupied_status">Occupied</string>
+    <string name="available_status">Available</string>
+    <string name="disabled_status">Disabled</string>
+    <string name="open_all_button">OPEN ALL</string>
+    <string name="check_door_button">CHECK DOOR</string>
+    <string name="dialog_disable">Do you want to disable this locker?</string>
+    <string name="dialog_enable">Do you want to enable this locker?</string>
+
+    <!-- Retrieve -->
+    <string name="retrieve_item">Select Item To Retrieve</string>
+    <string name="retrieve_info">This is to retrieve faulty items.\nTap each locker to open individually, or tap "Retrieve All" to open all lockers in this list.</string>
+    <string name="not_retrieved">NOT RETRIEVED</string>
+    <string name="retrieved">RETRIEVED</string>
+    <string name="button_retrieve_all">RETRIEVE ALL</string>
+    <string name="dialog_retrieve_all">Do you to retrieve all items?</string>
+    <string name="error_no_faulty">No faulty items at the moment</string>
+    <string name="error_no_item_available">No items available at this locker station</string>
+
 
     <!-- Strings for camera settings. -->
     <string name="pref_category_key_camera" translatable="false">pckc</string>

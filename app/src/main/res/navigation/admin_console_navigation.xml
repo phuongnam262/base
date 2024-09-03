@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_adminLoginFragment_to_adminDashboardFragment"
             app:destination="@id/adminDashboardFragment" />
+        <action
+            android:id="@+id/action_adminLoginFragment_to_faceListFragment"
+            app:destination="@id/faceListFragment" />
     </fragment>
     <fragment
         android:id="@+id/inputOTPFragment"
@@ -25,6 +28,9 @@
         <action
             android:id="@+id/action_inputOTPFragment_to_adminDashboardFragment"
             app:destination="@id/adminDashboardFragment" />
+        <action
+            android:id="@+id/action_inputOTPFragment_to_faceListFragment"
+            app:destination="@id/faceListFragment" />
     </fragment>
     <fragment
         android:id="@+id/adminDashboardFragment"
@@ -34,6 +40,15 @@
         <action
             android:id="@+id/action_adminDashboardFragment_to_inputSerialNumberFragment2"
             app:destination="@id/inputSerialNumberFragment2" />
+        <action
+            android:id="@+id/action_adminDashboardFragment_to_settingFragment"
+            app:destination="@id/settingFragment" />
+        <action
+            android:id="@+id/action_adminDashboardFragment_to_manageLockerFragment"
+            app:destination="@id/manageLockerFragment" />
+        <action
+            android:id="@+id/action_adminDashboardFragment_to_retrieveItemFragment"
+            app:destination="@id/retrieveItemFragment" />
     </fragment>
     <fragment
         android:id="@+id/inputSerialNumberFragment2"
@@ -66,4 +81,24 @@
             app:popUpTo="@id/depositItemFragment2"
             app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/faceListFragment"
+        android:name="com.lock.smartlocker.ui.face_list.FaceListFragment"
+        android:label="fragment_face_list"
+        tools:layout="@layout/fragment_face_list" />
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.lock.smartlocker.ui.setting.SettingFragment"
+        android:label="fragment_setting"
+        tools:layout="@layout/fragment_setting" />
+    <fragment
+        android:id="@+id/manageLockerFragment"
+        android:name="com.lock.smartlocker.ui.manage_locker.ManageLockerFragment"
+        android:label="fragment_manage_locker"
+        tools:layout="@layout/fragment_manage_locker" />
+    <fragment
+        android:id="@+id/retrieveItemFragment"
+        android:name="com.lock.smartlocker.ui.retrieve.RetrieveItemFragment"
+        android:label="fragment_retrieve_item"
+        tools:layout="@layout/fragment_retrieve_item" />
 </navigation>

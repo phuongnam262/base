@@ -1,12 +1,15 @@
 package com.lock.smartlocker.data.repositories
 
-import com.lock.smartlocker.data.db.AppDatabase
 import com.lock.smartlocker.data.entities.request.AminLoginRequest
 import com.lock.smartlocker.data.entities.request.ConsumerLoginRequest
+import com.lock.smartlocker.data.entities.request.DisableLockerRequest
 import com.lock.smartlocker.data.entities.responses.AdminLoginResponse
 import com.lock.smartlocker.data.entities.responses.BaseResponse
 import com.lock.smartlocker.data.entities.responses.ConsumerLoginResponse
+import com.lock.smartlocker.data.entities.responses.DisableLockerResponse
+import com.lock.smartlocker.data.entities.responses.GetAllItemRetrieveResponse
 import com.lock.smartlocker.data.entities.responses.GetInformationStaffResponse
+import com.lock.smartlocker.data.entities.responses.GetSettingResponse
 import com.lock.smartlocker.data.network.LockerAPI
 import com.lock.smartlocker.data.network.SafeApiRequest
 
@@ -26,4 +29,15 @@ class ManagerRepository (
         return apiRequest { api.provideLockerAPIService().getInformationStaff() }
     }
 
+    suspend fun getSetting(): BaseResponse<GetSettingResponse> {
+        return apiRequest { api.provideLockerAPIService().getSetting() }
+    }
+
+    suspend fun disableLocker(disableLockerRequest: DisableLockerRequest): BaseResponse<DisableLockerResponse> {
+        return apiRequest { api.provideLockerAPIService().disableLocker(disableLockerRequest) }
+    }
+
+    suspend fun getAllItemRetrieve(): BaseResponse<GetAllItemRetrieveResponse> {
+        return apiRequest { api.provideLockerAPIService().getAllItemRetrieve() }
+    }
 }

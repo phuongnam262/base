@@ -8,6 +8,7 @@
     <color name="colorRed">#F82F20</color>
     <color name="colorGreen">#009C2C</color>
     <color name="colorOrange">#FF9800</color>
+    <color name="colorBlue">#0A43EC</color>
 
     <!-- Color text-->
     <color name="text_label">#BF090909</color>

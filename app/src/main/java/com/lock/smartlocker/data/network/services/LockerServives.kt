@@ -3,6 +3,7 @@ package com.lock.smartlocker.data.network.services
 import com.lock.smartlocker.data.entities.request.AminLoginRequest
 import com.lock.smartlocker.data.entities.request.ConsumerLoginRequest
 import com.lock.smartlocker.data.entities.request.CreateInventoryTransactionRequest
+import com.lock.smartlocker.data.entities.request.DisableLockerRequest
 import com.lock.smartlocker.data.entities.request.GetAvailableItemRequest
 import com.lock.smartlocker.data.entities.request.GetItemReturnRequest
 import com.lock.smartlocker.data.entities.request.ReturnItemRequest
@@ -11,6 +12,8 @@ import com.lock.smartlocker.data.entities.responses.AdminLoginResponse
 import com.lock.smartlocker.data.entities.responses.BaseResponse
 import com.lock.smartlocker.data.entities.responses.ConsumerLoginResponse
 import com.lock.smartlocker.data.entities.responses.CreateInventoryResponse
+import com.lock.smartlocker.data.entities.responses.DisableLockerResponse
+import com.lock.smartlocker.data.entities.responses.GetAllItemRetrieveResponse
 import com.lock.smartlocker.data.entities.responses.GetAvailableItemResponse
 import com.lock.smartlocker.data.entities.responses.GetInformationStaffResponse
 import com.lock.smartlocker.data.entities.responses.GetListCategoryResponse
@@ -88,6 +91,15 @@ interface LockerServives {
     suspend fun updateInventoryTransaction(
         @Body updateInventoryTransactionRequest: UpdateInventoryTransactionRequest
     ): Response<BaseResponse<Any>>
+
+    @POST("api/locker/disable-locker")
+    suspend fun disableLocker(
+        @Body disableLockerRequest: DisableLockerRequest
+    ): Response<BaseResponse<DisableLockerResponse>>
+
+    @GET("/api/admin/get-all-item-retrieve")
+    suspend fun getAllItemRetrieve(
+    ): Response<BaseResponse<GetAllItemRetrieveResponse>>
 
     companion object {
         operator fun invoke(retrofit: Retrofit): LockerServives {

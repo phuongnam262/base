@@ -37,6 +37,10 @@ class ConstantUtils {
         const val TRANSACTION_ID = "TRANSACTION_ID"
         const val LOCKER_INFOS = "LOCKER_INFOS"
 
+        //Dialog Confirm
+        const val DISABLE_LOCKER = "DISABLE_LOCKER"
+        const val ENABLE_LOCKER = "ENABLE_LOCKER"
+
         //Error code
         const val LOGIN_EMAIL_NOT_EXISTED = "401-001"
         const val LOGIN_WRONG_PASSWORD = "401-002"
@@ -47,10 +51,14 @@ class ConstantUtils {
         const val INVALID_OTP = "601"
         const val SERIAL_NUMBER_INVALID = "60101"
         const val ADMIN_WRONG_USERNAME_PASS = "60104"
-        const val ADMIN_ACCOUNT_LOCKED = "602"
+        const val ADMIN_ACCOUNT_LOCKED = "60201"
         const val CREATE_TRANSACTION_FAILED = "604"
+        const val PASSWORD_POLICY_UPDATE = "60402"
         const val ERROR_NO_AVAILABLE_ITEM = "605"
+        const val PASSWORD_EXPIRED = "60503"
+        const val ERROR_NO_RETRIEVE_ITEM = "60505"
         const val ERROR_UNABLE_LOCKER = "606"
+        const val ADMIN_NO_PERMISSION = "60601"
         const val ERROR_LOGIC = "623"
 
     }

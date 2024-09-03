@@ -22,17 +22,21 @@ import com.lock.smartlocker.ui.cart.CartViewModelFactory
 import com.lock.smartlocker.ui.category.CategoryViewModelFactory
 import com.lock.smartlocker.ui.collect_items.CollectItemViewModelFactory
 import com.lock.smartlocker.ui.deposit_item.DepositItemViewModelFactory
+import com.lock.smartlocker.ui.face_list.FaceListViewModelFactory
 import com.lock.smartlocker.ui.home.HomeViewModelFactory
 import com.lock.smartlocker.ui.input_serial_number.InputSerialNumberViewModelFactory
 import com.lock.smartlocker.ui.inputemail.InputEmailViewModelFactory
 import com.lock.smartlocker.ui.inputotp.InputOTPViewModelFactory
+import com.lock.smartlocker.ui.manage_locker.ManageLockerViewModelFactory
 import com.lock.smartlocker.ui.manager_menu.ManagerMenuViewModelFactory
 import com.lock.smartlocker.ui.recognize_face.RecognizeFaceViewModelFactory
 import com.lock.smartlocker.ui.register_face.RegisterFaceViewModelFactory
+import com.lock.smartlocker.ui.retrieve.RetrieveViewModelFactory
 import com.lock.smartlocker.ui.returns.ReturnViewModelFactory
 import com.lock.smartlocker.ui.scan_item.ScanItemViewModelFactory
 import com.lock.smartlocker.ui.select_available_locker.SelectAvailableLockerViewModelFactory
 import com.lock.smartlocker.ui.select_faulty.SelectFaultyViewModelFactory
+import com.lock.smartlocker.ui.setting.SettingViewModelFactory
 import com.lock.smartlocker.ui.splash.SplashViewModelFactory
 import com.lock.smartlocker.ui.thank.ThankViewModelFactory
 import org.kodein.di.Kodein
@@ -107,6 +111,10 @@ class LockerApplication : Application(), KodeinAware {
         bind() from provider { RecognizeFaceViewModelFactory(instance(), instance()) }
         bind() from provider { CollectItemViewModelFactory(instance(), instance()) }
         bind() from provider { ScanItemViewModelFactory(instance()) }
+        bind() from provider { FaceListViewModelFactory(instance()) }
+        bind() from provider { SettingViewModelFactory(instance()) }
+        bind() from provider { ManageLockerViewModelFactory(instance(), instance()) }
+        bind() from provider { RetrieveViewModelFactory(instance(), instance()) }
     }
 
 }

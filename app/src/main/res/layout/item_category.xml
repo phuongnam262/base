@@ -12,6 +12,7 @@
     </data>
 
     <LinearLayout
+        android:id="@+id/ll_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/dp_10"
@@ -29,6 +30,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/segoe_ui_regular"
             android:text="@{category.categoryName}"
+            tools:text="Category"
             android:textColor="@{category.isSelected ? @color/colorBlack : @color/grey575757 }"
             android:textSize="@dimen/sp_16"
             android:textStyle="@{category.isSelected ? `bold` : `normal`}" />

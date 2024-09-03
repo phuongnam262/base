@@ -15,8 +15,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="30dp"
-        android:paddingVertical="20dp"
+        android:paddingHorizontal="@dimen/dp_15"
+        android:paddingVertical="@dimen/dp_15"
         android:background="@drawable/bg_ractangle_rounded">
 
         <LinearLayout
@@ -80,9 +80,7 @@
             <Button
                 android:id="@+id/btnLocker"
                 style="@style/CustomLockerButton"
-                android:background="@{doorStatus == 0 ? @drawable/bg_custom_locker_success_button : @drawable/bg_custom_locker_failed_button}"
-                android:layout_marginHorizontal="10dp"
-                android:text="001" />
+                android:background="@{doorStatus == 0 ? @drawable/bg_custom_locker_success_button : @drawable/bg_custom_locker_failed_button}" />
 
             <ImageView
                 android:id="@+id/ivArrowRight"

@@ -9,13 +9,14 @@ import com.lock.smartlocker.databinding.FragmentAdminDashboardBinding
 import com.lock.smartlocker.ui.base.BaseFragment
 import com.lock.smartlocker.ui.input_serial_number.InputSerialNumberFragment
 import com.lock.smartlocker.util.ConstantUtils
+import com.lock.smartlocker.util.view.custom.CustomConfirmDialog
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 
 
 class AdminDashboardFragment : BaseFragment<FragmentAdminDashboardBinding, AdminDashboardViewModel>(),
-    KodeinAware, View.OnClickListener {
+    KodeinAware, View.OnClickListener, CustomConfirmDialog.ConfirmationDialogListener {
 
     override val kodein by kodein()
     private val factory: AdminDashboardViewModelFactory by instance()
@@ -38,6 +39,9 @@ class AdminDashboardFragment : BaseFragment<FragmentAdminDashboardBinding, Admin
         mViewDataBinding?.headerBar?.ivBack?.setOnClickListener(this)
         mViewDataBinding?.llTopupItems?.setOnClickListener(this)
         mViewDataBinding?.llCloseApp?.setOnClickListener(this)
+        mViewDataBinding?.llSettings?.setOnClickListener(this)
+        mViewDataBinding?.llManageLockers?.setOnClickListener(this)
+        mViewDataBinding?.llRetrieveItems?.setOnClickListener(this)
     }
 
     private fun initData(){
@@ -63,7 +67,29 @@ class AdminDashboardFragment : BaseFragment<FragmentAdminDashboardBinding, Admin
                     navigateTo(R.id.action_adminDashboardFragment_to_inputSerialNumberFragment2, bundle)
                 }else viewModel.mMessage.postValue(R.string.error_no_available_locker)
             }
-            R.id.ll_close_app -> activity?.finishAffinity()
+            R.id.ll_close_app -> {
+                val dialog = CustomConfirmDialog.newInstance(
+                    message = getString(R.string.dialog_close_app),
+                )
+                dialog.show(childFragmentManager, InputSerialNumberFragment.CONFIRMATION_DIALOG_TAG)
+
+            }
+            R.id.ll_settings -> {
+                navigateTo(R.id.action_adminDashboardFragment_to_settingFragment, null)
+            }
+            R.id.ll_manage_lockers -> {
+                navigateTo(R.id.action_adminDashboardFragment_to_manageLockerFragment, null)
+            }
+            R.id.ll_retrieve_items -> {
+                navigateTo(R.id.action_adminDashboardFragment_to_retrieveItemFragment, null)
+            }
         }
+    }
+
+    override fun onDialogConfirmClick(dialogTag: String?) {
+        activity?.finishAffinity()
+    }
+
+    override fun onDialogCancelClick() {
     }
 }

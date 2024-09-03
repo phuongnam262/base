@@ -94,7 +94,8 @@ class RegisterFaceViewModel(
                                 addPersonModel.personGroup,
                                 0,
                                 emailRegister.value,
-                                0
+                                0,
+                                strBase64
                             )
                         val saveUser = userLockerRepository.saveUser(userLockerModel)
                         if (saveUser > 0) {

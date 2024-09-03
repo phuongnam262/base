@@ -7,6 +7,7 @@ data class Staff(
     val userName: String,
     @SerializedName("mobile_number")
     val mobileNumber: String,
+    @SerializedName("email")
     val email: String,
     @SerializedName("user_type")
     val userType: Int,

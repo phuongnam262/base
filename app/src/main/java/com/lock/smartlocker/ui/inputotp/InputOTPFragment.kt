@@ -56,11 +56,26 @@ class InputOTPFragment : BaseFragment<FragmentInputOtpBinding, InputOTPViewModel
                     }
                     navigateTo(R.id.action_inputOTPFragment2_to_categoryFragment, bundle)
                 }else{
+                    val isOpenManager = arguments?.getString(ConstantUtils.TYPE_OPEN_MANAGER) != null
                     val bundle = Bundle().apply {
                         putString(InputEmailFragment.EMAIL_REGISTER, arguments?.getString(
                             InputEmailFragment.EMAIL_REGISTER))
                     }
-                    navigateTo(R.id.action_inputOTPFragment_to_registerFaceFragment, bundle)
+                    if(isOpenManager){
+                        if (arguments?.getString(ConstantUtils.TYPE_OPEN_MANAGER) == ConstantUtils.TYPE_ADMIN_CONSOLE) {
+                            navigateTo(
+                                R.id.action_inputOTPFragment_to_adminDashboardFragment,
+                                bundle
+                            )
+                        } else {
+                            navigateTo(
+                                R.id.action_inputOTPFragment_to_faceListFragment,
+                                bundle
+                            )
+                        }
+                    }else{
+                        navigateTo(R.id.action_inputOTPFragment_to_registerFaceFragment, bundle)
+                    }
                 }
             }
         }

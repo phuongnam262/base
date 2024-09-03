@@ -8,7 +8,6 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
 import com.lock.smartlocker.R
 import com.lock.smartlocker.util.CommonUtils
@@ -65,17 +64,17 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : BaseAppCom
      * Handling show loading icon, message, snackbar
      */
     private fun setupObservers() {
-        mViewModel?.mLoading?.observe(this, Observer {
+        mViewModel?.mLoading?.observe(this) {
             if (it != null && it) showLoading()
             else hideLoading()
-        })
-        mViewModel?.mMessage?.observe(this, Observer {
+        }
+        mViewModel?.mMessage?.observe(this) {
             it?.let { CommonUtils.showErrorDialog(this, "", getString(it)) }
-        })
-        mViewModel?.mStatusText?.observe(this, Observer {
+        }
+        mViewModel?.mStatusText?.observe(this) {
             it?.let { mViewModel?.statusText?.postValue(getString(it)) }
             mViewModel?.showStatusText?.postValue(true)
-        })
+        }
     }
 
     /**
@@ -128,7 +127,8 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : BaseAppCom
     }
 
     // In ManagerMenuActivity.kt
-    fun showFragment(fragment: Fragment, navGraphId: Int, addToBackStack: Boolean = false, typeOpen: String? = null) {
+    fun showFragment(fragment: Fragment, navGraphId: Int, addToBackStack: Boolean = false, typeOpen: String? = null
+    , typeManager: String? = null) {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment_main) as NavHostFragment
         val navController = navHostFragment.navController
         val navInflater = navController.navInflater
@@ -138,6 +138,11 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : BaseAppCom
         if (typeOpen != null){
             val bundle = Bundle()
             bundle.putString(ConstantUtils.TYPE_OPEN, typeOpen)
+            fragment.arguments = bundle
+        }
+        if (typeManager != null){
+            val bundle = Bundle()
+            bundle.putString(ConstantUtils.TYPE_OPEN_MANAGER, typeManager)
             fragment.arguments = bundle
         }
         if (addToBackStack) {

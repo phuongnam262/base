@@ -9,6 +9,11 @@ class InputOTPViewModel(
 ) : BaseViewModel() {
 
     val otpText = MutableLiveData<String>()
+    val otpEmail = MutableLiveData<String>()
+
+    fun sendOTP() {
+
+    }
 
     fun onResendClicked() {
 

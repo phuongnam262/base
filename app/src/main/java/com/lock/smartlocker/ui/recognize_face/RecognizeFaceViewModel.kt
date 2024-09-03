@@ -16,7 +16,7 @@ import com.lock.smartlocker.util.NoInternetException
 import kotlinx.coroutines.launch
 
 class RecognizeFaceViewModel(
-    private val userLockerRepository: UserFaceRepository,
+    private val userFaceRepository: UserFaceRepository,
     private val managerRepository: ManagerRepository
 ) : BaseViewModel() {
     var recognizeFaceListener: RecognizeFaceListener? = null
@@ -27,7 +27,7 @@ class RecognizeFaceViewModel(
             mLoading.postValue(true)
             try {
                 val imageBase64Request = ImageBase64Request(strBase64)
-                val getDetectResponse = userLockerRepository.detectImage(imageBase64Request)
+                val getDetectResponse = userFaceRepository.detectImage(imageBase64Request)
                 getDetectResponse.errorCode.let {
                     if (it == ConstantUtils.ERROR_CODE_SUCCESS) {
                         if (getDetectResponse.result.liveness == 1) {
@@ -51,7 +51,7 @@ class RecognizeFaceViewModel(
             mLoading.postValue(true)
             try {
                 val imageSearchRequest = ImageSearchRequest(strBase64)
-                val getSearchResponse = userLockerRepository.searchPerson(imageSearchRequest)
+                val getSearchResponse = userFaceRepository.searchPerson(imageSearchRequest)
                 getSearchResponse.errorCode.let {
                     if (it == ConstantUtils.ERROR_CODE_SUCCESS) {
                         if (getSearchResponse.result != null) {
@@ -95,7 +95,7 @@ class RecognizeFaceViewModel(
     private fun getUserLocker(personCode: String) {
         ioScope.launch {
             mLoading.postValue(true)
-            val getUser = userLockerRepository.getUsedLocker(personCode)
+            val getUser = userFaceRepository.getUserLocker(personCode)
             if (getUser?.id != null) {
                 getUser.email?.let {
                     PreferenceHelper.writeString(ConstantUtils.ADMIN_NAME, it)

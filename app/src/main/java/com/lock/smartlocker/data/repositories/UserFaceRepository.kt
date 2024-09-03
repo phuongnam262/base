@@ -61,6 +61,13 @@ class UserFaceRepository(
     }
 
     /*
+    * call API delete person
+    * */
+    suspend fun deleteAllPerson(groupId: String): BaseFaceResponse {
+        return apiRequest { api.provideFaceAPIService().deleteAllPerson(groupId) }
+    }
+
+    /*
     * save user to local database
     * */
     suspend fun saveUser(user: UserLockerModel) = db.getUserLockerDAO().insertUser(user)
@@ -68,10 +75,20 @@ class UserFaceRepository(
     /*
     * get info user registed locker on DB
     * */
-    suspend fun getUsedLocker(personCode: String) = db.getUserLockerDAO().getUserLocker(personCode)
+    suspend fun getUserLocker(personCode: String) = db.getUserLockerDAO().getUserLocker(personCode)
 
     /*
     * delete user registed locker on DB
     * */
-    suspend fun deleteUsedLocker(personCode: String) = db.getUserLockerDAO().deleteUserByCode(personCode)
+    suspend fun deleteUserLocker(personCode: String) = db.getUserLockerDAO().deleteUserByCode(personCode)
+
+    /*
+    * delete user registed locker on DB
+    * */
+    suspend fun deleteAllUserLocker() = db.getUserLockerDAO().deleteAllUser()
+
+    /*
+   * get all user on DB
+   * */
+    suspend fun getAllUserLocker() = db.getUserLockerDAO().getAllUserLocker()
 }

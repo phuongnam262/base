@@ -89,49 +89,35 @@ abstract class BaseViewModel() : ViewModel() {
             Status.NO_RESPONSE.value.toString() -> mMessage.postValue(R.string.server_error)
             ConstantUtils.ERROR_NO_AVAILABLE_ITEM -> mMessage.postValue(R.string.error_no_available_item)
 
-            ConstantUtils.LOGIN_EMAIL_NOT_EXISTED -> {
-                mStatusText.postValue(R.string.login_error_1001)
-            }
+            ConstantUtils.LOGIN_EMAIL_NOT_EXISTED -> mStatusText.postValue(R.string.login_error_1001)
 
-            ConstantUtils.LOGIN_WRONG_PASSWORD ->  {
-                mStatusText.postValue(R.string.login_error_1002)
-            }
+            ConstantUtils.LOGIN_WRONG_PASSWORD -> mStatusText.postValue(R.string.login_error_1002)
 
-            ConstantUtils.EMAIL_NOT_CORRECT_FORMAT -> {
-                mStatusText.postValue(R.string.email_not_correct_format)
-            }
+            ConstantUtils.EMAIL_NOT_CORRECT_FORMAT -> mStatusText.postValue(R.string.email_not_correct_format)
 
-            ConstantUtils.ADMIN_WRONG_USERNAME_PASS -> {
-                mStatusText.postValue(R.string.error_username_password)
-            }
+            ConstantUtils.ADMIN_WRONG_USERNAME_PASS -> mStatusText.postValue(R.string.error_username_password)
 
-            ConstantUtils.ADMIN_ACCOUNT_LOCKED -> {
-                mStatusText.postValue(R.string.error_account_locked)
-            }
+            ConstantUtils.ADMIN_ACCOUNT_LOCKED -> mStatusText.postValue(R.string.error_account_locked)
 
-            ConstantUtils.DOOR_HAS_NOT_BEEN_CLOSE -> {
-                mStatusText.postValue(R.string.door_has_not_been_closed)
-            }
+            ConstantUtils.DOOR_HAS_NOT_BEEN_CLOSE -> mStatusText.postValue(R.string.door_has_not_been_closed)
 
-            ConstantUtils.SERIAL_NUMBER_INVALID, ConstantUtils.SERIAL_NUMBER_INVALID_1 -> {
-                mStatusText.postValue(R.string.error_invalid_serial)
-            }
+            ConstantUtils.SERIAL_NUMBER_INVALID, ConstantUtils.SERIAL_NUMBER_INVALID_1 -> mStatusText.postValue(R.string.error_invalid_serial)
 
-            ConstantUtils.ERROR_LOGIC -> {
-                mMessage.postValue(R.string.error_logic)
-            }
+            ConstantUtils.ERROR_LOGIC -> mMessage.postValue(R.string.error_logic)
 
-            ConstantUtils.INVALID_OTP -> {
-                mMessage.postValue(R.string.error_invalid_otp)
-            }
+            ConstantUtils.INVALID_OTP -> mStatusText.postValue(R.string.error_invalid_otp)
 
-            ConstantUtils.CREATE_TRANSACTION_FAILED -> {
-                mMessage.postValue(R.string.error_create_transaction_failed)
-            }
+            ConstantUtils.CREATE_TRANSACTION_FAILED -> mStatusText.postValue(R.string.error_create_transaction_failed)
 
-            ConstantUtils.ERROR_UNABLE_LOCKER -> {
-                mMessage.postValue(R.string.error_unable_locker)
-            }
+            ConstantUtils.ERROR_UNABLE_LOCKER -> mStatusText.postValue(R.string.error_unable_locker)
+
+            ConstantUtils.PASSWORD_POLICY_UPDATE -> mStatusText.postValue(R.string.error_password_policy_update)
+
+            ConstantUtils.PASSWORD_EXPIRED -> mStatusText.postValue(R.string.error_password_expired)
+
+            ConstantUtils.ADMIN_NO_PERMISSION -> mStatusText.postValue(R.string.error_no_permission_locker)
+
+            ConstantUtils.ERROR_NO_RETRIEVE_ITEM -> mStatusText.postValue(R.string.error_no_item_available)
 
             else -> mMessage.postValue(R.string.error_all)
 
