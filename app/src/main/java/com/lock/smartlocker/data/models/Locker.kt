@@ -20,5 +20,5 @@ data class Locker(
     @SerializedName("locker_status") var lockerStatus: Int,
     @SerializedName("item_detect") val itemDetect: Boolean,
     @SerializedName("block_collect_item") val blockCollectItem: Boolean,
-    var doorStatus: Int = 0,
+    var doorStatus: Int,
 )

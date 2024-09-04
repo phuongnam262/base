@@ -103,7 +103,8 @@ class DepositItemViewModel(
                 val returnItemRequest = ReturnItemRequest(
                     serial_number = itemReturn.serialNumber,
                     locker_id = itemReturn.lockerId,
-                    reason_faulty = itemReturn.reasonFaulty
+                    reason_faulty = itemReturn.reasonFaulty,
+                    is_faulty = itemReturn.reasonFaulty.isNotEmpty()
                 )
                 if (typeInput.value == ConstantUtils.TYPE_RETURN) returnItem(returnItemRequest)
                 else topupItem(returnItemRequest)
