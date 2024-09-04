@@ -45,36 +45,49 @@ class InputOTPFragment : BaseFragment<FragmentInputOtpBinding, InputOTPViewModel
     }
 
     override fun onClick(v: View?) {
-        when(v?.id){
-            R.id.btn_resend_otp -> navigateTo(R.id.action_inputOTPFragment_to_registerFaceFragment, null)
-            R.id.rl_home -> activity?.finish()
-            R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
-            R.id.btn_process -> {
-                if (arguments?.getString(ConstantUtils.TYPE_OPEN) != null) {
-                    val bundle = Bundle().apply {
-                        putString(ConstantUtils.TYPE_OPEN, arguments?.getString(ConstantUtils.TYPE_OPEN))
-                    }
-                    navigateTo(R.id.action_inputOTPFragment2_to_categoryFragment, bundle)
-                }else{
-                    val isOpenManager = arguments?.getString(ConstantUtils.TYPE_OPEN_MANAGER) != null
-                    val bundle = Bundle().apply {
-                        putString(InputEmailFragment.EMAIL_REGISTER, arguments?.getString(
-                            InputEmailFragment.EMAIL_REGISTER))
-                    }
-                    if(isOpenManager){
-                        if (arguments?.getString(ConstantUtils.TYPE_OPEN_MANAGER) == ConstantUtils.TYPE_ADMIN_CONSOLE) {
-                            navigateTo(
-                                R.id.action_inputOTPFragment_to_adminDashboardFragment,
-                                bundle
-                            )
-                        } else {
-                            navigateTo(
-                                R.id.action_inputOTPFragment_to_faceListFragment,
-                                bundle
+        if (checkDebouncedClick()) {
+            when (v?.id) {
+                R.id.btn_resend_otp -> navigateTo(
+                    R.id.action_inputOTPFragment_to_registerFaceFragment,
+                    null
+                )
+
+                R.id.rl_home -> activity?.finish()
+                R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
+                R.id.btn_process -> {
+                    if (arguments?.getString(ConstantUtils.TYPE_OPEN) != null) {
+                        val bundle = Bundle().apply {
+                            putString(
+                                ConstantUtils.TYPE_OPEN,
+                                arguments?.getString(ConstantUtils.TYPE_OPEN)
                             )
                         }
-                    }else{
-                        navigateTo(R.id.action_inputOTPFragment_to_registerFaceFragment, bundle)
+                        navigateTo(R.id.action_inputOTPFragment2_to_categoryFragment, bundle)
+                    } else {
+                        val isOpenManager =
+                            arguments?.getString(ConstantUtils.TYPE_OPEN_MANAGER) != null
+                        val bundle = Bundle().apply {
+                            putString(
+                                InputEmailFragment.EMAIL_REGISTER, arguments?.getString(
+                                    InputEmailFragment.EMAIL_REGISTER
+                                )
+                            )
+                        }
+                        if (isOpenManager) {
+                            if (arguments?.getString(ConstantUtils.TYPE_OPEN_MANAGER) == ConstantUtils.TYPE_ADMIN_CONSOLE) {
+                                navigateTo(
+                                    R.id.action_inputOTPFragment_to_adminDashboardFragment,
+                                    bundle
+                                )
+                            } else {
+                                navigateTo(
+                                    R.id.action_inputOTPFragment_to_faceListFragment,
+                                    bundle
+                                )
+                            }
+                        } else {
+                            navigateTo(R.id.action_inputOTPFragment_to_registerFaceFragment, bundle)
+                        }
                     }
                 }
             }

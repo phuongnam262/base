@@ -6,6 +6,8 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -180,5 +182,14 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
      */
     protected fun showKeyboard(view: View) {
         mActivity?.showKeyBoard(view)
+    }
+
+    private var lastClickTime = 0L
+    fun checkDebouncedClick() : Boolean {
+            val currentTime = System.currentTimeMillis()
+            if (currentTime - lastClickTime >= 600L) {
+                lastClickTime = currentTime
+                return true
+            }else return false
     }
 }

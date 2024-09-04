@@ -78,21 +78,25 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(),
     }
 
     override fun onClick(v: View?) {
-        when(v?.id){
-            R.id.rl_home -> {
-                CategoryFragment.listCartItem.clear()
-                activity?.finish()
-            }
-            R.id.iv_back -> {
-                activity?.onBackPressedDispatcher?.onBackPressed()
-            }
-            R.id.rl_item -> {}
-            R.id.btn_process -> {
-                if (arguments?.getString(ConstantUtils.TYPE_OPEN) != null) {
-                    if (arguments?.getString(ConstantUtils.TYPE_OPEN) == ConstantUtils.TYPE_LOAN) {
-                        viewModel.createInventoryTransaction(1)
-                    } else {
-                        viewModel.createInventoryTransaction(2)
+        if (checkDebouncedClick()) {
+            when (v?.id) {
+                R.id.rl_home -> {
+                    CategoryFragment.listCartItem.clear()
+                    activity?.finish()
+                }
+
+                R.id.iv_back -> {
+                    activity?.onBackPressedDispatcher?.onBackPressed()
+                }
+
+                R.id.rl_item -> {}
+                R.id.btn_process -> {
+                    if (arguments?.getString(ConstantUtils.TYPE_OPEN) != null) {
+                        if (arguments?.getString(ConstantUtils.TYPE_OPEN) == ConstantUtils.TYPE_LOAN) {
+                            viewModel.createInventoryTransaction(1)
+                        } else {
+                            viewModel.createInventoryTransaction(2)
+                        }
                     }
                 }
             }

@@ -1,4 +1,5 @@
 <layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
@@ -22,7 +23,7 @@
         android:orientation="vertical"
         android:padding="@dimen/dp_10"
         tools:ignore="TouchTargetSizeCheck"
-        android:onClick="@{() -> viewModel.onCategorySelected(category)}">
+        app:debouncedClick="@{() -> viewModel.onCategorySelected(category)}">
 
         <TextView
             android:id="@+id/categoryTxt"

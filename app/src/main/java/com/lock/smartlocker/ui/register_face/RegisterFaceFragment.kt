@@ -58,9 +58,9 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
     private var analysisUseCase: ImageAnalysis? = null
     private var imageProcessor: VisionImageProcessor? = null
     private var needUpdateGraphicOverlayImageSourceInfo = false
-    private var lensFacing = CameraSelector.LENS_FACING_FRONT
-    private var rotateCamera = Surface.ROTATION_0
-    private var rotateDetect = Surface.ROTATION_0
+    private var lensFacing = CameraSelector.LENS_FACING_EXTERNAL
+    private var rotateCamera = Surface.ROTATION_270
+    private var rotateDetect = Surface.ROTATION_90
     private var cameraSelector: CameraSelector? = null
     private var imageCapture: ImageCapture? = null
     private var isExited: Boolean = false
@@ -128,17 +128,20 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
     }
 
     override fun onClick(v: View?) {
-        when (v?.id) {
-            R.id.rl_home -> activity?.finish()
-            R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
-            R.id.btn_process -> {
-                if (isExited) {
-                    isExited = false
-                    mViewDataBinding?.ivFrame?.setBackgroundResource(R.drawable.bg_face_register)
-                    mViewDataBinding?.bottomMenu?.btnProcess?.text = getString(R.string.process_button)
-                    viewModel.showStatusText.value = false
-                    FaceDetectorProcessor.isSuccess = false
-                    bindAllCameraUseCases()
+        if (checkDebouncedClick()) {
+            when (v?.id) {
+                R.id.rl_home -> activity?.finish()
+                R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
+                R.id.btn_process -> {
+                    if (isExited) {
+                        isExited = false
+                        mViewDataBinding?.ivFrame?.setBackgroundResource(R.drawable.bg_face_register)
+                        mViewDataBinding?.bottomMenu?.btnProcess?.text =
+                            getString(R.string.process_button)
+                        viewModel.showStatusText.value = false
+                        FaceDetectorProcessor.isSuccess = false
+                        bindAllCameraUseCases()
+                    }
                 }
             }
         }

@@ -72,11 +72,13 @@ class InputEmailFragment : BaseFragment<FragmentInputEmailBinding, InputEmailVie
     }
 
     override fun onClick(v: View?) {
-        when(v?.id){
-            R.id.rl_home -> activity?.finish()
-            R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
-            R.id.btn_process -> {
-                viewModel.consumerLogin(arguments?.getString(ConstantUtils.TYPE_OPEN))
+        if (checkDebouncedClick()) {
+            when (v?.id) {
+                R.id.rl_home -> activity?.finish()
+                R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
+                R.id.btn_process -> {
+                    viewModel.consumerLogin(arguments?.getString(ConstantUtils.TYPE_OPEN))
+                }
             }
         }
     }

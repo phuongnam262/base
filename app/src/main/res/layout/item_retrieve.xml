@@ -34,9 +34,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/segoe_ui_regular"
+                android:maxLines="1"
                 android:text="@{lockerRetrieve.modelName}"
                 android:textColor="@color/colorBlack"
-                android:textSize="20sp"
+                android:textSize="@dimen/sp_13"
+                tools:eclipse="end"
                 tools:text="Asus VivoBook A512" />
 
 
@@ -71,6 +73,7 @@
                     android:layout_height="@dimen/dp_40"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
+                    android:visibility="invisible"
                     app:srcCompat="@drawable/arrow_right_icon" />
 
             </LinearLayout>
@@ -82,12 +85,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/segoe_ui_regular"
-            tools:text="@string/not_retrieved"
             android:text="@{lockerRetrieve.retrieveStatus == 0 ? @string/not_retrieved : @string/retrieved }"
             android:textColor="@{lockerRetrieve.retrieveStatus == 0 ? @color/redD0000E : @color/green009C2C }"
             android:textSize="@dimen/sp_14"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/not_retrieved" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

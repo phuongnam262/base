@@ -134,35 +134,37 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeLis
 
     override fun onClick(view: View?) {
         if (isOpenLocalServer) {
-            if (view != null) {
-                when (view.id) {
-                    R.id.btnMenu -> mViewDataBinding?.drawerLayout?.openDrawer(GravityCompat.START)
-                    R.id.tv_en -> {
-                        setNewLocale(ConstantUtils.Language.ENGLISH)
-                    }
+            if (checkDebouncedClick()) {
+                if (view != null) {
+                    when (view.id) {
+                        R.id.btnMenu -> mViewDataBinding?.drawerLayout?.openDrawer(GravityCompat.START)
+                        R.id.tv_en -> {
+                            setNewLocale(ConstantUtils.Language.ENGLISH)
+                        }
 
-                    R.id.tv_vi -> {
-                        setNewLocale(ConstantUtils.Language.VIETNAMESE)
-                    }
+                        R.id.tv_vi -> {
+                            setNewLocale(ConstantUtils.Language.VIETNAMESE)
+                        }
 
-                    R.id.ll_register_face -> openManagerFromLeftMenu(ConstantUtils.TYPE_REGISTER_FACE)
+                        R.id.ll_register_face -> openManagerFromLeftMenu(ConstantUtils.TYPE_REGISTER_FACE)
 
-                    R.id.ll_manage_face -> openManagerFromLeftMenu(ConstantUtils.TYPE_MANAGER_FACE)
+                        R.id.ll_manage_face -> openManagerFromLeftMenu(ConstantUtils.TYPE_MANAGER_FACE)
 
-                    R.id.ll_admin_console -> openManagerFromLeftMenu(ConstantUtils.TYPE_ADMIN_CONSOLE)
+                        R.id.ll_admin_console -> openManagerFromLeftMenu(ConstantUtils.TYPE_ADMIN_CONSOLE)
 
-                    R.id.container_loan -> {
-                        startActivityWithOneValue(
-                            ConstantUtils.TYPE_OPEN, ConstantUtils.TYPE_LOAN,
-                            ReturnActivity::class.java
-                        )
-                    }
+                        R.id.container_loan -> {
+                            startActivityWithOneValue(
+                                ConstantUtils.TYPE_OPEN, ConstantUtils.TYPE_LOAN,
+                                ReturnActivity::class.java
+                            )
+                        }
 
-                    R.id.container_collect -> {
-                        startActivityWithOneValue(
-                            ConstantUtils.TYPE_OPEN, ConstantUtils.TYPE_COLLECT,
-                            ReturnActivity::class.java
-                        )
+                        R.id.container_collect -> {
+                            startActivityWithOneValue(
+                                ConstantUtils.TYPE_OPEN, ConstantUtils.TYPE_COLLECT,
+                                ReturnActivity::class.java
+                            )
+                        }
                     }
                 }
             }

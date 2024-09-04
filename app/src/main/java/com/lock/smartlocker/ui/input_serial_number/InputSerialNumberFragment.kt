@@ -72,25 +72,27 @@ class InputSerialNumberFragment : BaseFragment<FragmentInputSerialNumberBinding,
     }
 
     override fun onClick(v: View?) {
-        when(v?.id){
-            R.id.rl_home -> activity?.finish()
-            R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
-            R.id.btn_process -> {
-                val newSerialNumber = viewModel.serialNumber.value
-                if (isReturnFlow) {
-                    if (viewModel.isItemDetailVisible.value == true && newSerialNumber?.lowercase() == viewModel.itemReturnData.value?.serialNumber?.lowercase()) {
-                        val dialog = CustomConfirmDialog.newInstance(
-                            message = getString(R.string.dialog_attention),
-                        )
-                        dialog.show(childFragmentManager, CONFIRMATION_DIALOG_TAG)
+        if (checkDebouncedClick()) {
+            when (v?.id) {
+                R.id.rl_home -> activity?.finish()
+                R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
+                R.id.btn_process -> {
+                    val newSerialNumber = viewModel.serialNumber.value
+                    if (isReturnFlow) {
+                        if (viewModel.isItemDetailVisible.value == true && newSerialNumber?.lowercase() == viewModel.itemReturnData.value?.serialNumber?.lowercase()) {
+                            val dialog = CustomConfirmDialog.newInstance(
+                                message = getString(R.string.dialog_attention),
+                            )
+                            dialog.show(childFragmentManager, CONFIRMATION_DIALOG_TAG)
+                        } else {
+                            viewModel.getItemReturn()
+                        }
                     } else {
-                        viewModel.getItemReturn()
-                    }
-                } else {
-                    if (viewModel.isItemDetailVisible.value == true && newSerialNumber?.lowercase() == viewModel.itemReturnData.value?.serialNumber?.lowercase()) {
-                        navigateToSelectAvailableLockerFragment()
-                    } else {
-                        viewModel.getItemTopup()
+                        if (viewModel.isItemDetailVisible.value == true && newSerialNumber?.lowercase() == viewModel.itemReturnData.value?.serialNumber?.lowercase()) {
+                            navigateToSelectAvailableLockerFragment()
+                        } else {
+                            viewModel.getItemTopup()
+                        }
                     }
                 }
             }

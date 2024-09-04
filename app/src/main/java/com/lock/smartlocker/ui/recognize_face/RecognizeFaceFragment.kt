@@ -60,9 +60,9 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
     private var analysisUseCase: ImageAnalysis? = null
     private var imageProcessor: VisionImageProcessor? = null
     private var needUpdateGraphicOverlayImageSourceInfo = false
-    private var lensFacing = CameraSelector.LENS_FACING_FRONT
-    private var rotateCamera = Surface.ROTATION_0
-    private var rotateDetect = Surface.ROTATION_0
+    private var lensFacing = CameraSelector.LENS_FACING_EXTERNAL
+    private var rotateCamera = Surface.ROTATION_270
+    private var rotateDetect = Surface.ROTATION_90
     private var cameraSelector: CameraSelector? = null
     private var imageCapture: ImageCapture? = null
     private var typeOpen : String? = null
@@ -134,27 +134,31 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
     }
 
     override fun onClick(v: View?) {
-        when (v?.id) {
-            R.id.rl_home -> activity?.finish()
-            R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
-            R.id.btn_retry -> {
-                mViewDataBinding?.ivFrame?.setBackgroundResource(R.drawable.bg_face_register)
-                viewModel.showStatusText.value = false
-                FaceDetectorProcessor.isSuccess = false
-                bindAllCameraUseCases()
-            }
-            R.id.btn_process -> {
-                viewModel.consumerLogin()
-            }
-            R.id.btn_using_mail -> {
-                imageProcessor?.run { this.stop() }
-                if (cameraProvider != null) {
-                    cameraProvider!!.unbindAll()
+        if (checkDebouncedClick()) {
+            when (v?.id) {
+                R.id.rl_home -> activity?.finish()
+                R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
+                R.id.btn_retry -> {
+                    mViewDataBinding?.ivFrame?.setBackgroundResource(R.drawable.bg_face_register)
+                    viewModel.showStatusText.value = false
+                    FaceDetectorProcessor.isSuccess = false
+                    bindAllCameraUseCases()
                 }
-                val bundle = Bundle().apply {
-                    putString(ConstantUtils.TYPE_OPEN, typeOpen )
+
+                R.id.btn_process -> {
+                    viewModel.consumerLogin()
                 }
-                navigateTo(R.id.action_recognizeFaceFragment_to_inputEmailFragment2, bundle)
+
+                R.id.btn_using_mail -> {
+                    imageProcessor?.run { this.stop() }
+                    if (cameraProvider != null) {
+                        cameraProvider!!.unbindAll()
+                    }
+                    val bundle = Bundle().apply {
+                        putString(ConstantUtils.TYPE_OPEN, typeOpen)
+                    }
+                    navigateTo(R.id.action_recognizeFaceFragment_to_inputEmailFragment2, bundle)
+                }
             }
         }
     }

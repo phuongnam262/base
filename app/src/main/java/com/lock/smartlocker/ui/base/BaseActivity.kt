@@ -156,4 +156,13 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : BaseAppCom
                 .commit()
         }
     }
+
+    private var lastClickTime = 0L
+    fun checkDebouncedClick() : Boolean {
+        val currentTime = System.currentTimeMillis()
+        if (currentTime - lastClickTime >= 600L) {
+            lastClickTime = currentTime
+            return true
+        }else return false
+    }
 }

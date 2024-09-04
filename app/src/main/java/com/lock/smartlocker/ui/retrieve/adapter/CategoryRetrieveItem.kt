@@ -17,7 +17,7 @@ class CategoryRetrieveItem(
     override fun bind(viewBinding: ItemCategoryRetrieveBinding, position: Int) {
         viewBinding.category = category
         viewBinding.llCategory.setOnClickListener {
-            //viewModel.onCategorySelected(category)
+            viewModel.onCategorySelected(category)
         }
     }
 }

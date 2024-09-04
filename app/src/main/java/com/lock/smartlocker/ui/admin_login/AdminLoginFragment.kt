@@ -49,11 +49,13 @@ class AdminLoginFragment : BaseFragment<FragmentAdminLoginBinding, AdminLoginVie
     }
 
     override fun onClick(v: View?) {
-        when (v?.id) {
-            R.id.rl_home -> activity?.finish()
-            R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
-            R.id.btn_process -> {
-                viewModel.adminLogin()
+        if (checkDebouncedClick()) {
+            when (v?.id) {
+                R.id.rl_home -> activity?.finish()
+                R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
+                R.id.btn_process -> {
+                    viewModel.adminLogin()
+                }
             }
         }
     }

@@ -2,13 +2,16 @@ package com.lock.smartlocker.ui.retrieve
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
 import com.lock.smartlocker.databinding.FragmentRetrieveItemBinding
 import com.lock.smartlocker.ui.base.BaseFragment
+import com.lock.smartlocker.ui.category.adapter.ModelItem
 import com.lock.smartlocker.ui.retrieve.adapter.CategoryRetrieveItem
+import com.lock.smartlocker.ui.retrieve.adapter.RetrieveItem
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import org.kodein.di.KodeinAware
@@ -50,24 +53,34 @@ class RetrieveItemFragment : BaseFragment<FragmentRetrieveItemBinding, RetrieveV
     private fun initData(){
         mViewDataBinding?.rvCategories?.adapter = categoryAdapter
         mViewDataBinding?.rvModels?.adapter = retrieveAdapter
-        viewModel.categories.observe(viewLifecycleOwner) {
-            viewModel.getAllItemRetrieve()
-        }
+
         viewModel.categoriesRetrieve.observe(viewLifecycleOwner) { categories ->
             categoryAdapter.update(categories.map {
                 CategoryRetrieveItem(it, viewModel)
             })
+            if (categories.isNotEmpty())
+                viewModel.onCategorySelected(categories[0])
+        }
+
+        viewModel.retrieveModels.observe(viewLifecycleOwner) { models ->
+            retrieveAdapter.update(models.map { RetrieveItem(it, viewModel) })
+        }
+
+        viewModel.categoryIdSelected.observe(viewLifecycleOwner) {
+            categoryAdapter.notifyDataSetChanged()
         }
     }
 
     override fun onClick(v: View?) {
-        when(v?.id){
-            R.id.rl_home -> activity?.finish()
-            R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
-            R.id.rl_item -> {}
-            R.id.btn_process -> {
+        if (checkDebouncedClick()) {
+            Log.e("RetrieveItemFragment", "onClick: ${v?.id}")
+            when (v?.id) {
+                R.id.rl_home -> activity?.finish()
+                R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
+                R.id.btn_process -> {
 
+                }
             }
-        }
+        }else Log.e("RetrieveItemFragment", "onClick: false")
     }
 }

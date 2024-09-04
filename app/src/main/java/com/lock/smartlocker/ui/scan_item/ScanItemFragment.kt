@@ -66,10 +66,12 @@ class ScanItemFragment : BaseFragment<FragmentScanItemBinding, ScanItemViewModel
     }
 
     override fun onClick(v: View?) {
-        when(v?.id){
-            R.id.rl_home -> activity?.finish()
-            R.id.btn_process -> {
-                viewModel.updateInventoryTransaction()
+        if (checkDebouncedClick()) {
+            when (v?.id) {
+                R.id.rl_home -> activity?.finish()
+                R.id.btn_process -> {
+                    viewModel.updateInventoryTransaction()
+                }
             }
         }
     }

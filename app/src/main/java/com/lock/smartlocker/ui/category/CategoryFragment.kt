@@ -103,14 +103,19 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel
     }
 
     override fun onClick(v: View?) {
-        when(v?.id){
-            R.id.rl_home -> activity?.finish()
-            R.id.rl_item -> {}
-            R.id.rl_cart -> {
-                val bundle = Bundle().apply {
-                    putString(ConstantUtils.TYPE_OPEN, arguments?.getString(ConstantUtils.TYPE_OPEN))
+        if (checkDebouncedClick()) {
+            when (v?.id) {
+                R.id.rl_home -> activity?.finish()
+                R.id.rl_item -> {}
+                R.id.rl_cart -> {
+                    val bundle = Bundle().apply {
+                        putString(
+                            ConstantUtils.TYPE_OPEN,
+                            arguments?.getString(ConstantUtils.TYPE_OPEN)
+                        )
+                    }
+                    navigateTo(R.id.action_categoryFragment_to_cartFragment, bundle)
                 }
-                navigateTo(R.id.action_categoryFragment_to_cartFragment, bundle)
             }
         }
     }

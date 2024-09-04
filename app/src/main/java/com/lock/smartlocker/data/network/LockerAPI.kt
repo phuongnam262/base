@@ -39,7 +39,7 @@ class LockerAPI(private val networkConnectionInterceptor: NetworkConnectionInter
             .build()
         Retrofit.Builder()
             .client(okkHttpclient)
-            .baseUrl("http://14.161.16.191:8532/")
+            .baseUrl("http://localhost:8532/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }

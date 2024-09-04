@@ -50,8 +50,7 @@
                 android:layout_marginEnd="@dimen/dp_40"
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="@+id/btnMenu"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:onClick="@{() -> viewmodel.checkOpenServer() }">
+                app:layout_constraintEnd_toEndOf="parent">
 
                 <TextView
                     android:id="@+id/tv_en"
@@ -142,7 +141,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:padding="@dimen/dp_30"
-                android:onClick="@{() -> viewmodel.getListReturnAvailableLockers() }"
+                app:debouncedClick="@{() -> viewmodel.getListReturnAvailableLockers() }"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/container_loan">
 

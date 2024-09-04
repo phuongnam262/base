@@ -74,11 +74,13 @@ class SelectFaultyFragment : BaseFragment<FragmentSelectFaultyBinding, SelectFau
     }
 
     override fun onClick(v: View?) {
-        when(v?.id){
-            R.id.rl_home -> activity?.finish()
-            R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
-            R.id.btn_process -> {
-                navigateToSelectAvailableLockerFragment()
+        if (checkDebouncedClick()) {
+            when (v?.id) {
+                R.id.rl_home -> activity?.finish()
+                R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
+                R.id.btn_process -> {
+                    navigateToSelectAvailableLockerFragment()
+                }
             }
         }
     }

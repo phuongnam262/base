@@ -40,8 +40,10 @@ class ThankFragment : BaseFragment<FragmentThankBinding, ThankViewModel>(),
     }
 
     override fun onClick(v: View?) {
-        when(v?.id){
-            R.id.rl_home -> activity?.finish()
+        if (checkDebouncedClick()) {
+            when (v?.id) {
+                R.id.rl_home -> activity?.finish()
+            }
         }
     }
 

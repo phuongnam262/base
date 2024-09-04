@@ -17,6 +17,8 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 import android.graphics.drawable.Drawable
+import android.os.Handler
+import android.os.Looper
 
 
 @BindingAdapter("imagePath")
@@ -95,5 +97,19 @@ fun setTextStyle(textView: TextView, style: String) {
         "italic" -> textView.setTypeface(null, Typeface.ITALIC)
         "bold_italic" -> textView.setTypeface(null, Typeface.BOLD_ITALIC)
         else -> textView.setTypeface(null, Typeface.NORMAL)
+    }
+}
+
+@BindingAdapter("debouncedClick")
+fun View.setDebouncedClickListener(clickListener: View.OnClickListener) {
+    val handler = Handler(Looper.getMainLooper())
+    var lastClickTime = 0L
+
+    setOnClickListener {
+        val currentTime = System.currentTimeMillis()
+        if (currentTime - lastClickTime >= 600L) {
+            lastClickTime = currentTime
+            handler.post { clickListener.onClick(this) }
+        }
     }
 }
