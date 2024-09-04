@@ -58,8 +58,14 @@ class RetrieveItemFragment : BaseFragment<FragmentRetrieveItemBinding, RetrieveV
             categoryAdapter.update(categories.map {
                 CategoryRetrieveItem(it, viewModel)
             })
-            if (categories.isNotEmpty())
+            if (categories.isNotEmpty()){
                 viewModel.onCategorySelected(categories[0])
+                mViewDataBinding?.bottomMenu?.btnProcess?.isEnabled = true
+                mViewDataBinding?.bottomMenu?.btnProcess?.alpha = 1f
+            }else{
+                mViewDataBinding?.bottomMenu?.btnProcess?.isEnabled = false
+                mViewDataBinding?.bottomMenu?.btnProcess?.alpha = 0.3f
+            }
         }
 
         viewModel.retrieveModels.observe(viewLifecycleOwner) { models ->
@@ -78,7 +84,7 @@ class RetrieveItemFragment : BaseFragment<FragmentRetrieveItemBinding, RetrieveV
                 R.id.rl_home -> activity?.finish()
                 R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
                 R.id.btn_process -> {
-
+                    viewModel.openAllLocker()
                 }
             }
         }else Log.e("RetrieveItemFragment", "onClick: false")

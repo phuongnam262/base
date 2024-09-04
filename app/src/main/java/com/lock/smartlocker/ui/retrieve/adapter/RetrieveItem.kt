@@ -16,7 +16,7 @@ class RetrieveItem(
     override fun bind(viewBinding: ItemRetrieveBinding, position: Int) {
         viewBinding.lockerRetrieve = model
         viewBinding.btnLocker.setOnClickListener {
-            //viewModel.openLocker(model.lockerId)
+            viewModel.openLocker(model.lockerId)
         }
     }
 }
