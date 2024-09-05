@@ -1,11 +1,10 @@
 package com.lock.smartlocker.data.network.services
 
-import com.lock.smartlocker.data.entities.AddGroupModel
+import com.lock.smartlocker.data.models.AddGroupModel
 import com.lock.smartlocker.data.entities.request.AddPersonRequest
 import com.lock.smartlocker.data.entities.request.ImageBase64Request
 import com.lock.smartlocker.data.entities.request.ImageSearchRequest
 import com.lock.smartlocker.data.entities.responses.BaseFaceResponse
-import com.lock.smartlocker.data.entities.responses.BaseResponse
 import com.lock.smartlocker.data.entities.responses.DetectImageResponse
 import com.lock.smartlocker.data.entities.responses.SearchResponse
 import retrofit2.Response

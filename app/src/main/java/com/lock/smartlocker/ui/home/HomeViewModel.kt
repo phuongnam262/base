@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.common.api.ApiException
 import com.google.gson.Gson
 import com.lock.smartlocker.R
-import com.lock.smartlocker.data.entities.AddGroupModel
+import com.lock.smartlocker.data.models.AddGroupModel
 import com.lock.smartlocker.data.preference.PreferenceHelper
 import com.lock.smartlocker.data.repositories.ReturnRepository
 import com.lock.smartlocker.data.repositories.UserFaceRepository

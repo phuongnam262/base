@@ -3,7 +3,7 @@ package com.lock.smartlocker.ui.register_face
 import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.common.api.ApiException
 import com.lock.smartlocker.R
-import com.lock.smartlocker.data.entities.UserLockerModel
+import com.lock.smartlocker.data.models.UserLockerModel
 import com.lock.smartlocker.data.entities.request.AddPersonRequest
 import com.lock.smartlocker.data.entities.request.ImageBase64Request
 import com.lock.smartlocker.data.entities.request.ImageSearchRequest

@@ -1,4 +1,4 @@
-package com.lock.smartlocker.data.entities
+package com.lock.smartlocker.data.models
 
 data class FaceInfoModel(
     val gender: Int = 0,

@@ -7,7 +7,7 @@
 
         <variable
             name="userLocker"
-            type="com.lock.smartlocker.data.entities.UserLockerModel" />
+            type="com.lock.smartlocker.data.models.UserLockerModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

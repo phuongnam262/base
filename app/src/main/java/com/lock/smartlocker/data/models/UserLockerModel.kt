@@ -1,4 +1,4 @@
-package com.lock.smartlocker.data.entities
+package com.lock.smartlocker.data.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

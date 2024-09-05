@@ -119,6 +119,8 @@ abstract class BaseViewModel() : ViewModel() {
 
             ConstantUtils.ERROR_NO_RETRIEVE_ITEM -> mStatusText.postValue(R.string.error_no_item_available)
 
+            ConstantUtils.ERROR_RETRIEVE_ITEM_FAIL -> mStatusText.postValue(R.string.error_retrieve_item)
+
             else -> mMessage.postValue(R.string.error_all)
 
         }

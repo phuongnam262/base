@@ -198,6 +198,7 @@
     <string name="dialog_retrieve_all">Bạn có muốn thu hồi tất cả các mục không?</string>
     <string name="error_no_faulty">Hiện tại không có đồ dùng lỗi</string>
     <string name="error_no_item_available">Không có đồ dùng nào tại trạm tủ này</string>
+    <string name="error_retrieve_item">Đồ dùng này đã được thu hồi</string>
 
     <!-- Strings for camera settings. -->
     <string name="pref_category_key_camera" translatable="false">pckc</string>

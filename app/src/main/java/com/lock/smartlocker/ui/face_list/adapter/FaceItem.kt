@@ -8,7 +8,7 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.load.resource.bitmap.Rotate
 import com.bumptech.glide.request.RequestOptions
 import com.lock.smartlocker.R
-import com.lock.smartlocker.data.entities.UserLockerModel
+import com.lock.smartlocker.data.models.UserLockerModel
 import com.lock.smartlocker.databinding.ItemFaceBinding
 import com.lock.smartlocker.ui.face_list.FaceListViewModel
 import com.xwray.groupie.databinding.BindableItem

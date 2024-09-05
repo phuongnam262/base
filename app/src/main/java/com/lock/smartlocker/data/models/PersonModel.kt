@@ -1,4 +1,4 @@
-package com.lock.smartlocker.data.entities
+package com.lock.smartlocker.data.models
 
 data class PersonModel(
     var personCode: String? = null,

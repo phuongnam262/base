@@ -45,8 +45,8 @@ class ManageLockerFragment : BaseFragment<FragmentManageLockerBinding, ManageLoc
         mViewDataBinding?.headerBar?.ivBack?.setOnClickListener(this)
         mViewDataBinding?.bottomMenu?.btnUsingMail?.setOnClickListener(this)
         mViewDataBinding?.bottomMenu?.btnUsingMail?.text = getString(R.string.open_all_button)
-        mViewDataBinding?.bottomMenu?.btnProcess?.setOnClickListener(this)
-        mViewDataBinding?.bottomMenu?.btnProcess?.text = getString(R.string.check_door_button)
+        mViewDataBinding?.bottomMenu?.btnRetry?.setOnClickListener(this)
+        mViewDataBinding?.bottomMenu?.btnRetry?.text = getString(R.string.check_door_button)
         mViewDataBinding?.rvLockers?.adapter = lockerAdapter
     }
 
@@ -78,7 +78,7 @@ class ManageLockerFragment : BaseFragment<FragmentManageLockerBinding, ManageLoc
                     viewModel.openAllLocker()
                 }
 
-                R.id.btn_process -> {
+                R.id.btn_retry -> {
                     viewModel.checkDoorStatus()
                 }
             }

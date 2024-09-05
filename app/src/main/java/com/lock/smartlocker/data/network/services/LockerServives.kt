@@ -6,6 +6,7 @@ import com.lock.smartlocker.data.entities.request.CreateInventoryTransactionRequ
 import com.lock.smartlocker.data.entities.request.DisableLockerRequest
 import com.lock.smartlocker.data.entities.request.GetAvailableItemRequest
 import com.lock.smartlocker.data.entities.request.GetItemReturnRequest
+import com.lock.smartlocker.data.entities.request.RetrieveItemRequest
 import com.lock.smartlocker.data.entities.request.ReturnItemRequest
 import com.lock.smartlocker.data.entities.request.UpdateInventoryTransactionRequest
 import com.lock.smartlocker.data.entities.responses.AdminLoginResponse
@@ -19,6 +20,7 @@ import com.lock.smartlocker.data.entities.responses.GetInformationStaffResponse
 import com.lock.smartlocker.data.entities.responses.GetListCategoryResponse
 import com.lock.smartlocker.data.entities.responses.GetSettingResponse
 import com.lock.smartlocker.data.entities.responses.ListReturnAvailableLockerResponse
+import com.lock.smartlocker.data.entities.responses.RetrieveItemResponse
 import com.lock.smartlocker.data.entities.responses.TerminalLoginResponse
 import com.lock.smartlocker.data.models.ItemReturn
 import retrofit2.Response
@@ -72,7 +74,7 @@ interface LockerServives {
         @Body returnItemRequest: ReturnItemRequest
     ): Response<BaseResponse<Map<String, Any>>>
 
-    @POST("api/item/topup-item")
+    @POST("/api/item/topup-item")
     suspend fun topupItem(
         @Body returnItemRequest: ReturnItemRequest
     ): Response<BaseResponse<Map<String, Any>>>
@@ -92,7 +94,7 @@ interface LockerServives {
         @Body updateInventoryTransactionRequest: UpdateInventoryTransactionRequest
     ): Response<BaseResponse<Any>>
 
-    @POST("api/locker/disable-locker")
+    @POST("/api/locker/disable-locker")
     suspend fun disableLocker(
         @Body disableLockerRequest: DisableLockerRequest
     ): Response<BaseResponse<DisableLockerResponse>>
@@ -100,6 +102,11 @@ interface LockerServives {
     @GET("/api/admin/get-all-item-retrieve")
     suspend fun getAllItemRetrieve(
     ): Response<BaseResponse<GetAllItemRetrieveResponse>>
+
+    @POST("/api/admin/retrieve-item")
+    suspend fun retrieveItem(
+        @Body retrieveItemRequest: RetrieveItemRequest
+    ): Response<BaseResponse<RetrieveItemResponse>>
 
     companion object {
         operator fun invoke(retrofit: Retrofit): LockerServives {

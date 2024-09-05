@@ -3,6 +3,7 @@ package com.lock.smartlocker.data.repositories
 import com.lock.smartlocker.data.entities.request.AminLoginRequest
 import com.lock.smartlocker.data.entities.request.ConsumerLoginRequest
 import com.lock.smartlocker.data.entities.request.DisableLockerRequest
+import com.lock.smartlocker.data.entities.request.RetrieveItemRequest
 import com.lock.smartlocker.data.entities.responses.AdminLoginResponse
 import com.lock.smartlocker.data.entities.responses.BaseResponse
 import com.lock.smartlocker.data.entities.responses.ConsumerLoginResponse
@@ -10,6 +11,7 @@ import com.lock.smartlocker.data.entities.responses.DisableLockerResponse
 import com.lock.smartlocker.data.entities.responses.GetAllItemRetrieveResponse
 import com.lock.smartlocker.data.entities.responses.GetInformationStaffResponse
 import com.lock.smartlocker.data.entities.responses.GetSettingResponse
+import com.lock.smartlocker.data.entities.responses.RetrieveItemResponse
 import com.lock.smartlocker.data.network.LockerAPI
 import com.lock.smartlocker.data.network.SafeApiRequest
 
@@ -39,5 +41,9 @@ class ManagerRepository (
 
     suspend fun getAllItemRetrieve(): BaseResponse<GetAllItemRetrieveResponse> {
         return apiRequest { api.provideLockerAPIService().getAllItemRetrieve() }
+    }
+
+    suspend fun retrieveItem(retrieveItemRequest: RetrieveItemRequest): BaseResponse<RetrieveItemResponse> {
+        return apiRequest { api.provideLockerAPIService().retrieveItem(retrieveItemRequest) }
     }
 }

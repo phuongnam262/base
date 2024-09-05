@@ -20,7 +20,7 @@ import org.kodein.di.generic.instance
 
 class RetrieveItemFragment : BaseFragment<FragmentRetrieveItemBinding, RetrieveViewModel>(),
     KodeinAware,
-    View.OnClickListener {
+    View.OnClickListener, RetrieveListener {
 
     override val kodein by kodein()
     private val factory: RetrieveViewModelFactory by instance()
@@ -36,6 +36,7 @@ class RetrieveItemFragment : BaseFragment<FragmentRetrieveItemBinding, RetrieveV
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.retrieveListener = this
         initView()
         initData()
     }
@@ -75,6 +76,10 @@ class RetrieveItemFragment : BaseFragment<FragmentRetrieveItemBinding, RetrieveV
         viewModel.categoryIdSelected.observe(viewLifecycleOwner) {
             categoryAdapter.notifyDataSetChanged()
         }
+
+        viewModel.listSerialRetrieve.observe(viewLifecycleOwner) {
+            viewModel.retrieveItem()
+        }
     }
 
     override fun onClick(v: View?) {
@@ -88,5 +93,15 @@ class RetrieveItemFragment : BaseFragment<FragmentRetrieveItemBinding, RetrieveV
                 }
             }
         }else Log.e("RetrieveItemFragment", "onClick: false")
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    override fun openLockerSuccess() {
+        retrieveAdapter.notifyDataSetChanged()
+    }
+
+    override fun allRetrieveSuccess() {
+        mViewDataBinding?.bottomMenu?.btnProcess?.alpha = 0.3f
+        mViewDataBinding?.bottomMenu?.btnProcess?.isEnabled = false
     }
 }

@@ -3,7 +3,7 @@ package com.lock.smartlocker.ui.face_list
 import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.common.api.ApiException
 import com.lock.smartlocker.R
-import com.lock.smartlocker.data.entities.UserLockerModel
+import com.lock.smartlocker.data.models.UserLockerModel
 import com.lock.smartlocker.data.repositories.UserFaceRepository
 import com.lock.smartlocker.ui.base.BaseViewModel
 import com.lock.smartlocker.util.ConstantUtils

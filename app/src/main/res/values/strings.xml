@@ -198,6 +198,7 @@
     <string name="dialog_retrieve_all">Do you to retrieve all items?</string>
     <string name="error_no_faulty">No faulty items at the moment</string>
     <string name="error_no_item_available">No items available at this locker station</string>
+    <string name="error_retrieve_item">Retrieve item fail, item is retrieved </string>
 
 
     <!-- Strings for camera settings. -->

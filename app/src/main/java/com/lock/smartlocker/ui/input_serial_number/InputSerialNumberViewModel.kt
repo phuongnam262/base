@@ -36,6 +36,7 @@ class InputSerialNumberViewModel(
             returnRepository.getItemReturn(param).apply {
                 if (isSuccessful) {
                     if (data != null ) {
+                        data.reasonFaulty = ""
                         showStatusText.postValue(false)
                         itemReturnData.postValue(data)
                         isItemDetailVisible.postValue(true)
@@ -63,6 +64,7 @@ class InputSerialNumberViewModel(
             returnRepository.getItemTopup(param).apply {
                 if (isSuccessful) {
                     if (data != null ) {
+                        data.reasonFaulty = ""
                         showStatusText.postValue(false)
                         itemReturnData.postValue(data)
                         isItemDetailVisible.postValue(true)

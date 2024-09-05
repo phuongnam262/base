@@ -1,13 +1,12 @@
 package com.lock.smartlocker.data.repositories
 
 import com.lock.smartlocker.data.db.AppDatabase
-import com.lock.smartlocker.data.entities.AddGroupModel
-import com.lock.smartlocker.data.entities.UserLockerModel
+import com.lock.smartlocker.data.models.AddGroupModel
+import com.lock.smartlocker.data.models.UserLockerModel
 import com.lock.smartlocker.data.entities.request.AddPersonRequest
 import com.lock.smartlocker.data.entities.request.ImageBase64Request
 import com.lock.smartlocker.data.entities.request.ImageSearchRequest
 import com.lock.smartlocker.data.entities.responses.BaseFaceResponse
-import com.lock.smartlocker.data.entities.responses.BaseResponse
 import com.lock.smartlocker.data.entities.responses.DetectImageResponse
 import com.lock.smartlocker.data.entities.responses.SearchResponse
 import com.lock.smartlocker.data.network.LockerAPI

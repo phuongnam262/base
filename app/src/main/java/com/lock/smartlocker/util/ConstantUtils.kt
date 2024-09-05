@@ -57,6 +57,7 @@ class ConstantUtils {
         const val ERROR_NO_AVAILABLE_ITEM = "605"
         const val PASSWORD_EXPIRED = "60503"
         const val ERROR_NO_RETRIEVE_ITEM = "60505"
+        const val ERROR_RETRIEVE_ITEM_FAIL = "60509"
         const val ERROR_UNABLE_LOCKER = "606"
         const val ADMIN_NO_PERMISSION = "60601"
         const val ERROR_LOGIC = "623"
