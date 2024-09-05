@@ -2,14 +2,12 @@ package com.lock.smartlocker.ui.retrieve
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
-import com.lock.smartlocker.databinding.FragmentRetrieveItemBinding
+import com.lock.smartlocker.databinding.FragmentRetrieveFaultyBinding
 import com.lock.smartlocker.ui.base.BaseFragment
-import com.lock.smartlocker.ui.retrieve.adapter.CategoryRetrieveItem
 import com.lock.smartlocker.ui.retrieve.adapter.RetrieveItem
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
@@ -17,17 +15,16 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 
-class RetrieveItemFragment : BaseFragment<FragmentRetrieveItemBinding, RetrieveViewModel>(),
+class RetrieveFaultyFragment : BaseFragment<FragmentRetrieveFaultyBinding, RetrieveViewModel>(),
     KodeinAware,
     View.OnClickListener, RetrieveListener {
 
     override val kodein by kodein()
     private val factory: RetrieveViewModelFactory by instance()
-    override val layoutId: Int = R.layout.fragment_retrieve_item
+    override val layoutId: Int = R.layout.fragment_retrieve_faulty
     override val bindingVariable: Int
         get() = BR.viewmodel
 
-    private val categoryAdapter = GroupAdapter<GroupieViewHolder>()
     private val retrieveAdapter = GroupAdapter<GroupieViewHolder>()
 
     override val viewModel: RetrieveViewModel
@@ -51,30 +48,17 @@ class RetrieveItemFragment : BaseFragment<FragmentRetrieveItemBinding, RetrieveV
 
     @SuppressLint("NotifyDataSetChanged")
     private fun initData(){
-        viewModel.getAllItemRetrieve()
-        mViewDataBinding?.rvCategories?.adapter = categoryAdapter
+        viewModel.getItemFaulty()
         mViewDataBinding?.rvModels?.adapter = retrieveAdapter
-
-        viewModel.categoriesRetrieve.observe(viewLifecycleOwner) { categories ->
-            categoryAdapter.update(categories.map {
-                CategoryRetrieveItem(it, viewModel)
-            })
-            if (categories.isNotEmpty()){
-                viewModel.onCategorySelected(categories[0])
+        viewModel.retrieveModels.observe(viewLifecycleOwner) { models ->
+            retrieveAdapter.update(models.map { RetrieveItem(it, viewModel) })
+            if (models.isNotEmpty()){
                 mViewDataBinding?.bottomMenu?.btnProcess?.isEnabled = true
                 mViewDataBinding?.bottomMenu?.btnProcess?.alpha = 1f
             }else{
                 mViewDataBinding?.bottomMenu?.btnProcess?.isEnabled = false
                 mViewDataBinding?.bottomMenu?.btnProcess?.alpha = 0.3f
             }
-        }
-
-        viewModel.retrieveModels.observe(viewLifecycleOwner) { models ->
-            retrieveAdapter.update(models.map { RetrieveItem(it, viewModel) })
-        }
-
-        viewModel.categoryIdSelected.observe(viewLifecycleOwner) {
-            categoryAdapter.notifyDataSetChanged()
         }
 
         viewModel.listSerialRetrieve.observe(viewLifecycleOwner) {

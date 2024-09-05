@@ -191,7 +191,8 @@
 
     <!-- Retrieve -->
     <string name="retrieve_item">Select Item To Retrieve</string>
-    <string name="retrieve_info">This is to retrieve faulty items.\nTap each locker to open individually, or tap "Retrieve All" to open all lockers in this list.</string>
+    <string name="retrieve_info">This is to retrieve items.\nTap each locker to open individually, or tap \"Retrieve All\" to open all lockers in this list.</string>
+    <string name="retrieve_faulty_info">This is to retrieve faulty items.\nTap each locker to open individually, or tap \"Retrieve All\" to open all lockers in this list.</string>
     <string name="not_retrieved">NOT RETRIEVED</string>
     <string name="retrieved">RETRIEVED</string>
     <string name="button_retrieve_all">RETRIEVE ALL</string>

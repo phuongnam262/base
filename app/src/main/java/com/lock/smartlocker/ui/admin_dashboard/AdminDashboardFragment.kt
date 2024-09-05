@@ -42,6 +42,7 @@ class AdminDashboardFragment : BaseFragment<FragmentAdminDashboardBinding, Admin
         mViewDataBinding?.llSettings?.setOnClickListener(this)
         mViewDataBinding?.llManageLockers?.setOnClickListener(this)
         mViewDataBinding?.llRetrieveItems?.setOnClickListener(this)
+        mViewDataBinding?.llRetrieveFaulty?.setOnClickListener(this)
     }
 
     private fun initData(){
@@ -95,6 +96,10 @@ class AdminDashboardFragment : BaseFragment<FragmentAdminDashboardBinding, Admin
 
                 R.id.ll_retrieve_items -> {
                     navigateTo(R.id.action_adminDashboardFragment_to_retrieveItemFragment, null)
+                }
+
+                R.id.ll_retrieve_faulty -> {
+                    navigateTo(R.id.action_adminDashboardFragment_to_retrieveFaultyFragment, null)
                 }
             }
         }

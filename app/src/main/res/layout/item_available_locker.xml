@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/dp_5"
-        android:background="@{isSelected ? @drawable/bg_selected_available_locker : @drawable/bg_ractangle_rounded}"
+        android:background="@{isSelected ? @drawable/bg_selected_available_locker : @drawable/bg_rectangle_rounded}"
         android:paddingHorizontal="@dimen/dp_10"
         android:paddingVertical="@dimen/dp_10">
 
@@ -43,7 +43,7 @@
             <Button
                 android:id="@+id/btnLocker"
                 style="@style/CustomLockerButton"
-                android:background="@drawable/bg_border_ractangle_rounded"
+                android:background="@drawable/bg_border_rectangle_rounded"
                 android:clickable="false"
                 android:text="@{model.name}" />
 

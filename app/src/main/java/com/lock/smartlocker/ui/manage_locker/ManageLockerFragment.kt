@@ -62,11 +62,6 @@ class ManageLockerFragment : BaseFragment<FragmentManageLockerBinding, ManageLoc
                 }
             } ?: emptyList())
         }
-        viewModel.listLockerId.observe(viewLifecycleOwner) {
-            if (it.isNotEmpty()) {
-                viewModel.checkDoorStatus()
-            }
-        }
     }
 
     override fun onClick(v: View?) {

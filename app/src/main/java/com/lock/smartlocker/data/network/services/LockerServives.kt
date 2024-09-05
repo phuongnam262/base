@@ -103,6 +103,10 @@ interface LockerServives {
     suspend fun getAllItemRetrieve(
     ): Response<BaseResponse<GetAllItemRetrieveResponse>>
 
+    @GET("/api/admin/get-item-faulty")
+    suspend fun getItemFaulty(
+    ): Response<BaseResponse<GetAllItemRetrieveResponse>>
+
     @POST("/api/admin/retrieve-item")
     suspend fun retrieveItem(
         @Body retrieveItemRequest: RetrieveItemRequest

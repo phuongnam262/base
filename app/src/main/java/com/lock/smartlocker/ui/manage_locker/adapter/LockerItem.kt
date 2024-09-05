@@ -26,16 +26,16 @@ class LockerItem(
         viewBinding.tvLockerInfo.text = info
         when(model.lockerStatus){
             1 -> {
+                viewBinding.tvStatus.text = context.getString(R.string.disabled_status)
+                viewBinding.tvStatus.setTextColor(context.getColor(R.color.grey7A7A7A))
+            }
+            2 -> {
                 viewBinding.tvStatus.text = context.getString(R.string.available_status)
                 viewBinding.tvStatus.setTextColor(context.getColor(R.color.colorGreen))
             }
-            2 -> {
+            3 -> {
                 viewBinding.tvStatus.text = context.getString(R.string.occupied_status)
                 viewBinding.tvStatus.setTextColor(context.getColor(R.color.colorBlue))
-            }
-            3 -> {
-                viewBinding.tvStatus.text = context.getString(R.string.disabled_status)
-                viewBinding.tvStatus.setTextColor(context.getColor(R.color.grey7A7A7A))
             }
         }
         viewBinding.btnDisable.setOnClickListener {

@@ -27,7 +27,7 @@
         <item name="android:textColor">@color/colorBlack</item>
         <item name="android:textSize">@dimen/sp_25</item>
         <item name="android:stateListAnimator">@null</item>
-        <item name="android:background">@drawable/bg_locker_close</item>
+        <item name="android:background">@drawable/bg_rectangle_rounded</item>
         <item name="backgroundTint">@null</item>
         <item name="android:fontFamily">@font/segoe_ui_bold</item>
         <item name="android:layout_marginHorizontal" tools:ignore="NewApi">@dimen/dp_7</item>

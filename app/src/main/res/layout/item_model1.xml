@@ -6,7 +6,7 @@
     android:backgroundTint="@color/greyF9F9F9"
     android:paddingHorizontal="20dp"
     android:paddingVertical="40dp"
-    android:background="@drawable/bg_ractangle_rounded">
+    android:background="@drawable/bg_rectangle_rounded">
 
     <TextView
         android:id="@+id/tvModelName"

@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/dp_5"
-        android:background="@drawable/bg_ractangle_rounded"
+        android:background="@drawable/bg_rectangle_rounded"
         android:paddingHorizontal="@dimen/dp_15"
         android:paddingVertical="@dimen/dp_10">
 
@@ -80,7 +80,7 @@
             <Button
                 android:id="@+id/btnLocker"
                 style="@style/CustomLockerButton"
-                android:background="@{lockerInfo.doorStatus == 0 ? @drawable/bg_locker_open : @drawable/bg_locker_close}"
+                app:lockerDoorBackground="@{lockerInfo.doorStatus}"
                 android:text="@{lockerInfo.lockerName}"
                 tools:text="001" />
 

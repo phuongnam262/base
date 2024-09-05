@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_ractangle_rounded"
+    android:background="@drawable/bg_rectangle_rounded"
     android:paddingHorizontal="@dimen/dp_15"
     android:paddingVertical="@dimen/dp_15">
 
@@ -75,7 +75,7 @@
             android:id="@+id/btnLocker"
             style="@style/CustomLockerButton"
             android:layout_marginHorizontal="10dp"
-            android:background="@drawable/bg_border_ractangle_rounded"
+            android:background="@drawable/bg_border_rectangle_rounded"
             android:text="001" />
 
         <ImageView

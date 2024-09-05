@@ -43,6 +43,10 @@ class ManagerRepository (
         return apiRequest { api.provideLockerAPIService().getAllItemRetrieve() }
     }
 
+    suspend fun getItemFaulty(): BaseResponse<GetAllItemRetrieveResponse> {
+        return apiRequest { api.provideLockerAPIService().getItemFaulty() }
+    }
+
     suspend fun retrieveItem(retrieveItemRequest: RetrieveItemRequest): BaseResponse<RetrieveItemResponse> {
         return apiRequest { api.provideLockerAPIService().retrieveItem(retrieveItemRequest) }
     }

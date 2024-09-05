@@ -74,6 +74,9 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel
             categoryAdapter.update(categories.map {
                 CategoryItem(it, viewModel)
             })
+            if (categories.isNotEmpty()) {
+                viewModel.onCategorySelected(categories[0])
+            }
         }
 
         viewModel.availableModels.observe(viewLifecycleOwner) { models ->

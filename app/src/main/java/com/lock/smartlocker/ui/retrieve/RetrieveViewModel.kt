@@ -30,11 +30,7 @@ class RetrieveViewModel(
     var categoryIdSelected = MutableLiveData<String>()
     var listSerialRetrieve = MutableLiveData<List<String>>()
 
-    init {
-        getAllItemRetrieve()
-    }
-
-    private fun getAllItemRetrieve() {
+    fun getAllItemRetrieve() {
         ioScope.launch {
             mLoading.postValue(true)
             managerRepository.getAllItemRetrieve().apply {
@@ -67,6 +63,32 @@ class RetrieveViewModel(
             val listLocker = categories?.modelRetrievies?.flatMap { it.lockers }
             _retrieveModels.postValue(listLocker ?: emptyList())
         }
+    }
+
+    fun getItemFaulty() {
+        ioScope.launch {
+            mLoading.postValue(true)
+            managerRepository.getItemFaulty().apply {
+                if (isSuccessful) {
+                    if (data != null) {
+                        val listId = ArrayList<String>()
+                        val listModel = ArrayList<LockerRetrieve>()
+                        _categoriesRetrieve.postValue(data.categories)
+                        data.categories.map { categories ->
+                            listId.addAll(categories.modelRetrievies.flatMap { model ->
+                                model.lockers.map { it.lockerId }
+                            })
+                            listModel.addAll(categories.modelRetrievies.flatMap { it.lockers })
+                        }
+                        listLockerId.postValue(listId)
+                        _retrieveModels.postValue(listModel)
+                    }
+                }else {
+                    handleError(status)
+                    _retrieveModels.postValue(emptyList())
+                }
+            }
+        }.invokeOnCompletion { mLoading.postValue(false) }
     }
 
     fun openAllLocker() {
@@ -139,6 +161,9 @@ class RetrieveViewModel(
                                         locker.doorStatus = data.locker_list[0].doorStatus
                                         if (data.locker_list[0].doorStatus == 1 || data.locker_list[0].doorStatus == -1) {
                                             mStatusText.postValue(R.string.error_open_failed)
+                                            uiScope.launch {
+                                                retrieveListener?.openLockerSuccess()
+                                            }
                                         } else {
                                             listSerialRetrieve.postValue(listOf(locker.serialNumber))
                                             showStatusText.postValue(false)

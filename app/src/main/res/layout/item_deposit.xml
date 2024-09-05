@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:paddingHorizontal="@dimen/dp_15"
         android:paddingVertical="@dimen/dp_15"
-        android:background="@drawable/bg_ractangle_rounded">
+        android:background="@drawable/bg_rectangle_rounded">
 
         <LinearLayout
             android:id="@+id/linearLayout2"
@@ -80,7 +80,7 @@
             <Button
                 android:id="@+id/btnLocker"
                 style="@style/CustomLockerButton"
-                android:background="@{doorStatus == 0 ? @drawable/bg_locker_open : @drawable/bg_locker_close}" />
+                app:lockerDoorBackground="@{doorStatus}"/>
 
             <ImageView
                 android:id="@+id/ivArrowRight"

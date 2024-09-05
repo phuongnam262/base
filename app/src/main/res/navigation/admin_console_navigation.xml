@@ -49,6 +49,9 @@
         <action
             android:id="@+id/action_adminDashboardFragment_to_retrieveItemFragment"
             app:destination="@id/retrieveItemFragment" />
+        <action
+            android:id="@+id/action_adminDashboardFragment_to_retrieveFaultyFragment"
+            app:destination="@id/retrieveFaultyFragment" />
     </fragment>
     <fragment
         android:id="@+id/inputSerialNumberFragment2"
@@ -101,4 +104,9 @@
         android:name="com.lock.smartlocker.ui.retrieve.RetrieveItemFragment"
         android:label="fragment_retrieve_item"
         tools:layout="@layout/fragment_retrieve_item" />
+    <fragment
+        android:id="@+id/retrieveFaultyFragment"
+        android:name="com.lock.smartlocker.ui.retrieve.RetrieveFaultyFragment"
+        android:label="fragment_retrieve_faulty"
+        tools:layout="@layout/fragment_retrieve_faulty" />
 </navigation>

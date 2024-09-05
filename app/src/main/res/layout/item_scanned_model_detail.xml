@@ -17,14 +17,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/dp_30"
-        android:background="@drawable/bg_ractangle_rounded">
+        android:background="@drawable/bg_rectangle_rounded">
 
         <ImageView
             android:id="@+id/ivModel"
             imageUrl="@{imageUrl}"
             android:layout_width="@dimen/dp_140"
             android:layout_height="@dimen/dp_140"
-            android:background="@drawable/bg_border_ractangle_rounded"
+            android:background="@drawable/bg_border_rectangle_rounded"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

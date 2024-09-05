@@ -191,7 +191,8 @@
 
     <!-- Retrieve -->
     <string name="retrieve_item">Chọn Đồ Dùng Cần Thu Hồi</string>
-    <string name="retrieve_info">Đây là cách thu hồi các đồ dùng bị lỗi.\nChạm vào từng tủ khóa để mở riêng lẻ hoặc chạm vào "Thu hồi lại tất cả" để mở tất cả các tủ khóa trong danh sách này.</string>
+    <string name="retrieve_info">Đây là cách thu hồi các đồ dùng.\nChạm vào từng tủ khóa để mở riêng lẻ hoặc chạm vào "Thu hồi lại tất cả" để mở tất cả các tủ khóa trong danh sách này.</string>
+    <string name="retrieve_faulty_info">Đây là cách thu hồi các đồ dùng bị lỗi.\nChạm vào từng tủ khóa để mở riêng lẻ hoặc chạm vào "Thu hồi lại tất cả" để mở tất cả các tủ khóa trong danh sách này.</string>
     <string name="not_retrieved">CHƯA THU HỒI</string>
     <string name="retrieved">ĐÃ THU HỒI</string>
     <string name="button_retrieve_all">THU HỒI TẤT CẢ</string>

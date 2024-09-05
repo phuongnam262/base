@@ -12,13 +12,14 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.target.CustomTarget
 import com.google.android.material.textview.MaterialTextView
-import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 import android.graphics.drawable.Drawable
 import android.os.Handler
 import android.os.Looper
+import android.widget.Button
+import com.lock.smartlocker.R
 
 
 @BindingAdapter("imagePath")
@@ -67,11 +68,6 @@ fun setBackgroundImageUrl(view: View, imageUrl: String?) {
     }
 }
 
-@BindingAdapter("priceVN")
-fun TextView.priceVN(price: Int) {
-     text = NumberFormat.getCurrencyInstance(Locale("vi", "VN"))
-        .format(price)
-}
 
 @SuppressLint("SetTextI18n")
 @BindingAdapter("getDateNow")
@@ -112,4 +108,20 @@ fun View.setDebouncedClickListener(clickListener: View.OnClickListener) {
             handler.post { clickListener.onClick(this) }
         }
     }
+}
+
+@BindingAdapter("lockerDoorBackground")
+fun setLockerDoorBackground(button: Button, doorStatus: Int) {
+    val backgroundResource = when (doorStatus) {
+        0 -> {
+            R.drawable.bg_locker_open_success
+        }
+        1, -1 -> {
+            R.drawable.bg_locker_open_fail
+        }
+        else -> {
+            R.drawable.bg_border_rectangle_rounded
+        }
+    }
+    button.setBackgroundResource(backgroundResource)
 }
