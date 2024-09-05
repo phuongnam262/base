@@ -104,6 +104,7 @@ dependencies {
     // encrypt
     implementation (libs.androidx.security.crypto)
 
-
+    // kiosk mode
+    implementation(files("libs/RocoApiManager.jar"))
 
 }
