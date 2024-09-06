@@ -8,7 +8,9 @@ import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
 import com.lock.smartlocker.databinding.FragmentRetrieveFaultyBinding
 import com.lock.smartlocker.ui.base.BaseFragment
+import com.lock.smartlocker.ui.input_serial_number.InputSerialNumberFragment
 import com.lock.smartlocker.ui.retrieve.adapter.RetrieveItem
+import com.lock.smartlocker.util.view.custom.CustomConfirmDialog
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import org.kodein.di.KodeinAware
@@ -17,7 +19,7 @@ import org.kodein.di.generic.instance
 
 class RetrieveFaultyFragment : BaseFragment<FragmentRetrieveFaultyBinding, RetrieveViewModel>(),
     KodeinAware,
-    View.OnClickListener, RetrieveListener {
+    View.OnClickListener, RetrieveListener, CustomConfirmDialog.ConfirmationDialogListener {
 
     override val kodein by kodein()
     private val factory: RetrieveViewModelFactory by instance()
@@ -72,7 +74,13 @@ class RetrieveFaultyFragment : BaseFragment<FragmentRetrieveFaultyBinding, Retri
                 R.id.rl_home -> activity?.finish()
                 R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
                 R.id.btn_process -> {
-                    viewModel.openAllLocker()
+                    val dialog = CustomConfirmDialog.newInstance(
+                        message = getString(R.string.dialog_retrieve_all),
+                    )
+                    dialog.show(
+                        childFragmentManager,
+                        InputSerialNumberFragment.CONFIRMATION_DIALOG_TAG
+                    )
                 }
             }
         }
@@ -86,5 +94,12 @@ class RetrieveFaultyFragment : BaseFragment<FragmentRetrieveFaultyBinding, Retri
     override fun allRetrieveSuccess() {
         mViewDataBinding?.bottomMenu?.btnProcess?.alpha = 0.3f
         mViewDataBinding?.bottomMenu?.btnProcess?.isEnabled = false
+    }
+
+    override fun onDialogConfirmClick(dialogTag: String?) {
+        viewModel.openAllLocker()
+    }
+
+    override fun onDialogCancelClick() {
     }
 }
