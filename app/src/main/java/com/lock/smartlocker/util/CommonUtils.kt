@@ -10,9 +10,7 @@ import com.lock.smartlocker.R
 
 object CommonUtils {
 
-    val TIME_SNACKBAR = 2500
-    const val TIME_TO_CALL_ALERT = 3000L
-
+    private var isDialogShowing = false
     /**
      * Showing snacknar by ResourceId
      */
@@ -43,28 +41,6 @@ object CommonUtils {
     }
 
     /**
-     * Showing snackbar by message string and action button
-     */
-    fun showSnackbarAction(
-        view: View?,
-        message: String,
-        actionId: Int,
-        listener: View.OnClickListener,
-        isAnchorView: Boolean = false
-    ) {
-        if (message.isEmpty()) return
-        view?.let {
-            val snackbar = Snackbar.make(
-                it, message,
-                TIME_SNACKBAR
-            )
-            snackbar.setAction(actionId, listener)
-            if (isAnchorView) snackbar.anchorView = it
-            snackbar.show()
-        }
-    }
-
-    /**
      * Showing error dialog with message and OK button
      */
     fun showErrorDialog(
@@ -73,8 +49,9 @@ object CommonUtils {
         message: String,
         theme: Int = androidx.appcompat.R.style.Base_AlertDialog_AppCompat_Light
     ) {
-        if (message.isEmpty()) return
+        if (message.isEmpty() || isDialogShowing) return
         context?.let {
+            isDialogShowing = true
             MaterialAlertDialogBuilder(it, theme)
                 .setTitle(title)
                 .setMessage(message)
@@ -82,11 +59,14 @@ object CommonUtils {
                     it.resources.getString(R.string.close)
                 ) { dialog, _ ->
                     dialog.dismiss()
+                    isDialogShowing = false
+                }
+                .setOnDismissListener {
+                    isDialogShowing = false
                 }
                 .show()
         }
     }
-
 
     /**
      * Processing start a activity
