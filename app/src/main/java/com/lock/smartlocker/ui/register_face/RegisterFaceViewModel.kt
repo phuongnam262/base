@@ -130,7 +130,7 @@ class RegisterFaceViewModel(
         if (detectImageResponse.message.contains("not found")) {
             uiScope.launch {
                 registerFaceListener?.faceNotFound()
-                mMessage.postValue(R.string.face_not_found)
+                mStatusText.postValue(R.string.face_not_found)
             }
         }else{
             mOtherError.postValue(detectImageResponse.message)

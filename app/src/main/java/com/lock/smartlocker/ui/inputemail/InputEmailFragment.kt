@@ -1,6 +1,7 @@
 package com.lock.smartlocker.ui.inputemail
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -33,12 +34,18 @@ class InputEmailFragment : BaseFragment<FragmentInputEmailBinding, InputEmailVie
     }
 
     private val items = listOf("@gmail.com", "@yahoo.com", "@hotmail.com", "@edu")
+    private var isClicked = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.inputEmailListener = this
         initView()
         initData()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        isClicked = false
     }
 
     private fun initView(){
@@ -73,11 +80,15 @@ class InputEmailFragment : BaseFragment<FragmentInputEmailBinding, InputEmailVie
 
     override fun onClick(v: View?) {
         if (checkDebouncedClick()) {
+            Log.d("InputOTPFragment", System.currentTimeMillis().toString())
             when (v?.id) {
                 R.id.rl_home -> activity?.finish()
                 R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
                 R.id.btn_process -> {
-                    viewModel.consumerLogin(arguments?.getString(ConstantUtils.TYPE_OPEN))
+                    if (isClicked.not()) {
+                        isClicked = true
+                        viewModel.consumerLogin(arguments?.getString(ConstantUtils.TYPE_OPEN))
+                    }
                 }
             }
         }

@@ -32,6 +32,7 @@ class ManageLockerViewModel(
                 if (isSuccessful) {
                     if (data != null) {
                         val filteredLockers = data.lockers.filter { it.name != "Console" }
+                        filteredLockers.map { it.doorStatus = 2 }
                         _lockers.postValue(filteredLockers)
                     }
                 } else handleError(status)

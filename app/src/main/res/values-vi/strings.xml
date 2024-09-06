@@ -15,10 +15,10 @@
     <!-- login -->
     <string name="login_error_1001">Email không tồn tại</string>
     <string name="login_error_1002">Sai mật khẩu</string>
-    <string name="email_not_correct_format">Invalid email format</string>
+    <string name="email_not_correct_format">Sai định dạng email</string>
 
     <!-- Error -->
-    <string name="unauthorized">Unauthorized</string>
+    <string name="unauthorized">Tài khoản bị mất quyền truy cập</string>
 
     <!-- Home -->
     <string name="menu_item">ITEMS</string>
@@ -60,8 +60,8 @@
     <string name="error_no_permission_console">Bạn không có quyền truy cập vào Bảng điều khiển Quản trị</string>
 
     <!-- input OTP -->
-    <string name="enter_otp_verify">Nhập OTP được gửi đến thiết bị của bạn để xác minh tài khoản..</string>
-    <string name="enter_otp">Nhập OTP::</string>
+    <string name="enter_otp_verify">Nhập OTP được gửi đến thiết bị của bạn để xác minh tài khoản.</string>
+    <string name="enter_otp">Nhập OTP:</string>
     <string name="resend_otp_button">Gửi lại OTP</string>
     <string name="error_invalid_otp">Mã OTP không hợp lệ. Vui lòng thử lại hoặc yêu cầu mã OTP mới</string>
 

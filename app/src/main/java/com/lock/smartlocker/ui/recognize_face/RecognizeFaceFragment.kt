@@ -70,6 +70,7 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
     companion object {
         private const val TAG = "RecognizeFaceFragment"
     }
+    private var isClicked = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -114,6 +115,7 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
     override fun onResume() {
         super.onResume()
         bindAllCameraUseCases()
+        isClicked = false
     }
 
     override fun onPause() {
@@ -146,7 +148,10 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
                 }
 
                 R.id.btn_process -> {
-                    viewModel.consumerLogin()
+                    if (isClicked.not()) {
+                        isClicked = true
+                        viewModel.consumerLogin()
+                    }
                 }
 
                 R.id.btn_using_mail -> {
@@ -172,8 +177,7 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
     }
 
     override fun faceNotFound() {
-        FaceDetectorProcessor.isSuccess = false
-        bindAnalysisUseCase()
+        mViewDataBinding?.ivFrame?.setBackgroundResource(R.drawable.bg_face_fail)
     }
 
     override fun consumerLoginSuccess(email: String?) {

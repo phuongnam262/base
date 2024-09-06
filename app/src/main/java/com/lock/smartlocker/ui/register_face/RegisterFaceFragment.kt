@@ -64,6 +64,7 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
     private var cameraSelector: CameraSelector? = null
     private var imageCapture: ImageCapture? = null
     private var isExited: Boolean = false
+    private var strBase64: String? = null
 
     companion object {
         private const val TAG = "RegisterFaceFragment"
@@ -80,6 +81,8 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
         viewModel.titlePage.postValue(getString(R.string.register_face))
         mViewDataBinding?.bottomMenu?.rlHome?.setOnClickListener(this)
         mViewDataBinding?.bottomMenu?.btnProcess?.setOnClickListener(this)
+        mViewDataBinding?.bottomMenu?.btnProcess?.isEnabled = false
+        mViewDataBinding?.bottomMenu?.btnProcess?.alpha = 0.3f
         mViewDataBinding?.headerBar?.ivBack?.setOnClickListener(this)
 
         cameraSelector = CameraSelector.Builder().requireLensFacing(lensFacing).build()
@@ -136,12 +139,13 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
                     if (isExited) {
                         isExited = false
                         mViewDataBinding?.ivFrame?.setBackgroundResource(R.drawable.bg_face_register)
-                        mViewDataBinding?.bottomMenu?.btnProcess?.text =
-                            getString(R.string.process_button)
+                        mViewDataBinding?.bottomMenu?.btnProcess?.text = getString(R.string.process_button)
+                        mViewDataBinding?.bottomMenu?.btnProcess?.isEnabled = false
+                        mViewDataBinding?.bottomMenu?.btnProcess?.alpha = 0.3f
                         viewModel.showStatusText.value = false
                         FaceDetectorProcessor.isSuccess = false
                         bindAllCameraUseCases()
-                    }
+                    }else strBase64?.let { detectImageFromImage(it) }
                 }
             }
         }
@@ -155,11 +159,14 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
     }
 
     override fun faceNotFound() {
-        FaceDetectorProcessor.isSuccess = false
-        bindAnalysisUseCase()
+        failDetectFace()
     }
 
     override fun faceExited() {
+        failDetectFace()
+    }
+
+    private fun failDetectFace(){
         mViewDataBinding?.bottomMenu?.btnProcess?.text = getString(R.string.btn_retry)
         mViewDataBinding?.ivFrame?.setBackgroundResource(R.drawable.bg_face_fail)
         isExited = true
@@ -320,8 +327,9 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
                         if (cameraProvider != null) {
                             cameraProvider!!.unbindAll()
                         }
-                        val strBase64 = encodeImage(photoFile)
-                        detectImageFromImage(strBase64)
+                        strBase64 = encodeImage(photoFile)
+                        mViewDataBinding?.bottomMenu?.btnProcess?.isEnabled = true
+                        mViewDataBinding?.bottomMenu?.btnProcess?.alpha = 1f
                     }
 
                     override fun onError(exception: ImageCaptureException) {

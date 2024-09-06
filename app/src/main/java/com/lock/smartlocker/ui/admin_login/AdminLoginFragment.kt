@@ -29,12 +29,17 @@ class AdminLoginFragment : BaseFragment<FragmentAdminLoginBinding, AdminLoginVie
 
     override val viewModel: AdminLoginViewModel
         get() = ViewModelProvider(this, factory)[AdminLoginViewModel::class.java]
-
+    private var isClicked = false
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mViewModel?.adminLoginListener = this
         initView()
         initData()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        isClicked = false
     }
 
     private fun initView() {
@@ -54,7 +59,10 @@ class AdminLoginFragment : BaseFragment<FragmentAdminLoginBinding, AdminLoginVie
                 R.id.rl_home -> activity?.finish()
                 R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
                 R.id.btn_process -> {
-                    viewModel.adminLogin()
+                    if (isClicked.not()) {
+                        isClicked = true
+                        viewModel.adminLogin()
+                    }
                 }
             }
         }
