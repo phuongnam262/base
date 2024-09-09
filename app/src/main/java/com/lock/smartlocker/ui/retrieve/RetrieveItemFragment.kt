@@ -63,11 +63,9 @@ class RetrieveItemFragment : BaseFragment<FragmentRetrieveItemBinding, RetrieveV
             })
             if (categories.isNotEmpty()){
                 viewModel.onCategorySelected(categories[0])
-                mViewDataBinding?.bottomMenu?.btnProcess?.isEnabled = true
-                mViewDataBinding?.bottomMenu?.btnProcess?.alpha = 1f
+                viewModel.enableButtonProcess.value = true
             }else{
-                mViewDataBinding?.bottomMenu?.btnProcess?.isEnabled = false
-                mViewDataBinding?.bottomMenu?.btnProcess?.alpha = 0.3f
+                viewModel.enableButtonProcess.value = false
             }
         }
 
@@ -108,8 +106,7 @@ class RetrieveItemFragment : BaseFragment<FragmentRetrieveItemBinding, RetrieveV
     }
 
     override fun allRetrieveSuccess() {
-        mViewDataBinding?.bottomMenu?.btnProcess?.alpha = 0.3f
-        mViewDataBinding?.bottomMenu?.btnProcess?.isEnabled = false
+        viewModel.enableButtonProcess.value = false
     }
 
     override fun onDialogConfirmClick(dialogTag: String?) {

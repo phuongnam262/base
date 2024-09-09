@@ -63,6 +63,7 @@
             app:showStatusText="@{viewmodel.showStatusText}"
             app:timerHour="@{viewmodel.timerHour}"
             app:showButtonUsingMail="@{viewmodel.showButtonUsingMail}"
+            app:enableButtonProcess="@{viewmodel.enableButtonProcess}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />

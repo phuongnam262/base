@@ -26,6 +26,10 @@
             name="showProcessButton"
             type="Boolean" />
 
+        <variable
+            name="enableButtonProcess"
+            type="Boolean" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -116,6 +120,8 @@
                         style="@style/CustomButtonBlack"
                         android:layout_width="@dimen/dp_120"
                         android:layout_height="wrap_content"
+                        android:alpha="@{enableButtonProcess ? 1f : 0.3f}"
+                        android:enabled="@{enableButtonProcess ? true : false}"
                         android:text="@string/process_button"
                         android:layout_centerInParent="true"/>
 

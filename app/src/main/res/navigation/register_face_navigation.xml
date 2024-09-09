@@ -3,8 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/manager_menu_navigation"
-    app:startDestination="@+id/inputEmailFragment">
+    app:startDestination="@+id/menuRegisterFragment">
 
+    <fragment
+        android:id="@+id/menuRegisterFragment"
+        android:name="com.lock.smartlocker.ui.menu_register.MenuRegisterFragment"
+        android:label="fragment_menu_register"
+        tools:layout="@layout/fragment_menu_register" >
+        <action
+            android:id="@+id/action_menuRegisterFragment_to_inputEmailFragment"
+            app:destination="@id/inputEmailFragment" />
+        <action
+            android:id="@+id/action_menuRegisterFragment_to_scanWorkCardFragment2"
+            app:destination="@id/scanWorkCardFragment2" />
+    </fragment>
     <fragment
         android:id="@+id/inputEmailFragment"
         android:name="com.lock.smartlocker.ui.inputemail.InputEmailFragment"
@@ -28,4 +40,13 @@
         android:name="com.lock.smartlocker.ui.register_face.RegisterFaceFragment"
         android:label="@string/register_face"
         tools:layout="@layout/fragment_register_face" />
+    <fragment
+        android:id="@+id/scanWorkCardFragment2"
+        android:name="com.lock.smartlocker.ui.scan_work_card.ScanWorkCardFragment"
+        android:label="fragment_scan_work_card"
+        tools:layout="@layout/fragment_scan_work_card" >
+        <action
+            android:id="@+id/action_scanWorkCardFragment2_to_registerFaceFragment"
+            app:destination="@id/registerFaceFragment" />
+    </fragment>
 </navigation>

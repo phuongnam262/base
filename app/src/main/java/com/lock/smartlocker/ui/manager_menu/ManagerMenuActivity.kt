@@ -10,6 +10,7 @@ import com.lock.smartlocker.databinding.ActivityManagerMenuBinding
 import com.lock.smartlocker.ui.admin_login.AdminLoginFragment
 import com.lock.smartlocker.ui.base.BaseActivity
 import com.lock.smartlocker.ui.inputemail.InputEmailFragment
+import com.lock.smartlocker.ui.menu_register.MenuRegisterFragment
 import com.lock.smartlocker.util.ConstantUtils
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
@@ -38,7 +39,7 @@ class ManagerMenuActivity : BaseActivity<ActivityManagerMenuBinding, ManagerMenu
     private fun initView() {
         when (intent.getStringExtra(ConstantUtils.TYPE_OPEN_MANAGER)) {
             ConstantUtils.TYPE_REGISTER_FACE -> {
-                showFragment(InputEmailFragment(), R.navigation.register_face_navigation)
+                showFragment(MenuRegisterFragment(), R.navigation.register_face_navigation)
             }
 
             ConstantUtils.TYPE_MANAGER_FACE -> {

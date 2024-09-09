@@ -1,6 +1,7 @@
 package com.lock.smartlocker.data.network.services
 
 import com.lock.smartlocker.data.entities.request.AminLoginRequest
+import com.lock.smartlocker.data.entities.request.CheckCardRequest
 import com.lock.smartlocker.data.entities.request.ConsumerLoginRequest
 import com.lock.smartlocker.data.entities.request.CreateInventoryTransactionRequest
 import com.lock.smartlocker.data.entities.request.DisableLockerRequest
@@ -11,6 +12,7 @@ import com.lock.smartlocker.data.entities.request.ReturnItemRequest
 import com.lock.smartlocker.data.entities.request.UpdateInventoryTransactionRequest
 import com.lock.smartlocker.data.entities.responses.AdminLoginResponse
 import com.lock.smartlocker.data.entities.responses.BaseResponse
+import com.lock.smartlocker.data.entities.responses.CheckCardResponse
 import com.lock.smartlocker.data.entities.responses.ConsumerLoginResponse
 import com.lock.smartlocker.data.entities.responses.CreateInventoryResponse
 import com.lock.smartlocker.data.entities.responses.DisableLockerResponse
@@ -47,6 +49,11 @@ interface LockerServives {
     suspend fun consumerLogin(
         @Body consumerLoginRequest: ConsumerLoginRequest
     ): Response<BaseResponse<ConsumerLoginResponse>>
+
+    @POST("/api/end-user/check-card-number")
+    suspend fun checkCardNumber(
+        @Body checkCardRequest: CheckCardRequest
+    ): Response<BaseResponse<CheckCardResponse>>
 
     @POST("/api/admin/admin-login")
     suspend fun adminLogin(

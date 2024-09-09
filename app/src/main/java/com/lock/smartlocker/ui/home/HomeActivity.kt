@@ -9,14 +9,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.View.OnClickListener
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProvider
 import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
-import com.lock.smartlocker.data.preference.PreferenceHelper
 import com.lock.smartlocker.databinding.ActivityHomeBinding
 import com.lock.smartlocker.ui.base.BaseActivity
 import com.lock.smartlocker.ui.manager_menu.ManagerMenuActivity
@@ -24,6 +22,7 @@ import com.lock.smartlocker.ui.returns.ReturnActivity
 import com.lock.smartlocker.util.CommonUtils
 import com.lock.smartlocker.util.ConstantUtils
 import org.kodein.di.KodeinAware
+import com.lock.smartlocker.BuildConfig
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
 
@@ -72,7 +71,17 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeLis
         mViewDataBinding?.tvVi?.setOnClickListener(this)
         mViewDataBinding?.containerLoan?.setOnClickListener(this)
         mViewDataBinding?.containerCollect?.setOnClickListener(this)
+        mViewDataBinding?.containerConsumableCollect?.setOnClickListener(this)
 
+        if (BuildConfig.IS_NEW_FLOW.not()) {
+            mViewDataBinding?.containerLoan?.visibility = View.VISIBLE
+            mViewDataBinding?.containerCollect?.visibility = View.VISIBLE
+            mViewDataBinding?.containerConsumableCollect?.visibility = View.VISIBLE
+        } else {
+            mViewDataBinding?.containerLoan?.visibility = View.GONE
+            mViewDataBinding?.containerCollect?.visibility = View.GONE
+            mViewDataBinding?.containerReturn?.visibility = View.GONE
+        }
 
         viewModel.isServerOff.observeForever {
             isOpenLocalServer = it
@@ -162,6 +171,13 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeLis
                         R.id.container_collect -> {
                             startActivityWithOneValue(
                                 ConstantUtils.TYPE_OPEN, ConstantUtils.TYPE_COLLECT,
+                                ReturnActivity::class.java
+                            )
+                        }
+
+                        R.id.container_consumable_collect -> {
+                            startActivityWithOneValue(
+                                ConstantUtils.TYPE_OPEN, ConstantUtils.TYPE_CONSUMABLE_COLLECT,
                                 ReturnActivity::class.java
                             )
                         }

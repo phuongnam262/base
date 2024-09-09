@@ -8,6 +8,15 @@ android {
     namespace = "com.lock.smartlocker"
     compileSdk = 34
 
+    signingConfigs {
+        create("release") {
+            keyAlias = "smart locker"
+            keyPassword = "spz@123456"
+            storeFile = file("smartlock.keystore")
+            storePassword = "spz@123456"
+        }
+    }
+
     defaultConfig {
         applicationId = "com.lock.smartlocker"
         minSdk = 24
@@ -25,6 +34,12 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField("boolean", "IS_NEW_FLOW", "true")
+            signingConfig = signingConfigs.getByName("debug")
+        }
+        debug {
+            isMinifyEnabled = false
+            buildConfigField("boolean", "IS_NEW_FLOW", "false")
         }
     }
     compileOptions {
@@ -37,6 +52,7 @@ android {
     buildFeatures {
         viewBinding = true
         dataBinding = true
+        buildConfig = true
     }
 }
 

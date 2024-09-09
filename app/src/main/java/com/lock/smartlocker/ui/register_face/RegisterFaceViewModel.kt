@@ -20,6 +20,8 @@ class RegisterFaceViewModel(
 ) : BaseViewModel() {
     var registerFaceListener: RegisterFaceListener? = null
     val emailRegister = MutableLiveData<String>()
+    val cardNumberRegister = MutableLiveData<String>()
+    val nameEndUser = MutableLiveData<String>()
     fun detectImage(strBase64: String) {
         ioScope.launch {
             mLoading.postValue(true)
@@ -94,6 +96,7 @@ class RegisterFaceViewModel(
                                 addPersonModel.personGroup,
                                 0,
                                 emailRegister.value,
+                                "",
                                 0,
                                 strBase64
                             )

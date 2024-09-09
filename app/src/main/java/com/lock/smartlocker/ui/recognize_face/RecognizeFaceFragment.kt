@@ -81,8 +81,11 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
 
     private fun initView() {
         viewModel.titlePage.postValue(getString(R.string.recognize_face))
+        if (typeOpen == ConstantUtils.TYPE_CONSUMABLE_COLLECT){
+            mViewDataBinding?.bottomMenu?.btnUsing?.text = getString(R.string.using_card_button)
+        }
         mViewDataBinding?.bottomMenu?.rlHome?.setOnClickListener(this)
-        mViewDataBinding?.bottomMenu?.btnUsingMail?.setOnClickListener(this)
+        mViewDataBinding?.bottomMenu?.btnUsing?.setOnClickListener(this)
         mViewDataBinding?.bottomMenu?.btnRetry?.setOnClickListener(this)
         mViewDataBinding?.bottomMenu?.btnProcess?.setOnClickListener(this)
         mViewDataBinding?.headerBar?.ivBack?.setOnClickListener(this)
@@ -154,7 +157,7 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
                     }
                 }
 
-                R.id.btn_using_mail -> {
+                R.id.btn_using -> {
                     imageProcessor?.run { this.stop() }
                     if (cameraProvider != null) {
                         cameraProvider!!.unbindAll()

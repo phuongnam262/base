@@ -43,8 +43,8 @@ class ManageLockerFragment : BaseFragment<FragmentManageLockerBinding, ManageLoc
         viewModel.titlePage.postValue(getString(R.string.manage_locker))
         mViewDataBinding?.bottomMenu?.rlHome?.setOnClickListener(this)
         mViewDataBinding?.headerBar?.ivBack?.setOnClickListener(this)
-        mViewDataBinding?.bottomMenu?.btnUsingMail?.setOnClickListener(this)
-        mViewDataBinding?.bottomMenu?.btnUsingMail?.text = getString(R.string.open_all_button)
+        mViewDataBinding?.bottomMenu?.btnUsing?.setOnClickListener(this)
+        mViewDataBinding?.bottomMenu?.btnUsing?.text = getString(R.string.open_all_button)
         mViewDataBinding?.bottomMenu?.btnRetry?.setOnClickListener(this)
         mViewDataBinding?.bottomMenu?.btnRetry?.text = getString(R.string.check_door_button)
         mViewDataBinding?.rvLockers?.adapter = lockerAdapter
@@ -69,7 +69,7 @@ class ManageLockerFragment : BaseFragment<FragmentManageLockerBinding, ManageLoc
             when (v?.id) {
                 R.id.rl_home -> activity?.finish()
                 R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
-                R.id.btn_using_mail -> {
+                R.id.btn_using -> {
                     viewModel.openAllLocker()
                 }
 

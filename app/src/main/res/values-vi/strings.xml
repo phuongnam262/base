@@ -31,14 +31,22 @@
     <string name="return_button_label">Hãy chọn một ngăn tủ để trả lại đồ dùng đã mượn</string>
     <string name="collect_button">LẤY ĐỒ DÙNG</string>
     <string name="collect_button_label">Bạn có thể lấy đồ dùng theo quy định và không cần hoàn trả </string>
-    <string name="using_mail_button">DÙNG EMAIL</string>
-    <string name="retry_button">THỬ LẠI</string>
-    <string name="process_button">TIẾP TỤC</string>
+    <string name="consumable_collect_button">CONSUMABLE COLLECT</string>
+    <string name="consumable_collect_button_label">Allows users to get consumable item - no return requirement</string>
 
     <!-- Recognize face -->
     <string name="recognize_face">Nhận Diện Khuôn Mặt Của Bạn</string>
     <string name="error_no_face_detect">Không tìm thấy dữ liệu.\nHãy thử lại hoặc sử dụng phương pháp khác.</string>
     <string name="welcome_back">Chào mừng trở lại %1$s</string>
+    <string name="using_mail_button">DÙNG EMAIL</string>
+    <string name="retry_button">THỬ LẠI</string>
+    <string name="process_button">TIẾP TỤC</string>
+    <string name="using_card_button">DÙNG THẺ</string>
+
+    <!-- Scan work card -->
+    <string name="scan_work_card">Scan Work Card</string>
+    <string name="scan_work_card_info">Please scan your work card.</string>
+    <string name="your_work_card">Your work card:</string>
 
     <!-- Input email -->
     <string name="auth_required">Yêu Cầu Xác Thực</string>
@@ -200,6 +208,12 @@
     <string name="error_no_faulty">Hiện tại không có đồ dùng lỗi</string>
     <string name="error_no_item_available">Không có đồ dùng nào tại trạm tủ này</string>
     <string name="error_retrieve_item">Đồ dùng này đã được thu hồi</string>
+
+    <!-- Menu -->
+    <string name="email_button">EMAIL</string>
+    <string name="work_card_button">WORK CARD</string>
+    <string name="error_wrong_card_number">Sai thẻ nhân viên, vui lòng quét lại</string>
+    <string name="error_card_emplty">Vui lòng quét thẻ nhân viên</string>
 
     <!-- Strings for camera settings. -->
     <string name="pref_category_key_camera" translatable="false">pckc</string>

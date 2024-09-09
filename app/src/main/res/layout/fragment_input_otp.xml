@@ -61,7 +61,6 @@
             android:layout_marginEnd="@dimen/dp_30"
             android:text="@={viewmodel.otpText}"
             android:textAlignment="center"
-            android:enabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_input_username"
@@ -87,6 +86,7 @@
             app:ownerText="@{viewmodel.ownerText}"
             app:showStatusText="@{viewmodel.showStatusText}"
             app:timerHour="@{viewmodel.timerHour}"
+            app:enableButtonProcess="@{viewmodel.enableButtonProcess}"
             app:showProcessButton="@{viewmodel.showButtonProcess}"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

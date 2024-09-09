@@ -1,11 +1,13 @@
 package com.lock.smartlocker.data.repositories
 
 import com.lock.smartlocker.data.entities.request.AminLoginRequest
+import com.lock.smartlocker.data.entities.request.CheckCardRequest
 import com.lock.smartlocker.data.entities.request.ConsumerLoginRequest
 import com.lock.smartlocker.data.entities.request.DisableLockerRequest
 import com.lock.smartlocker.data.entities.request.RetrieveItemRequest
 import com.lock.smartlocker.data.entities.responses.AdminLoginResponse
 import com.lock.smartlocker.data.entities.responses.BaseResponse
+import com.lock.smartlocker.data.entities.responses.CheckCardResponse
 import com.lock.smartlocker.data.entities.responses.ConsumerLoginResponse
 import com.lock.smartlocker.data.entities.responses.DisableLockerResponse
 import com.lock.smartlocker.data.entities.responses.GetAllItemRetrieveResponse
@@ -21,6 +23,10 @@ class ManagerRepository (
 
     suspend fun consumerLogin(consumerLoginRequest: ConsumerLoginRequest): BaseResponse<ConsumerLoginResponse> {
         return apiRequest { api.provideLockerAPIService().consumerLogin(consumerLoginRequest) }
+    }
+
+    suspend fun checkCardNumber(checkCardRequest: CheckCardRequest): BaseResponse<CheckCardResponse> {
+        return apiRequest { api.provideLockerAPIService().checkCardNumber(checkCardRequest) }
     }
 
     suspend fun adminLogin(adminLoginRequest: AminLoginRequest): BaseResponse<AdminLoginResponse> {

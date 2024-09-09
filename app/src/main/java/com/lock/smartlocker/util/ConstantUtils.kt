@@ -28,6 +28,7 @@ class ConstantUtils {
         //Type Consumer
         const val TYPE_LOAN = "TYPE_LOAN"
         const val TYPE_COLLECT = "TYPE_COLLECT"
+        const val TYPE_CONSUMABLE_COLLECT = "TYPE_CONSUMABLE_COLLECT"
 
         //Type input serial
         const val TYPE_RETURN = "TYPE_RETURN"
@@ -40,6 +41,10 @@ class ConstantUtils {
         //Dialog Confirm
         const val DISABLE_LOCKER = "DISABLE_LOCKER"
         const val ENABLE_LOCKER = "ENABLE_LOCKER"
+
+        //End user
+        const val NAME_END_USER = "NAME_END_USER"
+        const val WORK_CARD_NUMBER = "WORK_CARD_NUMBER"
 
         //Error code
         const val LOGIN_EMAIL_NOT_EXISTED = "401-001"
@@ -54,6 +59,7 @@ class ConstantUtils {
         const val ADMIN_ACCOUNT_LOCKED = "60201"
         const val CREATE_TRANSACTION_FAILED = "604"
         const val PASSWORD_POLICY_UPDATE = "60402"
+        const val ERROR_CARD_NUMBER = "60404"
         const val ERROR_NO_AVAILABLE_ITEM = "605"
         const val PASSWORD_EXPIRED = "60503"
         const val ERROR_NO_RETRIEVE_ITEM = "60505"

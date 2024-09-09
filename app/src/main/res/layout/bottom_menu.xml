@@ -26,6 +26,10 @@
             name="showButtonUsingMail"
             type="Boolean" />
 
+        <variable
+            name="enableButtonProcess"
+            type="Boolean" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -115,7 +119,7 @@
 
 
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btn_using_mail"
+                        android:id="@+id/btn_using"
                         style="@style/CustomButtonBlack"
                         android:layout_width="@dimen/dp_120"
                         android:layout_height="wrap_content"
@@ -144,6 +148,8 @@
                         android:layout_width="@dimen/dp_120"
                         android:layout_height="wrap_content"
                         android:text="@string/process_button"
+                        android:alpha="@{enableButtonProcess ? 1f : 0.3f}"
+                        android:enabled="@{enableButtonProcess ? true : false}"
                         android:visibility="@{showButtonUsingMail ? View.GONE : View.VISIBLE}"
                         android:layout_centerInParent="true"/>
 

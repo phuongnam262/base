@@ -54,13 +54,7 @@ class RetrieveFaultyFragment : BaseFragment<FragmentRetrieveFaultyBinding, Retri
         mViewDataBinding?.rvModels?.adapter = retrieveAdapter
         viewModel.retrieveModels.observe(viewLifecycleOwner) { models ->
             retrieveAdapter.update(models.map { RetrieveItem(it, viewModel) })
-            if (models.isNotEmpty()){
-                mViewDataBinding?.bottomMenu?.btnProcess?.isEnabled = true
-                mViewDataBinding?.bottomMenu?.btnProcess?.alpha = 1f
-            }else{
-                mViewDataBinding?.bottomMenu?.btnProcess?.isEnabled = false
-                mViewDataBinding?.bottomMenu?.btnProcess?.alpha = 0.3f
-            }
+            viewModel.enableButtonProcess.value = models.isNotEmpty()
         }
 
         viewModel.listSerialRetrieve.observe(viewLifecycleOwner) {
@@ -92,8 +86,7 @@ class RetrieveFaultyFragment : BaseFragment<FragmentRetrieveFaultyBinding, Retri
     }
 
     override fun allRetrieveSuccess() {
-        mViewDataBinding?.bottomMenu?.btnProcess?.alpha = 0.3f
-        mViewDataBinding?.bottomMenu?.btnProcess?.isEnabled = false
+        viewModel.enableButtonProcess.value = false
     }
 
     override fun onDialogConfirmClick(dialogTag: String?) {

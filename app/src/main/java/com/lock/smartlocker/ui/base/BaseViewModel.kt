@@ -36,6 +36,7 @@ abstract class BaseViewModel() : ViewModel() {
     var titlePage = MutableLiveData<String>()
     var statusText = MutableLiveData<String>()
     var showButtonProcess = MutableLiveData<Boolean>(true)
+    var enableButtonProcess = MutableLiveData<Boolean>(false)
     var showButtonUsingMail = MutableLiveData<Boolean>(true)
     var showStatusText = MutableLiveData<Boolean>()
     var timerHour = MutableLiveData<String>()
@@ -122,6 +123,8 @@ abstract class BaseViewModel() : ViewModel() {
             ConstantUtils.ERROR_RETRIEVE_ITEM_FAIL -> mStatusText.postValue(R.string.error_retrieve_item)
 
             ConstantUtils.ERROR_NO_RETRIEVE_FAULTY -> mStatusText.postValue(R.string.error_no_faulty)
+
+            ConstantUtils.ERROR_CARD_NUMBER -> mStatusText.postValue(R.string.error_wrong_card_number)
 
             else -> mMessage.postValue(R.string.error_all)
 

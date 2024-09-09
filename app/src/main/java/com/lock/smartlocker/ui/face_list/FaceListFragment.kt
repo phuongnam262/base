@@ -84,8 +84,7 @@ class FaceListFragment : BaseFragment<FragmentFaceListBinding, FaceListViewModel
     }
 
     override fun dataEmpty() {
-        mViewDataBinding?.bottomMenu?.btnProcess?.isEnabled = false
-        mViewDataBinding?.bottomMenu?.btnProcess?.alpha = 0.3f
+        viewModel.enableButtonProcess.value = false
     }
 
     override fun onDialogConfirmClick(dialogTag: String?) {

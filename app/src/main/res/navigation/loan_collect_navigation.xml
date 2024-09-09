@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_recognizeFaceFragment_to_inputEmailFragment2"
             app:destination="@id/inputEmailFragment2" />
+        <action
+            android:id="@+id/action_recognizeFaceFragment_to_scanWorkCardFragment"
+            app:destination="@id/scanWorkCardFragment" />
     </fragment>
     <fragment
         android:id="@+id/inputOTPFragment2"
@@ -79,4 +82,9 @@
             android:id="@+id/action_inputEmailFragment2_to_inputOTPFragment2"
             app:destination="@id/inputOTPFragment2" />
     </fragment>
+    <fragment
+        android:id="@+id/scanWorkCardFragment"
+        android:name="com.lock.smartlocker.ui.scan_work_card.ScanWorkCardFragment"
+        android:label="fragment_scan_work_card"
+        tools:layout="@layout/fragment_scan_work_card" />
 </navigation>

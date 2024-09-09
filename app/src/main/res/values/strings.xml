@@ -31,14 +31,22 @@
     <string name="return_button_label">Return your loaned item into the locker easily to complete the borrowing</string>
     <string name="collect_button">COLLECT</string>
     <string name="collect_button_label">Allows users to take items, like gloves,… without needing to return them</string>
-    <string name="using_mail_button">USING EMAIL</string>
-    <string name="retry_button">RETRY</string>
-    <string name="process_button">PROCESS</string>
+    <string name="consumable_collect_button">CONSUMABLE COLLECT</string>
+    <string name="consumable_collect_button_label">Allows users to get consumable item - no return requirement</string>
 
     <!-- Recognize face -->
     <string name="recognize_face">Recognize Your Face</string>
     <string name="error_no_face_detect">No face detected.\nTry again or use another authentication method.</string>
     <string name="welcome_back">Welcome back %1$s</string>
+    <string name="using_mail_button">USING EMAIL</string>
+    <string name="retry_button">RETRY</string>
+    <string name="process_button">PROCESS</string>
+    <string name="using_card_button">USING CARD</string>
+
+    <!-- Scan work card -->
+    <string name="scan_work_card">Scan Work Card</string>
+    <string name="scan_work_card_info">Please scan your work card.</string>
+    <string name="your_work_card">Your work card:</string>
 
     <!-- Input email -->
     <string name="auth_required">Authentication Required</string>
@@ -201,6 +209,11 @@
     <string name="error_no_item_available">No items available at this locker station</string>
     <string name="error_retrieve_item">Retrieve item fail, item is retrieved </string>
 
+    <!-- Menu -->
+    <string name="email_button">EMAIL</string>
+    <string name="work_card_button">WORK CARD</string>
+    <string name="error_wrong_card_number">Incorrect work card, please scan again</string>
+    <string name="error_card_emplty">Please scan your work card</string>
 
     <!-- Strings for camera settings. -->
     <string name="pref_category_key_camera" translatable="false">pckc</string>

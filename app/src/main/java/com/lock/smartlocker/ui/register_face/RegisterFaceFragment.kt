@@ -31,6 +31,7 @@ import com.lock.smartlocker.facedetector.VisionImageProcessor
 import com.lock.smartlocker.facedetector.preference.PreferenceUtils
 import com.lock.smartlocker.ui.base.BaseFragment
 import com.lock.smartlocker.ui.inputemail.InputEmailFragment
+import com.lock.smartlocker.util.ConstantUtils
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
@@ -81,8 +82,6 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
         viewModel.titlePage.postValue(getString(R.string.register_face))
         mViewDataBinding?.bottomMenu?.rlHome?.setOnClickListener(this)
         mViewDataBinding?.bottomMenu?.btnProcess?.setOnClickListener(this)
-        mViewDataBinding?.bottomMenu?.btnProcess?.isEnabled = false
-        mViewDataBinding?.bottomMenu?.btnProcess?.alpha = 0.3f
         mViewDataBinding?.headerBar?.ivBack?.setOnClickListener(this)
 
         cameraSelector = CameraSelector.Builder().requireLensFacing(lensFacing).build()
@@ -128,6 +127,8 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
 
     private fun initData() {
         viewModel.emailRegister.value = arguments?.getString(InputEmailFragment.EMAIL_REGISTER)
+        viewModel.nameEndUser.value = arguments?.getString(ConstantUtils.NAME_END_USER)
+        viewModel.cardNumberRegister.value = arguments?.getString(ConstantUtils.WORK_CARD_NUMBER)
     }
 
     override fun onClick(v: View?) {
@@ -140,8 +141,7 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
                         isExited = false
                         mViewDataBinding?.ivFrame?.setBackgroundResource(R.drawable.bg_face_register)
                         mViewDataBinding?.bottomMenu?.btnProcess?.text = getString(R.string.process_button)
-                        mViewDataBinding?.bottomMenu?.btnProcess?.isEnabled = false
-                        mViewDataBinding?.bottomMenu?.btnProcess?.alpha = 0.3f
+                        viewModel.enableButtonProcess.value = false
                         viewModel.showStatusText.value = false
                         FaceDetectorProcessor.isSuccess = false
                         bindAllCameraUseCases()

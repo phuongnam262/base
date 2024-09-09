@@ -73,6 +73,7 @@ class InputEmailFragment : BaseFragment<FragmentInputEmailBinding, InputEmailVie
         mViewDataBinding?.bottomMenu?.rlHome?.setOnClickListener(this)
         mViewDataBinding?.bottomMenu?.btnProcess?.setOnClickListener(this)
         mViewDataBinding?.headerBar?.ivBack?.setOnClickListener(this)
+        viewModel.enableButtonProcess.postValue(true)
     }
 
     private fun initData(){

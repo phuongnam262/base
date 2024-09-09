@@ -56,13 +56,7 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(),
                 CartItemAdapter(it, viewModel)
             })
             CategoryFragment.listCartItem = cartItems
-            if (cartItems.size > 0){
-                mViewDataBinding?.bottomMenu?.btnProcess?.isEnabled = true
-                mViewDataBinding?.bottomMenu?.btnProcess?.alpha = 1f
-            }else{
-                mViewDataBinding?.bottomMenu?.btnProcess?.isEnabled = false
-                mViewDataBinding?.bottomMenu?.btnProcess?.alpha = 0.3f
-            }
+            viewModel.enableButtonProcess.value = cartItems.size > 0
         }
 
         viewModel.listLockerInfo.observe(viewLifecycleOwner) {

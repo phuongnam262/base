@@ -84,6 +84,7 @@
             app:showProcessButton="@{viewmodel.showButtonProcess}"
             app:showStatusText="@{viewmodel.showStatusText}"
             app:statusText="@{viewmodel.statusText}"
+            app:enableButtonProcess="@{viewmodel.enableButtonProcess}"
             app:timerHour="@{viewmodel.timerHour}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
