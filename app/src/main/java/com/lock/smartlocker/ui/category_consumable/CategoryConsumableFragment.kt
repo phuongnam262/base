@@ -1,4 +1,4 @@
-package com.lock.smartlocker.ui.category
+package com.lock.smartlocker.ui.category_consumable
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -8,8 +8,9 @@ import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
 import com.lock.smartlocker.data.models.CartItem
 import com.lock.smartlocker.data.preference.PreferenceHelper
-import com.lock.smartlocker.databinding.FragmentCategoryBinding
+import com.lock.smartlocker.databinding.FragmentCategoryConsumableBinding
 import com.lock.smartlocker.ui.base.BaseFragment
+import com.lock.smartlocker.ui.category.adapter.CategoryItem
 import com.lock.smartlocker.ui.category_consumable.adapter.ConsumableItem
 import com.lock.smartlocker.util.ConstantUtils
 import com.xwray.groupie.GroupAdapter
@@ -18,12 +19,12 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 
-class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel>(),
+class CategoryConsumableFragment : BaseFragment<FragmentCategoryConsumableBinding, CategoryConsumableViewModel>(),
     KodeinAware,
     View.OnClickListener {
 
     override val kodein by kodein()
-    private val factory: CategoryViewModelFactory by instance()
+    private val factory: CategoryConsumableViewModelFactory by instance()
     override val layoutId: Int = R.layout.fragment_category
     override val bindingVariable: Int
         get() = BR.viewmodel
@@ -31,8 +32,8 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel
     private val categoryAdapter = GroupAdapter<GroupieViewHolder>()
     private val modelAdapter = GroupAdapter<GroupieViewHolder>()
 
-    override val viewModel: CategoryViewModel
-        get() = ViewModelProvider(this, factory)[CategoryViewModel::class.java]
+    override val viewModel: CategoryConsumableViewModel
+        get() = ViewModelProvider(this, factory)[CategoryConsumableViewModel::class.java]
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -68,16 +69,16 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel
         mViewDataBinding?.rvModels?.adapter = modelAdapter
 
         viewModel.categories.observe(viewLifecycleOwner) { categories ->
-            categoryAdapter.update(categories.map {
-                CategoryItem(it, viewModel)
-            })
+//            categoryAdapter.update(categories.map {
+//                CategoryItem(it, viewModel)
+//            })
             if (categories.isNotEmpty()) {
                 viewModel.onCategorySelected(categories[0])
             }
         }
 
         viewModel.availableModels.observe(viewLifecycleOwner) { models ->
-            modelAdapter.update(models.map { ConsumableItem(it, viewModel) })
+           // modelAdapter.update(models.map { ModelItem(it, viewModel) })
         }
 
         viewModel.categoryIdSelected.observe(viewLifecycleOwner) {

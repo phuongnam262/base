@@ -87,6 +87,7 @@
     <string name="face_exits_email">Your work card have been linked to email: %1$s</string>
 
     <!-- Admin Dashboard -->
+    <string name="consumable_topup">CONSUMABLE TOPUP</string>
     <string name="topup_items">TOPUP ITEMS\n(%1$s)</string>
     <string name="retrieve_faulty">RETRIEVE FAULTY\n(%1$s)</string>
     <string name="retrieve_items">RETRIEVE ITEMS</string>

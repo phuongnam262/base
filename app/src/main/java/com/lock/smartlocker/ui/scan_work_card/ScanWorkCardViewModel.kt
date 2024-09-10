@@ -33,7 +33,6 @@ class ScanWorkCardViewModel(
                 if (isSuccessful) {
                     if (data != null) {
                         showStatusText.postValue(false)
-                        mStatusText.postValue(null)
                         scanCardListener?.handleSuccess(data.endUser.fullName, workCardText.value!!)
                     }
                 }else handleError(status)

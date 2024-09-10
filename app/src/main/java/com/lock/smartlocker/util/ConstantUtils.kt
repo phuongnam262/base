@@ -60,7 +60,6 @@ class ConstantUtils {
         const val ADMIN_ACCOUNT_LOCKED = "60201"
         const val CREATE_TRANSACTION_FAILED = "604"
         const val PASSWORD_POLICY_UPDATE = "60402"
-        const val ERROR_CARD_NUMBER = "60404"
         const val ERROR_NO_AVAILABLE_ITEM = "605"
         const val PASSWORD_EXPIRED = "60503"
         const val ERROR_NO_RETRIEVE_ITEM = "60505"
@@ -69,6 +68,7 @@ class ConstantUtils {
         const val ERROR_UNABLE_LOCKER = "606"
         const val ADMIN_NO_PERMISSION = "60601"
         const val ERROR_LOGIC = "623"
+        const val ERROR_CARD_NUMBER = "70404"
 
     }
 

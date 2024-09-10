@@ -35,11 +35,15 @@ android {
                 "proguard-rules.pro"
             )
             buildConfigField("boolean", "IS_NEW_FLOW", "true")
+            buildConfigField("boolean", "IS_DISABLE_WORK_CARD", "true")
+            buildConfigField("Integer", "TYPE_LOGIN", "6")
             signingConfig = signingConfigs.getByName("debug")
         }
         debug {
             isMinifyEnabled = false
             buildConfigField("boolean", "IS_NEW_FLOW", "false")
+            buildConfigField("boolean", "IS_DISABLE_WORK_CARD", "false")
+            buildConfigField("Integer", "TYPE_LOGIN", "0")
         }
     }
     compileOptions {
@@ -54,6 +58,7 @@ android {
         dataBinding = true
         buildConfig = true
     }
+
     externalNativeBuild {
         ndkBuild {
             path("src/main/jni/Android.mk")

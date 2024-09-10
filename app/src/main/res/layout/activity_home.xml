@@ -102,7 +102,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/loan_button"
                             android:textColor="@color/colorBlack"
-                            android:textSize="@dimen/sp_30"
+                            android:textSize="@dimen/sp_27"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -162,7 +162,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/return_button"
                             android:textColor="@color/colorBlack"
-                            android:textSize="@dimen/sp_30"
+                            android:textSize="@dimen/sp_27"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -221,7 +221,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/consumable_collect_button"
                             android:textColor="@color/colorBlack"
-                            android:textSize="@dimen/sp_30"
+                            android:textSize="@dimen/sp_27"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -280,7 +280,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/collect_button"
                             android:textColor="@color/colorBlack"
-                            android:textSize="@dimen/sp_30"
+                            android:textSize="@dimen/sp_27"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 

@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.category.CategoryFragment">
+    tools:context=".ui.category_consumable.CategoryConsumableFragment">
 
     <data>
 
@@ -10,7 +10,7 @@
 
         <variable
             name="viewmodel"
-            type="com.lock.smartlocker.ui.category.CategoryViewModel" />
+            type="com.lock.smartlocker.ui.category_consumable.CategoryConsumableViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -35,7 +35,7 @@
                 android:id="@+id/header_title"
                 layout="@layout/header_name_date"
                 app:nameLocker="@{viewmodel.terminalName}"
-                app:timer="@{viewmodel.timerString}"/>
+                app:timer="@{viewmodel.timerString}" />
 
             <ImageView
                 android:id="@+id/ivAvatar"
@@ -61,18 +61,32 @@
                 app:layout_constraintStart_toEndOf="@+id/ivAvatar"
                 app:layout_constraintTop_toTopOf="@+id/ivAvatar" />
 
-            <TextView
-                android:id="@+id/tvCategoryLabel"
+            <LinearLayout
+                android:id="@+id/ll_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_20"
-                android:fontFamily="@font/segoe_ui_regular"
-                android:text="@string/category"
-                android:textColor="@color/text_color"
-                android:textSize="@dimen/sp_22"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ivAvatar" />
+                app:layout_constraintTop_toBottomOf="@+id/ivAvatar">
+
+                <ImageButton
+                    android:id="@+id/iv_back"
+                    style="@style/CustomImageButtonStyle"
+                    android:layout_width="@dimen/dp_30"
+                    android:layout_height="@dimen/dp_30"
+                    android:padding="@dimen/dp_2"
+                    android:src="@drawable/icon_back" />
+
+                <TextView
+                    android:id="@+id/tvCategoryLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/segoe_ui_regular"
+                    android:text="@string/category"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/sp_22" />
+            </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvCategories"
@@ -84,7 +98,7 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvCategoryLabel"
+                app:layout_constraintTop_toBottomOf="@+id/ll_title"
                 tools:listitem="@layout/item_category" />
 
             <TextView

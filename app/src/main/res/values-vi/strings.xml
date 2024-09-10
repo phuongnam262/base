@@ -87,6 +87,7 @@
     <string name="face_exits_email">Thẻ nhân viên đã được liên kết với email: (%1$s)</string>
 
     <!-- Admin Dashboard -->
+    <string name="consumable_topup">THÊM VẬT TƯ</string>
     <string name="topup_items">THÊM ĐỒ DÙNG\n(%1$s)</string>
     <string name="retrieve_faulty">THU HỒI ĐỒ DÙNG LỖI\n(%1$s)</string>
     <string name="retrieve_items">THU HỒI ĐỒ DÙNG </string>

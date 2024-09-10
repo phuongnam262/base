@@ -37,6 +37,7 @@ class AdminDashboardFragment : BaseFragment<FragmentAdminDashboardBinding, Admin
         viewModel.titlePage.postValue(getString(R.string.admin_menu))
         mViewDataBinding?.bottomMenu?.rlHome?.setOnClickListener(this)
         mViewDataBinding?.headerBar?.ivBack?.setOnClickListener(this)
+        mViewDataBinding?.llConsumableTopup?.setOnClickListener(this)
         mViewDataBinding?.llTopupItems?.setOnClickListener(this)
         mViewDataBinding?.llCloseApp?.setOnClickListener(this)
         mViewDataBinding?.llSettings?.setOnClickListener(this)

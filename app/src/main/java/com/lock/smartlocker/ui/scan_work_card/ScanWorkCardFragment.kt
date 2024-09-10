@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.lock.smartlocker.BR
+import com.lock.smartlocker.BuildConfig
 import com.lock.smartlocker.R
 import com.lock.smartlocker.data.services.com.ComBean
 import com.lock.smartlocker.data.services.com.SerialHelper
@@ -30,7 +31,7 @@ class ScanWorkCardFragment : BaseFragment<FragmentScanWorkCardBinding, ScanWorkC
         get() = BR.viewmodel
 
     override val viewModel: ScanWorkCardViewModel
-        get() = ViewModelProvider(requireActivity(), factory)[ScanWorkCardViewModel::class.java]
+        get() = ViewModelProvider(this, factory)[ScanWorkCardViewModel::class.java]
 
     private var comA: SerialControl? = null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -49,6 +50,9 @@ class ScanWorkCardFragment : BaseFragment<FragmentScanWorkCardBinding, ScanWorkC
         mViewDataBinding?.bottomMenu?.btnProcess?.setOnClickListener(this)
         mViewDataBinding?.headerBar?.ivBack?.setOnClickListener(this)
         viewModel.enableButtonProcess.postValue(true)
+        if (BuildConfig.IS_DISABLE_WORK_CARD){
+            mViewDataBinding?.etWorkCard?.isEnabled = false
+        }
     }
 
     private fun initData(){
@@ -62,7 +66,7 @@ class ScanWorkCardFragment : BaseFragment<FragmentScanWorkCardBinding, ScanWorkC
             when (v?.id) {
                 R.id.btn_process -> viewModel.checkCardNumber()
                 R.id.rl_home -> activity?.finish()
-                R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
+                R.id.iv_back -> activity?.supportFragmentManager?.popBackStack()
             }
         }
     }
@@ -80,7 +84,7 @@ class ScanWorkCardFragment : BaseFragment<FragmentScanWorkCardBinding, ScanWorkC
         override fun onDataReceived(comRecData: ComBean?) {
             Coroutines.main {
                 val receivedData = comRecData?.bRec?.decodeToString()?.trim()
-                mViewDataBinding?.etWorkCard?.append(receivedData)
+                mViewDataBinding?.etWorkCard?.setText(receivedData)
             }
         }
     }
