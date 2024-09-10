@@ -15,7 +15,7 @@ interface UserLockerDAO{
     suspend fun insertUser(user: UserLockerModel) : Long
 
     @Update
-    suspend fun updateUser(user: UserLockerModel)
+    suspend fun updateUser(user: UserLockerModel) : Int
 
     @Delete
     suspend fun deleteUser(user: UserLockerModel)

@@ -81,6 +81,9 @@
         <action
             android:id="@+id/action_inputEmailFragment2_to_inputOTPFragment2"
             app:destination="@id/inputOTPFragment2" />
+        <action
+            android:id="@+id/action_inputEmailFragment2_to_categoryFragment"
+            app:destination="@id/categoryFragment" />
     </fragment>
     <fragment
         android:id="@+id/scanWorkCardFragment"

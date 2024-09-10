@@ -28,10 +28,12 @@ class AdminLoginViewModel(
             mLoading.postValue(true)
             if (username.value.isNullOrEmpty()) {
                 mStatusText.postValue(R.string.error_username_empty)
+                adminLoginListener?.adminLoginFail()
                 return@launch
             }
             if (password.value.isNullOrEmpty()) {
                 mStatusText.postValue(R.string.error_password_empty)
+                adminLoginListener?.adminLoginFail()
                 return@launch
             }
             val param = AminLoginRequest()
@@ -46,7 +48,10 @@ class AdminLoginViewModel(
                         PreferenceHelper.writeString(ConstantUtils.ADMIN_NAME, data.staff.userName)
                         showStatusText.postValue(false)
                     }
-                }else handleError(status)
+                }else {
+                    handleError(status)
+                    adminLoginListener?.adminLoginFail()
+                }
             }
         }.invokeOnCompletion { mLoading.postValue(false) }
     }

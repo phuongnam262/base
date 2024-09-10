@@ -7,7 +7,6 @@ import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
 import com.lock.smartlocker.databinding.FragmentInputOtpBinding
 import com.lock.smartlocker.ui.base.BaseFragment
-import com.lock.smartlocker.ui.input_serial_number.InputSerialNumberFragment
 import com.lock.smartlocker.ui.inputemail.InputEmailFragment
 import com.lock.smartlocker.util.ConstantUtils
 import org.kodein.di.KodeinAware
@@ -15,7 +14,8 @@ import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 
 
-class InputOTPFragment : BaseFragment<FragmentInputOtpBinding, InputOTPViewModel>(), KodeinAware, View.OnClickListener {
+class InputOTPFragment : BaseFragment<FragmentInputOtpBinding, InputOTPViewModel>(), KodeinAware,
+    View.OnClickListener, InputOTPListener {
 
     override val kodein by kodein()
     private val factory: InputOTPViewModelFactory by instance()
@@ -24,10 +24,12 @@ class InputOTPFragment : BaseFragment<FragmentInputOtpBinding, InputOTPViewModel
         get() = BR.viewmodel
 
     override val viewModel: InputOTPViewModel
-        get() = ViewModelProvider(this, factory)[InputOTPViewModel::class.java]
+        get() = ViewModelProvider(requireActivity(), factory)[InputOTPViewModel::class.java]
+
+    private var isClicked = false
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        viewModel.inputOTPListener = this
         initView()
         initData()
     }
@@ -42,56 +44,48 @@ class InputOTPFragment : BaseFragment<FragmentInputOtpBinding, InputOTPViewModel
     }
 
     private fun initData(){
-
+        viewModel.email.value = arguments?.getString(InputEmailFragment.EMAIL_REGISTER)
     }
 
     override fun onClick(v: View?) {
         if (checkDebouncedClick()) {
             when (v?.id) {
-                R.id.btn_resend_otp -> navigateTo(
-                    R.id.action_inputOTPFragment_to_registerFaceFragment,
-                    null
-                )
-
                 R.id.rl_home -> activity?.finish()
-                R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
+                R.id.iv_back -> activity?.supportFragmentManager?.popBackStack()
                 R.id.btn_process -> {
-                    if (arguments?.getString(ConstantUtils.TYPE_OPEN) != null) {
-                        val bundle = Bundle().apply {
-                            putString(
-                                ConstantUtils.TYPE_OPEN,
-                                arguments?.getString(ConstantUtils.TYPE_OPEN)
-                            )
-                        }
-                        navigateTo(R.id.action_inputOTPFragment2_to_categoryFragment, bundle)
-                    } else {
-                        val isOpenManager =
-                            arguments?.getString(ConstantUtils.TYPE_OPEN_MANAGER) != null
-                        val bundle = Bundle().apply {
-                            putString(
-                                InputEmailFragment.EMAIL_REGISTER, arguments?.getString(
-                                    InputEmailFragment.EMAIL_REGISTER
-                                )
-                            )
-                        }
-                        if (isOpenManager) {
-                            if (arguments?.getString(ConstantUtils.TYPE_OPEN_MANAGER) == ConstantUtils.TYPE_ADMIN_CONSOLE) {
-                                navigateTo(
-                                    R.id.action_inputOTPFragment_to_adminDashboardFragment,
-                                    bundle
-                                )
-                            } else {
-                                navigateTo(
-                                    R.id.action_inputOTPFragment_to_faceListFragment,
-                                    bundle
-                                )
-                            }
-                        } else {
-                            navigateTo(R.id.action_inputOTPFragment_to_registerFaceFragment, bundle)
-                        }
+                    if (isClicked.not()) {
+                        isClicked = true
+                        viewModel.onSendOTP()
                     }
                 }
             }
         }
+    }
+
+    override fun verifySuccess(email: String?) {
+        if (arguments?.getString(ConstantUtils.TYPE_OPEN) != null) {
+            val bundle = Bundle().apply {
+                putString(ConstantUtils.TYPE_OPEN, arguments?.getString(ConstantUtils.TYPE_OPEN))
+            }
+            navigateTo(R.id.action_inputOTPFragment2_to_categoryFragment, bundle)
+        } else {
+            val isOpenManager = arguments?.getString(ConstantUtils.TYPE_OPEN_MANAGER) != null
+            val bundle = Bundle().apply {
+                putString(InputEmailFragment.EMAIL_REGISTER, email)
+            }
+            if (isOpenManager) {
+                if (arguments?.getString(ConstantUtils.TYPE_OPEN_MANAGER) == ConstantUtils.TYPE_ADMIN_CONSOLE) {
+                    navigateTo(R.id.action_inputOTPFragment_to_adminDashboardFragment, bundle)
+                } else {
+                    navigateTo(R.id.action_inputOTPFragment_to_faceListFragment, bundle)
+                }
+            } else {
+                navigateTo(R.id.action_inputOTPFragment_to_registerFaceFragment, bundle)
+            }
+        }
+    }
+
+    override fun verifyFail() {
+        isClicked = false
     }
 }

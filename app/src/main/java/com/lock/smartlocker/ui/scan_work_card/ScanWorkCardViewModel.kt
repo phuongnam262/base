@@ -17,7 +17,6 @@ class ScanWorkCardViewModel(
 
     var scanCardListener: ScanCardListener? = null
     val workCardText = MutableLiveData<String>()
-    val fullName = MutableLiveData<String>()
 
     fun checkCardNumber() {
         ioScope.launch {
@@ -33,8 +32,8 @@ class ScanWorkCardViewModel(
             managerRepository.checkCardNumber(param).apply {
                 if (isSuccessful) {
                     if (data != null) {
-                        fullName.postValue(data.endUser.fullName)
                         showStatusText.postValue(false)
+                        mStatusText.postValue(null)
                         scanCardListener?.handleSuccess(data.endUser.fullName, workCardText.value!!)
                     }
                 }else handleError(status)

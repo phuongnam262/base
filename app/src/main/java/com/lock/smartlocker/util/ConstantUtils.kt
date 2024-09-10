@@ -53,6 +53,7 @@ class ConstantUtils {
         const val EMAIL_NOT_CORRECT_FORMAT = "422"
         const val DOOR_HAS_NOT_BEEN_CLOSE = "423-001"
 
+        const val REQUIRE_OTP = "201"
         const val INVALID_OTP = "601"
         const val SERIAL_NUMBER_INVALID = "60101"
         const val ADMIN_WRONG_USERNAME_PASS = "60104"

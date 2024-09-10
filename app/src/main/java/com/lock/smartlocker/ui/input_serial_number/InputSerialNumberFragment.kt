@@ -36,7 +36,7 @@ class InputSerialNumberFragment : BaseFragment<FragmentInputSerialNumberBinding,
         get() = BR.viewmodel
 
     override val viewModel: InputSerialNumberViewModel
-        get() = ViewModelProvider(this, factory)[InputSerialNumberViewModel::class.java]
+        get() = ViewModelProvider(requireActivity(), factory)[InputSerialNumberViewModel::class.java]
 
     private var isReturnFlow = true
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

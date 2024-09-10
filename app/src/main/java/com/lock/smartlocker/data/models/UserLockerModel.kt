@@ -12,6 +12,7 @@ data class UserLockerModel(
     var personGroup: String? = null,
     var status: Int? = null,
     var email: String? = null,
+    var cardNumber: String? = null,
     var isDelete: Int? = null,
     var faceBase64: String? = null
 )

@@ -28,7 +28,7 @@ class AdminLoginFragment : BaseFragment<FragmentAdminLoginBinding, AdminLoginVie
         get() = BR.viewmodel
 
     override val viewModel: AdminLoginViewModel
-        get() = ViewModelProvider(this, factory)[AdminLoginViewModel::class.java]
+        get() = ViewModelProvider(requireActivity(), factory)[AdminLoginViewModel::class.java]
     private var isClicked = false
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -93,5 +93,9 @@ class AdminLoginFragment : BaseFragment<FragmentAdminLoginBinding, AdminLoginVie
         }else{
             viewModel.mStatusText.postValue(R.string.error_no_permission_console)
         }
+    }
+
+    override fun adminLoginFail() {
+        isClicked = false
     }
 }

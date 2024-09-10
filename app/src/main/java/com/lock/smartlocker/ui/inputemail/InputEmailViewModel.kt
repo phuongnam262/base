@@ -21,6 +21,7 @@ class InputEmailViewModel(
         ioScope.launch {
             if (email.value.isNullOrEmpty()) {
                 mStatusText.postValue(R.string.error_email_empty)
+                inputEmailListener?.consumerLoginFail("","")
                 return@launch
             }else{
                 showStatusText.postValue(false)
@@ -31,11 +32,14 @@ class InputEmailViewModel(
             managerRepository.consumerLogin(param).apply {
                 if (isSuccessful) {
                     if (data != null) {
-                        inputEmailListener?.consumerLoginSuccess(param.email!!)
+                        inputEmailListener?.consumerLoginSuccess(param.email)
                         if (typeOpen != null)  PreferenceHelper.writeString(ConstantUtils.USER_TOKEN, data.token)
                         showStatusText.postValue(false)
                     }
-                }else handleError(status)
+                }else {
+                    if (status != ConstantUtils.REQUIRE_OTP) handleError(status)
+                    else inputEmailListener?.consumerLoginFail(param.email, status)
+                }
             }
         }.invokeOnCompletion { mLoading.postValue(false) }
     }

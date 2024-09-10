@@ -54,6 +54,11 @@ android {
         dataBinding = true
         buildConfig = true
     }
+    externalNativeBuild {
+        ndkBuild {
+            path("src/main/jni/Android.mk")
+        }
+    }
 }
 
 dependencies {

@@ -5,6 +5,7 @@ import com.lock.smartlocker.data.entities.request.CheckCardRequest
 import com.lock.smartlocker.data.entities.request.ConsumerLoginRequest
 import com.lock.smartlocker.data.entities.request.DisableLockerRequest
 import com.lock.smartlocker.data.entities.request.RetrieveItemRequest
+import com.lock.smartlocker.data.entities.request.VerifyOTPRequest
 import com.lock.smartlocker.data.entities.responses.AdminLoginResponse
 import com.lock.smartlocker.data.entities.responses.BaseResponse
 import com.lock.smartlocker.data.entities.responses.CheckCardResponse
@@ -55,5 +56,13 @@ class ManagerRepository (
 
     suspend fun retrieveItem(retrieveItemRequest: RetrieveItemRequest): BaseResponse<RetrieveItemResponse> {
         return apiRequest { api.provideLockerAPIService().retrieveItem(retrieveItemRequest) }
+    }
+
+    suspend fun verifyOTP(verifyOTPRequest: VerifyOTPRequest): BaseResponse<ConsumerLoginResponse> {
+        return apiRequest { api.provideLockerAPIService().verifyOTP(verifyOTPRequest) }
+    }
+
+    suspend fun resendOTP(consumerLoginRequest: ConsumerLoginRequest): BaseResponse<Map<String, Any>> {
+        return apiRequest { api.provideLockerAPIService().resendOTP(consumerLoginRequest) }
     }
 }

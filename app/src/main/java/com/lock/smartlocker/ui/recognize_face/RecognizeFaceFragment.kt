@@ -60,9 +60,9 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
     private var analysisUseCase: ImageAnalysis? = null
     private var imageProcessor: VisionImageProcessor? = null
     private var needUpdateGraphicOverlayImageSourceInfo = false
-    private var lensFacing = CameraSelector.LENS_FACING_EXTERNAL
-    private var rotateCamera = Surface.ROTATION_270
-    private var rotateDetect = Surface.ROTATION_90
+    private var lensFacing = CameraSelector.LENS_FACING_FRONT
+    private var rotateCamera = Surface.ROTATION_0
+    private var rotateDetect = Surface.ROTATION_0
     private var cameraSelector: CameraSelector? = null
     private var imageCapture: ImageCapture? = null
     private var typeOpen : String? = null
@@ -189,6 +189,10 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
             putString(EMAIL_REGISTER, email)
         }
         navigateTo(R.id.action_recognizeFaceFragment_to_inputOTPFragment2, bundle)
+    }
+
+    override fun consumerLoginFail() {
+        isClicked = false
     }
 
     override fun faceExited() {

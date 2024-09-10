@@ -6,4 +6,6 @@ interface RecognizeFaceListener {
     fun faceExited()
     fun faceNotFound()
     fun consumerLoginSuccess(email: String?)
+
+    fun consumerLoginFail()
 }

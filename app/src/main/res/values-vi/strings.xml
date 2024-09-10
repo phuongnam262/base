@@ -72,6 +72,7 @@
     <string name="enter_otp">Nhập OTP:</string>
     <string name="resend_otp_button">Gửi lại OTP</string>
     <string name="error_invalid_otp">Mã OTP không hợp lệ. Vui lòng thử lại hoặc yêu cầu mã OTP mới</string>
+    <string name="error_otp_emplty">Vui lòng nhập OTP</string>
 
     <!-- Register face -->
     <string name="register_face">Đăng Ký Khuôn Mặt Của Bạn</string>
@@ -82,6 +83,8 @@
     <string name="face_register_success">Đăng Ký Khuôn Mặt Thành Công</string>
     <string name="face_hello">Hello %1$s, \nFace ID của bạn đã được thêm thành công.</string>
     <string name="btn_retry">THỬ LẠI</string>
+    <string name="face_exits_work_card">Email của bạn đã được liên kết với thẻ nhân viên: (%1$s)</string>
+    <string name="face_exits_email">Thẻ nhân viên đã được liên kết với email: (%1$s)</string>
 
     <!-- Admin Dashboard -->
     <string name="topup_items">THÊM ĐỒ DÙNG\n(%1$s)</string>

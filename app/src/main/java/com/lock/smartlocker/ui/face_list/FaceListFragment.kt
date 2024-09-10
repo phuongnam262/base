@@ -61,7 +61,7 @@ class FaceListFragment : BaseFragment<FragmentFaceListBinding, FaceListViewModel
         }
         viewModel.faces.observe(viewLifecycleOwner) {
             faceAdapter.notifyDataSetChanged()
-            if (it.isEmpty()) dataEmpty()
+            if (it.isEmpty()) dataEmpty() else viewModel.enableButtonProcess.value = true
         }
     }
 

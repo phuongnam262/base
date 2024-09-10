@@ -119,7 +119,10 @@ class RecognizeFaceViewModel(
                         PreferenceHelper.writeString(ConstantUtils.USER_TOKEN, data.token)
                         recognizeFaceListener?.consumerLoginSuccess(email)
                     }
-                }else handleError(status)
+                }else {
+                    handleError(status)
+                    recognizeFaceListener?.consumerLoginFail()
+                }
             }
         }.invokeOnCompletion { mLoading.postValue(false) }
     }

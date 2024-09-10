@@ -10,6 +10,7 @@ import com.lock.smartlocker.data.entities.request.GetItemReturnRequest
 import com.lock.smartlocker.data.entities.request.RetrieveItemRequest
 import com.lock.smartlocker.data.entities.request.ReturnItemRequest
 import com.lock.smartlocker.data.entities.request.UpdateInventoryTransactionRequest
+import com.lock.smartlocker.data.entities.request.VerifyOTPRequest
 import com.lock.smartlocker.data.entities.responses.AdminLoginResponse
 import com.lock.smartlocker.data.entities.responses.BaseResponse
 import com.lock.smartlocker.data.entities.responses.CheckCardResponse
@@ -49,6 +50,16 @@ interface LockerServives {
     suspend fun consumerLogin(
         @Body consumerLoginRequest: ConsumerLoginRequest
     ): Response<BaseResponse<ConsumerLoginResponse>>
+
+    @POST("/api/consumer/verify-otp")
+    suspend fun verifyOTP(
+        @Body verifyOTPRequest: VerifyOTPRequest
+    ): Response<BaseResponse<ConsumerLoginResponse>>
+
+    @POST("/api/consumer/verify-consumer-login")
+    suspend fun resendOTP(
+        @Body consumerLoginRequest: ConsumerLoginRequest
+    ): Response<BaseResponse<Map<String, Any>>>
 
     @POST("/api/end-user/check-card-number")
     suspend fun checkCardNumber(

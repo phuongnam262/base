@@ -27,7 +27,7 @@ class InputEmailFragment : BaseFragment<FragmentInputEmailBinding, InputEmailVie
         get() = BR.viewmodel
 
     override val viewModel: InputEmailViewModel
-        get() = ViewModelProvider(this, factory)[InputEmailViewModel::class.java]
+        get() = ViewModelProvider(requireActivity(), factory)[InputEmailViewModel::class.java]
 
     companion object {
         const val EMAIL_REGISTER = "email_register"
@@ -95,18 +95,37 @@ class InputEmailFragment : BaseFragment<FragmentInputEmailBinding, InputEmailVie
         }
     }
 
-    override fun consumerLoginSuccess(email: String) {
+    override fun consumerLoginSuccess(email: String?) {
         if (arguments?.getString(ConstantUtils.TYPE_OPEN) != null) {
             val bundle = Bundle().apply {
-                putString(ConstantUtils.TYPE_OPEN, arguments?.getString(ConstantUtils.TYPE_OPEN) )
-                putString(EMAIL_REGISTER, email)
+                putString(
+                    ConstantUtils.TYPE_OPEN,
+                    arguments?.getString(ConstantUtils.TYPE_OPEN)
+                )
             }
-            navigateTo(R.id.action_inputEmailFragment2_to_inputOTPFragment2, bundle)
+            navigateTo(R.id.action_inputEmailFragment2_to_categoryFragment, bundle)
         }else{
             val bundle = Bundle().apply {
                 putString(EMAIL_REGISTER, email)
             }
-            navigateTo(R.id.action_navigation_input_email_to_inputOTPFragment, bundle)
+            navigateTo(R.id.action_inputEmailFragment_to_registerFaceFragment, bundle)
         }
+    }
+
+    override fun consumerLoginFail(email: String?, status: String?) {
+        if (status == ConstantUtils.REQUIRE_OTP){
+            if (arguments?.getString(ConstantUtils.TYPE_OPEN) != null) {
+                val bundle = Bundle().apply {
+                    putString(ConstantUtils.TYPE_OPEN, arguments?.getString(ConstantUtils.TYPE_OPEN) )
+                    putString(EMAIL_REGISTER, email)
+                }
+                navigateTo(R.id.action_inputEmailFragment2_to_inputOTPFragment2, bundle)
+            }else{
+                val bundle = Bundle().apply {
+                    putString(EMAIL_REGISTER, email)
+                }
+                navigateTo(R.id.action_navigation_input_email_to_inputOTPFragment, bundle)
+            }
+        }else isClicked = false
     }
 }

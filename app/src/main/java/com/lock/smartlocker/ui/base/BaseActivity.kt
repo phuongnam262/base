@@ -42,6 +42,8 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : BaseAppCom
      */
     abstract val viewModel: V
 
+    private var isObserverSet = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         performDataBinding()
@@ -64,16 +66,19 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : BaseAppCom
      * Handling show loading icon, message, snackbar
      */
     private fun setupObservers() {
-        mViewModel?.mLoading?.observe(this) {
-            if (it != null && it) showLoading()
-            else hideLoading()
-        }
-        mViewModel?.mMessage?.observe(this) {
-            it?.let { CommonUtils.showErrorDialog(this, "", getString(it)) }
-        }
-        mViewModel?.mStatusText?.observe(this) {
-            it?.let { mViewModel?.statusText?.postValue(getString(it)) }
-            mViewModel?.showStatusText?.postValue(true)
+        if (isObserverSet.not()) {
+            mViewModel?.mLoading?.observe(this) {
+                if (it != null && it) showLoading()
+                else hideLoading()
+            }
+            mViewModel?.mMessage?.observe(this) {
+                it?.let { CommonUtils.showErrorDialog(this, "", getString(it)) }
+            }
+            mViewModel?.mStatusText?.observe(this) {
+                it?.let { mViewModel?.statusText?.postValue(getString(it)) }
+                mViewModel?.showStatusText?.postValue(true)
+            }
+            isObserverSet = true
         }
     }
 

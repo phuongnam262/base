@@ -26,7 +26,7 @@
             android:ellipsize="end"
             android:fontFamily="@font/segoe_ui_regular"
             android:maxLines="1"
-            android:text="@{userLocker.email}"
+            android:text="@{userLocker.personName != null ? userLocker.personName : userLocker.email}"
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/sp_14"
             app:layout_constraintEnd_toStartOf="@+id/btnRemove"

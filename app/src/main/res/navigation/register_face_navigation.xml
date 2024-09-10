@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_navigation_input_email_to_inputOTPFragment"
             app:destination="@id/inputOTPFragment" />
+        <action
+            android:id="@+id/action_inputEmailFragment_to_registerFaceFragment"
+            app:destination="@id/registerFaceFragment" />
     </fragment>
        <fragment
         android:id="@+id/inputOTPFragment"

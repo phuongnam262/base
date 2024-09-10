@@ -30,6 +30,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
     protected var mViewModel: V? = null
         private set
     private var mDialog: Dialog? = null
+    private var isObserverSet = false
 
     /**
      * Overriding for set layoutId variable
@@ -98,21 +99,24 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
      * Handling show loading icon, message, snackbar for fragment
      */
     private fun setupObservers() {
-        activity?.let {activity ->
-            mViewModel?.mLoading?.observe(activity, Observer {
-                if (it != null && it) showLoading()
-                else hideLoading()
-            })
-            mViewModel?.mMessage?.observe(activity, Observer {
-                it?.let { CommonUtils.showErrorDialog(activity, "", getString(it)) }
-            })
-            mViewModel?.mStatusText?.observe(activity, Observer {
-                it?.let { mViewModel?.statusText?.postValue(getString(it)) }
-                mViewModel?.showStatusText?.postValue(true)
-            })
-            mViewModel?.mOtherError?.observe(activity, Observer {
-                it?.let { CommonUtils.showErrorDialog(activity, "", it) }
-            })
+        activity?.let { activity ->
+            if (isObserverSet.not()) {
+                mViewModel?.mLoading?.observe(activity, Observer {
+                    if (it != null && it) showLoading()
+                    else hideLoading()
+                })
+                mViewModel?.mMessage?.observe(activity, Observer {
+                    it?.let { CommonUtils.showErrorDialog(activity, "", getString(it)) }
+                })
+                mViewModel?.mStatusText?.observe(activity, Observer {
+                    it?.let { mViewModel?.statusText?.postValue(getString(it)) }
+                    mViewModel?.showStatusText?.postValue(true)
+                })
+                mViewModel?.mOtherError?.observe(activity, Observer {
+                    it?.let { CommonUtils.showErrorDialog(activity, "", it) }
+                })
+                isObserverSet = true
+            }
         }
     }
 
@@ -185,11 +189,11 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
     }
 
     private var lastClickTime = 0L
-    fun checkDebouncedClick() : Boolean {
-            val currentTime = System.currentTimeMillis()
-            if (currentTime - lastClickTime >= 600L) {
-                lastClickTime = currentTime
-                return true
-            }else return false
+    fun checkDebouncedClick(): Boolean {
+        val currentTime = System.currentTimeMillis()
+        if (currentTime - lastClickTime >= 600L) {
+            lastClickTime = currentTime
+            return true
+        } else return false
     }
 }

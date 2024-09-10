@@ -72,6 +72,11 @@ class UserFaceRepository(
     suspend fun saveUser(user: UserLockerModel) = db.getUserLockerDAO().insertUser(user)
 
     /*
+    * update user to local database
+    * */
+    suspend fun updateUser(user: UserLockerModel) = db.getUserLockerDAO().updateUser(user)
+
+    /*
     * get info user registed locker on DB
     * */
     suspend fun getUserLocker(personCode: String) = db.getUserLockerDAO().getUserLocker(personCode)

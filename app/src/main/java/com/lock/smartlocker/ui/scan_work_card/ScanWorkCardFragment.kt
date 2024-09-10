@@ -5,14 +5,19 @@ import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
+import com.lock.smartlocker.data.services.com.ComBean
+import com.lock.smartlocker.data.services.com.SerialHelper
 import com.lock.smartlocker.databinding.FragmentScanWorkCardBinding
 import com.lock.smartlocker.ui.base.BaseFragment
 import com.lock.smartlocker.ui.inputemail.InputEmailFragment
 import com.lock.smartlocker.ui.scan_item.adapter.ScanItem
 import com.lock.smartlocker.util.ConstantUtils
+import com.lock.smartlocker.util.Coroutines
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
+import java.io.IOException
+import java.security.InvalidParameterException
 
 
 class ScanWorkCardFragment : BaseFragment<FragmentScanWorkCardBinding, ScanWorkCardViewModel>(),
@@ -25,9 +30,14 @@ class ScanWorkCardFragment : BaseFragment<FragmentScanWorkCardBinding, ScanWorkC
         get() = BR.viewmodel
 
     override val viewModel: ScanWorkCardViewModel
-        get() = ViewModelProvider(this, factory)[ScanWorkCardViewModel::class.java]
+        get() = ViewModelProvider(requireActivity(), factory)[ScanWorkCardViewModel::class.java]
+
+    private var comA: SerialControl? = null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        comA = SerialControl("/dev/ttysWK2", 9600)
+        openComPort(comA!!)
+
         viewModel.scanCardListener = this
         initView()
         initData()
@@ -63,5 +73,36 @@ class ScanWorkCardFragment : BaseFragment<FragmentScanWorkCardBinding, ScanWorkC
             putString(ConstantUtils.WORK_CARD_NUMBER, cardNumber)
         }
         navigateTo(R.id.action_scanWorkCardFragment2_to_registerFaceFragment, bundle)
+    }
+
+    private inner class SerialControl(sPort: String?, iBaudRate: Int) :
+        SerialHelper(sPort!!, iBaudRate) {
+        override fun onDataReceived(comRecData: ComBean?) {
+            Coroutines.main {
+                val receivedData = comRecData?.bRec?.decodeToString()?.trim()
+                mViewDataBinding?.etWorkCard?.append(receivedData)
+            }
+        }
+    }
+
+    private fun closeComPort(comPort: SerialControl?) {
+        comPort?.close()
+    }
+
+    private fun openComPort(comPort: SerialControl) {
+        try {
+            comPort.open()
+        } catch (e: SecurityException) {
+            viewModel.mOtherError.postValue("Permission denied for serial port.")
+        } catch (e: IOException) {
+            viewModel.mOtherError.postValue("Failed to open serial port.")
+        } catch (e: InvalidParameterException) {
+            viewModel.mOtherError.postValue("Invalid parameters.")
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        closeComPort(comA)
     }
 }
