@@ -20,6 +20,7 @@ import com.lock.smartlocker.ui.admin_dashboard.AdminDashboardViewModelFactory
 import com.lock.smartlocker.ui.admin_login.AdminLoginViewModelFactory
 import com.lock.smartlocker.ui.cart.CartViewModelFactory
 import com.lock.smartlocker.ui.category.CategoryViewModelFactory
+import com.lock.smartlocker.ui.category_consumable.CategoryConsumableViewModelFactory
 import com.lock.smartlocker.ui.collect_items.CollectItemViewModelFactory
 import com.lock.smartlocker.ui.deposit_item.DepositItemViewModelFactory
 import com.lock.smartlocker.ui.face_list.FaceListViewModelFactory
@@ -119,6 +120,7 @@ class LockerApplication : Application(), KodeinAware {
         bind() from provider { RetrieveViewModelFactory(instance(), instance()) }
         bind() from provider { MenuRegisterViewModelFactory() }
         bind() from provider { ScanWorkCardViewModelFactory(instance()) }
+        bind() from provider { CategoryConsumableViewModelFactory(instance()) }
     }
 
 }

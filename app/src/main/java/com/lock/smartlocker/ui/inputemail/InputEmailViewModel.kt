@@ -17,7 +17,7 @@ class InputEmailViewModel(
     val email = MutableLiveData<String>()
     val subEmail = MutableLiveData<String>()
 
-    fun consumerLogin(typeOpen: String?) {
+    fun consumerLogin() {
         ioScope.launch {
             if (email.value.isNullOrEmpty()) {
                 mStatusText.postValue(R.string.error_email_empty)
@@ -33,7 +33,7 @@ class InputEmailViewModel(
                 if (isSuccessful) {
                     if (data != null) {
                         inputEmailListener?.consumerLoginSuccess(param.email)
-                        if (typeOpen != null)  PreferenceHelper.writeString(ConstantUtils.USER_TOKEN, data.token)
+                        PreferenceHelper.writeString(ConstantUtils.USER_TOKEN, data.token)
                         showStatusText.postValue(false)
                     }
                 }else {

@@ -4,27 +4,29 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.lock.smartlocker.data.models.AvailableConsumable
 import com.lock.smartlocker.data.models.ConsumableAvailableItem
+import com.lock.smartlocker.data.models.ConsumableCategories
+import com.lock.smartlocker.data.models.ConsumableTopup
 import com.lock.smartlocker.data.repositories.LoanRepository
+import com.lock.smartlocker.data.repositories.ManagerRepository
 import com.lock.smartlocker.ui.base.BaseViewModel
 import kotlinx.coroutines.launch
 
 class CategoryConsumableViewModel(
-    private val loanRepository: LoanRepository
+    private val managerRepository: ManagerRepository
 ) : BaseViewModel() {
-    private val _categoriesConsumable = MutableLiveData<List<ConsumableAvailableItem>>()
-    val categoriesConsumable: LiveData<List<ConsumableAvailableItem>> get() = _categoriesConsumable
+    private val _categoriesConsumable = MutableLiveData<List<ConsumableCategories>>()
+    val categoriesConsumable: LiveData<List<ConsumableCategories>> get() = _categoriesConsumable
 
-    private val _listConsumable = MutableLiveData<List<AvailableConsumable>>()
-    val listConsumable: LiveData<List<AvailableConsumable>> get() = _listConsumable
+    private val _listConsumable = MutableLiveData<List<ConsumableTopup>>()
+    val listConsumable: LiveData<List<ConsumableTopup>> get() = _listConsumable
     var categoryIdSelected = MutableLiveData<String>()
 
     fun getConsumableAvailableItem() {
         ioScope.launch {
             mLoading.postValue(true)
-            loanRepository.getConsumableAvailableItem().apply {
+            managerRepository.getConsumable().apply {
                 if (isSuccessful) {
                     if (data != null) {
-                        val listId = ArrayList<String>()
                         _categoriesConsumable.postValue(data.categories)
                     }
                 } else {
@@ -35,7 +37,7 @@ class CategoryConsumableViewModel(
         }.invokeOnCompletion { mLoading.postValue(false) }
     }
 
-    fun onCategorySelected(category: ConsumableAvailableItem) {
+    fun onCategorySelected(category: ConsumableCategories) {
         _categoriesConsumable.value?.map { it.isSelected = false }
         categoryIdSelected.postValue(category.categoryId)
         category.isSelected = true
@@ -46,7 +48,7 @@ class CategoryConsumableViewModel(
         }
     }
 
-    fun selectConsumable(model: AvailableConsumable) {
+    fun selectConsumable(model: ConsumableTopup) {
 
     }
 }

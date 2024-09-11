@@ -12,6 +12,8 @@ import com.lock.smartlocker.data.entities.responses.CheckCardResponse
 import com.lock.smartlocker.data.entities.responses.ConsumerLoginResponse
 import com.lock.smartlocker.data.entities.responses.DisableLockerResponse
 import com.lock.smartlocker.data.entities.responses.GetAllItemRetrieveResponse
+import com.lock.smartlocker.data.entities.responses.GetConsumableAvailableItemResponse
+import com.lock.smartlocker.data.entities.responses.GetConsumableResponse
 import com.lock.smartlocker.data.entities.responses.GetInformationStaffResponse
 import com.lock.smartlocker.data.entities.responses.GetSettingResponse
 import com.lock.smartlocker.data.entities.responses.RetrieveItemResponse
@@ -64,5 +66,9 @@ class ManagerRepository (
 
     suspend fun resendOTP(consumerLoginRequest: ConsumerLoginRequest): BaseResponse<Map<String, Any>> {
         return apiRequest { api.provideLockerAPIService().resendOTP(consumerLoginRequest) }
+    }
+
+    suspend fun getConsumable(): BaseResponse<GetConsumableResponse> {
+        return apiRequest { api.provideLockerAPIService().getConsumable() }
     }
 }

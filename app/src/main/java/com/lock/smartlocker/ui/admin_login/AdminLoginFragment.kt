@@ -30,6 +30,8 @@ class AdminLoginFragment : BaseFragment<FragmentAdminLoginBinding, AdminLoginVie
     override val viewModel: AdminLoginViewModel
         get() = ViewModelProvider(requireActivity(), factory)[AdminLoginViewModel::class.java]
     private var isClicked = false
+    private var typeOpen : String? = null
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mViewModel?.adminLoginListener = this
@@ -51,7 +53,9 @@ class AdminLoginFragment : BaseFragment<FragmentAdminLoginBinding, AdminLoginVie
     }
 
     private fun initData() {
-
+        if (arguments?.getString(ConstantUtils.TYPE_OPEN_MANAGER) != null) {
+            typeOpen = arguments?.getString(ConstantUtils.TYPE_OPEN_MANAGER)
+        }
     }
 
     override fun onClick(v: View?) {
@@ -77,14 +81,12 @@ class AdminLoginFragment : BaseFragment<FragmentAdminLoginBinding, AdminLoginVie
                 val bundle = Bundle().apply {
                     putString(InputEmailFragment.EMAIL_REGISTER, adminLoginResponse.staff.email)
                     putString(
-                        ConstantUtils.TYPE_OPEN_MANAGER,
-                        arguments?.getString(ConstantUtils.TYPE_OPEN_MANAGER)
-                    )
+                        ConstantUtils.TYPE_OPEN_MANAGER, typeOpen)
                 }
                 navigateTo(R.id.action_adminLoginFragment_to_inputOTPFragment, bundle)
             } else {
                 // OTP false thì qua màn menu hoặc face list
-                if(arguments?.getString(ConstantUtils.TYPE_OPEN_MANAGER) == ConstantUtils.TYPE_ADMIN_CONSOLE){
+                if(typeOpen == ConstantUtils.TYPE_ADMIN_CONSOLE){
                     navigateTo(R.id.action_adminLoginFragment_to_adminDashboardFragment, null)
                 }else{
                     navigateTo(R.id.action_adminLoginFragment_to_faceListFragment, null)

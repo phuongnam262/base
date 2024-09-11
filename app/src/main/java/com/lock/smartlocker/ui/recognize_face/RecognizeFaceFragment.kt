@@ -75,8 +75,8 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.recognizeFaceListener = this
-        initView()
         initData()
+        initView()
     }
 
     private fun initView() {
@@ -153,7 +153,7 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
                 R.id.btn_process -> {
                     if (isClicked.not()) {
                         isClicked = true
-                        viewModel.consumerLogin()
+                        viewModel.consumerLogin(typeOpen == ConstantUtils.TYPE_CONSUMABLE_COLLECT)
                     }
                 }
 
@@ -165,7 +165,12 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
                     val bundle = Bundle().apply {
                         putString(ConstantUtils.TYPE_OPEN, typeOpen)
                     }
-                    navigateTo(R.id.action_recognizeFaceFragment_to_inputEmailFragment2, bundle)
+                    // Nếu là consumable thì qua màn hình nhập work card
+                    if (typeOpen == ConstantUtils.TYPE_CONSUMABLE_COLLECT) {
+                        navigateTo(R.id.action_recognizeFaceFragment_to_scanWorkCardFragment, bundle)
+                    }else{
+                        navigateTo(R.id.action_recognizeFaceFragment_to_inputEmailFragment2, bundle)
+                    }
                 }
             }
         }
@@ -177,6 +182,7 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
         activity?.resources?.getColor(R.color.colorGreen)
             ?.let { mViewDataBinding?.bottomMenu?.tvStatus?.setTextColor(it) }
         mViewDataBinding?.bottomMenu?.llButton?.weightSum = 2.0f
+        viewModel.enableButtonProcess.postValue(true)
     }
 
     override fun faceNotFound() {
@@ -184,15 +190,26 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
     }
 
     override fun consumerLoginSuccess(email: String?) {
-        val bundle = Bundle().apply {
-            putString(ConstantUtils.TYPE_OPEN, typeOpen )
-            putString(EMAIL_REGISTER, email)
+        if (typeOpen != ConstantUtils.TYPE_CONSUMABLE_COLLECT) {
+            val bundle = Bundle().apply {
+                putString(ConstantUtils.TYPE_OPEN, typeOpen)
+                putString(EMAIL_REGISTER, email)
+            }
+            navigateTo(R.id.action_recognizeFaceFragment_to_categoryFragment, bundle)
         }
-        navigateTo(R.id.action_recognizeFaceFragment_to_inputOTPFragment2, bundle)
     }
 
-    override fun consumerLoginFail() {
-        isClicked = false
+    override fun consumerLoginFail(email: String?, status: String?) {
+        // Chỉ fail(yêu cầu OTP) khi typeOpen khác consumable
+        if (status == ConstantUtils.REQUIRE_OTP){
+            if (arguments?.getString(ConstantUtils.TYPE_OPEN) != null) {
+                val bundle = Bundle().apply {
+                    putString(ConstantUtils.TYPE_OPEN, arguments?.getString(ConstantUtils.TYPE_OPEN) )
+                    putString(EMAIL_REGISTER, email)
+                }
+                navigateTo(R.id.action_recognizeFaceFragment_to_inputOTPFragment2, bundle)
+            }
+        }else isClicked = false
     }
 
     override fun faceExited() {

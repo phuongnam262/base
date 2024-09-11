@@ -42,6 +42,8 @@ class RetrieveViewModel(
                             listId.addAll(categories.modelRetrievies.flatMap { model ->
                                 model.lockers.map { it.lockerId }
                             })
+                            categories.modelRetrievies.flatMap { model ->
+                                model.lockers.map { it.doorStatus = 2 } }
                         }
                         listLockerId.postValue(listId)
                     }

@@ -108,11 +108,14 @@ class RecognizeFaceViewModel(
         }.invokeOnCompletion { mLoading.postValue(false) }
     }
 
-    fun consumerLogin() {
+    fun consumerLogin(isConsumable: Boolean) {
         ioScope.launch {
             mLoading.postValue(true)
             val param = ConsumerLoginRequest()
             param.email = email
+            // Nếu là consumable thì type = 0 để ko yêu cầu OTP
+            if (isConsumable) param.type = "0"
+
             managerRepository.consumerLogin(param).apply {
                 if (isSuccessful) {
                     if (data != null) {
@@ -120,8 +123,8 @@ class RecognizeFaceViewModel(
                         recognizeFaceListener?.consumerLoginSuccess(email)
                     }
                 }else {
-                    handleError(status)
-                    recognizeFaceListener?.consumerLoginFail()
+                    if (status != ConstantUtils.REQUIRE_OTP) handleError(status)
+                    else recognizeFaceListener?.consumerLoginFail(param.email, status)
                 }
             }
         }.invokeOnCompletion { mLoading.postValue(false) }

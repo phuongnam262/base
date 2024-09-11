@@ -1,7 +1,6 @@
 package com.lock.smartlocker.data.network
 
 import com.google.gson.GsonBuilder
-import com.lock.smartlocker.data.entities.LockerRetrieveDeserializer
 import com.lock.smartlocker.data.models.LockerRetrieve
 import com.lock.smartlocker.data.network.services.FaceServives
 import com.lock.smartlocker.data.network.services.HardwareControlServices
@@ -18,13 +17,10 @@ class LockerAPI(private val networkConnectionInterceptor: NetworkConnectionInter
             .addInterceptor(AuthInterceptor(true))
             .connectTimeout(30, TimeUnit.SECONDS)
             .build()
-        val gson = GsonBuilder()
-            .registerTypeAdapter(LockerRetrieve::class.java, LockerRetrieveDeserializer())
-            .create()
         Retrofit.Builder()
             .client(okkHttpclient)
             .baseUrl("https://uatalamapisapp.smartlocker.vn/")
-            .addConverterFactory(GsonConverterFactory.create(gson))
+            .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
 

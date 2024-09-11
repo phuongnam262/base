@@ -20,6 +20,7 @@ import com.lock.smartlocker.data.entities.responses.DisableLockerResponse
 import com.lock.smartlocker.data.entities.responses.GetAllItemRetrieveResponse
 import com.lock.smartlocker.data.entities.responses.GetAvailableItemResponse
 import com.lock.smartlocker.data.entities.responses.GetConsumableAvailableItemResponse
+import com.lock.smartlocker.data.entities.responses.GetConsumableResponse
 import com.lock.smartlocker.data.entities.responses.GetInformationStaffResponse
 import com.lock.smartlocker.data.entities.responses.GetListCategoryResponse
 import com.lock.smartlocker.data.entities.responses.GetSettingResponse
@@ -93,6 +94,9 @@ interface LockerServives {
         @Body returnItemRequest: ReturnItemRequest
     ): Response<BaseResponse<Map<String, Any>>>
 
+    @GET("/api/admin/get-consumable")
+    suspend fun getConsumable(): Response<BaseResponse<GetConsumableResponse>>
+
     @POST("/api/item/topup-item")
     suspend fun topupItem(
         @Body returnItemRequest: ReturnItemRequest
@@ -103,7 +107,7 @@ interface LockerServives {
         @Body getAvailableItemRequest: GetAvailableItemRequest
     ): Response<BaseResponse<GetAvailableItemResponse>>
 
-    @POST("/api/consumable-transaction/get-available-item")
+    @GET("/api/consumable-transaction/get-available-item")
     suspend fun getConsumableAvailableItem(): Response<BaseResponse<GetConsumableAvailableItemResponse>>
 
     @POST("/api/inventory-transaction/create-inventory-transaction")

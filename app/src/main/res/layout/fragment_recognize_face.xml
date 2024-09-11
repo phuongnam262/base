@@ -83,6 +83,7 @@
             app:statusText="@{viewmodel.statusText}"
             app:ownerText="@{viewmodel.ownerText}"
             app:showStatusText="@{viewmodel.showStatusText}"
+            app:enableButtonProcess="@{viewmodel.enableButtonProcess}"
             app:timerHour="@{viewmodel.timerHour}"
             app:showButtonUsingMail="@{viewmodel.showButtonUsingMail}" />
 

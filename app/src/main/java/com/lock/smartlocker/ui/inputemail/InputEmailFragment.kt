@@ -88,7 +88,7 @@ class InputEmailFragment : BaseFragment<FragmentInputEmailBinding, InputEmailVie
                 R.id.btn_process -> {
                     if (isClicked.not()) {
                         isClicked = true
-                        viewModel.consumerLogin(arguments?.getString(ConstantUtils.TYPE_OPEN))
+                        viewModel.consumerLogin()
                     }
                 }
             }

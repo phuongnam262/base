@@ -15,7 +15,8 @@
             app:destination="@id/inputOTPFragment" />
         <action
             android:id="@+id/action_adminLoginFragment_to_adminDashboardFragment"
-            app:destination="@id/adminDashboardFragment" />
+            app:destination="@id/adminDashboardFragment"
+            app:popUpTo="@id/adminLoginFragment" />
         <action
             android:id="@+id/action_adminLoginFragment_to_faceListFragment"
             app:destination="@id/faceListFragment" />
@@ -52,6 +53,9 @@
         <action
             android:id="@+id/action_adminDashboardFragment_to_retrieveFaultyFragment"
             app:destination="@id/retrieveFaultyFragment" />
+        <action
+            android:id="@+id/action_adminDashboardFragment_to_categoryConsumableFragment"
+            app:destination="@id/categoryConsumableFragment" />
     </fragment>
     <fragment
         android:id="@+id/inputSerialNumberFragment2"
@@ -109,4 +113,9 @@
         android:name="com.lock.smartlocker.ui.retrieve.RetrieveFaultyFragment"
         android:label="fragment_retrieve_faulty"
         tools:layout="@layout/fragment_retrieve_faulty" />
+    <fragment
+        android:id="@+id/categoryConsumableFragment"
+        android:name="com.lock.smartlocker.ui.category_consumable.CategoryConsumableFragment"
+        android:label="fragment_category_consumable"
+        tools:layout="@layout/fragment_category_consumable" />
 </navigation>

@@ -59,7 +59,7 @@ class ReturnActivity : BaseActivity<ActivityReturnBinding, ReturnViewModel>(),
                 showFragment(RecognizeFaceFragment(), R.navigation.loan_collect_navigation, typeOpen = ConstantUtils.TYPE_COLLECT)
             }
             ConstantUtils.TYPE_CONSUMABLE_COLLECT -> {
-
+                showFragment(RecognizeFaceFragment(), R.navigation.loan_collect_navigation, typeOpen = ConstantUtils.TYPE_CONSUMABLE_COLLECT)
             }
         }
     }

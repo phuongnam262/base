@@ -31,8 +31,8 @@
     <string name="return_button_label">Hãy chọn một ngăn tủ để trả lại đồ dùng đã mượn</string>
     <string name="collect_button">LẤY ĐỒ DÙNG</string>
     <string name="collect_button_label">Bạn có thể lấy đồ dùng theo quy định và không cần hoàn trả </string>
-    <string name="consumable_collect_button">CONSUMABLE COLLECT</string>
-    <string name="consumable_collect_button_label">Allows users to get consumable item - no return requirement</string>
+    <string name="consumable_collect_button">LẤY VẬT TƯ</string>
+    <string name="consumable_collect_button_label">Cho phép người dùng nhận vật tư - không yêu cầu trả lại</string>
 
     <!-- Recognize face -->
     <string name="recognize_face">Nhận Diện Khuôn Mặt Của Bạn</string>
@@ -44,9 +44,9 @@
     <string name="using_card_button">DÙNG THẺ</string>
 
     <!-- Scan work card -->
-    <string name="scan_work_card">Scan Work Card</string>
-    <string name="scan_work_card_info">Please scan your work card.</string>
-    <string name="your_work_card">Your work card:</string>
+    <string name="scan_work_card">Quét thẻ nhân viên</string>
+    <string name="scan_work_card_info">Vui lòng quét thẻ nhân viên.</string>
+    <string name="your_work_card">Thẻ nhân viên của bạn:</string>
 
     <!-- Input email -->
     <string name="auth_required">Yêu Cầu Xác Thực</string>

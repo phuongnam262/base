@@ -40,6 +40,7 @@ class CategoryConsumableFragment : BaseFragment<FragmentCategoryConsumableBindin
 
     @SuppressLint("SetTextI18n")
     private fun initView(){
+        viewModel.titlePage.postValue(getString(R.string.category))
         mViewDataBinding?.headerBar?.ivBack?.setOnClickListener(this)
         mViewDataBinding?.bottomMenu?.rlHome?.setOnClickListener(this)
     }

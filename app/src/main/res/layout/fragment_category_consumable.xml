@@ -21,6 +21,13 @@
         android:clickable="true"
         android:focusable="true">
 
+        <include
+            android:id="@+id/header_bar"
+            layout="@layout/header_navigation"
+            app:nameLocker="@{viewmodel.terminalName}"
+            app:timer="@{viewmodel.timerString}"
+            app:title="@{viewmodel.titlePage}" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -29,14 +36,7 @@
             app:layout_constraintBottom_toTopOf="@id/bottom_menu"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <include
-                android:id="@+id/header_bar"
-                layout="@layout/header_navigation"
-                app:nameLocker="@{viewmodel.terminalName}"
-                app:timer="@{viewmodel.timerString}"
-                app:title="@{viewmodel.titlePage}" />
+            app:layout_constraintTop_toBottomOf="@+id/header_bar">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvCategories"

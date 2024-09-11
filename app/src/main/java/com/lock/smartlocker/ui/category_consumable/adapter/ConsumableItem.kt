@@ -1,13 +1,13 @@
 package com.lock.smartlocker.ui.category_consumable.adapter
 
 import com.lock.smartlocker.R
-import com.lock.smartlocker.data.models.AvailableConsumable
+import com.lock.smartlocker.data.models.ConsumableTopup
 import com.lock.smartlocker.databinding.ItemConsumableBinding
 import com.lock.smartlocker.ui.category_consumable.CategoryConsumableViewModel
 import com.xwray.groupie.databinding.BindableItem
 
 class ConsumableItem(
-    private val model: AvailableConsumable,
+    private val model: ConsumableTopup,
     private val viewModel: CategoryConsumableViewModel
 ) : BindableItem<ItemConsumableBinding>() {
 

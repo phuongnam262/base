@@ -7,9 +7,9 @@ import com.lock.smartlocker.data.repositories.ManagerRepository
 import com.lock.smartlocker.data.repositories.ReturnRepository
 
 class CategoryConsumableViewModelFactory(
-    private val loanRepository: LoanRepository
+    private val managerRepository: ManagerRepository
     ) : ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return CategoryConsumableViewModel(loanRepository) as T
+        return CategoryConsumableViewModel(managerRepository) as T
     }
 }

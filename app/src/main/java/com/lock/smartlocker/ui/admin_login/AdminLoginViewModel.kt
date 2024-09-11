@@ -18,6 +18,7 @@ class AdminLoginViewModel(
     val username = MutableLiveData<String>()
     val password = MutableLiveData<String>()
     var adminLoginListener : AdminLoginListener? = null
+    var typeOpen : String? = null
 
     fun clickShowPassword() {
         showPassword.value = showPassword.value != true

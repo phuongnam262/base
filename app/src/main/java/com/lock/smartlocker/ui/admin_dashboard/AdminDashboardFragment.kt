@@ -60,7 +60,10 @@ class AdminDashboardFragment : BaseFragment<FragmentAdminDashboardBinding, Admin
         if (checkDebouncedClick()) {
             when (v?.id) {
                 R.id.rl_home -> activity?.finish()
-                R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
+                R.id.iv_back -> activity?.supportFragmentManager?.popBackStack()
+                R.id.ll_consumable_topup -> {
+                    navigateTo(R.id.action_adminDashboardFragment_to_categoryConsumableFragment, null)
+                }
                 R.id.ll_topup_items -> {
                     if (viewModel.numberLockerAvailable.value != 0) {
                         val bundle = Bundle().apply {

@@ -34,6 +34,8 @@ class ScanWorkCardFragment : BaseFragment<FragmentScanWorkCardBinding, ScanWorkC
         get() = ViewModelProvider(this, factory)[ScanWorkCardViewModel::class.java]
 
     private var comA: SerialControl? = null
+    private var typeOpen : String? = null
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         comA = SerialControl("/dev/ttysWK2", 9600)
@@ -56,6 +58,9 @@ class ScanWorkCardFragment : BaseFragment<FragmentScanWorkCardBinding, ScanWorkC
     }
 
     private fun initData(){
+        if (arguments?.getString(ConstantUtils.TYPE_OPEN) != null) {
+            typeOpen = arguments?.getString(ConstantUtils.TYPE_OPEN)
+        }
         viewModel.workCardText.observe(viewLifecycleOwner) { text ->
             viewModel.enableButtonProcess.postValue(text.isNotEmpty())
         }
@@ -72,11 +77,17 @@ class ScanWorkCardFragment : BaseFragment<FragmentScanWorkCardBinding, ScanWorkC
     }
 
     override fun handleSuccess(name: String, cardNumber: String) {
-        val bundle = Bundle().apply {
-            putString(ConstantUtils.NAME_END_USER, name)
-            putString(ConstantUtils.WORK_CARD_NUMBER, cardNumber)
+        if (typeOpen != ConstantUtils.TYPE_CONSUMABLE_COLLECT){
+            // Nếu không phải consumable thì qua màn register face
+            val bundle = Bundle().apply {
+                putString(ConstantUtils.NAME_END_USER, name)
+                putString(ConstantUtils.WORK_CARD_NUMBER, cardNumber)
+            }
+            navigateTo(R.id.action_scanWorkCardFragment2_to_registerFaceFragment, bundle)
+        }else{
+
         }
-        navigateTo(R.id.action_scanWorkCardFragment2_to_registerFaceFragment, bundle)
+
     }
 
     private inner class SerialControl(sPort: String?, iBaudRate: Int) :
