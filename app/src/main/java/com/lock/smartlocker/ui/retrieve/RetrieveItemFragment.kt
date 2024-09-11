@@ -2,7 +2,6 @@ package com.lock.smartlocker.ui.retrieve
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.lock.smartlocker.BR
@@ -10,7 +9,7 @@ import com.lock.smartlocker.R
 import com.lock.smartlocker.databinding.FragmentRetrieveItemBinding
 import com.lock.smartlocker.ui.base.BaseFragment
 import com.lock.smartlocker.ui.input_serial_number.InputSerialNumberFragment
-import com.lock.smartlocker.ui.retrieve.adapter.CategoryRetrieveItem
+import com.lock.smartlocker.ui.retrieve.adapter.Categorytem
 import com.lock.smartlocker.ui.retrieve.adapter.RetrieveItem
 import com.lock.smartlocker.util.view.custom.CustomConfirmDialog
 import com.xwray.groupie.GroupAdapter
@@ -59,7 +58,7 @@ class RetrieveItemFragment : BaseFragment<FragmentRetrieveItemBinding, RetrieveV
 
         viewModel.categoriesRetrieve.observe(viewLifecycleOwner) { categories ->
             categoryAdapter.update(categories.map {
-                CategoryRetrieveItem(it, viewModel)
+                Categorytem(it, viewModel)
             })
             if (categories.isNotEmpty()){
                 viewModel.onCategorySelected(categories[0])

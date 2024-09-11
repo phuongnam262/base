@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.category_consumable.CategoryConsumableFragment">
+    tools:context=".ui.category.CategoryFragment">
 
     <data>
 
@@ -10,7 +10,7 @@
 
         <variable
             name="viewmodel"
-            type="com.lock.smartlocker.ui.category_consumable.CategoryConsumableViewModel" />
+            type="com.lock.smartlocker.ui.category.CategoryViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -32,32 +32,68 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <include
-                android:id="@+id/header_bar"
-                layout="@layout/header_navigation"
+                android:id="@+id/header_title"
+                layout="@layout/header_name_date"
                 app:nameLocker="@{viewmodel.terminalName}"
-                app:timer="@{viewmodel.timerString}"
-                app:title="@{viewmodel.titlePage}" />
+                app:timer="@{viewmodel.timerString}"/>
+
+            <ImageView
+                android:id="@+id/ivAvatar"
+                android:layout_width="@dimen/dp_45"
+                android:layout_height="@dimen/dp_45"
+                android:background="@drawable/avatar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/header_title"
+                tools:ignore="VisualLintBounds"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/tvHelloSomething"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_10"
+                android:fontFamily="@font/segoe_ui_regular"
+                android:gravity="center_vertical"
+                android:text="Hello someone@something.com"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/sp_20"
+                app:layout_constraintBottom_toBottomOf="@+id/ivAvatar"
+                app:layout_constraintStart_toEndOf="@+id/ivAvatar"
+                app:layout_constraintTop_toTopOf="@+id/ivAvatar" />
+
+            <TextView
+                android:id="@+id/tvCategoryLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_20"
+                android:fontFamily="@font/segoe_ui_regular"
+                android:text="@string/category"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/sp_22"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ivAvatar" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvCategories"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_15"
+                android:layout_marginTop="@dimen/dp_10"
                 android:clipToPadding="false"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/header_bar"
+                app:layout_constraintTop_toBottomOf="@+id/tvCategoryLabel"
                 tools:listitem="@layout/item_category" />
 
             <TextView
-                android:id="@+id/tvConsumableLabel"
+                android:id="@+id/tvModelLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_20"
                 android:fontFamily="@font/segoe_ui_regular"
-                android:text="@string/consumables"
+                android:text="@string/model"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/sp_22"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -73,10 +109,10 @@
                 android:text="@string/please_select_category"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/sp_16"
-                android:visibility="@{viewmodel.listConsumable.size() == 0}"
+                android:visibility="@{viewmodel.availableModels.size() == 0}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvConsumableLabel" />
+                app:layout_constraintTop_toBottomOf="@+id/tvModelLabel" />
 
             <TextView
                 android:id="@+id/categoryTxtBold"
@@ -87,14 +123,14 @@
                 android:text="@string/select_items"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/sp_16"
-                android:visibility="@{viewmodel.listConsumable.size() == 0 ? View.GONE : View.VISIBLE}"
+                android:visibility="@{viewmodel.availableModels.size() == 0 ? View.GONE : View.VISIBLE}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvConsumableLabel"
+                app:layout_constraintTop_toBottomOf="@+id/tvModelLabel"
                 tools:visibility="visible" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvConsumables"
+                android:id="@+id/rvModels"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginVertical="@dimen/dp_10"
@@ -105,16 +141,18 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/categoryTxtBold"
-                tools:listitem="@layout/item_consumable" />
+                tools:listitem="@layout/item_model" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <include
             android:id="@+id/bottom_menu"
-            layout="@layout/bottom_menu_3"
+            layout="@layout/bottom_menu_2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:numberCart="@{String.valueOf(viewmodel.listCartItem.size())}"
             app:ownerText="@{viewmodel.ownerText}"
-            app:showStatusText="@{viewmodel.showStatusText}"
-            app:statusText="@{viewmodel.statusText}"
             app:timerHour="@{viewmodel.timerHour}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

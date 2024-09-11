@@ -134,7 +134,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="successful">Successful</string>
 
-    <!-- loan   -->
+    <!-- Loan   -->
     <string name="category">Category</string>
     <string name="model">Model</string>
     <string name="select_items">Select item(s)</string>
@@ -142,6 +142,11 @@
     <string name="add_to_cart">Add To Cart</string>
     <string name="available">"Available: "</string>
     <string name="loanable">"Loanable: "</string>
+
+    <!-- Consumable   -->
+    <string name="consumables">Consumables</string>
+    <string name="current_quantity">Total Current Quantity:</string>
+    <string name="select_button">Select</string>
 
     <!-- Cart -->
     <string name="please_review_cart_info">Please review them. When ready, press "PROCEED" to collect your items. The locker will automatically open at that time</string>

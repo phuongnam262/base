@@ -10,7 +10,8 @@ import com.lock.smartlocker.data.models.CartItem
 import com.lock.smartlocker.data.preference.PreferenceHelper
 import com.lock.smartlocker.databinding.FragmentCategoryBinding
 import com.lock.smartlocker.ui.base.BaseFragment
-import com.lock.smartlocker.ui.category_consumable.adapter.ConsumableItem
+import com.lock.smartlocker.ui.category.adapter.CategoryItem
+import com.lock.smartlocker.ui.category.adapter.ModelItem
 import com.lock.smartlocker.util.ConstantUtils
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
@@ -77,7 +78,7 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel
         }
 
         viewModel.availableModels.observe(viewLifecycleOwner) { models ->
-            modelAdapter.update(models.map { ConsumableItem(it, viewModel) })
+            modelAdapter.update(models.map { ModelItem(it, viewModel) })
         }
 
         viewModel.categoryIdSelected.observe(viewLifecycleOwner) {

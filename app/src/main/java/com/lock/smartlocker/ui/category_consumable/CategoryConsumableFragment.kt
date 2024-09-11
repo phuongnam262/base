@@ -6,13 +6,10 @@ import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
-import com.lock.smartlocker.data.models.CartItem
-import com.lock.smartlocker.data.preference.PreferenceHelper
 import com.lock.smartlocker.databinding.FragmentCategoryConsumableBinding
 import com.lock.smartlocker.ui.base.BaseFragment
-import com.lock.smartlocker.ui.category.adapter.CategoryItem
+import com.lock.smartlocker.ui.category_consumable.adapter.CategoryItem
 import com.lock.smartlocker.ui.category_consumable.adapter.ConsumableItem
-import com.lock.smartlocker.util.ConstantUtils
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import org.kodein.di.KodeinAware
@@ -25,12 +22,12 @@ class CategoryConsumableFragment : BaseFragment<FragmentCategoryConsumableBindin
 
     override val kodein by kodein()
     private val factory: CategoryConsumableViewModelFactory by instance()
-    override val layoutId: Int = R.layout.fragment_category
+    override val layoutId: Int = R.layout.fragment_category_consumable
     override val bindingVariable: Int
         get() = BR.viewmodel
 
     private val categoryAdapter = GroupAdapter<GroupieViewHolder>()
-    private val modelAdapter = GroupAdapter<GroupieViewHolder>()
+    private val consumableAdapter = GroupAdapter<GroupieViewHolder>()
 
     override val viewModel: CategoryConsumableViewModel
         get() = ViewModelProvider(this, factory)[CategoryConsumableViewModel::class.java]
@@ -41,59 +38,36 @@ class CategoryConsumableFragment : BaseFragment<FragmentCategoryConsumableBindin
         initData()
     }
 
-    companion object{
-        var listCartItem = ArrayList<CartItem>()
-    }
-
     @SuppressLint("SetTextI18n")
     private fun initView(){
+        mViewDataBinding?.headerBar?.ivBack?.setOnClickListener(this)
         mViewDataBinding?.bottomMenu?.rlHome?.setOnClickListener(this)
-        mViewDataBinding?.bottomMenu?.rlItem?.setOnClickListener(this)
-        mViewDataBinding?.bottomMenu?.rlCart?.setOnClickListener(this)
-        mViewDataBinding?.tvHelloSomething?.text = "Hello ${PreferenceHelper.getString(ConstantUtils.ADMIN_NAME, "Admin")}"
     }
 
     @SuppressLint("NotifyDataSetChanged")
     private fun initData(){
-        viewModel.listCartItem.value = listCartItem
-
-        if (arguments?.getString(ConstantUtils.TYPE_OPEN) != null) {
-            if (arguments?.getString(ConstantUtils.TYPE_OPEN) == ConstantUtils.TYPE_LOAN) {
-                viewModel.loadAvailableItem(1)
-            } else {
-                viewModel.loadAvailableItem(2)
-            }
-        }
-
+        viewModel.getConsumableAvailableItem()
         mViewDataBinding?.rvCategories?.adapter = categoryAdapter
-        mViewDataBinding?.rvModels?.adapter = modelAdapter
+        mViewDataBinding?.rvConsumables?.adapter = consumableAdapter
 
-        viewModel.categories.observe(viewLifecycleOwner) { categories ->
-//            categoryAdapter.update(categories.map {
-//                CategoryItem(it, viewModel)
-//            })
-            if (categories.isNotEmpty()) {
+        viewModel.categoriesConsumable.observe(viewLifecycleOwner) { categories ->
+            categoryAdapter.update(categories.map {
+                CategoryItem(it, viewModel)
+            })
+            if (categories.isNotEmpty()){
                 viewModel.onCategorySelected(categories[0])
+                viewModel.enableButtonProcess.value = true
+            }else{
+                viewModel.enableButtonProcess.value = false
             }
         }
 
-        viewModel.availableModels.observe(viewLifecycleOwner) { models ->
-           // modelAdapter.update(models.map { ModelItem(it, viewModel) })
+        viewModel.listConsumable.observe(viewLifecycleOwner) { models ->
+            consumableAdapter.update(models.map { ConsumableItem(it, viewModel) })
         }
 
         viewModel.categoryIdSelected.observe(viewLifecycleOwner) {
             categoryAdapter.notifyDataSetChanged()
-        }
-
-        viewModel.listCartItem.observe(viewLifecycleOwner) {
-            modelAdapter.notifyDataSetChanged()
-            listCartItem = it
-            viewModel.enableButtonProcess.value = it.size > 0
-        }
-
-
-        viewModel.availableItem.observe(viewLifecycleOwner) {
-            viewModel.updateAvailableModels()
         }
     }
 
@@ -101,16 +75,7 @@ class CategoryConsumableFragment : BaseFragment<FragmentCategoryConsumableBindin
         if (checkDebouncedClick()) {
             when (v?.id) {
                 R.id.rl_home -> activity?.finish()
-                R.id.rl_item -> {}
-                R.id.rl_cart -> {
-                    val bundle = Bundle().apply {
-                        putString(
-                            ConstantUtils.TYPE_OPEN,
-                            arguments?.getString(ConstantUtils.TYPE_OPEN)
-                        )
-                    }
-                    navigateTo(R.id.action_categoryFragment_to_cartFragment, bundle)
-                }
+                R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
             }
         }
     }

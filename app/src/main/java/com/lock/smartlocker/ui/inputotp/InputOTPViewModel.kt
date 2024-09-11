@@ -2,6 +2,7 @@ package com.lock.smartlocker.ui.inputotp
 
 import androidx.lifecycle.MutableLiveData
 import com.lock.smartlocker.R
+import com.lock.smartlocker.data.entities.request.ConsumerLoginRequest
 import com.lock.smartlocker.data.entities.request.VerifyOTPRequest
 import com.lock.smartlocker.data.preference.PreferenceHelper
 import com.lock.smartlocker.data.repositories.ManagerRepository
@@ -43,6 +44,17 @@ class InputOTPViewModel(
     }
 
     fun onResend() {
-
+        ioScope.launch {
+            mLoading.postValue(true)
+            val param = ConsumerLoginRequest()
+            param.email = email.value
+            managerRepository.resendOTP(param).apply {
+                if (isSuccessful) {
+                    mLoading.postValue(false)
+                } else {
+                    handleError(status)
+                }
+            }
+        }.invokeOnCompletion { mLoading.postValue(false) }
     }
 }
