@@ -12,7 +12,8 @@ import java.util.concurrent.TimeUnit
 
 class LockerAPI(private val networkConnectionInterceptor: NetworkConnectionInterceptor) {
     private val lockerRetrofit by lazy {
-        val okkHttpclient = OkHttpClient.Builder()
+        val okkHttpclient = UnsafeOkHttpClient.getUnsafeOkHttpClient()
+            .newBuilder()
             .addInterceptor(networkConnectionInterceptor)
             .addInterceptor(AuthInterceptor(true))
             .connectTimeout(30, TimeUnit.SECONDS)
