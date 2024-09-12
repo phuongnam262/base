@@ -7,6 +7,7 @@ data class LockerRetrieve(
     @SerializedName("locker_name") val lockerName: String,
     @SerializedName("serial_number") val serialNumber: String,
     @SerializedName("model_name") var modelName: String,
+    @SerializedName("arrow_position") val arrowPosition: Int,
     var doorStatus: Int = 2,
     var retrieveStatus : Int = 0,
 )

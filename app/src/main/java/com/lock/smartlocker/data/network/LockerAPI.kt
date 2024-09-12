@@ -19,7 +19,7 @@ class LockerAPI(private val networkConnectionInterceptor: NetworkConnectionInter
             .build()
         Retrofit.Builder()
             .client(okkHttpclient)
-            .baseUrl("https://uatalamapisapp.smartlocker.vn/")
+            .baseUrl("http://lockerapisapp.ccivietnam.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }

@@ -65,8 +65,8 @@
 
         <ImageView
             android:id="@+id/ivArrowLeft"
-            android:layout_width="36dp"
-            android:layout_height="80dp"
+            android:layout_width="@dimen/dp_18"
+            android:layout_height="@dimen/dp_45"
             android:layout_gravity="center_vertical"
             android:visibility="invisible"
             app:srcCompat="@drawable/arrow_left_icon" />
@@ -80,10 +80,9 @@
 
         <ImageView
             android:id="@+id/ivArrowRight"
-            android:layout_width="36dp"
-            android:layout_height="80dp"
+            android:layout_width="@dimen/dp_18"
+            android:layout_height="@dimen/dp_45"
             android:layout_gravity="center_vertical"
-            android:layout_weight="1"
             app:srcCompat="@drawable/arrow_right_icon" />
 
     </LinearLayout>
