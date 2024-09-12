@@ -147,6 +147,7 @@
     <string name="consumables">Vật tư</string>
     <string name="current_quantity">Tổng số lượng hiện tại:</string>
     <string name="select_button">Chọn</string>
+    <string name="current_quantity_number">Số lượng hiện tại:</string>
 
     <!-- Cart -->
     <string name="please_review_cart_info">Vui lòng lấy đồ dùng của bạn từ tủ khóa đã mở.\nNếu tủ khóa không mở, hãy nhấn "MỞ LẠI" để thử lại.\nĐóng cửa sau khi hoàn tất lấy đồ.</string>

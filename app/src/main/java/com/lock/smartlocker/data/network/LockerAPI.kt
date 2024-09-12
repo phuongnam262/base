@@ -12,15 +12,14 @@ import java.util.concurrent.TimeUnit
 
 class LockerAPI(private val networkConnectionInterceptor: NetworkConnectionInterceptor) {
     private val lockerRetrofit by lazy {
-        val okkHttpclient = UnsafeOkHttpClient.getUnsafeOkHttpClient()
-            .newBuilder()
+        val okkHttpclient = OkHttpClient.Builder()
             .addInterceptor(networkConnectionInterceptor)
             .addInterceptor(AuthInterceptor(true))
             .connectTimeout(30, TimeUnit.SECONDS)
             .build()
         Retrofit.Builder()
             .client(okkHttpclient)
-            .baseUrl("http://lockerapisapp.ccivietnam.com/")
+            .baseUrl("https://uatalamapisapp.smartlocker.vn/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }

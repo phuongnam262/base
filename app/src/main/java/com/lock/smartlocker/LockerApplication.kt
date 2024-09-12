@@ -37,6 +37,7 @@ import com.lock.smartlocker.ui.retrieve.RetrieveViewModelFactory
 import com.lock.smartlocker.ui.returns.ReturnViewModelFactory
 import com.lock.smartlocker.ui.scan_item.ScanItemViewModelFactory
 import com.lock.smartlocker.ui.scan_work_card.ScanWorkCardViewModelFactory
+import com.lock.smartlocker.ui.consumable_available_locker.ConsumableAvailableLockerViewModelFactory
 import com.lock.smartlocker.ui.select_available_locker.SelectAvailableLockerViewModelFactory
 import com.lock.smartlocker.ui.select_faulty.SelectFaultyViewModelFactory
 import com.lock.smartlocker.ui.setting.SettingViewModelFactory
@@ -55,7 +56,7 @@ class LockerApplication : Application(), KodeinAware {
     /**
      * root handling of exception
      */
-    private val unCaughtExceptionHandler = Thread.UncaughtExceptionHandler { _, ex ->
+    private val unCaughtExceptionHandler = Thread.UncaughtExceptionHandler { _, _ ->
         try {
             Process.killProcess(Process.myPid())
         } catch (e: Exception) {
@@ -121,6 +122,7 @@ class LockerApplication : Application(), KodeinAware {
         bind() from provider { MenuRegisterViewModelFactory() }
         bind() from provider { ScanWorkCardViewModelFactory(instance()) }
         bind() from provider { CategoryConsumableViewModelFactory(instance()) }
+        bind() from provider { ConsumableAvailableLockerViewModelFactory(instance()) }
     }
 
 }

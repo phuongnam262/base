@@ -147,6 +147,7 @@
     <string name="consumables">Consumables</string>
     <string name="current_quantity">Total Current Quantity:</string>
     <string name="select_button">Select</string>
+    <string name="current_quantity_number">Current Quantity:</string>
 
     <!-- Cart -->
     <string name="please_review_cart_info">Please review them. When ready, press "PROCEED" to collect your items. The locker will automatically open at that time</string>

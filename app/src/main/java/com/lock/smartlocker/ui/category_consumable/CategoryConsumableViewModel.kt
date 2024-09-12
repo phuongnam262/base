@@ -6,6 +6,7 @@ import com.lock.smartlocker.data.models.AvailableConsumable
 import com.lock.smartlocker.data.models.ConsumableAvailableItem
 import com.lock.smartlocker.data.models.ConsumableCategories
 import com.lock.smartlocker.data.models.ConsumableTopup
+import com.lock.smartlocker.data.models.LockerConsumable
 import com.lock.smartlocker.data.repositories.LoanRepository
 import com.lock.smartlocker.data.repositories.ManagerRepository
 import com.lock.smartlocker.ui.base.BaseViewModel
@@ -20,6 +21,8 @@ class CategoryConsumableViewModel(
     private val _listConsumable = MutableLiveData<List<ConsumableTopup>>()
     val listConsumable: LiveData<List<ConsumableTopup>> get() = _listConsumable
     var categoryIdSelected = MutableLiveData<String>()
+
+    var lockers = MutableLiveData<List<LockerConsumable>>()
 
     fun getConsumableAvailableItem() {
         ioScope.launch {
@@ -49,6 +52,6 @@ class CategoryConsumableViewModel(
     }
 
     fun selectConsumable(model: ConsumableTopup) {
-
+        lockers.postValue(model.lockers)
     }
 }

@@ -117,5 +117,14 @@
         android:id="@+id/categoryConsumableFragment"
         android:name="com.lock.smartlocker.ui.category_consumable.CategoryConsumableFragment"
         android:label="fragment_category_consumable"
-        tools:layout="@layout/fragment_category_consumable" />
+        tools:layout="@layout/fragment_category_consumable" >
+        <action
+            android:id="@+id/action_categoryConsumableFragment_to_consumableAvailableLockerFragment"
+            app:destination="@id/consumableAvailableLockerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/consumableAvailableLockerFragment"
+        android:name="com.lock.smartlocker.ui.consumable_available_locker.ConsumableAvailableLockerFragment"
+        android:label="fragment_consumable_available_locker"
+        tools:layout="@layout/fragment_consumable_available_locker" />
 </navigation>
