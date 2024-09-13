@@ -7,10 +7,6 @@
         <import type="android.view.View" />
 
         <variable
-            name="isSelected"
-            type="Boolean" />
-
-        <variable
             name="model"
             type="com.lock.smartlocker.data.models.LockerConsumable" />
     </data>
@@ -19,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/dp_5"
-        android:background="@{isSelected ? @drawable/bg_selected_available_locker : @drawable/bg_rectangle_rounded}"
+        android:background="@drawable/bg_radius_white_selector"
         android:paddingHorizontal="@dimen/dp_10"
         android:paddingVertical="@dimen/dp_10">
 
@@ -74,8 +70,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_gravity="center_vertical"
-                android:visibility="gone">
+                android:layout_gravity="center_vertical">
 
                 <TextView
                     android:id="@+id/tvSizeLable"
@@ -109,7 +104,6 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/segoe_ui_regular"
                     android:text="@string/current_quantity_number"
-                    android:visibility="gone"
                     android:textColor="@color/colorBlack"
                     android:textSize="@dimen/sp_16" />
 

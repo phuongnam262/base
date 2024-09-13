@@ -148,6 +148,16 @@
     <string name="current_quantity">Tổng số lượng hiện tại:</string>
     <string name="select_button">Chọn</string>
     <string name="current_quantity_number">Số lượng hiện tại:</string>
+    <string name="max_button">TỐI ĐA</string>
+    <string name="report_button">Báo cáo</string>
+    <string name="confirm_button">XÁC NHẬN</string>
+    <string name="submit_button">GỬI</string>
+    <string name="enter_topup_quantity">Nhập số lượng thêm</string>
+    <string name="top_up">THÊM:</string>
+    <string name="select_report">CHỌN LÝ DO BÁO CÁO</string>
+    <string name="report_has_sent">Báo cáo đã được gửi.</string>
+    <string name="found_less_stock">Tìm thấy ít hàng hơn</string>
+    <string name="found_extra_stock">Tìm thấy nhiều hàng hơn</string>
 
     <!-- Cart -->
     <string name="please_review_cart_info">Vui lòng lấy đồ dùng của bạn từ tủ khóa đã mở.\nNếu tủ khóa không mở, hãy nhấn "MỞ LẠI" để thử lại.\nĐóng cửa sau khi hoàn tất lấy đồ.</string>

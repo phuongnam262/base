@@ -3,7 +3,6 @@ package com.lock.smartlocker.ui.consumable_available_locker
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
@@ -11,6 +10,7 @@ import com.lock.smartlocker.databinding.FragmentConsumableAvailableLockerBinding
 import com.lock.smartlocker.ui.base.BaseFragment
 import com.lock.smartlocker.ui.category_consumable.CategoryConsumableFragment
 import com.lock.smartlocker.ui.consumable_available_locker.adapter.ConsumableAvailableLockerItem
+import com.lock.smartlocker.util.ConstantUtils
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import org.kodein.di.KodeinAware
@@ -60,7 +60,9 @@ class ConsumableAvailableLockerFragment : BaseFragment<FragmentConsumableAvailab
             } })
         }
         viewModel.selectedLocker.observe(viewLifecycleOwner) {
-            availableLockerAdapter.notifyDataSetChanged()
+            if (it != null) {
+                viewModel.openLocker()
+            }
         }
 
     }
@@ -82,7 +84,11 @@ class ConsumableAvailableLockerFragment : BaseFragment<FragmentConsumableAvailab
     }
 
     override fun sendCommandOpenLockerSuccess(lockerId: String?) {
-
+        val bundle = Bundle().apply {
+            putString(ConstantUtils.LOCKER_ID, lockerId)
+        }
+        navigateTo(R.id.action_consumableAvailableLockerFragment_to_depositConsumableFragment, bundle)
+        viewModel.selectedLocker.postValue( null)
     }
 
 }

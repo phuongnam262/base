@@ -1,6 +1,5 @@
 package com.lock.smartlocker.ui.consumable_available_locker
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.lock.smartlocker.data.entities.request.HardwareControllerRequest
 import com.lock.smartlocker.data.models.LockerConsumable
@@ -16,21 +15,10 @@ class ConsumableAvailableLockerViewModel(
     var consumableAvailableLockerListener: ConsumableAvailableLockerListener? = null
 
     val lockers = MutableLiveData<List<LockerConsumable>>()
-    //val lockers: LiveData<List<LockerConsumable>> get() = _lockers
 
-    private val _selectedLocker = MutableLiveData<LockerConsumable?>()
-    val selectedLocker: LiveData<LockerConsumable?> get() = _selectedLocker
-
+    var selectedLocker = MutableLiveData<LockerConsumable?>()
     fun selectLocker(locker: LockerConsumable) {
-        _selectedLocker.value = locker
-    }
-
-    fun loadListAvailableLockers() {
-        ioScope.launch {
-            //val availableLockerIds = PreferenceHelper.getString(ConstantUtils.RETURN_AVAILABLE_LOCKER_LIST, "")
-           //_lockers.postValue(availableLockers)
-
-        }
+        selectedLocker.value = locker
     }
 
     fun openLocker() {

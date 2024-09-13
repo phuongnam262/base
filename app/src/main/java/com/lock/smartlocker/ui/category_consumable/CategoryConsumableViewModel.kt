@@ -2,12 +2,9 @@ package com.lock.smartlocker.ui.category_consumable
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.lock.smartlocker.data.models.AvailableConsumable
-import com.lock.smartlocker.data.models.ConsumableAvailableItem
 import com.lock.smartlocker.data.models.ConsumableCategories
 import com.lock.smartlocker.data.models.ConsumableTopup
 import com.lock.smartlocker.data.models.LockerConsumable
-import com.lock.smartlocker.data.repositories.LoanRepository
 import com.lock.smartlocker.data.repositories.ManagerRepository
 import com.lock.smartlocker.ui.base.BaseViewModel
 import kotlinx.coroutines.launch

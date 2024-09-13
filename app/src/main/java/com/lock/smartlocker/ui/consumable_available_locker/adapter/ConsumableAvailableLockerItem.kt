@@ -18,7 +18,6 @@ class ConsumableAvailableLockerItem(
 
     override fun bind(viewBinding: ItemConsumableAvailableLockerBinding, position: Int) {
         viewBinding.model = model
-        viewBinding.isSelected = viewModel.selectedLocker.value == model
         when(model.lockerSize){
             "S" -> {
                 model.lockerSize = context.getString(R.string.locker_s)

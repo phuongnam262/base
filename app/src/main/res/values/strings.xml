@@ -148,6 +148,16 @@
     <string name="current_quantity">Total Current Quantity:</string>
     <string name="select_button">Select</string>
     <string name="current_quantity_number">Current Quantity:</string>
+    <string name="max_button">MAX</string>
+    <string name="report_button">Report</string>
+    <string name="confirm_button">CONFIRM</string>
+    <string name="submit_button">SUBMIT</string>
+    <string name="enter_topup_quantity">Enter Topup Quantity</string>
+    <string name="top_up">TOP UP: </string>
+    <string name="select_report">SELECT REPORT REASON</string>
+    <string name="report_has_sent">The report has been sent.</string>
+    <string name="found_less_stock">Found less stock</string>
+    <string name="found_extra_stock">Found extra stock</string>
 
     <!-- Cart -->
     <string name="please_review_cart_info">Please review them. When ready, press "PROCEED" to collect your items. The locker will automatically open at that time</string>

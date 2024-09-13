@@ -126,5 +126,14 @@
         android:id="@+id/consumableAvailableLockerFragment"
         android:name="com.lock.smartlocker.ui.consumable_available_locker.ConsumableAvailableLockerFragment"
         android:label="fragment_consumable_available_locker"
-        tools:layout="@layout/fragment_consumable_available_locker" />
+        tools:layout="@layout/fragment_consumable_available_locker" >
+        <action
+            android:id="@+id/action_consumableAvailableLockerFragment_to_depositConsumableFragment"
+            app:destination="@id/depositConsumableFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/depositConsumableFragment"
+        android:name="com.lock.smartlocker.ui.deposit_consumable.DepositConsumableFragment"
+        android:label="fragment_deposit_consumable"
+        tools:layout="@layout/fragment_deposit_consumable" />
 </navigation>

@@ -7,6 +7,6 @@ data class ConsumableInLocker(
     @SerializedName("set_point") val setPoint: Int,
     @SerializedName("current_quantity") val currentQuantity: Int,
     @SerializedName("consumable_name") val consumableName: String,
-    var inputQuantity: Int,
+    var inputQuantity: String?,
     var doorStatus: Int,
 )
