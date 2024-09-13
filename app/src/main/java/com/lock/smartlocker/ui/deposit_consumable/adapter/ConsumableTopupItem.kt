@@ -1,6 +1,5 @@
 package com.lock.smartlocker.ui.deposit_consumable.adapter
 
-import androidx.core.widget.addTextChangedListener
 import com.lock.smartlocker.R
 import com.lock.smartlocker.data.models.ConsumableInLocker
 import com.lock.smartlocker.databinding.ItemConsumableTopupBinding
@@ -17,17 +16,11 @@ class ConsumableTopupItem(
     override fun bind(viewBinding: ItemConsumableTopupBinding, position: Int) {
         viewBinding.consumable = model
 
-        viewBinding.etQuantity.addTextChangedListener {
-
-        }
-
         viewBinding.btnMax.setOnClickListener {
             if (model.setPoint > model.currentQuantity) {
-                if (((model.inputQuantity)?.toInt() ?: 0) < model.setPoint) {
-                    val max = model.setPoint - model.currentQuantity
-                    viewBinding.etQuantity.setText(max)
-                }
-            }
+                val max = model.setPoint - model.currentQuantity
+                viewBinding.etQuantity.setText(max.toString())
+            }else viewBinding.etQuantity.setText("0")
         }
 
         viewBinding.btnReport.setOnClickListener {

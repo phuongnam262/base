@@ -5,11 +5,9 @@ import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
-import com.lock.smartlocker.data.models.LockerConsumable
 import com.lock.smartlocker.databinding.FragmentDepositConsumableBinding
 import com.lock.smartlocker.ui.base.BaseFragment
 import com.lock.smartlocker.ui.deposit_consumable.adapter.ConsumableTopupItem
-import com.lock.smartlocker.ui.input_serial_number.InputSerialNumberFragment
 import com.lock.smartlocker.util.ConstantUtils
 import com.lock.smartlocker.util.view.custom.CustomConfirmDialog
 import com.xwray.groupie.GroupAdapter
@@ -51,11 +49,13 @@ class DepositConsumableFragment : BaseFragment<FragmentDepositConsumableBinding,
         mViewDataBinding?.btnLocker?.setOnClickListener(this)
         mViewDataBinding?.headerBar?.ivBack?.setOnClickListener(this)
         mViewDataBinding?.rvConsumables?.adapter = consumableAdapter
+        viewModel.enableButtonProcess.postValue(true)
     }
 
     private fun initData(){
         lockerId = arguments?.getString(ConstantUtils.LOCKER_ID)
         lockerId?.let { viewModel.checkLockerStatus(it) }
+        viewModel.categoryId = arguments?.getString(ConstantUtils.CATEGORY_ID)
         viewModel.lockerConsumable.observe(viewLifecycleOwner) { locker ->
             mViewDataBinding?.locker = locker
         }
@@ -74,26 +74,15 @@ class DepositConsumableFragment : BaseFragment<FragmentDepositConsumableBinding,
                         it1 -> viewModel.reopenLocker(it1)
                     }
                 }
-
                 R.id.btn_process -> {
+                    viewModel.topupConsumable()
                 }
             }
         }
     }
 
-    override fun returnItemSuccess() {
-        navigateTo(R.id.action_depositItemFragment_to_thankFragment, null)
-    }
-
     override fun topupItemSuccess() {
-        val dialog = CustomConfirmDialog.newInstance(
-            message = getString(R.string.deposit_topup_success),
-        )
-        dialog.show(childFragmentManager, InputSerialNumberFragment.CONFIRMATION_DIALOG_TAG)
-    }
-
-    override fun sendCommandOpenLockerSuccess(lockerId: String?) {
-        TODO("Not yet implemented")
+        navigateTo(R.id.action_depositConsumableFragment_to_categoryConsumableFragment, null)
     }
 
     override fun onDialogConfirmClick(dialogTag: String?) {

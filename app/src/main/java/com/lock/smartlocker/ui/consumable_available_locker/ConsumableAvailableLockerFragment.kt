@@ -86,6 +86,7 @@ class ConsumableAvailableLockerFragment : BaseFragment<FragmentConsumableAvailab
     override fun sendCommandOpenLockerSuccess(lockerId: String?) {
         val bundle = Bundle().apply {
             putString(ConstantUtils.LOCKER_ID, lockerId)
+            putString(ConstantUtils.CATEGORY_ID, arguments?.getString(ConstantUtils.CATEGORY_ID))
         }
         navigateTo(R.id.action_consumableAvailableLockerFragment_to_depositConsumableFragment, bundle)
         viewModel.selectedLocker.postValue( null)

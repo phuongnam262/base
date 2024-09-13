@@ -10,6 +10,7 @@ import com.lock.smartlocker.data.entities.request.GetConsumableInLockerRequest
 import com.lock.smartlocker.data.entities.request.GetItemReturnRequest
 import com.lock.smartlocker.data.entities.request.RetrieveItemRequest
 import com.lock.smartlocker.data.entities.request.ReturnItemRequest
+import com.lock.smartlocker.data.entities.request.TopupConsumableRequest
 import com.lock.smartlocker.data.entities.request.UpdateInventoryTransactionRequest
 import com.lock.smartlocker.data.entities.request.VerifyOTPRequest
 import com.lock.smartlocker.data.entities.responses.AdminLoginResponse
@@ -107,6 +108,11 @@ interface LockerServives {
     @POST("/api/item/topup-item")
     suspend fun topupItem(
         @Body returnItemRequest: ReturnItemRequest
+    ): Response<BaseResponse<Map<String, Any>>>
+
+    @POST("/api/admin/topup-consusmable")
+    suspend fun topupConsumable(
+        @Body topupConsumableRequest: TopupConsumableRequest
     ): Response<BaseResponse<Map<String, Any>>>
 
     @POST("/api/inventory-transaction/get-available-item")

@@ -30,6 +30,7 @@ class NetworkConnectionInterceptor(
         connectivityManager?.let {
             it.getNetworkCapabilities(connectivityManager.activeNetwork)?.apply {
                 result = when {
+                    hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
                     hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
                     hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
                     else -> false

@@ -42,8 +42,6 @@
                 android:id="@+id/btnMax"
                 style="@style/CustomButton"
                 android:text="@string/max_button"
-                android:enabled="@{consumable.currentQuantity &lt; consumable.setPoint}"
-                android:alpha="@{consumable.currentQuantity &lt; consumable.setPoint ? 1f : 0.3f}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -64,7 +62,6 @@
                 android:layout_height="@dimen/dp_40"
                 android:layout_marginEnd="@dimen/dp_80"
                 android:inputType="number"
-                android:enabled="@{consumable.currentQuantity &lt; consumable.setPoint}"
                 android:hint="0"
                 android:text="@={consumable.inputQuantity}"
                 android:textAlignment="center"

@@ -6,6 +6,7 @@ import com.lock.smartlocker.data.entities.request.ConsumerLoginRequest
 import com.lock.smartlocker.data.entities.request.DisableLockerRequest
 import com.lock.smartlocker.data.entities.request.GetConsumableInLockerRequest
 import com.lock.smartlocker.data.entities.request.RetrieveItemRequest
+import com.lock.smartlocker.data.entities.request.TopupConsumableRequest
 import com.lock.smartlocker.data.entities.request.VerifyOTPRequest
 import com.lock.smartlocker.data.entities.responses.AdminLoginResponse
 import com.lock.smartlocker.data.entities.responses.BaseResponse
@@ -76,5 +77,9 @@ class ManagerRepository (
 
     suspend fun getConsumableInLocker(getConsumableInLockerRequest: GetConsumableInLockerRequest): BaseResponse<GetConsumableInLockerResponse> {
         return apiRequest { api.provideLockerAPIService().getConsumableInLocker(getConsumableInLockerRequest) }
+    }
+
+    suspend fun topupConsumable(topupConsumableRequest: TopupConsumableRequest): BaseResponse<Map<String, Any>> {
+        return apiRequest { api.provideLockerAPIService().topupConsumable(topupConsumableRequest) }
     }
 }

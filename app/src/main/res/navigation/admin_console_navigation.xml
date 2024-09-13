@@ -135,5 +135,11 @@
         android:id="@+id/depositConsumableFragment"
         android:name="com.lock.smartlocker.ui.deposit_consumable.DepositConsumableFragment"
         android:label="fragment_deposit_consumable"
-        tools:layout="@layout/fragment_deposit_consumable" />
+        tools:layout="@layout/fragment_deposit_consumable" >
+        <action
+            android:id="@+id/action_depositConsumableFragment_to_categoryConsumableFragment"
+            app:destination="@id/categoryConsumableFragment"
+            app:popUpTo="@id/categoryConsumableFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

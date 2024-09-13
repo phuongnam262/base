@@ -21,18 +21,18 @@ class ConsumableAvailableLockerItem(
         when(model.lockerSize){
             "S" -> {
                 model.lockerSize = context.getString(R.string.locker_s)
-                viewBinding.tvCurrentQuantity.setTextColor(context.getColorStateList(R.color.colorGreen))
-                viewBinding.tvQuantityLable.setTextColor(context.getColorStateList(R.color.colorGreen))
+                viewBinding.tvCurrentQuantity.setTextColor(context.getColor(R.color.colorGreen))
+                viewBinding.tvQuantityLable.setTextColor(context.getColor(R.color.colorGreen))
             }
             "M" -> {
                 model.lockerSize = context.getString(R.string.locker_m)
-                viewBinding.tvCurrentQuantity.setTextColor(context.getColorStateList(R.color.colorBlue))
-                viewBinding.tvQuantityLable.setTextColor(context.getColorStateList(R.color.colorBlue))
+                viewBinding.tvCurrentQuantity.setTextColor(context.getColor(R.color.colorBlue))
+                viewBinding.tvQuantityLable.setTextColor(context.getColor(R.color.colorBlue))
             }
             "L" -> {
                 model.lockerSize = context.getString(R.string.locker_l)
-                viewBinding.tvCurrentQuantity.setTextColor(context.getColorStateList(R.color.colorOrange))
-                viewBinding.tvQuantityLable.setTextColor(context.getColorStateList(R.color.colorOrange))
+                viewBinding.tvCurrentQuantity.setTextColor(context.getColor(R.color.colorOrange))
+                viewBinding.tvQuantityLable.setTextColor(context.getColor(R.color.colorOrange))
             }
         }
         viewBinding.root.setOnClickListener {

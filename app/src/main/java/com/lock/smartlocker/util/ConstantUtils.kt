@@ -18,6 +18,7 @@ class ConstantUtils {
         const val RETURN_AVAILABLE_LOCKER_LIST = "RETURN_AVAILABLE_LOCKER_LIST"
         const val ERROR_CODE_SUCCESS = "SUCCESS"
         const val LOCKER_ID = "LOCKER_ID"
+        const val CATEGORY_ID = "CATEGORY_ID"
 
         //Type Open
         const val TYPE_OPEN = "TYPE_OPEN"

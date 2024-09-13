@@ -1,13 +1,17 @@
 package com.lock.smartlocker.ui.deposit_consumable
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.map
 import com.lock.smartlocker.R
 import com.lock.smartlocker.data.entities.request.GetConsumableInLockerRequest
 import com.lock.smartlocker.data.entities.request.HardwareControllerRequest
 import com.lock.smartlocker.data.entities.request.ReturnItemRequest
+import com.lock.smartlocker.data.entities.request.TopupConsumableRequest
 import com.lock.smartlocker.data.models.ConsumableInLocker
 import com.lock.smartlocker.data.models.LockerConsumable
+import com.lock.smartlocker.data.models.TopupConsumable
 import com.lock.smartlocker.data.preference.PreferenceHelper
 import com.lock.smartlocker.data.repositories.HardwareControllerRepository
 import com.lock.smartlocker.data.repositories.ManagerRepository
@@ -25,6 +29,7 @@ class DepositConsumableViewModel(
     private val _listConsumable = MutableLiveData<List<ConsumableInLocker>>()
     val listConsumable: LiveData<List<ConsumableInLocker>> get() = _listConsumable
     var lockerConsumable = MutableLiveData<LockerConsumable>()
+    var categoryId : String? = null
 
     fun checkLockerStatus(lockerId: String) {
         lockerID = lockerId
@@ -74,16 +79,27 @@ class DepositConsumableViewModel(
         }.invokeOnCompletion { mLoading.postValue(false) }
     }
 
-    private fun topupItem(returnItemRequest: ReturnItemRequest) {
+    @SuppressLint("CheckResult")
+    fun topupConsumable() {
         ioScope.launch {
             mLoading.postValue(true)
-//            managerRepository.topupItem(returnItemRequest).apply {
-//                if (isSuccessful) {
-//                    if (data != null) {
-//                        depositConsumableListener?.topupItemSuccess()
-//                    }
-//                } else handleError(status)
-//            }
+            val dataMap = listConsumable.value?.map {
+                    TopupConsumable(
+                        categoryId = categoryId,
+                        consumableId = it.consumableId,
+                        lockerId = lockerID,
+                        quantity = if (it.inputQuantity?.isNotEmpty() == true) it.inputQuantity?.toInt() else 0
+                    )
+                } ?: arrayListOf()
+
+            val params = TopupConsumableRequest(
+                data_infos = dataMap
+            )
+            managerRepository.topupConsumable(params).apply {
+                if (isSuccessful) {
+                    depositConsumableListener?.topupItemSuccess()
+                } else handleError(status)
+            }
         }.invokeOnCompletion { mLoading.postValue(false) }
     }
 

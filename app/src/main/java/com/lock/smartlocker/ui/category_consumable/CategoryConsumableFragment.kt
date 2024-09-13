@@ -11,6 +11,7 @@ import com.lock.smartlocker.databinding.FragmentCategoryConsumableBinding
 import com.lock.smartlocker.ui.base.BaseFragment
 import com.lock.smartlocker.ui.category_consumable.adapter.CategoryItem
 import com.lock.smartlocker.ui.category_consumable.adapter.ConsumableItem
+import com.lock.smartlocker.util.ConstantUtils
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import org.kodein.di.KodeinAware
@@ -93,6 +94,9 @@ class CategoryConsumableFragment : BaseFragment<FragmentCategoryConsumableBindin
     }
 
     private fun openAvailableLocker(){
-        navigateTo(R.id.action_categoryConsumableFragment_to_consumableAvailableLockerFragment, null)
+        val bundle = Bundle().apply {
+            putString(ConstantUtils.CATEGORY_ID, viewModel.categoryIdSelected.value)
+        }
+        navigateTo(R.id.action_categoryConsumableFragment_to_consumableAvailableLockerFragment, bundle)
     }
 }
