@@ -24,7 +24,6 @@ class InputSerialNumberFragment : BaseFragment<FragmentInputSerialNumberBinding,
     companion object {
         const val CATEGORY_ID_KEY = "category_id"
         const val RETURN_ITEM_REQUEST_KEY = "return_item_request"
-        const val CONFIRMATION_DIALOG_TAG = "confirmation_dialog"
         const val TYPE_INPUT_SERIAL = "type_input_serial"
     }
 
@@ -80,10 +79,7 @@ class InputSerialNumberFragment : BaseFragment<FragmentInputSerialNumberBinding,
                     val newSerialNumber = viewModel.serialNumber.value
                     if (isReturnFlow) {
                         if (viewModel.isItemDetailVisible.value == true && newSerialNumber?.lowercase() == viewModel.itemReturnData.value?.serialNumber?.lowercase()) {
-                            val dialog = CustomConfirmDialog.newInstance(
-                                message = getString(R.string.dialog_attention),
-                            )
-                            dialog.show(childFragmentManager, CONFIRMATION_DIALOG_TAG)
+                            showDialogConfirm(getString(R.string.dialog_attention))
                         } else {
                             viewModel.getItemReturn()
                         }

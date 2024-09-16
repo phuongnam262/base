@@ -87,10 +87,7 @@ class DepositItemFragment : BaseFragment<FragmentDepositItemBinding, DepositItem
     }
 
     override fun topupItemSuccess() {
-        val dialog = CustomConfirmDialog.newInstance(
-            message = getString(R.string.deposit_topup_success),
-        )
-        dialog.show(childFragmentManager, InputSerialNumberFragment.CONFIRMATION_DIALOG_TAG)
+        showDialogConfirm(getString(R.string.deposit_topup_success))
     }
 
     override fun onDialogConfirmClick(dialogTag: String?) {

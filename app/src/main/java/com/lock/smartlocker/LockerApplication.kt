@@ -19,8 +19,11 @@ import com.lock.smartlocker.data.repositories.UserFaceRepository
 import com.lock.smartlocker.ui.admin_dashboard.AdminDashboardViewModelFactory
 import com.lock.smartlocker.ui.admin_login.AdminLoginViewModelFactory
 import com.lock.smartlocker.ui.cart.CartViewModelFactory
+import com.lock.smartlocker.ui.cart_consumable.CartConsumableViewModelFactory
 import com.lock.smartlocker.ui.category.CategoryViewModelFactory
 import com.lock.smartlocker.ui.category_consumable.CategoryConsumableViewModelFactory
+import com.lock.smartlocker.ui.category_consumable_collect.CategoryConsumableCollectViewModelFactory
+import com.lock.smartlocker.ui.collect_consumable_item.CollectConsumableItemViewModelFactory
 import com.lock.smartlocker.ui.collect_items.CollectItemViewModelFactory
 import com.lock.smartlocker.ui.deposit_item.DepositItemViewModelFactory
 import com.lock.smartlocker.ui.face_list.FaceListViewModelFactory
@@ -97,34 +100,37 @@ class LockerApplication : Application(), KodeinAware {
         bind() from singleton { LoanRepository(instance()) }
 
         //bind Factory
-        bind() from provider { HomeViewModelFactory(instance(), instance()) }
-        bind() from provider { SplashViewModelFactory(instance()) }
-        bind() from provider { ManagerMenuViewModelFactory(instance()) }
-        bind() from provider { InputEmailViewModelFactory(instance()) }
-        bind() from provider { AdminLoginViewModelFactory(instance()) }
-        bind() from provider { InputOTPViewModelFactory(instance()) }
-        bind() from provider { RegisterFaceViewModelFactory(instance()) }
         bind() from provider { AdminDashboardViewModelFactory(instance()) }
-        bind() from provider { ReturnViewModelFactory(instance()) }
-        bind() from provider { InputSerialNumberViewModelFactory(instance()) }
-        bind() from provider { SelectFaultyViewModelFactory() }
-        bind() from provider { SelectAvailableLockerViewModelFactory(instance()) }
-        bind() from provider { DepositItemViewModelFactory(instance(), instance()) }
-        bind() from provider { ThankViewModelFactory() }
-        bind() from provider { CategoryViewModelFactory(instance()) }
+        bind() from provider { AdminLoginViewModelFactory(instance()) }
+        bind() from provider { CartConsumableViewModelFactory(instance()) }
         bind() from provider { CartViewModelFactory(instance()) }
-        bind() from provider { RecognizeFaceViewModelFactory(instance(), instance()) }
-        bind() from provider { CollectItemViewModelFactory(instance(), instance()) }
-        bind() from provider { ScanItemViewModelFactory(instance()) }
-        bind() from provider { FaceListViewModelFactory(instance()) }
-        bind() from provider { SettingViewModelFactory(instance()) }
-        bind() from provider { ManageLockerViewModelFactory(instance(), instance()) }
-        bind() from provider { RetrieveViewModelFactory(instance(), instance()) }
-        bind() from provider { MenuRegisterViewModelFactory() }
-        bind() from provider { ScanWorkCardViewModelFactory(instance()) }
+        bind() from provider { CategoryConsumableCollectViewModelFactory(instance()) }
         bind() from provider { CategoryConsumableViewModelFactory(instance()) }
+        bind() from provider { CategoryViewModelFactory(instance()) }
+        bind() from provider { CollectItemViewModelFactory(instance(), instance()) }
+        bind() from provider { CollectConsumableItemViewModelFactory(instance(), instance()) }
         bind() from provider { ConsumableAvailableLockerViewModelFactory(instance()) }
         bind() from provider { DepositConsumableViewModelFactory(instance(), instance()) }
+        bind() from provider { DepositItemViewModelFactory(instance(), instance()) }
+        bind() from provider { FaceListViewModelFactory(instance()) }
+        bind() from provider { HomeViewModelFactory(instance(), instance()) }
+        bind() from provider { InputEmailViewModelFactory(instance()) }
+        bind() from provider { InputOTPViewModelFactory(instance()) }
+        bind() from provider { InputSerialNumberViewModelFactory(instance()) }
+        bind() from provider { ManageLockerViewModelFactory(instance(), instance()) }
+        bind() from provider { ManagerMenuViewModelFactory(instance()) }
+        bind() from provider { MenuRegisterViewModelFactory() }
+        bind() from provider { RecognizeFaceViewModelFactory(instance(), instance()) }
+        bind() from provider { RegisterFaceViewModelFactory(instance()) }
+        bind() from provider { ReturnViewModelFactory(instance()) }
+        bind() from provider { RetrieveViewModelFactory(instance(), instance()) }
+        bind() from provider { ScanItemViewModelFactory(instance()) }
+        bind() from provider { ScanWorkCardViewModelFactory(instance()) }
+        bind() from provider { SelectAvailableLockerViewModelFactory(instance()) }
+        bind() from provider { SelectFaultyViewModelFactory() }
+        bind() from provider { SettingViewModelFactory(instance()) }
+        bind() from provider { SplashViewModelFactory(instance()) }
+        bind() from provider { ThankViewModelFactory() }
     }
 
 }

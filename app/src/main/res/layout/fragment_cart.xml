@@ -60,6 +60,7 @@
             app:ownerText="@{viewmodel.ownerText}"
             app:timerHour="@{viewmodel.timerHour}"
             app:showButtonProcess="@{true}"
+            app:enableButtonProcess="@{viewmodel.enableButtonProcess}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />

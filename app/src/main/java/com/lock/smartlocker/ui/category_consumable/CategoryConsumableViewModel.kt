@@ -21,7 +21,11 @@ class CategoryConsumableViewModel(
 
     var lockers = MutableLiveData<List<LockerConsumable>>()
 
-    fun getConsumableAvailableItem() {
+    init {
+        getConsumableAvailableItem()
+    }
+
+    private fun getConsumableAvailableItem() {
         ioScope.launch {
             mLoading.postValue(true)
             managerRepository.getConsumable().apply {

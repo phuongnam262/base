@@ -22,6 +22,10 @@
             name="numberCart"
             type="String" />
 
+        <variable
+            name="enableButtonProcess"
+            type="Boolean" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -134,7 +138,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:clickable="true"
+                        android:clickable="false"
+                        android:alpha="0.3"
                         android:focusable="true"
                         android:visibility="@{showButtonProcess ? View.GONE : View.VISIBLE}">
 
@@ -167,6 +172,8 @@
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:text="@string/process_button"
+                        android:alpha="@{enableButtonProcess ? 1f : 0.3f}"
+                        android:enabled="@{enableButtonProcess ? true : false}"
                         android:visibility="@{showButtonProcess ? View.VISIBLE : View.GONE}" />
 
                 </RelativeLayout>

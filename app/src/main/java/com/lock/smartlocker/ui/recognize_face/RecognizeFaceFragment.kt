@@ -60,12 +60,11 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
     private var analysisUseCase: ImageAnalysis? = null
     private var imageProcessor: VisionImageProcessor? = null
     private var needUpdateGraphicOverlayImageSourceInfo = false
-    private var lensFacing = CameraSelector.LENS_FACING_EXTERNAL
-    private var rotateCamera = Surface.ROTATION_270
-    private var rotateDetect = Surface.ROTATION_90
+    private var lensFacing = CameraSelector.LENS_FACING_FRONT
+    private var rotateCamera = Surface.ROTATION_0
+    private var rotateDetect = Surface.ROTATION_0
     private var cameraSelector: CameraSelector? = null
     private var imageCapture: ImageCapture? = null
-    private var typeOpen : String? = null
 
     companion object {
         private const val TAG = "RecognizeFaceFragment"
@@ -81,7 +80,7 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
 
     private fun initView() {
         viewModel.titlePage.postValue(getString(R.string.recognize_face))
-        if (typeOpen == ConstantUtils.TYPE_CONSUMABLE_COLLECT){
+        if (viewModel.typeOpen == ConstantUtils.TYPE_CONSUMABLE_COLLECT){
             mViewDataBinding?.bottomMenu?.btnUsing?.text = getString(R.string.using_card_button)
         }
         mViewDataBinding?.bottomMenu?.rlHome?.setOnClickListener(this)
@@ -134,7 +133,7 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
 
     private fun initData() {
         if (arguments?.getString(ConstantUtils.TYPE_OPEN) != null) {
-            typeOpen = arguments?.getString(ConstantUtils.TYPE_OPEN)
+            viewModel.typeOpen = arguments?.getString(ConstantUtils.TYPE_OPEN)
         }
     }
 
@@ -153,7 +152,8 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
                 R.id.btn_process -> {
                     if (isClicked.not()) {
                         isClicked = true
-                        viewModel.consumerLogin(typeOpen == ConstantUtils.TYPE_CONSUMABLE_COLLECT)
+                        if(viewModel.typeOpen == ConstantUtils.TYPE_CONSUMABLE_COLLECT) viewModel.endUserLogin()
+                        else viewModel.consumerLogin()
                     }
                 }
 
@@ -163,10 +163,10 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
                         cameraProvider!!.unbindAll()
                     }
                     val bundle = Bundle().apply {
-                        putString(ConstantUtils.TYPE_OPEN, typeOpen)
+                        putString(ConstantUtils.TYPE_OPEN, viewModel.typeOpen)
                     }
                     // Nếu là consumable thì qua màn hình nhập work card
-                    if (typeOpen == ConstantUtils.TYPE_CONSUMABLE_COLLECT) {
+                    if (viewModel.typeOpen == ConstantUtils.TYPE_CONSUMABLE_COLLECT) {
                         navigateTo(R.id.action_recognizeFaceFragment_to_scanWorkCardFragment, bundle)
                     }else{
                         navigateTo(R.id.action_recognizeFaceFragment_to_inputEmailFragment2, bundle)
@@ -176,9 +176,9 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
         }
     }
 
-    override fun handleSuccess(personCode: String, email: String) {
+    override fun handleSuccess(name: String?) {
         mViewDataBinding?.ivFrame?.setBackgroundResource(R.drawable.bg_face_success)
-        mViewDataBinding?.bottomMenu?.tvStatus?.text = getString(R.string.welcome_back, email)
+        mViewDataBinding?.bottomMenu?.tvStatus?.text = getString(R.string.welcome_back, name)
         activity?.resources?.getColor(R.color.colorGreen)
             ?.let { mViewDataBinding?.bottomMenu?.tvStatus?.setTextColor(it) }
         mViewDataBinding?.bottomMenu?.llButton?.weightSum = 2.0f
@@ -190,12 +190,14 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
     }
 
     override fun consumerLoginSuccess(email: String?) {
-        if (typeOpen != ConstantUtils.TYPE_CONSUMABLE_COLLECT) {
+        if (viewModel.typeOpen != ConstantUtils.TYPE_CONSUMABLE_COLLECT) {
             val bundle = Bundle().apply {
-                putString(ConstantUtils.TYPE_OPEN, typeOpen)
+                putString(ConstantUtils.TYPE_OPEN, viewModel.typeOpen)
                 putString(EMAIL_REGISTER, email)
             }
             navigateTo(R.id.action_recognizeFaceFragment_to_categoryFragment, bundle)
+        }else{
+            navigateTo(R.id.action_recognizeFaceFragment_to_categoryConsumableCollectFragment, null)
         }
     }
 

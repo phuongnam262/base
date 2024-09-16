@@ -51,8 +51,8 @@
 
     <style name="CustomEditTextStyle" parent="Widget.AppCompat.EditText">
         <item name="android:background">@drawable/bg_edittext</item>
-        <item name="android:padding">@dimen/dp_10</item>
-        <item name="android:textSize">@dimen/dp_18</item>
+        <item name="android:padding">@dimen/dp_8</item>
+        <item name="android:textSize">@dimen/dp_16</item>
         <item name="android:textColor">@color/colorBlack</item>
         <item name="android:maxLines">1</item>
         <item name="android:singleLine">true</item>

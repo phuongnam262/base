@@ -34,7 +34,6 @@ class CategoryConsumableFragment : BaseFragment<FragmentCategoryConsumableBindin
     override val viewModel: CategoryConsumableViewModel
         get() = ViewModelProvider(this, factory)[CategoryConsumableViewModel::class.java]
 
-    private var isInnitData = false
     companion object{
         var listLockerSelected = ArrayList<LockerConsumable>()
     }
@@ -54,8 +53,6 @@ class CategoryConsumableFragment : BaseFragment<FragmentCategoryConsumableBindin
 
     @SuppressLint("NotifyDataSetChanged")
     private fun initData(){
-        isInnitData = true
-        viewModel.getConsumableAvailableItem()
         mViewDataBinding?.rvCategories?.adapter = categoryAdapter
         mViewDataBinding?.rvConsumables?.adapter = consumableAdapter
 

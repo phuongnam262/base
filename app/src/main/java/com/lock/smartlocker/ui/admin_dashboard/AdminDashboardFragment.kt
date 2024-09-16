@@ -80,13 +80,7 @@ class AdminDashboardFragment : BaseFragment<FragmentAdminDashboardBinding, Admin
                 }
 
                 R.id.ll_close_app -> {
-                    val dialog = CustomConfirmDialog.newInstance(
-                        message = getString(R.string.dialog_close_app),
-                    )
-                    dialog.show(
-                        childFragmentManager,
-                        InputSerialNumberFragment.CONFIRMATION_DIALOG_TAG
-                    )
+                    showDialogConfirm(getString(R.string.dialog_close_app))
 
                 }
 

@@ -88,7 +88,13 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel
         viewModel.listCartItem.observe(viewLifecycleOwner) {
             modelAdapter.notifyDataSetChanged()
             listCartItem = it
-            viewModel.enableButtonProcess.value = it.size > 0
+            if (it.size == 0) {
+                mViewDataBinding?.bottomMenu?.rlCart?.isClickable = false
+                mViewDataBinding?.bottomMenu?.rlCart?.alpha = 0.3f
+            }else{
+                mViewDataBinding?.bottomMenu?.rlCart?.isClickable = true
+                mViewDataBinding?.bottomMenu?.rlCart?.alpha = 1f
+            }
         }
 
 

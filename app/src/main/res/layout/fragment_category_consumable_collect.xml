@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.category.CategoryFragment">
+    tools:context=".ui.category_consumable_collect.CategoryConsumableCollectFragment">
 
     <data>
 
@@ -10,7 +10,7 @@
 
         <variable
             name="viewmodel"
-            type="com.lock.smartlocker.ui.category.CategoryViewModel" />
+            type="com.lock.smartlocker.ui.category_consumable_collect.CategoryConsumableCollectViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,21 +21,21 @@
         android:clickable="true"
         android:focusable="true">
 
+        <include
+            android:id="@+id/header_title"
+            layout="@layout/header_name_date"
+            app:nameLocker="@{viewmodel.terminalName}"
+            app:timer="@{viewmodel.timerString}"/>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginHorizontal="@dimen/dp_30"
-            android:layout_marginVertical="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_10"
             app:layout_constraintBottom_toTopOf="@id/bottom_menu"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <include
-                android:id="@+id/header_title"
-                layout="@layout/header_name_date"
-                app:nameLocker="@{viewmodel.terminalName}"
-                app:timer="@{viewmodel.timerString}"/>
+            app:layout_constraintTop_toBottomOf="@+id/header_title">
 
             <ImageView
                 android:id="@+id/ivAvatar"
@@ -43,7 +43,7 @@
                 android:layout_height="@dimen/dp_45"
                 android:background="@drawable/avatar"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/header_title"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="VisualLintBounds"
                 tools:srcCompat="@tools:sample/avatars" />
 
@@ -93,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_20"
                 android:fontFamily="@font/segoe_ui_regular"
-                android:text="@string/model"
+                android:text="@string/consumables"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/sp_22"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -109,7 +109,7 @@
                 android:text="@string/please_select_category"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/sp_16"
-                android:visibility="@{viewmodel.availableModels.size() == 0}"
+                android:visibility="@{viewmodel.availableConsumables.size() == 0}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvModelLabel" />
@@ -123,17 +123,17 @@
                 android:text="@string/select_items"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/sp_16"
-                android:visibility="@{viewmodel.availableModels.size() == 0 ? View.GONE : View.VISIBLE}"
+                android:visibility="@{viewmodel.availableConsumables.size() == 0 ? View.GONE : View.VISIBLE}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvModelLabel"
                 tools:visibility="visible" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvModels"
+                android:id="@+id/rvConsumables"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginVertical="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_10"
                 android:clipToPadding="false"
                 android:orientation="vertical"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -141,7 +141,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/categoryTxtBold"
-                tools:listitem="@layout/item_model" />
+                tools:listitem="@layout/item_consumable_collect" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

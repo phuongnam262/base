@@ -4,6 +4,7 @@ import com.lock.smartlocker.data.entities.request.AminLoginRequest
 import com.lock.smartlocker.data.entities.request.CheckCardRequest
 import com.lock.smartlocker.data.entities.request.ConsumerLoginRequest
 import com.lock.smartlocker.data.entities.request.DisableLockerRequest
+import com.lock.smartlocker.data.entities.request.EndUserLoginRequest
 import com.lock.smartlocker.data.entities.request.GetConsumableInLockerRequest
 import com.lock.smartlocker.data.entities.request.RetrieveItemRequest
 import com.lock.smartlocker.data.entities.request.TopupConsumableRequest
@@ -29,6 +30,10 @@ class ManagerRepository (
 
     suspend fun consumerLogin(consumerLoginRequest: ConsumerLoginRequest): BaseResponse<ConsumerLoginResponse> {
         return apiRequest { api.provideLockerAPIService().consumerLogin(consumerLoginRequest) }
+    }
+
+    suspend fun endUserLogin(endUserLoginRequest: EndUserLoginRequest): BaseResponse<CheckCardResponse> {
+        return apiRequest { api.provideLockerAPIService().endUserLogin(endUserLoginRequest) }
     }
 
     suspend fun checkCardNumber(checkCardRequest: CheckCardRequest): BaseResponse<CheckCardResponse> {

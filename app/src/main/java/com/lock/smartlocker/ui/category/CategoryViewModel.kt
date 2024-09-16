@@ -2,7 +2,6 @@ package com.lock.smartlocker.ui.category
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.map
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.lock.smartlocker.data.entities.request.GetAvailableItemRequest
@@ -23,14 +22,16 @@ class CategoryViewModel(
 
     private val _categories = MutableLiveData<List<Category>>()
     val categories: LiveData<List<Category>> get() = _categories
+
     private val _availableItem = MutableLiveData<List<AvailableItem>>()
     val availableItem: LiveData<List<AvailableItem>> get() = _availableItem
+
     private val _availableModels = MutableLiveData<List<AvailableModel>>()
     val availableModels: LiveData<List<AvailableModel>> get() = _availableModels
+
     var categoryIdSelected = MutableLiveData<String>()
     private val updatedListCart: ArrayList<CartItem> = ArrayList()
     val listCartItem = MutableLiveData<ArrayList<CartItem>>()
-
     init {
         loadCategories()
     }
@@ -109,7 +110,7 @@ class CategoryViewModel(
         } else {
             val cart = categoryIdSelected.value?.let {
                 if(model.loanable != null) {
-                    model.loanable?.toInt()?.let { it1 ->
+                    model.loanable.toInt().let { it1 ->
                         CartItem(
                             modelId = model.modelId,
                             modelName = model.modelName,

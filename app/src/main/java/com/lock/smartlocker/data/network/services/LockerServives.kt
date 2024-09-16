@@ -2,9 +2,12 @@ package com.lock.smartlocker.data.network.services
 
 import com.lock.smartlocker.data.entities.request.AminLoginRequest
 import com.lock.smartlocker.data.entities.request.CheckCardRequest
+import com.lock.smartlocker.data.entities.request.ConfirmConsumableCollectRequest
 import com.lock.smartlocker.data.entities.request.ConsumerLoginRequest
 import com.lock.smartlocker.data.entities.request.CreateInventoryTransactionRequest
+import com.lock.smartlocker.data.entities.request.CreateTransactionRequest
 import com.lock.smartlocker.data.entities.request.DisableLockerRequest
+import com.lock.smartlocker.data.entities.request.EndUserLoginRequest
 import com.lock.smartlocker.data.entities.request.GetAvailableItemRequest
 import com.lock.smartlocker.data.entities.request.GetConsumableInLockerRequest
 import com.lock.smartlocker.data.entities.request.GetItemReturnRequest
@@ -18,6 +21,7 @@ import com.lock.smartlocker.data.entities.responses.BaseResponse
 import com.lock.smartlocker.data.entities.responses.CheckCardResponse
 import com.lock.smartlocker.data.entities.responses.ConsumerLoginResponse
 import com.lock.smartlocker.data.entities.responses.CreateInventoryResponse
+import com.lock.smartlocker.data.entities.responses.CreateTransactionResponse
 import com.lock.smartlocker.data.entities.responses.DisableLockerResponse
 import com.lock.smartlocker.data.entities.responses.GetAllItemRetrieveResponse
 import com.lock.smartlocker.data.entities.responses.GetAvailableItemResponse
@@ -55,6 +59,11 @@ interface LockerServives {
     suspend fun consumerLogin(
         @Body consumerLoginRequest: ConsumerLoginRequest
     ): Response<BaseResponse<ConsumerLoginResponse>>
+
+    @POST("/api/end-user/login")
+    suspend fun endUserLogin(
+        @Body endUserLoginRequest: EndUserLoginRequest
+    ): Response<BaseResponse<CheckCardResponse>>
 
     @POST("/api/consumer/verify-otp")
     suspend fun verifyOTP(
@@ -131,6 +140,16 @@ interface LockerServives {
     @POST("/api/inventory-transaction/update-inventory-transaction")
     suspend fun updateInventoryTransaction(
         @Body updateInventoryTransactionRequest: UpdateInventoryTransactionRequest
+    ): Response<BaseResponse<Any>>
+
+    @POST("/api/consumable-transaction/create-consusmable-transaction")
+    suspend fun createConsumableTransaction(
+        @Body createTransactionRequest: CreateTransactionRequest
+    ): Response<BaseResponse<CreateTransactionResponse>>
+
+    @POST("/api/consumable-transaction/confirm-collect-consusmable")
+    suspend fun confirmCollectConsumable(
+        @Body confirmConsumableCollectRequest: ConfirmConsumableCollectRequest
     ): Response<BaseResponse<Any>>
 
     @POST("/api/locker/disable-locker")
