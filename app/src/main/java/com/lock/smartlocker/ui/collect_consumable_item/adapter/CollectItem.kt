@@ -7,7 +7,6 @@ import com.lock.smartlocker.R
 import com.lock.smartlocker.data.models.LockerInfoCollect
 import com.lock.smartlocker.databinding.ItemCollectConsumableBinding
 import com.lock.smartlocker.ui.collect_consumable_item.CollectConsumableItemViewModel
-import com.lock.smartlocker.util.view.custom.CustomConfirmDialog
 import com.xwray.groupie.databinding.BindableItem
 
 class CollectItem(
@@ -29,10 +28,7 @@ class CollectItem(
             viewModel.reopenLocker(lockerInfo.lockerId)
         }
         viewBinding.btnReport.setOnClickListener {
-//            val dialog = CustomConfirmDialog.newInstance(
-//                message = context.getString(R.string.dialog_enable),
-//            )
-//            dialog.show(fragmentManager, lockerInfo.consumableId)
+
         }
     }
 }

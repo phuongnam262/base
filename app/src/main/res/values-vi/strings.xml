@@ -54,6 +54,8 @@
     <string name="enter_email_continue">Nhập email của bạn để tiếp tục.</string>
     <string name="enter_email">Nhập email của bạn:</string>
     <string name="error_email_empty">Vui lòng nhập email</string>
+    <string name="error_email_exited">Email đã được đăng ký trên thiết bị này</string>
+    <string name="error_card_exited">Thẻ nhân viên đã được đăng ký trên thiết bị này</string>
 
     <!-- Admin Login -->
     <string name="enter_username_continue">Nhập tên người dùng của bạn để tiếp tục..</string>

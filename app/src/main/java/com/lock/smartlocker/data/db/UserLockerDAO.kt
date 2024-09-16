@@ -31,4 +31,10 @@ interface UserLockerDAO{
 
     @Query("SELECT * FROM UserLockerModel")
     suspend fun getAllUserLocker() : List<UserLockerModel>
+
+    @Query("SELECT * FROM UserLockerModel WHERE email = :email")
+    suspend fun checkUserEmail(email: String) : UserLockerModel?
+
+    @Query("SELECT * FROM UserLockerModel WHERE cardNumber = :cardNumber")
+    suspend fun checkUserCard(cardNumber: String) : UserLockerModel?
 }

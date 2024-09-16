@@ -120,11 +120,7 @@ class CollectConsumableItemFragment : BaseFragment<FragmentCollectConsumableItem
     }
 
     override fun onDialogConfirmClick(dialogTag: String?) {
-        if (dialogTag == ConstantUtils.CONFIRMATION_DIALOG_TAG) {
-            activity?.finish()
-        }else{
-
-        }
+        activity?.finish()
     }
 
     override fun onDialogCancelClick() {

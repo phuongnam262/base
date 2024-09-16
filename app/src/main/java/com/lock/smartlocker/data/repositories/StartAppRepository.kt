@@ -13,7 +13,7 @@ class StartAppRepository (
 ) : SafeApiRequest() {
 
     suspend fun terminalLogin(): BaseResponse<TerminalLoginResponse> {
-        return apiRequest { api.provideLockerAPIService().terminalLogin("4430a9956b242edd6721") }
+        return apiRequest { api.provideLockerAPIService().terminalLogin("4ddfa0a2a99428d4136e") }
     }
 
     suspend fun getSetting(): BaseResponse<GetSettingResponse> {

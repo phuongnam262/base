@@ -95,4 +95,14 @@ class UserFaceRepository(
    * get all user on DB
    * */
     suspend fun getAllUserLocker() = db.getUserLockerDAO().getAllUserLocker()
+
+    /*
+   * check email exist on DB
+   * */
+    suspend fun checkEmail(email: String) = db.getUserLockerDAO().checkUserEmail(email)
+
+    /*
+   * check card exist on DB
+   * */
+    suspend fun checkCardNumber(card: String) = db.getUserLockerDAO().checkUserCard(card)
 }

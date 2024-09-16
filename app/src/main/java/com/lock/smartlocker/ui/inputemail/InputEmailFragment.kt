@@ -10,7 +10,6 @@ import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
 import com.lock.smartlocker.databinding.FragmentInputEmailBinding
 import com.lock.smartlocker.ui.base.BaseFragment
-import com.lock.smartlocker.ui.input_serial_number.InputSerialNumberFragment
 import com.lock.smartlocker.util.ConstantUtils
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
@@ -77,6 +76,9 @@ class InputEmailFragment : BaseFragment<FragmentInputEmailBinding, InputEmailVie
     }
 
     private fun initData(){
+        if (arguments?.getString(ConstantUtils.TYPE_OPEN) != null) {
+            viewModel.typeOpen = arguments?.getString(ConstantUtils.TYPE_OPEN)
+        }
     }
 
     override fun onClick(v: View?) {
@@ -96,7 +98,7 @@ class InputEmailFragment : BaseFragment<FragmentInputEmailBinding, InputEmailVie
     }
 
     override fun consumerLoginSuccess(email: String?) {
-        if (arguments?.getString(ConstantUtils.TYPE_OPEN) != null) {
+        if (viewModel.typeOpen != null) {
             val bundle = Bundle().apply {
                 putString(
                     ConstantUtils.TYPE_OPEN,
@@ -114,9 +116,9 @@ class InputEmailFragment : BaseFragment<FragmentInputEmailBinding, InputEmailVie
 
     override fun consumerLoginFail(email: String?, status: String?) {
         if (status == ConstantUtils.REQUIRE_OTP){
-            if (arguments?.getString(ConstantUtils.TYPE_OPEN) != null) {
+            if (viewModel.typeOpen != null) {
                 val bundle = Bundle().apply {
-                    putString(ConstantUtils.TYPE_OPEN, arguments?.getString(ConstantUtils.TYPE_OPEN) )
+                    putString(ConstantUtils.TYPE_OPEN, viewModel.typeOpen)
                     putString(EMAIL_REGISTER, email)
                 }
                 navigateTo(R.id.action_inputEmailFragment2_to_inputOTPFragment2, bundle)

@@ -54,6 +54,8 @@
     <string name="enter_email_continue">Enter your email to continue.</string>
     <string name="enter_email">Enter your email:</string>
     <string name="error_email_empty">Please enter email</string>
+    <string name="error_email_exited">Email already register on this device</string>
+    <string name="error_card_exited">Work card already register on this device</string>
 
     <!-- Admin Login -->
     <string name="enter_username_continue">Enter your username to continue.</string>

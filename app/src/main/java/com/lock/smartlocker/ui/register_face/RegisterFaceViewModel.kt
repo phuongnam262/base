@@ -1,15 +1,15 @@
 package com.lock.smartlocker.ui.register_face
 
+import android.annotation.SuppressLint
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.common.api.ApiException
 import com.lock.smartlocker.R
-import com.lock.smartlocker.data.models.UserLockerModel
 import com.lock.smartlocker.data.entities.request.AddPersonRequest
 import com.lock.smartlocker.data.entities.request.ImageBase64Request
 import com.lock.smartlocker.data.entities.request.ImageSearchRequest
 import com.lock.smartlocker.data.entities.responses.DetectImageResponse
-import com.lock.smartlocker.data.preference.PreferenceHelper
+import com.lock.smartlocker.data.models.UserLockerModel
 import com.lock.smartlocker.data.repositories.UserFaceRepository
 import com.lock.smartlocker.ui.base.BaseViewModel
 import com.lock.smartlocker.util.ConstantUtils
@@ -20,6 +20,7 @@ import kotlin.random.Random
 class RegisterFaceViewModel(
     private val userLockerRepository: UserFaceRepository
 ) : BaseViewModel() {
+    @SuppressLint("StaticFieldLeak")
     var context: Context? = null
     var registerFaceListener: RegisterFaceListener? = null
     val emailRegister = MutableLiveData<String>()
@@ -100,8 +101,8 @@ class RegisterFaceViewModel(
                                 addPersonModel.personCode,
                                 addPersonModel.personGroup,
                                 0,
-                                emailRegister.value,
-                                cardNumberRegister.value,
+                                emailRegister.value?.lowercase(),
+                                cardNumberRegister.value?.lowercase(),
                                 0,
                                 strBase64
                             )
@@ -156,7 +157,7 @@ class RegisterFaceViewModel(
                         }
                         return@launch
                     }else if (getUser.cardNumber != null){
-                        getUser.email = emailRegister.value
+                        getUser.email = emailRegister.value?.lowercase()
                         updateUserLocker(getUser)
                         uiScope.launch {
                             registerFaceListener?.faceExited()
@@ -173,7 +174,7 @@ class RegisterFaceViewModel(
                         }
                         return@launch
                     }else if (getUser.email != null){
-                        getUser.cardNumber = cardNumberRegister.value
+                        getUser.cardNumber = cardNumberRegister.value?.lowercase()
                         getUser.personName = nameEndUser.value
                         updateUserLocker(getUser)
                         uiScope.launch {

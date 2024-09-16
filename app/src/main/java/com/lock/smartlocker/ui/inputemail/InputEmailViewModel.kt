@@ -5,28 +5,37 @@ import com.lock.smartlocker.R
 import com.lock.smartlocker.data.entities.request.ConsumerLoginRequest
 import com.lock.smartlocker.data.preference.PreferenceHelper
 import com.lock.smartlocker.data.repositories.ManagerRepository
+import com.lock.smartlocker.data.repositories.UserFaceRepository
 import com.lock.smartlocker.ui.base.BaseViewModel
 import com.lock.smartlocker.util.ConstantUtils
 import kotlinx.coroutines.launch
 
 class InputEmailViewModel(
-    private val managerRepository: ManagerRepository
+    private val managerRepository: ManagerRepository,
+    private val userLockerRepository: UserFaceRepository
 ) : BaseViewModel() {
 
     var inputEmailListener: InputEmailListener? = null
+    var typeOpen : String? = null
     val email = MutableLiveData<String>()
     val subEmail = MutableLiveData<String>()
 
     fun consumerLogin() {
         ioScope.launch {
+            mLoading.postValue(true)
             if (email.value.isNullOrEmpty()) {
                 mStatusText.postValue(R.string.error_email_empty)
                 inputEmailListener?.consumerLoginFail("","")
                 return@launch
             }else{
-                showStatusText.postValue(false)
+                if (typeOpen == null) {
+                    val getUser = userLockerRepository.checkEmail(email.value + subEmail.value)
+                    if (getUser != null) {
+                        mStatusText.postValue(R.string.error_email_exited)
+                        return@launch
+                    } else showStatusText.postValue(false)
+                }else showStatusText.postValue(false)
             }
-            mLoading.postValue(true)
             val param = ConsumerLoginRequest()
             param.email = email.value + subEmail.value
             managerRepository.consumerLogin(param).apply {
