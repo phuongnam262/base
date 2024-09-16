@@ -56,6 +56,7 @@ class CollectItemFragment : BaseFragment<FragmentCollectItemBinding, CollectItem
             val listLockerInfo: CreateInventoryResponse = Gson().fromJson(jsonList, responseType)
             viewModel.listLockerInfo.value = listLockerInfo.locker_infos
             viewModel.transactionId.value = it.getString(ConstantUtils.TRANSACTION_ID)
+            if (listLockerInfo.locker_infos.isNotEmpty()) viewModel.enableButtonProcess.value = true
         }
         viewModel.listLockerInfo.observe(viewLifecycleOwner) { collect ->
             collectItemAdapter.update(collect?.map {

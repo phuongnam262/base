@@ -21,7 +21,7 @@
     <string name="unauthorized">Tài khoản bị mất quyền truy cập</string>
 
     <!-- Home -->
-    <string name="menu_item">ITEMS</string>
+    <string name="menu_item">ĐỒ DÙNG</string>
     <string name="menu_register_face">Đăng ký khuôn mặt</string>
     <string name="menu_manager_face">Quản lý khuôn mặt</string>
     <string name="menu_admin_console">Bảng điều khiển quản trị</string>
@@ -42,6 +42,7 @@
     <string name="retry_button">THỬ LẠI</string>
     <string name="process_button">TIẾP TỤC</string>
     <string name="using_card_button">DÙNG THẺ</string>
+    <string name="work_card_error">Bạn chưa đăng ký work card cho khuôn mặt</string>
 
     <!-- Scan work card -->
     <string name="scan_work_card">Quét thẻ nhân viên</string>
@@ -77,14 +78,14 @@
     <!-- Register face -->
     <string name="register_face">Đăng Ký Khuôn Mặt Của Bạn</string>
     <string name="register_face_info">Vui lòng đứng gần tủ và nhìn thẳng vào máy ảnh để chúng tôi có thể chụp rõ khuôn mặt của bạn.</string>
-    <string name="face_exits">Face ID này đã tồn tại.</string>
+    <string name="face_exits">Khuôn mặt này đã tồn tại.</string>
     <string name="save_user_fail">Lưu người dùng thất bại</string>
     <string name="face_not_found">Không tìm thấy khuôn mặt</string>
     <string name="face_register_success">Đăng Ký Khuôn Mặt Thành Công</string>
-    <string name="face_hello">Hello %1$s, \nFace ID của bạn đã được thêm thành công.</string>
+    <string name="face_hello">Chào %1$s, \nKhuôn mặt của bạn đã được thêm thành công.</string>
     <string name="btn_retry">THỬ LẠI</string>
-    <string name="face_exits_work_card">Email của bạn đã được liên kết với thẻ nhân viên: (%1$s)</string>
-    <string name="face_exits_email">Thẻ nhân viên đã được liên kết với email: (%1$s)</string>
+    <string name="face_exits_work_card">Email của bạn đã được liên kết với thẻ nhân viên: (%1$s)\nDữ liệu đã tự động kết hợp với nhau</string>
+    <string name="face_exits_email">Thẻ nhân viên đã được liên kết với email: (%1$s)\nDữ liệu đã tự động kết hợp với nhau</string>
 
     <!-- Admin Dashboard -->
     <string name="consumable_topup">THÊM VẬT TƯ</string>
@@ -131,37 +132,59 @@
     <!-- hwc   -->
     <string name="error_open_failed">Cửa không được mở thành công.</string>
     <string name="error_door_has_not_close">Cửa chưa được đóng.</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="successful">Thành công</string>
 
     <!-- Loan -->
     <string name="category">Danh mục</string>
-    <string name="model">Model</string>
+    <string name="model">Đồ dùng</string>
     <string name="select_items">Chọn đồ dùng</string>
     <string name="please_select_category">Vui lòng chọn danh mục để hiển thị các đồ dùng.</string>
     <string name="add_to_cart">Thêm vào giỏ</string>
-    <string name="available">"Có sẵn: "</string>
-    <string name="loanable">"Được phép lấy: "</string>
+    <string name="available">Có sẵn: </string>
+    <string name="loanable">Được phép lấy: </string>
 
     <!-- Consumable   -->
     <string name="consumables">Vật tư</string>
     <string name="current_quantity">Tổng số lượng hiện tại:</string>
     <string name="select_button">Chọn</string>
+    <string name="current_quantity_number">Số lượng hiện tại:</string>
+    <string name="max_button">TỐI ĐA</string>
+    <string name="report_button">Báo cáo</string>
+    <string name="confirm_button">XÁC NHẬN</string>
+    <string name="submit_button">GỬI</string>
+    <string name="enter_topup_quantity">Nhập số lượng thêm</string>
+    <string name="top_up">THÊM:</string>
+    <string name="select_report">CHỌN LÝ DO BÁO CÁO</string>
+    <string name="report_has_sent">Báo cáo đã được gửi.</string>
+    <string name="found_less_stock">Tìm thấy ít hàng hơn</string>
+    <string name="found_extra_stock">Tìm thấy nhiều hàng hơn</string>
+    <string name="collectable">Được phép lấy: </string>
+    <string name="collectable_value">Được phép lấy: %1$s</string>
 
     <!-- Cart -->
     <string name="please_review_cart_info">Vui lòng lấy đồ dùng của bạn từ tủ khóa đã mở.\nNếu tủ khóa không mở, hãy nhấn "MỞ LẠI" để thử lại.\nĐóng cửa sau khi hoàn tất lấy đồ.</string>
-    <string name="cart">Cart</string>
-    <string name="cart_item_quantity_format">x%d</string>
+    <string name="cart">Giỏ hàng</string>
+    <string name="cart_item_quantity_format">x%1$s</string>
     <string name="maximum_item_quantity">Giới hạn có sẵn hoặc có thể lấy</string>
+    <string name="maximum_item_quantity_consumable">Giới hạn có sẵn hoặc có thể lấy</string>
     <string name="error_create_transaction_failed">Đã xảy ra lỗi. Vui lòng thử lại hoặc liên hệ với bộ phận hỗ trợ</string>
 
     <!-- Collect items -->
     <string name="collect_items">Lấy Đồ Dùng</string>
-    <string name="collect_items_info">Please collect your items from the opened locker.\nIf any locker doesn’t open, press "REOPEN" to try again. Close the door after retrieving your items.</string>
+    <string name="collect_items_info">Vui lòng lấy đồ dùng của bạn từ tủ khóa đã mở.Nếu tủ khóa không mở, hãy nhấn "MỞ LẠI" để thử lại.Đóng cửa sau khi hoàn tất lấy đồ.</string>
     <string name="error_all_doors_not_open">Tất cả các cửa không mở</string>
     <string name="error_some_doors_not_open">Một số tủ không mở</string>
     <string name="reopen_button">Mở lại tủ</string>
     <string name="error_no_available_item"> Không có đồ dùng nào tại trạm tủ này</string>
+    <string name="take_item">Lấy <b>%1$s</b> món đồ </string>
+    <string name="dialog_cancel_process">Bạn có muốn hủy quá trình này không?</string>
+    <string name="dialog_delete_consumable">Bạn có muốn xóa vật tư này không?</string>
+
+    <!-- Confirmation -->
+    <string name="confirmation">Xác Nhận</string>
+    <string name="confirmation_info">Vui lòng xác nhận các món đồ bạn đã lấy từ tủ khóa đã mở.</string>
+    <string name="you_take">Bạn đã lấy </string>
+    <string name="items">món đồ</string>
 
     <!-- Scan items -->
     <string name="scan_items">Quét Xác Thực</string>
@@ -220,7 +243,7 @@
 
     <!-- Menu -->
     <string name="email_button">EMAIL</string>
-    <string name="work_card_button">WORK CARD</string>
+    <string name="work_card_button">THẺ NHÂN VIÊN</string>
     <string name="error_wrong_card_number">Sai thẻ nhân viên, vui lòng quét lại</string>
     <string name="error_card_emplty">Vui lòng quét thẻ nhân viên</string>
 

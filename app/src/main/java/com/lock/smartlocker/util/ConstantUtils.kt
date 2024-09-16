@@ -17,6 +17,9 @@ class ConstantUtils {
         const val MANDATORY_DOOR_CLOSURE_VERIFICATION = "MANDATORY_DOOR_CLOSURE_VERIFICATION"
         const val RETURN_AVAILABLE_LOCKER_LIST = "RETURN_AVAILABLE_LOCKER_LIST"
         const val ERROR_CODE_SUCCESS = "SUCCESS"
+        const val LOCKER_ID = "LOCKER_ID"
+        const val CATEGORY_ID = "CATEGORY_ID"
+        const val CONFIRMATION_DIALOG_TAG = "CONFIRMATION_DIALOG_TAG"
 
         //Type Open
         const val TYPE_OPEN = "TYPE_OPEN"

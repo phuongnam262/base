@@ -68,13 +68,7 @@ class RetrieveFaultyFragment : BaseFragment<FragmentRetrieveFaultyBinding, Retri
                 R.id.rl_home -> activity?.finish()
                 R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
                 R.id.btn_process -> {
-                    val dialog = CustomConfirmDialog.newInstance(
-                        message = getString(R.string.dialog_retrieve_all),
-                    )
-                    dialog.show(
-                        childFragmentManager,
-                        InputSerialNumberFragment.CONFIRMATION_DIALOG_TAG
-                    )
+                    showDialogConfirm(getString(R.string.dialog_retrieve_all))
                 }
             }
         }

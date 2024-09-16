@@ -117,5 +117,29 @@
         android:id="@+id/categoryConsumableFragment"
         android:name="com.lock.smartlocker.ui.category_consumable.CategoryConsumableFragment"
         android:label="fragment_category_consumable"
-        tools:layout="@layout/fragment_category_consumable" />
+        tools:layout="@layout/fragment_category_consumable" >
+        <action
+            android:id="@+id/action_categoryConsumableFragment_to_consumableAvailableLockerFragment"
+            app:destination="@id/consumableAvailableLockerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/consumableAvailableLockerFragment"
+        android:name="com.lock.smartlocker.ui.consumable_available_locker.ConsumableAvailableLockerFragment"
+        android:label="fragment_consumable_available_locker"
+        tools:layout="@layout/fragment_consumable_available_locker" >
+        <action
+            android:id="@+id/action_consumableAvailableLockerFragment_to_depositConsumableFragment"
+            app:destination="@id/depositConsumableFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/depositConsumableFragment"
+        android:name="com.lock.smartlocker.ui.deposit_consumable.DepositConsumableFragment"
+        android:label="fragment_deposit_consumable"
+        tools:layout="@layout/fragment_deposit_consumable" >
+        <action
+            android:id="@+id/action_depositConsumableFragment_to_categoryConsumableFragment"
+            app:destination="@id/categoryConsumableFragment"
+            app:popUpTo="@id/categoryConsumableFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

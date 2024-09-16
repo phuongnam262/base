@@ -36,7 +36,7 @@ class RegisterFaceViewModel(
                         if (getDetectResponse.result.liveness == 1) {
                             searchPerson(strBase64)
                             return@launch
-                        }
+                        }else handelFaceFail(getDetectResponse)
                     } else {
                         handelFaceFail(getDetectResponse)
                     }
@@ -133,7 +133,7 @@ class RegisterFaceViewModel(
     }
 
     private fun handelFaceFail(detectImageResponse: DetectImageResponse) {
-        if (detectImageResponse.message.contains("not found")) {
+        if (detectImageResponse.message.contains("not found") || detectImageResponse.result.liveness != 1) {
             uiScope.launch {
                 registerFaceListener?.faceNotFound()
                 mStatusText.postValue(R.string.face_not_found)

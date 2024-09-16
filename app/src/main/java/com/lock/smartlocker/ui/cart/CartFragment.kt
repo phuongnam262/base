@@ -8,7 +8,6 @@ import com.lock.smartlocker.R
 import com.lock.smartlocker.databinding.FragmentCartBinding
 import com.lock.smartlocker.ui.base.BaseFragment
 import com.lock.smartlocker.ui.category.CategoryFragment
-import com.lock.smartlocker.ui.returns.ReturnActivity
 import com.lock.smartlocker.util.ConstantUtils
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder

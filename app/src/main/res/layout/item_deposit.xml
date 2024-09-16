@@ -4,11 +4,15 @@
 
 
     <data>
+        <import type="android.view.View" />
         <variable
             name="modelName"
             type="String" />
         <variable
             name="doorStatus"
+            type="Integer" />
+        <variable
+            name="arrowPosition"
             type="Integer" />
     </data>
 
@@ -71,10 +75,10 @@
 
             <ImageView
                 android:id="@+id/ivArrowLeft"
-                android:layout_width="@dimen/dp_20"
-                android:layout_height="@dimen/dp_40"
+                android:layout_width="@dimen/dp_18"
+                android:layout_height="@dimen/dp_45"
                 android:layout_gravity="center_vertical"
-                android:visibility="invisible"
+                android:visibility="@{arrowPosition == 1 ? View.VISIBLE : View.INVISIBLE}"
                 app:srcCompat="@drawable/arrow_left_icon" />
 
             <Button
@@ -84,11 +88,10 @@
 
             <ImageView
                 android:id="@+id/ivArrowRight"
-                android:layout_width="@dimen/dp_20"
-                android:layout_height="@dimen/dp_40"
-                android:visibility="invisible"
+                android:layout_width="@dimen/dp_18"
+                android:layout_height="@dimen/dp_45"
+                android:visibility="@{arrowPosition == 3 ? View.VISIBLE : View.INVISIBLE}"
                 android:layout_gravity="center_vertical"
-                android:layout_weight="1"
                 app:srcCompat="@drawable/arrow_right_icon" />
 
         </LinearLayout>

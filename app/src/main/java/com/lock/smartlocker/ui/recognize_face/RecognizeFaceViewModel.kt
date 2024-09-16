@@ -1,9 +1,9 @@
 package com.lock.smartlocker.ui.recognize_face
 
-import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.common.api.ApiException
 import com.lock.smartlocker.R
 import com.lock.smartlocker.data.entities.request.ConsumerLoginRequest
+import com.lock.smartlocker.data.entities.request.EndUserLoginRequest
 import com.lock.smartlocker.data.entities.request.ImageBase64Request
 import com.lock.smartlocker.data.entities.request.ImageSearchRequest
 import com.lock.smartlocker.data.entities.responses.DetectImageResponse
@@ -20,7 +20,9 @@ class RecognizeFaceViewModel(
     private val managerRepository: ManagerRepository
 ) : BaseViewModel() {
     var recognizeFaceListener: RecognizeFaceListener? = null
+    var typeOpen : String? = null
     var email : String? = null
+    var cardNumber : String? = null
 
     fun detectImage(strBase64: String) {
         ioScope.launch {
@@ -33,7 +35,7 @@ class RecognizeFaceViewModel(
                         if (getDetectResponse.result.liveness == 1) {
                             searchPerson(strBase64)
                             return@launch
-                        }
+                        }else handelFaceFail(getDetectResponse)
                     } else {
                         handelFaceFail(getDetectResponse)
                     }
@@ -82,7 +84,7 @@ class RecognizeFaceViewModel(
     }
 
     private fun handelFaceFail(detectImageResponse: DetectImageResponse) {
-        if (detectImageResponse.message.contains("not found")) {
+        if (detectImageResponse.message.contains("not found") || detectImageResponse.result.liveness != 1) {
             uiScope.launch {
                 recognizeFaceListener?.faceNotFound()
                 mStatusText.postValue(R.string.face_not_found)
@@ -97,25 +99,36 @@ class RecognizeFaceViewModel(
             mLoading.postValue(true)
             val getUser = userFaceRepository.getUserLocker(personCode)
             if (getUser?.id != null) {
-                getUser.email?.let {
-                    PreferenceHelper.writeString(ConstantUtils.ADMIN_NAME, it)
-                    email = it
+                PreferenceHelper.writeString(ConstantUtils.ADMIN_NAME,
+                    getUser.personName?.ifEmpty { getUser.email })
+                email = getUser.email
+                cardNumber = getUser.cardNumber
+                if (typeOpen == ConstantUtils.TYPE_CONSUMABLE_COLLECT) {
+                    if (cardNumber.isNullOrEmpty()){
+                        uiScope.launch {
+                            recognizeFaceListener?.faceNotFound()
+                            mStatusText.postValue(R.string.work_card_error)
+                            showStatusText.postValue(true)
+                        }
+                    }else {
+                        showButtonUsingMail.postValue(false)
+                        showStatusText.postValue(true)
+                        recognizeFaceListener?.handleSuccess(getUser.personName?.ifEmpty { getUser.email })
+                    }
+                } else {
                     showButtonUsingMail.postValue(false)
                     showStatusText.postValue(true)
-                    getUser.personCode?.let { it1 -> recognizeFaceListener?.handleSuccess(it1, it) }
+                    recognizeFaceListener?.handleSuccess(getUser.personName?.ifEmpty { getUser.email })
                 }
             }
         }.invokeOnCompletion { mLoading.postValue(false) }
     }
 
-    fun consumerLogin(isConsumable: Boolean) {
+    fun consumerLogin() {
         ioScope.launch {
             mLoading.postValue(true)
             val param = ConsumerLoginRequest()
             param.email = email
-            // Nếu là consumable thì type = 0 để ko yêu cầu OTP
-            if (isConsumable) param.type = "0"
-
             managerRepository.consumerLogin(param).apply {
                 if (isSuccessful) {
                     if (data != null) {
@@ -125,6 +138,24 @@ class RecognizeFaceViewModel(
                 }else {
                     if (status != ConstantUtils.REQUIRE_OTP) handleError(status)
                     else recognizeFaceListener?.consumerLoginFail(param.email, status)
+                }
+            }
+        }.invokeOnCompletion { mLoading.postValue(false) }
+    }
+
+    fun endUserLogin() {
+        ioScope.launch {
+            mLoading.postValue(true)
+            val param = EndUserLoginRequest(card_number = cardNumber)
+            managerRepository.endUserLogin(param).apply {
+                if (isSuccessful) {
+                    if (data != null) {
+                        PreferenceHelper.writeString(ConstantUtils.USER_TOKEN, data.endUser.userToken)
+                        recognizeFaceListener?.consumerLoginSuccess(data.endUser.fullName)
+                    }
+                }else {
+                    if (status != ConstantUtils.REQUIRE_OTP) handleError(status)
+                    else recognizeFaceListener?.consumerLoginFail(data?.endUser?.fullName, status)
                 }
             }
         }.invokeOnCompletion { mLoading.postValue(false) }

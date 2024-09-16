@@ -23,7 +23,8 @@ class HomeViewModel(
     private val returnRepository: ReturnRepository
 ) : BaseViewModel() {
     var homeListener: HomeListener? = null
-    var isServerOff = MutableLiveData<Boolean>()
+    var isOpenLocalServer = MutableLiveData<Boolean>()
+    var atinInnitSuccess = MutableLiveData<Boolean>()
 
     private val _language = MutableLiveData<String>()
     val language: LiveData<String> = _language
@@ -33,21 +34,46 @@ class HomeViewModel(
         _language.value = languageCode
     }
 
-    fun checkOpenServer() {
+    fun checkATINOpenServer(){
         ioScope.launch {
             val client = OkHttpClient()
             val request = Request.Builder()
-                .url("http://localhost:8282/")
+                .url("http://localhost:8282/status")
                 .get()
                 .build()
 
             try {
                 val response = client.newCall(request).execute()
                 response.isSuccessful
-                isServerOff.postValue(true)
+                isOpenLocalServer.postValue(true)
+                checkATINReady()
             } catch (e: IOException) {
                 // Xử lý lỗi khi không có kết nối
-                isServerOff.postValue(false)
+                isOpenLocalServer.postValue(false)
+            }
+        }
+    }
+
+    private fun checkATINReady() {
+        ioScope.launch {
+            try {
+                val getResponse = userLockerRepository.getStatusAPI()
+                getResponse.errorCode.let {
+                    if (it == ConstantUtils.ERROR_CODE_SUCCESS){
+                        if (getResponse.result == 0 && getResponse.status == 0) {
+                            atinInnitSuccess.postValue(true)
+                            return@launch
+                        }else atinInnitSuccess.postValue(false)
+                    }else atinInnitSuccess.postValue(false)
+                }
+            } catch (e: ApiException) {
+                atinInnitSuccess.postValue(false)
+                mLoading.postValue(false)
+                mMessage.postValue(R.string.error_message)
+            } catch (e: NoInternetException) {
+                atinInnitSuccess.postValue(false)
+                mLoading.postValue(false)
+                mMessage.postValue(R.string.error_network)
             }
         }
     }

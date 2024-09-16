@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="android.view.View" />
         <variable
             name="lockerRetrieve"
             type="com.lock.smartlocker.data.models.LockerRetrieve" />
@@ -54,10 +54,10 @@
 
                 <ImageView
                     android:id="@+id/ivArrowLeft"
-                    android:layout_width="@dimen/dp_20"
-                    android:layout_height="@dimen/dp_40"
+                    android:layout_width="@dimen/dp_18"
+                    android:layout_height="@dimen/dp_45"
                     android:layout_gravity="center_vertical"
-                    android:visibility="invisible"
+                    android:visibility="@{lockerRetrieve.arrowPosition == 1 ? View.VISIBLE : View.INVISIBLE}"
                     app:srcCompat="@drawable/arrow_left_icon" />
 
                 <Button
@@ -69,11 +69,10 @@
 
                 <ImageView
                     android:id="@+id/ivArrowRight"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/dp_40"
+                    android:layout_width="@dimen/dp_18"
+                    android:layout_height="@dimen/dp_45"
                     android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:visibility="invisible"
+                    android:visibility="@{lockerRetrieve.arrowPosition == 3 ? View.VISIBLE : View.INVISIBLE}"
                     app:srcCompat="@drawable/arrow_right_icon" />
 
             </LinearLayout>

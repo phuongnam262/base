@@ -6,8 +6,6 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +17,9 @@ import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.lock.smartlocker.R
 import com.lock.smartlocker.util.CommonUtils
+import com.lock.smartlocker.util.ConstantUtils
 import com.lock.smartlocker.util.Coroutines
+import com.lock.smartlocker.util.view.custom.CustomConfirmDialog
 import com.lock.smartlocker.util.view.custom.CustomLoading
 
 abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment() {
@@ -195,5 +195,12 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
             lastClickTime = currentTime
             return true
         } else return false
+    }
+
+    open fun showDialogConfirm(message: String){
+        val dialog = CustomConfirmDialog.newInstance(
+            message = message,
+        )
+        dialog.show(childFragmentManager, ConstantUtils.CONFIRMATION_DIALOG_TAG)
     }
 }

@@ -85,7 +85,7 @@ class ScanWorkCardFragment : BaseFragment<FragmentScanWorkCardBinding, ScanWorkC
             }
             navigateTo(R.id.action_scanWorkCardFragment2_to_registerFaceFragment, bundle)
         }else{
-
+            navigateTo(R.id.action_scanWorkCardFragment_to_categoryConsumableCollectFragment, null)
         }
 
     }

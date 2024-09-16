@@ -40,6 +40,7 @@ class SplashViewModel(
             startAppRepository.getSetting().apply {
                 if (isSuccessful) {
                     if (data != null) {
+                        data.lockers.map { it.doorStatus = 2 }
                         PreferenceHelper.writeString(ConstantUtils.GET_SETTING, Gson().toJson(data))
                         getListCategory()
                     }

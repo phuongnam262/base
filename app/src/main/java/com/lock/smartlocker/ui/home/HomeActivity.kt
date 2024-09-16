@@ -53,8 +53,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeLis
         const val PERSON_CODE = "person_code"
     }
 
-    private var isOpenLocalServer = false
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //Data binding
@@ -83,19 +81,24 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeLis
             mViewDataBinding?.containerReturn?.visibility = View.GONE
         }
 
-        viewModel.isServerOff.observeForever {
-            isOpenLocalServer = it
+        viewModel.isOpenLocalServer.observeForever {
             if (it) {
                 viewModel.addGroup()
             } else {
                 CommonUtils.showErrorDialog(this, "","Please Open ATIN Services")
             }
         }
+
+        viewModel.atinInnitSuccess.observeForever {
+            if (it.not()) {
+                CommonUtils.showErrorDialog(this, "","ATIN SDK init error 90115")
+            }
+        }
     }
 
     override fun onResume() {
         super.onResume()
-        viewModel.checkOpenServer()
+        viewModel.checkATINOpenServer()
     }
 
     private fun allRuntimePermissionsGranted(): Boolean {
@@ -142,7 +145,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeLis
     }
 
     override fun onClick(view: View?) {
-        if (isOpenLocalServer) {
+        if (viewModel.isOpenLocalServer.value == true && viewModel.atinInnitSuccess.value == true) {
             if (checkDebouncedClick()) {
                 if (view != null) {
                     when (view.id) {
@@ -211,13 +214,18 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeLis
     }
 
     override fun getReturnAvailableLockersSuccess() {
-        if (isOpenLocalServer) {
+        if (viewModel.isOpenLocalServer.value == true && viewModel.atinInnitSuccess.value == true) {
             startActivityWithOneValue(
                 ConstantUtils.TYPE_OPEN, ConstantUtils.TYPE_RETURN,
                 ReturnActivity::class.java
             )
         } else{
-            CommonUtils.showErrorDialog(this, "","Please Open ATIN Services")
+            if (viewModel.isOpenLocalServer.value == false) {
+                CommonUtils.showErrorDialog(this, "","Please Open ATIN Services")
+            }
+            if (viewModel.atinInnitSuccess.value == false) {
+                CommonUtils.showErrorDialog(this, "","ATIN SDK init error 90115")
+            }
         }
     }
 }

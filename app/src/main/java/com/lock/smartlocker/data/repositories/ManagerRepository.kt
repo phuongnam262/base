@@ -4,7 +4,10 @@ import com.lock.smartlocker.data.entities.request.AminLoginRequest
 import com.lock.smartlocker.data.entities.request.CheckCardRequest
 import com.lock.smartlocker.data.entities.request.ConsumerLoginRequest
 import com.lock.smartlocker.data.entities.request.DisableLockerRequest
+import com.lock.smartlocker.data.entities.request.EndUserLoginRequest
+import com.lock.smartlocker.data.entities.request.GetConsumableInLockerRequest
 import com.lock.smartlocker.data.entities.request.RetrieveItemRequest
+import com.lock.smartlocker.data.entities.request.TopupConsumableRequest
 import com.lock.smartlocker.data.entities.request.VerifyOTPRequest
 import com.lock.smartlocker.data.entities.responses.AdminLoginResponse
 import com.lock.smartlocker.data.entities.responses.BaseResponse
@@ -13,6 +16,7 @@ import com.lock.smartlocker.data.entities.responses.ConsumerLoginResponse
 import com.lock.smartlocker.data.entities.responses.DisableLockerResponse
 import com.lock.smartlocker.data.entities.responses.GetAllItemRetrieveResponse
 import com.lock.smartlocker.data.entities.responses.GetConsumableAvailableItemResponse
+import com.lock.smartlocker.data.entities.responses.GetConsumableInLockerResponse
 import com.lock.smartlocker.data.entities.responses.GetConsumableResponse
 import com.lock.smartlocker.data.entities.responses.GetInformationStaffResponse
 import com.lock.smartlocker.data.entities.responses.GetSettingResponse
@@ -26,6 +30,10 @@ class ManagerRepository (
 
     suspend fun consumerLogin(consumerLoginRequest: ConsumerLoginRequest): BaseResponse<ConsumerLoginResponse> {
         return apiRequest { api.provideLockerAPIService().consumerLogin(consumerLoginRequest) }
+    }
+
+    suspend fun endUserLogin(endUserLoginRequest: EndUserLoginRequest): BaseResponse<CheckCardResponse> {
+        return apiRequest { api.provideLockerAPIService().endUserLogin(endUserLoginRequest) }
     }
 
     suspend fun checkCardNumber(checkCardRequest: CheckCardRequest): BaseResponse<CheckCardResponse> {
@@ -70,5 +78,13 @@ class ManagerRepository (
 
     suspend fun getConsumable(): BaseResponse<GetConsumableResponse> {
         return apiRequest { api.provideLockerAPIService().getConsumable() }
+    }
+
+    suspend fun getConsumableInLocker(getConsumableInLockerRequest: GetConsumableInLockerRequest): BaseResponse<GetConsumableInLockerResponse> {
+        return apiRequest { api.provideLockerAPIService().getConsumableInLocker(getConsumableInLockerRequest) }
+    }
+
+    suspend fun topupConsumable(topupConsumableRequest: TopupConsumableRequest): BaseResponse<Map<String, Any>> {
+        return apiRequest { api.provideLockerAPIService().topupConsumable(topupConsumableRequest) }
     }
 }

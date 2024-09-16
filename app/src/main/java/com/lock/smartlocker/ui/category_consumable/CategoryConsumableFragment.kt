@@ -6,10 +6,12 @@ import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
+import com.lock.smartlocker.data.models.LockerConsumable
 import com.lock.smartlocker.databinding.FragmentCategoryConsumableBinding
 import com.lock.smartlocker.ui.base.BaseFragment
 import com.lock.smartlocker.ui.category_consumable.adapter.CategoryItem
 import com.lock.smartlocker.ui.category_consumable.adapter.ConsumableItem
+import com.lock.smartlocker.util.ConstantUtils
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import org.kodein.di.KodeinAware
@@ -32,6 +34,10 @@ class CategoryConsumableFragment : BaseFragment<FragmentCategoryConsumableBindin
     override val viewModel: CategoryConsumableViewModel
         get() = ViewModelProvider(this, factory)[CategoryConsumableViewModel::class.java]
 
+    companion object{
+        var listLockerSelected = ArrayList<LockerConsumable>()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
@@ -47,7 +53,6 @@ class CategoryConsumableFragment : BaseFragment<FragmentCategoryConsumableBindin
 
     @SuppressLint("NotifyDataSetChanged")
     private fun initData(){
-        viewModel.getConsumableAvailableItem()
         mViewDataBinding?.rvCategories?.adapter = categoryAdapter
         mViewDataBinding?.rvConsumables?.adapter = consumableAdapter
 
@@ -55,12 +60,7 @@ class CategoryConsumableFragment : BaseFragment<FragmentCategoryConsumableBindin
             categoryAdapter.update(categories.map {
                 CategoryItem(it, viewModel)
             })
-            if (categories.isNotEmpty()){
-                viewModel.onCategorySelected(categories[0])
-                viewModel.enableButtonProcess.value = true
-            }else{
-                viewModel.enableButtonProcess.value = false
-            }
+            viewModel.enableButtonProcess.value = categories.isNotEmpty()
         }
 
         viewModel.listConsumable.observe(viewLifecycleOwner) { models ->
@@ -70,14 +70,30 @@ class CategoryConsumableFragment : BaseFragment<FragmentCategoryConsumableBindin
         viewModel.categoryIdSelected.observe(viewLifecycleOwner) {
             categoryAdapter.notifyDataSetChanged()
         }
+
+        viewModel.lockers.observe(viewLifecycleOwner) {
+            if (it.isNotEmpty()){
+                listLockerSelected.clear()
+                listLockerSelected.addAll(it)
+                openAvailableLocker()
+                viewModel.lockers.value = ArrayList()
+            }
+        }
     }
 
     override fun onClick(v: View?) {
         if (checkDebouncedClick()) {
             when (v?.id) {
                 R.id.rl_home -> activity?.finish()
-                R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
+                R.id.iv_back -> activity?.supportFragmentManager?.popBackStack()
             }
         }
+    }
+
+    private fun openAvailableLocker(){
+        val bundle = Bundle().apply {
+            putString(ConstantUtils.CATEGORY_ID, viewModel.categoryIdSelected.value)
+        }
+        navigateTo(R.id.action_categoryConsumableFragment_to_consumableAvailableLockerFragment, bundle)
     }
 }
