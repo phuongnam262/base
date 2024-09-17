@@ -162,6 +162,10 @@
     <string name="found_extra_stock">Tìm thấy nhiều hàng hơn</string>
     <string name="collectable">Được phép lấy: </string>
     <string name="collectable_value">Được phép lấy: %1$s</string>
+    <string-array name="stock_options">
+        <item>Tìm thấy ít hàng hơn</item>
+        <item>Tìm thấy nhiều hàng hơn</item>
+    </string-array>
 
     <!-- Cart -->
     <string name="please_review_cart_info">Vui lòng lấy đồ dùng của bạn từ tủ khóa đã mở.\nNếu tủ khóa không mở, hãy nhấn "MỞ LẠI" để thử lại.\nĐóng cửa sau khi hoàn tất lấy đồ.</string>

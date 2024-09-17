@@ -162,6 +162,10 @@
     <string name="found_extra_stock">Found extra stock</string>
     <string name="collectable">Collectable: </string>
     <string name="collectable_value">Collectable: %1$s</string>
+    <string-array name="stock_options">
+        <item>Found less stock</item>
+        <item>Found extra stock</item>
+    </string-array>
 
     <!-- Cart -->
     <string name="please_review_cart_info">Please review them. When ready, press "PROCEED" to collect your items.\nThe locker will automatically open at that time</string>

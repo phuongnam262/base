@@ -7,6 +7,7 @@ import com.lock.smartlocker.R
 import com.lock.smartlocker.data.models.LockerInfoCollect
 import com.lock.smartlocker.databinding.ItemCollectConsumableBinding
 import com.lock.smartlocker.ui.collect_consumable_item.CollectConsumableItemViewModel
+import com.lock.smartlocker.util.view.custom.ReportStockDialog
 import com.xwray.groupie.databinding.BindableItem
 
 class CollectItem(
@@ -28,7 +29,8 @@ class CollectItem(
             viewModel.reopenLocker(lockerInfo.lockerId)
         }
         viewBinding.btnReport.setOnClickListener {
-
+            val dialog = ReportStockDialog.newInstance(lockerInfo.lockerId, lockerInfo.consumableId)
+            dialog.show(fragmentManager, "ReportStockDialog")
         }
     }
 }
