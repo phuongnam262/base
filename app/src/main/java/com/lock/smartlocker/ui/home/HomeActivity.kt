@@ -5,6 +5,7 @@ import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -25,6 +26,7 @@ import org.kodein.di.KodeinAware
 import com.lock.smartlocker.BuildConfig
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
+import java.util.Locale
 
 class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeListener,
     KodeinAware, OnClickListener {
@@ -99,6 +101,18 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeLis
     override fun onResume() {
         super.onResume()
         viewModel.checkATINOpenServer()
+        getLocale()
+    }
+
+    private fun getLocale(){
+        val currentLocale = Locale.getDefault()
+        if (currentLocale.language == "vi") {
+            mViewDataBinding?.tvEn?.setTypeface(null, Typeface.NORMAL)
+            mViewDataBinding?.tvVi?.setTypeface(null, Typeface.BOLD)
+        } else {
+            mViewDataBinding?.tvEn?.setTypeface(null, Typeface.BOLD)
+            mViewDataBinding?.tvVi?.setTypeface(null, Typeface.NORMAL)
+        }
     }
 
     private fun allRuntimePermissionsGranted(): Boolean {
