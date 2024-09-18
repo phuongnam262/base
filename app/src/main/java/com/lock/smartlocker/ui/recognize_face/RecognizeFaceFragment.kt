@@ -394,10 +394,10 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
             e.printStackTrace()
         }
         val bm = BitmapFactory.decodeStream(fis)
+        val scaledBitmap = Bitmap.createScaledBitmap(bm, bm.width / 2, bm.height / 2, true)
         val baos = ByteArrayOutputStream()
-        bm.compress(Bitmap.CompressFormat.JPEG, 20, baos)
+        scaledBitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos)
         val b = baos.toByteArray()
-        //Base64.de
         return Base64.encodeToString(b, Base64.DEFAULT)
     }
 

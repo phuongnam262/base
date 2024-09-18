@@ -68,7 +68,10 @@ class ScanWorkCardFragment : BaseFragment<FragmentScanWorkCardBinding, ScanWorkC
     override fun onClick(v: View?) {
         if (checkDebouncedClick()) {
             when (v?.id) {
-                R.id.btn_process -> viewModel.checkCardNumber()
+                R.id.btn_process -> {
+                    if(viewModel.typeOpen == ConstantUtils.TYPE_CONSUMABLE_COLLECT) viewModel.endUserLogin()
+                    else viewModel.checkCardNumber()
+                }
                 R.id.rl_home -> activity?.finish()
                 R.id.iv_back -> activity?.supportFragmentManager?.popBackStack()
             }

@@ -32,6 +32,7 @@ class InputEmailViewModel(
                     val getUser = userLockerRepository.checkEmail(email.value + subEmail.value)
                     if (getUser != null) {
                         mStatusText.postValue(R.string.error_email_exited)
+                        inputEmailListener?.consumerLoginFail("","")
                         return@launch
                     } else showStatusText.postValue(false)
                 }else showStatusText.postValue(false)
@@ -46,7 +47,10 @@ class InputEmailViewModel(
                         showStatusText.postValue(false)
                     }
                 }else {
-                    if (status != ConstantUtils.REQUIRE_OTP) handleError(status)
+                    if (status != ConstantUtils.REQUIRE_OTP) {
+                        handleError(status)
+                        inputEmailListener?.consumerLoginFail("","")
+                    }
                     else inputEmailListener?.consumerLoginFail(param.email, status)
                 }
             }

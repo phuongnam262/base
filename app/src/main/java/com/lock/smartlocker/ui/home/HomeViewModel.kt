@@ -84,7 +84,7 @@ class HomeViewModel(
                 val getResponse = userLockerRepository.getGroup("G1")
                 getResponse.errorCode.let {
                     if (it == ConstantUtils.ERROR_CODE_SUCCESS) {
-                        if (getResponse.message == "Group not found") addGroup()
+                        if (getResponse.message.contains("Group not found")) addGroup()
                         else return@launch
                     }else addGroup()
                 }
