@@ -2,8 +2,6 @@ package com.lock.smartlocker.ui.admin_login
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
@@ -12,8 +10,6 @@ import com.lock.smartlocker.databinding.FragmentAdminLoginBinding
 import com.lock.smartlocker.ui.base.BaseFragment
 import com.lock.smartlocker.ui.inputemail.InputEmailFragment
 import com.lock.smartlocker.util.ConstantUtils
-import com.lock.smartlocker.util.Coroutines
-import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
@@ -75,6 +71,8 @@ class AdminLoginFragment : BaseFragment<FragmentAdminLoginBinding, AdminLoginVie
 
     override fun adminLoginSuccess(adminLoginResponse: AdminLoginResponse) {
         //Đăng nhập thành công -> check permission is_admin_console = false
+        viewModel.username.postValue("")
+        viewModel.password.postValue("")
         if (adminLoginResponse.staff.isAdminConsole) {
             if (adminLoginResponse.staff.isOtp) {
                 // OTP true thì qua màn OTP

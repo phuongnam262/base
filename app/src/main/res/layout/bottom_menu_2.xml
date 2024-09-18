@@ -122,6 +122,7 @@
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="@dimen/dp_7"
                             android:text="@string/menu_item"
+                            android:visibility="@{showButtonProcess ? View.GONE : View.VISIBLE}"
                             android:textColor="@color/text_sub_color"
                             android:textSize="@dimen/sp_11" />
                     </RelativeLayout>

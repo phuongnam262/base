@@ -10,8 +10,6 @@ import com.lock.smartlocker.data.services.com.ComBean
 import com.lock.smartlocker.data.services.com.SerialHelper
 import com.lock.smartlocker.databinding.FragmentScanWorkCardBinding
 import com.lock.smartlocker.ui.base.BaseFragment
-import com.lock.smartlocker.ui.inputemail.InputEmailFragment
-import com.lock.smartlocker.ui.scan_item.adapter.ScanItem
 import com.lock.smartlocker.util.ConstantUtils
 import com.lock.smartlocker.util.Coroutines
 import org.kodein.di.KodeinAware
@@ -79,6 +77,7 @@ class ScanWorkCardFragment : BaseFragment<FragmentScanWorkCardBinding, ScanWorkC
     }
 
     override fun handleSuccess(name: String, cardNumber: String) {
+        viewModel.workCardText.postValue("")
         if (viewModel.typeOpen != ConstantUtils.TYPE_CONSUMABLE_COLLECT){
             // Nếu không phải consumable thì qua màn register face
             val bundle = Bundle().apply {

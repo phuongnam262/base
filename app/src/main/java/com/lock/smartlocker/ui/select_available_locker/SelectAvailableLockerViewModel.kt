@@ -9,7 +9,6 @@ import com.lock.smartlocker.data.entities.responses.GetSettingResponse
 import com.lock.smartlocker.data.models.Locker
 import com.lock.smartlocker.data.preference.PreferenceHelper
 import com.lock.smartlocker.data.repositories.HardwareControllerRepository
-import com.lock.smartlocker.data.repositories.ReturnRepository
 import com.lock.smartlocker.ui.base.BaseViewModel
 import com.lock.smartlocker.util.ConstantUtils
 import kotlinx.coroutines.launch

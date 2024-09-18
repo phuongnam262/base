@@ -12,10 +12,18 @@
         tools:layout="@layout/fragment_menu_register" >
         <action
             android:id="@+id/action_menuRegisterFragment_to_inputEmailFragment"
-            app:destination="@id/inputEmailFragment" />
+            app:destination="@id/inputEmailFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
         <action
             android:id="@+id/action_menuRegisterFragment_to_scanWorkCardFragment2"
-            app:destination="@id/scanWorkCardFragment2" />
+            app:destination="@id/scanWorkCardFragment2"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
     </fragment>
     <fragment
         android:id="@+id/inputEmailFragment"
@@ -24,10 +32,18 @@
         tools:layout="@layout/fragment_input_email" >
         <action
             android:id="@+id/action_navigation_input_email_to_inputOTPFragment"
-            app:destination="@id/inputOTPFragment" />
+            app:destination="@id/inputOTPFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
         <action
             android:id="@+id/action_inputEmailFragment_to_registerFaceFragment"
-            app:destination="@id/registerFaceFragment" />
+            app:destination="@id/registerFaceFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
     </fragment>
        <fragment
         android:id="@+id/inputOTPFragment"
@@ -36,7 +52,11 @@
         tools:layout="@layout/fragment_input_otp" >
         <action
             android:id="@+id/action_inputOTPFragment_to_registerFaceFragment"
-            app:destination="@id/registerFaceFragment" />
+            app:destination="@id/registerFaceFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
     </fragment>
     <fragment
         android:id="@+id/registerFaceFragment"
@@ -50,6 +70,10 @@
         tools:layout="@layout/fragment_scan_work_card" >
         <action
             android:id="@+id/action_scanWorkCardFragment2_to_registerFaceFragment"
-            app:destination="@id/registerFaceFragment" />
+            app:destination="@id/registerFaceFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
     </fragment>
 </navigation>

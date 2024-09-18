@@ -56,7 +56,6 @@ class CategoryConsumableCollectFragment : BaseFragment<FragmentCategoryConsumabl
     @SuppressLint("NotifyDataSetChanged")
     private fun initData(){
         viewModel.listCartItem.value = listCartItem
-        viewModel.getConsumableAvailableItem()
         mViewDataBinding?.rvCategories?.adapter = categoryAdapter
         mViewDataBinding?.rvConsumables?.adapter = consumableAdapter
 
@@ -94,7 +93,10 @@ class CategoryConsumableCollectFragment : BaseFragment<FragmentCategoryConsumabl
     override fun onClick(v: View?) {
         if (checkDebouncedClick()) {
             when (v?.id) {
-                R.id.rl_home -> activity?.finish()
+                R.id.rl_home -> {
+                    listCartItem.clear()
+                    activity?.finish()
+                }
                 R.id.rl_item -> {}
                 R.id.rl_cart -> {
                     navigateTo(R.id.action_categoryConsumableCollectFragment_to_cartConsumableFragment, null)

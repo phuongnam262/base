@@ -8,7 +8,6 @@ import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
 import com.lock.smartlocker.databinding.FragmentRetrieveFaultyBinding
 import com.lock.smartlocker.ui.base.BaseFragment
-import com.lock.smartlocker.ui.input_serial_number.InputSerialNumberFragment
 import com.lock.smartlocker.ui.retrieve.adapter.RetrieveItem
 import com.lock.smartlocker.util.view.custom.CustomConfirmDialog
 import com.xwray.groupie.GroupAdapter

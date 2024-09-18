@@ -98,6 +98,9 @@ class InputEmailFragment : BaseFragment<FragmentInputEmailBinding, InputEmailVie
     }
 
     override fun consumerLoginSuccess(email: String?) {
+        viewModel.email.postValue("")
+        //viewModel.subEmail.value = items[0]
+       // mViewDataBinding?.spiEmail?.setSelection(0)
         if (viewModel.typeOpen != null) {
             val bundle = Bundle().apply {
                 putString(

@@ -79,11 +79,10 @@ class CartConsumableFragment : BaseFragment<FragmentCartConsumableBinding, CartC
                     activity?.finish()
                 }
 
-                R.id.iv_back -> {
-                    activity?.onBackPressedDispatcher?.onBackPressed()
+                R.id.iv_back, R.id.rl_item  -> {
+                    activity?.supportFragmentManager?.popBackStack()
                 }
 
-                R.id.rl_item -> {}
                 R.id.btn_process -> {
                     viewModel.createInventoryTransaction()
                 }

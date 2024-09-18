@@ -12,7 +12,11 @@
         <action
             android:id="@+id/action_selectAvailableLockerFragment_to_depositItemFragment"
             app:destination="@id/depositItemFragment"
-            app:popUpToInclusive="false" />
+            app:popUpToInclusive="false"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
     </fragment>
     <fragment
         android:id="@+id/thankFragment"
@@ -28,7 +32,11 @@
             android:id="@+id/action_depositItemFragment_to_thankFragment"
             app:destination="@id/thankFragment"
             app:popUpTo="@id/depositItemFragment"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
     </fragment>
     <fragment
         android:id="@+id/selectFaultyFragment"
@@ -37,7 +45,11 @@
         tools:layout="@layout/fragment_select_faulty" >
         <action
             android:id="@+id/action_selectFaultyFragment_to_selectAvailableLockerFragment"
-            app:destination="@id/selectAvailableLockerFragment" />
+            app:destination="@id/selectAvailableLockerFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
     </fragment>
     <fragment
         android:id="@+id/inputSerialNumberFragment"
@@ -46,9 +58,17 @@
         tools:layout="@layout/fragment_input_serial_number" >
         <action
             android:id="@+id/action_inputSerialNumberFragment_to_selectFaultyFragment2"
-            app:destination="@id/selectFaultyFragment" />
+            app:destination="@id/selectFaultyFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
         <action
             android:id="@+id/action_inputSerialNumberFragment_to_selectAvailableLockerFragment"
-            app:destination="@id/selectAvailableLockerFragment" />
+            app:destination="@id/selectAvailableLockerFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
     </fragment>
 </navigation>

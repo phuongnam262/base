@@ -63,6 +63,7 @@ class InputOTPFragment : BaseFragment<FragmentInputOtpBinding, InputOTPViewModel
     }
 
     override fun verifySuccess(email: String?) {
+        viewModel.otpText.postValue("")
         if (arguments?.getString(ConstantUtils.TYPE_OPEN) != null) {
             val bundle = Bundle().apply {
                 putString(ConstantUtils.TYPE_OPEN, arguments?.getString(ConstantUtils.TYPE_OPEN))

@@ -3,11 +3,9 @@ package com.lock.smartlocker.ui.scan_work_card
 import androidx.lifecycle.MutableLiveData
 import com.lock.smartlocker.R
 import com.lock.smartlocker.data.entities.request.CheckCardRequest
-import com.lock.smartlocker.data.entities.request.ConsumerLoginRequest
 import com.lock.smartlocker.data.entities.request.EndUserLoginRequest
 import com.lock.smartlocker.data.preference.PreferenceHelper
 import com.lock.smartlocker.data.repositories.ManagerRepository
-import com.lock.smartlocker.data.repositories.StartAppRepository
 import com.lock.smartlocker.data.repositories.UserFaceRepository
 import com.lock.smartlocker.ui.base.BaseViewModel
 import com.lock.smartlocker.util.ConstantUtils

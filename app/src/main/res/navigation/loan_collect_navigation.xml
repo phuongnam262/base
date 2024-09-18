@@ -11,19 +11,43 @@
         tools:layout="@layout/fragment_recognize_face" >
         <action
             android:id="@+id/action_recognizeFaceFragment_to_inputOTPFragment2"
-            app:destination="@id/inputOTPFragment2" />
+            app:destination="@id/inputOTPFragment2"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
         <action
             android:id="@+id/action_recognizeFaceFragment_to_inputEmailFragment2"
-            app:destination="@id/inputEmailFragment2" />
+            app:destination="@id/inputEmailFragment2"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
         <action
             android:id="@+id/action_recognizeFaceFragment_to_scanWorkCardFragment"
-            app:destination="@id/scanWorkCardFragment" />
+            app:destination="@id/scanWorkCardFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
         <action
             android:id="@+id/action_recognizeFaceFragment_to_categoryFragment"
-            app:destination="@id/categoryFragment" />
+            app:destination="@id/categoryFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"
+            app:popUpTo="@id/recognizeFaceFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_recognizeFaceFragment_to_categoryConsumableCollectFragment"
-            app:destination="@id/categoryConsumableCollectFragment" />
+            app:destination="@id/categoryConsumableCollectFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"
+            app:popUpTo="@id/recognizeFaceFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/inputOTPFragment2"
@@ -33,8 +57,10 @@
         <action
             android:id="@+id/action_inputOTPFragment2_to_categoryFragment"
             app:destination="@id/categoryFragment"
-            app:popUpTo="@id/inputOTPFragment2"
-            app:popUpToInclusive="true" />
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
     </fragment>
     <fragment
         android:id="@+id/thankFragment2"
@@ -48,7 +74,11 @@
         tools:layout="@layout/fragment_category" >
         <action
             android:id="@+id/action_categoryFragment_to_cartFragment"
-            app:destination="@id/cartFragment" />
+            app:destination="@id/cartFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
     </fragment>
     <fragment
         android:id="@+id/cartFragment"
@@ -57,7 +87,11 @@
         tools:layout="@layout/fragment_cart" >
         <action
             android:id="@+id/action_cartFragment_to_collectItemFragment"
-            app:destination="@id/collectItemFragment" />
+            app:destination="@id/collectItemFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
     </fragment>
     <fragment
         android:id="@+id/collectItemFragment"
@@ -66,7 +100,11 @@
         tools:layout="@layout/fragment_collect_item" >
         <action
             android:id="@+id/action_collectItemFragment_to_scanItemFragment"
-            app:destination="@id/scanItemFragment" />
+            app:destination="@id/scanItemFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
     </fragment>
     <fragment
         android:id="@+id/scanItemFragment"
@@ -76,8 +114,10 @@
         <action
             android:id="@+id/action_scanItemFragment_to_thankFragment2"
             app:destination="@id/thankFragment2"
-            app:launchSingleTop="true"
-            app:popUpTo="@id/scanItemFragment" />
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
     </fragment>
     <fragment
         android:id="@+id/inputEmailFragment2"
@@ -86,13 +126,25 @@
         tools:layout="@layout/fragment_input_email" >
         <action
             android:id="@+id/action_inputEmailFragment2_to_inputOTPFragment2"
-            app:destination="@id/inputOTPFragment2" />
+            app:destination="@id/inputOTPFragment2"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
         <action
             android:id="@+id/action_inputEmailFragment2_to_categoryFragment"
-            app:destination="@id/categoryFragment" />
+            app:destination="@id/categoryFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
         <action
             android:id="@+id/action_inputEmailFragment2_to_categoryFragment2"
-            app:destination="@id/categoryFragment" />
+            app:destination="@id/categoryFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
     </fragment>
     <fragment
         android:id="@+id/scanWorkCardFragment"
@@ -101,7 +153,11 @@
         tools:layout="@layout/fragment_scan_work_card" >
         <action
             android:id="@+id/action_scanWorkCardFragment_to_categoryConsumableCollectFragment"
-            app:destination="@id/categoryConsumableCollectFragment" />
+            app:destination="@id/categoryConsumableCollectFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
     </fragment>
     <fragment
         android:id="@+id/categoryConsumableCollectFragment"
@@ -110,7 +166,11 @@
         tools:layout="@layout/fragment_category_consumable_collect" >
         <action
             android:id="@+id/action_categoryConsumableCollectFragment_to_cartConsumableFragment"
-            app:destination="@id/cartConsumableFragment" />
+            app:destination="@id/cartConsumableFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out" />
     </fragment>
     <fragment
         android:id="@+id/cartConsumableFragment"
@@ -119,7 +179,11 @@
         tools:layout="@layout/fragment_cart_consumable" >
         <action
             android:id="@+id/action_cartConsumableFragment_to_collectConsumableItemFragment"
-            app:destination="@id/collectConsumableItemFragment" />
+            app:destination="@id/collectConsumableItemFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
     </fragment>
     <fragment
         android:id="@+id/collectConsumableItemFragment"
@@ -129,8 +193,9 @@
         <action
             android:id="@+id/action_collectConsumableItemFragment_to_thankFragment2"
             app:destination="@id/thankFragment2"
-            app:launchSingleTop="true"
-            app:popUpTo="@id/thankFragment2"
-            app:popUpToInclusive="false" />
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
     </fragment>
 </navigation>

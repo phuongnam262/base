@@ -1,17 +1,12 @@
 package com.lock.smartlocker.ui.splash
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.snackbar.Snackbar
 import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
 import com.lock.smartlocker.databinding.ActivitySplashBinding
 import com.lock.smartlocker.ui.base.BaseActivity
 import com.lock.smartlocker.ui.home.HomeActivity
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance

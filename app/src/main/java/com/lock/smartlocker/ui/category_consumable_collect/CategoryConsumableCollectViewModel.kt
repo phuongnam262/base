@@ -22,6 +22,10 @@ class CategoryConsumableCollectViewModel(
     private val updatedListCart: ArrayList<CartConsumableItem> = ArrayList()
     val listCartItem = MutableLiveData<ArrayList<CartConsumableItem>>()
 
+    init {
+        getConsumableAvailableItem()
+    }
+
     fun getConsumableAvailableItem() {
         ioScope.launch {
             mLoading.postValue(true)
@@ -80,25 +84,27 @@ class CategoryConsumableCollectViewModel(
                 listCartItem.postValue(listCartItem.value)
             }
         } else {
-            val cart = categoryIdSelected.value?.let {
-                CartConsumableItem(
-                    consumableId = consumable.consumableId,
-                    consumableName = consumable.consumableName,
-                    categoryId = it,
-                    collectable = consumable.collectable - 1,
-                    available = consumable.available - 1,
-                    quantity = 1
-                )
-            }
             if (consumable.available > 0) {
-                consumable.available -= 1
-            }
-            if (consumable.collectable > 0) {
-                consumable.collectable -= 1
-            }
-            if (cart != null) {
-                updatedListCart.add(cart)
-                listCartItem.postValue(updatedListCart)
+                val cart = categoryIdSelected.value?.let {
+                    CartConsumableItem(
+                        consumableId = consumable.consumableId,
+                        consumableName = consumable.consumableName,
+                        categoryId = it,
+                        collectable = consumable.collectable - 1,
+                        available = consumable.available - 1,
+                        quantity = 1
+                    )
+                }
+                if (consumable.available > 0) {
+                    consumable.available -= 1
+                }
+                if (consumable.collectable > 0) {
+                    consumable.collectable -= 1
+                }
+                if (cart != null) {
+                    updatedListCart.add(cart)
+                    listCartItem.postValue(updatedListCart)
+                }
             }
         }
     }

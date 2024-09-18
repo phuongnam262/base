@@ -108,35 +108,37 @@ class CategoryViewModel(
                 }
             }
         } else {
-            val cart = categoryIdSelected.value?.let {
-                if(model.loanable != null) {
-                    model.loanable.toInt().let { it1 ->
+            if (model.available > 0) {
+                val cart = categoryIdSelected.value?.let {
+                    if (model.loanable != null) {
+                        model.loanable.toInt().let { it1 ->
+                            CartItem(
+                                modelId = model.modelId,
+                                modelName = model.modelName,
+                                categoryId = it,
+                                loanable = it1,
+                                available = model.available,
+                                quantity = 1
+                            )
+                        }
+                    } else {
                         CartItem(
                             modelId = model.modelId,
                             modelName = model.modelName,
                             categoryId = it,
-                            loanable = it1,
+                            loanable = 9999,
                             available = model.available,
                             quantity = 1
                         )
                     }
-                }else{
-                    CartItem(
-                        modelId = model.modelId,
-                        modelName = model.modelName,
-                        categoryId = it,
-                        loanable = 9999,
-                        available = model.available,
-                        quantity = 1
-                    )
                 }
-            }
-            if (cart != null) {
-                updatedListCart.add(cart)
-                listCartItem.postValue(updatedListCart)
-            }
-            if (model.available > 0) {
-                model.available -= 1
+                if (cart != null) {
+                    updatedListCart.add(cart)
+                    listCartItem.postValue(updatedListCart)
+                }
+                if (model.available > 0) {
+                    model.available -= 1
+                }
             }
         }
     }

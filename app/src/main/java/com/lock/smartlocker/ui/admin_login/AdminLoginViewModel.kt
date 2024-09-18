@@ -3,12 +3,10 @@ package com.lock.smartlocker.ui.admin_login
 import androidx.lifecycle.MutableLiveData
 import com.lock.smartlocker.R
 import com.lock.smartlocker.data.entities.request.AminLoginRequest
-import com.lock.smartlocker.data.entities.responses.AdminLoginResponse
 import com.lock.smartlocker.data.preference.PreferenceHelper
 import com.lock.smartlocker.data.repositories.ManagerRepository
 import com.lock.smartlocker.ui.base.BaseViewModel
 import com.lock.smartlocker.util.ConstantUtils
-import com.lock.smartlocker.util.Coroutines
 import kotlinx.coroutines.launch
 
 class AdminLoginViewModel(

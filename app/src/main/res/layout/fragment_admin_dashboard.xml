@@ -14,6 +14,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorWhite"
         android:backgroundImage="@{viewmodel.imageBackgroundUrl}"
         android:clickable="true"
         android:focusable="true">
@@ -71,7 +72,7 @@
                 android:id="@+id/ll_topup_items"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_80"
-                android:layout_marginEnd="@dimen/dp_5"
+                android:layout_marginStart="@dimen/dp_5"
                 android:layout_weight="1"
                 android:background="@drawable/bg_radius_white_selector"
                 android:clickable="true"
@@ -114,7 +115,7 @@
                 android:id="@+id/ll_retrieve_faulty"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_80"
-                android:layout_marginStart="@dimen/dp_5"
+                android:layout_marginEnd="@dimen/dp_5"
                 android:layout_weight="1"
                 android:background="@drawable/bg_radius_white_selector"
                 android:clickable="true"
@@ -143,7 +144,8 @@
                 android:id="@+id/ll_retrieve_items"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_80"
-                android:layout_marginEnd="@dimen/dp_5"
+
+                android:layout_marginStart="@dimen/dp_5"
                 android:layout_weight="1"
                 android:background="@drawable/bg_radius_white_selector"
                 android:clickable="true"
@@ -185,7 +187,7 @@
                 android:id="@+id/ll_manage_lockers"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_80"
-                android:layout_marginStart="@dimen/dp_5"
+                android:layout_marginEnd="@dimen/dp_5"
                 android:layout_weight="1"
                 android:background="@drawable/bg_radius_white_selector"
                 android:clickable="true"
@@ -212,7 +214,7 @@
                 android:id="@+id/ll_settings"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_80"
-                android:layout_marginEnd="@dimen/dp_5"
+                android:layout_marginStart="@dimen/dp_5"
                 android:layout_weight="1"
                 android:background="@drawable/bg_radius_white_selector"
                 android:clickable="true"
@@ -248,7 +250,7 @@
             android:paddingStart="@dimen/dp_30"
             android:paddingEnd="@dimen/dp_30"
             android:weightSum="2"
-            app:layout_constraintEnd_toEndOf="@id/ll_manage_lockers"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ll_container3"
             tools:ignore="NotSibling">
@@ -257,7 +259,7 @@
                 android:id="@+id/ll_close_app"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_80"
-                android:layout_marginStart="@dimen/dp_5"
+                android:layout_marginEnd="@dimen/dp_7"
                 android:layout_weight="1"
                 android:background="@drawable/bg_radius_white_selector"
                 android:clickable="true"
@@ -279,6 +281,19 @@
                     android:layout_height="wrap_content"
                     android:text="@string/close_app" />
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_none"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_80"
+                android:layout_marginStart="@dimen/dp_7"
+                android:layout_weight="1"
+                android:background="@drawable/bg_radius_white_selector"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="invisible" />
 
         </LinearLayout>
 

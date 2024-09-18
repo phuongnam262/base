@@ -3,7 +3,6 @@ package com.lock.smartlocker.ui.recognize_face
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.net.Uri
 import android.os.Bundle
 import android.util.Base64
 import android.util.Log
@@ -19,7 +18,6 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import com.google.mlkit.common.MlKitException
 import com.lock.smartlocker.BR
@@ -387,6 +385,7 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
     }
 
     private fun encodeImage(file: File): String {
+        //val imageFile = File(path)
         var fis: FileInputStream? = null
         try {
             fis = FileInputStream(file)
@@ -394,10 +393,10 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
             e.printStackTrace()
         }
         val bm = BitmapFactory.decodeStream(fis)
-        val scaledBitmap = Bitmap.createScaledBitmap(bm, bm.width / 2, bm.height / 2, true)
         val baos = ByteArrayOutputStream()
-        scaledBitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos)
+        bm.compress(Bitmap.CompressFormat.JPEG, 20, baos)
         val b = baos.toByteArray()
+        //Base64.de
         return Base64.encodeToString(b, Base64.DEFAULT)
     }
 

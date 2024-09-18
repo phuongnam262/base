@@ -131,35 +131,14 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : BaseAppCom
         startActivity(intent)
     }
 
-    // In ManagerMenuActivity.kt
-    fun showFragment(fragment: Fragment, navGraphId: Int, addToBackStack: Boolean = false, typeOpen: String? = null
-    , typeManager: String? = null) {
+    fun showFragment(navGraphId: Int, typeOpen: String? = null, typeManager: String? = null) {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment_main) as NavHostFragment
         val navController = navHostFragment.navController
-        val navInflater = navController.navInflater
-        val graph = navInflater.inflate(navGraphId)
-        navController.graph = graph
-
-        if (typeOpen != null){
-            val bundle = Bundle()
-            bundle.putString(ConstantUtils.TYPE_OPEN, typeOpen)
-            fragment.arguments = bundle
+        val bundle = Bundle().apply {
+            typeOpen?.let { putString(ConstantUtils.TYPE_OPEN, it) }
+            typeManager?.let { putString(ConstantUtils.TYPE_OPEN_MANAGER, it) }
         }
-        if (typeManager != null){
-            val bundle = Bundle()
-            bundle.putString(ConstantUtils.TYPE_OPEN_MANAGER, typeManager)
-            fragment.arguments = bundle
-        }
-        if (addToBackStack) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_main, fragment)
-                .addToBackStack(null)
-                .commit()
-        } else {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_main, fragment)
-                .commit()
-        }
+        navController.setGraph(navGraphId, bundle)
     }
 
     private var lastClickTime = 0L

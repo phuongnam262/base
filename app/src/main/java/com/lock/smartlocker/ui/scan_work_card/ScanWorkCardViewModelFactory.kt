@@ -3,7 +3,6 @@ package com.lock.smartlocker.ui.scan_work_card
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.lock.smartlocker.data.repositories.ManagerRepository
-import com.lock.smartlocker.data.repositories.StartAppRepository
 import com.lock.smartlocker.data.repositories.UserFaceRepository
 
 class ScanWorkCardViewModelFactory(
