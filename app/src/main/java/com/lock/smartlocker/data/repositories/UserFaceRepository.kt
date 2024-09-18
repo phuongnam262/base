@@ -20,16 +20,24 @@ class UserFaceRepository(
     /*
     * call API check Status
     * */
-    suspend fun getStatusAPI(): BaseFaceResponse {
+    suspend fun getStatusAPI(): BaseFaceResponse<Int> {
         return apiRequest { api.provideFaceAPIService().getStatus() }
     }
 
     /*
     * call API add group
     * */
-    suspend fun addGroup(addGroupModel: AddGroupModel): BaseFaceResponse {
+    suspend fun addGroup(addGroupModel: AddGroupModel): BaseFaceResponse<Int> {
         return apiRequest { api.provideFaceAPIService().addGroup(addGroupModel) }
     }
+
+    /*
+    * call API get group
+    * */
+    suspend fun getGroup(groupCode: String): BaseFaceResponse<Any> {
+        return apiRequest { api.provideFaceAPIService().getGroup(groupCode) }
+    }
+
 
     /*
     * call API detect Image
@@ -48,21 +56,21 @@ class UserFaceRepository(
     /*
     * call API add person
     * */
-    suspend fun addPerson(addPersonRequest: AddPersonRequest): BaseFaceResponse {
+    suspend fun addPerson(addPersonRequest: AddPersonRequest): BaseFaceResponse<Int> {
         return apiRequest { api.provideFaceAPIService().addPerson(addPersonRequest) }
     }
 
     /*
     * call API delete person
     * */
-    suspend fun deletePerson(personCode: String): BaseFaceResponse {
+    suspend fun deletePerson(personCode: String): BaseFaceResponse<Int> {
         return apiRequest { api.provideFaceAPIService().deletePerson(personCode) }
     }
 
     /*
     * call API delete person
     * */
-    suspend fun deleteAllPerson(groupId: String): BaseFaceResponse {
+    suspend fun deleteAllPerson(groupId: String): BaseFaceResponse<Int> {
         return apiRequest { api.provideFaceAPIService().deleteAllPerson(groupId) }
     }
 

@@ -78,6 +78,27 @@ class HomeViewModel(
         }
     }
 
+    fun getGroup() {
+        ioScope.launch {
+            try {
+                val getResponse = userLockerRepository.getGroup("G1")
+                getResponse.errorCode.let {
+                    if (it == ConstantUtils.ERROR_CODE_SUCCESS) {
+                        if (getResponse.message == "Group not found") addGroup()
+                        else return@launch
+                    }else addGroup()
+                }
+            } catch (e: ApiException) {
+                mLoading.postValue(false)
+                mMessage.postValue(R.string.error_message)
+            } catch (e: NoInternetException) {
+                mLoading.postValue(false)
+                mMessage.postValue(R.string.error_network)
+            }
+        }
+    }
+
+
     fun addGroup() {
         ioScope.launch {
             try {

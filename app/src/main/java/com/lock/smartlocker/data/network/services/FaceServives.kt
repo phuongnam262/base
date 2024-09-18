@@ -19,10 +19,15 @@ interface FaceServives {
     @POST("addGroup")
     suspend fun addGroup(
         @Body groupModel: AddGroupModel
-    ): Response<BaseFaceResponse>
+    ): Response<BaseFaceResponse<Int>>
+
+    @GET("getGroup")
+    suspend fun getGroup(
+        @Query("groupCode") groupCode: String
+    ): Response<BaseFaceResponse<Any>>
 
     @GET("status")
-    suspend fun getStatus(): Response<BaseFaceResponse>
+    suspend fun getStatus(): Response<BaseFaceResponse<Int>>
 
     @POST("detect")
     suspend fun detectImage(
@@ -37,17 +42,17 @@ interface FaceServives {
     @POST("addPerson")
     suspend fun addPerson(
         @Body person: AddPersonRequest,
-    ): Response<BaseFaceResponse>
+    ): Response<BaseFaceResponse<Int>>
 
     @DELETE("deletePerson")
     suspend fun deletePerson(
         @Query("personCode") personCode: String
-    ): Response<BaseFaceResponse>
+    ): Response<BaseFaceResponse<Int>>
 
     @DELETE("deletePerson")
     suspend fun deleteAllPerson(
         @Query("groupId") groupId: String
-    ): Response<BaseFaceResponse>
+    ): Response<BaseFaceResponse<Int>>
 
     companion object {
         operator fun invoke(retrofit: Retrofit): FaceServives {

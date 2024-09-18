@@ -1,9 +1,7 @@
 package com.lock.smartlocker.data.network
 
 import com.google.gson.Gson
-import com.lock.smartlocker.R
 import com.lock.smartlocker.data.entities.responses.BaseResponse
-import com.lock.smartlocker.util.ConstantUtils
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types

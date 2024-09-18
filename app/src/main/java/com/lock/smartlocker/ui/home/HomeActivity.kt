@@ -83,7 +83,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeLis
 
         viewModel.isOpenLocalServer.observeForever {
             if (it) {
-                viewModel.addGroup()
+                viewModel.getGroup()
             } else {
                 CommonUtils.showErrorDialog(this, "","Please Open ATIN Services")
             }
