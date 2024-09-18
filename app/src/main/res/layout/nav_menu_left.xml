@@ -24,7 +24,7 @@
                 android:layout_width="@dimen/dp_60"
                 android:layout_height="@dimen/dp_60"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/dp_30"
+                android:layout_marginStart="@dimen/dp_20"
                 android:contentDescription="@string/menu_admin_console"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -33,12 +33,12 @@
 
             <TextView
                 android:id="@+id/tv_hello"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/dp_170"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_20"
                 android:text="{Good morning}\nfrom smartLocker"
                 android:textColor="@color/colorWhite"
-                android:textSize="@dimen/sp_20"
+                android:textSize="@dimen/sp_18"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/iv_logo"
                 app:layout_constraintTop_toTopOf="parent" />

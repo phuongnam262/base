@@ -11,6 +11,10 @@
     <string name="error_all">Some error please check it</string>
     <string name="error_response">Error response</string>
     <string name="error_message">An internal error has occurred. Please try again.</string>
+    <string name="morning">Chào buổi sáng</string>
+    <string name="afternoon">Chào buổi chiều</string>
+    <string name="night">Chào buổi tối</string>
+    <string name="from">%1$s\ntừ tủ khóa thông minh</string>
 
     <!-- login -->
     <string name="login_error_1001">Email không tồn tại</string>

@@ -26,6 +26,7 @@ import org.kodein.di.KodeinAware
 import com.lock.smartlocker.BuildConfig
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
+import java.util.Calendar
 import java.util.Locale
 
 class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeListener,
@@ -96,12 +97,24 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeLis
                 CommonUtils.showErrorDialog(this, "","ATIN SDK init error 90115")
             }
         }
+        getGreeting()
     }
 
     override fun onResume() {
         super.onResume()
         viewModel.checkATINOpenServer()
         getLocale()
+    }
+
+    private fun getGreeting() {
+        val calendar = Calendar.getInstance()
+        val hour = calendar.get(Calendar.HOUR_OF_DAY)
+        val greeting = when (hour) {
+            in 0..11 -> getString(R.string.morning)
+            in 12..17 -> getString(R.string.afternoon)
+            else -> getString(R.string.night)
+        }
+        mViewDataBinding?.navMenuLeft?.tvHello?.text = String.format(getString(R.string.from), greeting)
     }
 
     private fun getLocale(){

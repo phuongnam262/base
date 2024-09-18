@@ -11,6 +11,10 @@
     <string name="error_all">Some error please check it</string>
     <string name="error_response">Error response</string>
     <string name="error_message">An internal error has occurred. Please try again.</string>
+    <string name="morning">Good morning</string>
+    <string name="afternoon">Good afternoon</string>
+    <string name="night">Good evening</string>
+    <string name="from">%1$s\nfrom SmartLocker</string>
 
     <!-- login -->
     <string name="login_error_1001">Email is not existed</string>
