@@ -1,6 +1,10 @@
 package com.lock.smartlocker.data.services
 
-import android.app.*
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.os.Build
@@ -9,7 +13,7 @@ import android.os.IBinder
 import android.os.Looper
 import androidx.core.app.NotificationCompat
 import com.lock.smartlocker.R
-import com.lock.smartlocker.ui.home.HomeActivity
+import com.lock.smartlocker.ui.splash.SplashActivity
 
 class BootService : Service() {
     private val handler = Handler(Looper.getMainLooper())
@@ -24,7 +28,7 @@ class BootService : Service() {
         startForeground(NOTIFICATION_ID, notification)
 
         handler.postDelayed({
-            val startAppIntent = Intent(this, HomeActivity::class.java)
+            val startAppIntent = Intent(this, SplashActivity::class.java)
             startAppIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(startAppIntent)
 
@@ -51,7 +55,7 @@ class BootService : Service() {
         val pendingIntent = PendingIntent.getActivity(
             this,
             0,
-            Intent(this, HomeActivity::class.java),
+            Intent(this, SplashActivity::class.java),
             PendingIntent.FLAG_IMMUTABLE
         )
 
