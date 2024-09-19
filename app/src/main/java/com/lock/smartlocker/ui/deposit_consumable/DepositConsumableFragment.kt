@@ -21,7 +21,8 @@ class DepositConsumableFragment : BaseFragment<FragmentDepositConsumableBinding,
     KodeinAware,
     View.OnClickListener,
     DepositConsumableListener,
-    ReportStockDialog.ReportStockDialogListener{
+    ReportStockDialog.ReportStockDialogListener,
+    CustomConfirmDialog.ConfirmationDialogListener{
 
     override val kodein by kodein()
     private val factory: DepositConsumableViewModelFactory by instance()
@@ -68,8 +69,8 @@ class DepositConsumableFragment : BaseFragment<FragmentDepositConsumableBinding,
     override fun onClick(v: View?) {
         if (checkDebouncedClick()) {
             when (v?.id) {
-                R.id.rl_home -> activity?.finish()
-                R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
+                R.id.rl_home -> showDialogConfirm(getString(R.string.dialog_cancel_process), "home")
+                R.id.iv_back -> showDialogConfirm(getString(R.string.dialog_cancel_process), "back")
                 R.id.btnReopen, R.id.btnLocker -> {
                     lockerId?.let {
                         it1 -> viewModel.reopenLocker(it1)
@@ -92,5 +93,13 @@ class DepositConsumableFragment : BaseFragment<FragmentDepositConsumableBinding,
 
     override fun onDialogCancel() {
 
+    }
+
+    override fun onDialogConfirmClick(dialogTag: String?) {
+        if (dialogTag == "home") activity?.finish()
+        else activity?.supportFragmentManager?.popBackStack()
+    }
+
+    override fun onDialogCancelClick() {
     }
 }

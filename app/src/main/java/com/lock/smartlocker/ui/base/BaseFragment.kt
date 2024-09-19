@@ -197,9 +197,10 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
         } else return false
     }
 
-    open fun showDialogConfirm(message: String){
+    open fun showDialogConfirm(message: String, tag: String = ""){
         val dialog = CustomConfirmDialog.newInstance(
             message = message,
+            dialogTag = tag
         )
         dialog.show(childFragmentManager, ConstantUtils.CONFIRMATION_DIALOG_TAG)
     }
