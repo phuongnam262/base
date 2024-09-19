@@ -35,9 +35,10 @@ class ScanWorkCardFragment : BaseFragment<FragmentScanWorkCardBinding, ScanWorkC
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        comA = SerialControl("/dev/ttysWK2", 9600)
-        openComPort(comA!!)
-
+        if(comA == null){
+            comA = SerialControl("/dev/ttysWK2", 9600)
+            openComPort(comA!!)
+        }
         viewModel.scanCardListener = this
         initView()
         initData()
@@ -71,7 +72,10 @@ class ScanWorkCardFragment : BaseFragment<FragmentScanWorkCardBinding, ScanWorkC
                     else viewModel.checkCardNumber()
                 }
                 R.id.rl_home -> activity?.finish()
-                R.id.iv_back -> activity?.supportFragmentManager?.popBackStack()
+                R.id.iv_back -> {
+                    closeComPort(comA)
+                    activity?.supportFragmentManager?.popBackStack()
+                }
             }
         }
     }
