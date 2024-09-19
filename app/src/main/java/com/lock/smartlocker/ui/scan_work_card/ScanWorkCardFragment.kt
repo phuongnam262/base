@@ -12,6 +12,7 @@ import com.lock.smartlocker.databinding.FragmentScanWorkCardBinding
 import com.lock.smartlocker.ui.base.BaseFragment
 import com.lock.smartlocker.util.ConstantUtils
 import com.lock.smartlocker.util.Coroutines
+import com.lock.smartlocker.util.SerialControlManager
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
@@ -31,13 +32,12 @@ class ScanWorkCardFragment : BaseFragment<FragmentScanWorkCardBinding, ScanWorkC
     override val viewModel: ScanWorkCardViewModel
         get() = ViewModelProvider(this, factory)[ScanWorkCardViewModel::class.java]
 
-    private var comA: SerialControl? = null
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if(comA == null){
-            comA = SerialControl("/dev/ttysWK2", 9600)
-            openComPort(comA!!)
+        SerialControlManager.getSerialControl()?.onDataReceivedListener = { receivedData ->
+            Coroutines.main {
+                mViewDataBinding?.etWorkCard?.setText(receivedData)
+            }
         }
         viewModel.scanCardListener = this
         initView()
@@ -72,10 +72,8 @@ class ScanWorkCardFragment : BaseFragment<FragmentScanWorkCardBinding, ScanWorkC
                     else viewModel.checkCardNumber()
                 }
                 R.id.rl_home -> activity?.finish()
-                R.id.iv_back -> {
-                    closeComPort(comA)
-                    activity?.supportFragmentManager?.popBackStack()
-                }
+                R.id.iv_back -> activity?.supportFragmentManager?.popBackStack()
+
             }
         }
     }
@@ -94,34 +92,8 @@ class ScanWorkCardFragment : BaseFragment<FragmentScanWorkCardBinding, ScanWorkC
         viewModel.workCardText.postValue("")
     }
 
-    private inner class SerialControl(sPort: String?, iBaudRate: Int) :
-        SerialHelper(sPort!!, iBaudRate) {
-        override fun onDataReceived(comRecData: ComBean?) {
-            Coroutines.main {
-                val receivedData = comRecData?.bRec?.decodeToString()?.trim()
-                mViewDataBinding?.etWorkCard?.setText(receivedData)
-            }
-        }
-    }
-
-    private fun closeComPort(comPort: SerialControl?) {
-        comPort?.close()
-    }
-
-    private fun openComPort(comPort: SerialControl) {
-        try {
-            comPort.open()
-        } catch (e: SecurityException) {
-            viewModel.mOtherError.postValue("Permission denied for serial port.")
-        } catch (e: IOException) {
-            viewModel.mOtherError.postValue("Failed to open serial port.")
-        } catch (e: InvalidParameterException) {
-            viewModel.mOtherError.postValue("Invalid parameters.")
-        }
-    }
-
     override fun onDestroy() {
         super.onDestroy()
-        closeComPort(comA)
+        SerialControlManager.getSerialControl()?.onDataReceivedListener = null
     }
 }
