@@ -41,7 +41,7 @@ class SelectFaultyFragment : BaseFragment<FragmentSelectFaultyBinding, SelectFau
         viewModel.spinnerItems.observe(viewLifecycleOwner) { items ->
             val adapter = ArrayAdapter(
                 requireContext(),
-                android.R.layout.simple_spinner_item,
+                R.layout.item_spinner,
                 items
             )
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)

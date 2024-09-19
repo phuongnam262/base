@@ -4,6 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import com.lock.smartlocker.R
 import com.lock.smartlocker.data.entities.request.ConfirmConsumableCollectRequest
 import com.lock.smartlocker.data.entities.request.HardwareControllerRequest
+import com.lock.smartlocker.data.entities.request.ReportConsumableRequest
+import com.lock.smartlocker.data.entities.request.ReportConsumableTransactionRequest
 import com.lock.smartlocker.data.models.ConfirmCollectItem
 import com.lock.smartlocker.data.models.LockerInfoCollect
 import com.lock.smartlocker.data.models.LockerStatus
@@ -111,6 +113,23 @@ class CollectConsumableItemViewModel(
                     if (data != null ) {
                         collectItemListener?.confirmCollectSuccess()
                     }
+                } else handleError(status)
+            }
+        }.invokeOnCompletion { mLoading.postValue(false) }
+    }
+
+    fun reportConsumableTransaction(reason: String, lockerId: String, consumableId: String) {
+        ioScope.launch {
+            mLoading.postValue(true)
+            val params = ReportConsumableTransactionRequest(
+                lockerId = lockerId,
+                consumableId = consumableId,
+                transactionId = transactionId.value,
+                reason = reason
+            )
+            loanRepository.reportConsumableTransaction(params).apply {
+                if (isSuccessful) {
+                    return@launch
                 } else handleError(status)
             }
         }.invokeOnCompletion { mLoading.postValue(false) }

@@ -10,6 +10,7 @@ import com.lock.smartlocker.ui.base.BaseFragment
 import com.lock.smartlocker.ui.deposit_consumable.adapter.ConsumableTopupItem
 import com.lock.smartlocker.util.ConstantUtils
 import com.lock.smartlocker.util.view.custom.CustomConfirmDialog
+import com.lock.smartlocker.util.view.custom.ReportStockDialog
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import org.kodein.di.KodeinAware
@@ -20,7 +21,7 @@ class DepositConsumableFragment : BaseFragment<FragmentDepositConsumableBinding,
     KodeinAware,
     View.OnClickListener,
     DepositConsumableListener,
-    CustomConfirmDialog.ConfirmationDialogListener{
+    ReportStockDialog.ReportStockDialogListener{
 
     override val kodein by kodein()
     private val factory: DepositConsumableViewModelFactory by instance()
@@ -60,7 +61,7 @@ class DepositConsumableFragment : BaseFragment<FragmentDepositConsumableBinding,
             mViewDataBinding?.locker = locker
         }
         viewModel.listConsumable.observe(viewLifecycleOwner) { models ->
-            consumableAdapter.update(models.map { ConsumableTopupItem(it, viewModel) })
+            consumableAdapter.update(models.map { ConsumableTopupItem(it, viewModel, childFragmentManager) })
         }
     }
 
@@ -85,11 +86,11 @@ class DepositConsumableFragment : BaseFragment<FragmentDepositConsumableBinding,
         navigateTo(R.id.action_depositConsumableFragment_to_categoryConsumableFragment, null)
     }
 
-    override fun onDialogConfirmClick(dialogTag: String?) {
-        navigateTo(R.id.action_depositItemFragment2_to_adminDashboardFragment, null)
+    override fun onDialogSubmit(reason: String, lockerId: String, consumableId: String) {
+        viewModel.reportConsumable(reason, consumableId)
     }
 
-    override fun onDialogCancelClick() {
-        navigateTo(R.id.action_depositItemFragment2_to_adminDashboardFragment, null)
+    override fun onDialogCancel() {
+
     }
 }

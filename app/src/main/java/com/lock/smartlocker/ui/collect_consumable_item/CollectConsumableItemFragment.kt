@@ -16,6 +16,7 @@ import com.lock.smartlocker.ui.base.BaseFragment
 import com.lock.smartlocker.ui.collect_consumable_item.adapter.CollectItem
 import com.lock.smartlocker.util.ConstantUtils
 import com.lock.smartlocker.util.view.custom.CustomConfirmDialog
+import com.lock.smartlocker.util.view.custom.ReportStockDialog
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import org.kodein.di.KodeinAware
@@ -25,7 +26,8 @@ import org.kodein.di.generic.instance
 class CollectConsumableItemFragment : BaseFragment<FragmentCollectConsumableItemBinding, CollectConsumableItemViewModel>(),
     KodeinAware,
     View.OnClickListener, CollectConsumableItemListener,
-    CustomConfirmDialog.ConfirmationDialogListener{
+    CustomConfirmDialog.ConfirmationDialogListener,
+    ReportStockDialog.ReportStockDialogListener{
 
     override val kodein by kodein()
     private val factory: CollectConsumableItemViewModelFactory by instance()
@@ -124,5 +126,12 @@ class CollectConsumableItemFragment : BaseFragment<FragmentCollectConsumableItem
     }
 
     override fun onDialogCancelClick() {
+    }
+
+    override fun onDialogSubmit(reason: String, lockerId: String, consumableId: String) {
+        viewModel.reportConsumableTransaction(reason, lockerId, consumableId)
+    }
+
+    override fun onDialogCancel() {
     }
 }

@@ -77,7 +77,6 @@ class ScanWorkCardFragment : BaseFragment<FragmentScanWorkCardBinding, ScanWorkC
     }
 
     override fun handleSuccess(name: String, cardNumber: String) {
-        viewModel.workCardText.postValue("")
         if (viewModel.typeOpen != ConstantUtils.TYPE_CONSUMABLE_COLLECT){
             // Nếu không phải consumable thì qua màn register face
             val bundle = Bundle().apply {
@@ -88,7 +87,7 @@ class ScanWorkCardFragment : BaseFragment<FragmentScanWorkCardBinding, ScanWorkC
         }else{
             navigateTo(R.id.action_scanWorkCardFragment_to_categoryConsumableCollectFragment, null)
         }
-
+        viewModel.workCardText.postValue("")
     }
 
     private inner class SerialControl(sPort: String?, iBaudRate: Int) :

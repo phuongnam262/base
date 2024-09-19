@@ -1,12 +1,11 @@
 package com.lock.smartlocker.data.repositories
 
-import com.lock.smartlocker.data.db.AppDatabase
 import com.lock.smartlocker.data.entities.responses.BaseResponse
 import com.lock.smartlocker.data.entities.responses.GetListCategoryResponse
 import com.lock.smartlocker.data.entities.responses.GetSettingResponse
 import com.lock.smartlocker.data.entities.responses.TerminalLoginResponse
-import com.lock.smartlocker.data.network.SafeApiRequest
 import com.lock.smartlocker.data.network.LockerAPI
+import com.lock.smartlocker.data.network.SafeApiRequest
 
 class StartAppRepository (
     private val api: LockerAPI

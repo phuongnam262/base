@@ -3,11 +3,10 @@ package com.lock.smartlocker.ui.deposit_consumable
 import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.map
 import com.lock.smartlocker.R
 import com.lock.smartlocker.data.entities.request.GetConsumableInLockerRequest
 import com.lock.smartlocker.data.entities.request.HardwareControllerRequest
-import com.lock.smartlocker.data.entities.request.ReturnItemRequest
+import com.lock.smartlocker.data.entities.request.ReportConsumableRequest
 import com.lock.smartlocker.data.entities.request.TopupConsumableRequest
 import com.lock.smartlocker.data.models.ConsumableInLocker
 import com.lock.smartlocker.data.models.LockerConsumable
@@ -124,6 +123,22 @@ class DepositConsumableViewModel(
                             mStatusText.postValue(R.string.error_open_failed)
                         } else showStatusText.postValue(false)
                     }
+                } else handleError(status)
+            }
+        }.invokeOnCompletion { mLoading.postValue(false) }
+    }
+
+    fun reportConsumable(reason: String, consumableId: String) {
+        ioScope.launch {
+            mLoading.postValue(true)
+            val params = ReportConsumableRequest(
+                lockerId = lockerID,
+                consumableId = consumableId,
+                reason = reason
+            )
+            managerRepository.reportConsumable(params).apply {
+                if (isSuccessful) {
+                    return@launch
                 } else handleError(status)
             }
         }.invokeOnCompletion { mLoading.postValue(false) }

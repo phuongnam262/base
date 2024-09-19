@@ -157,6 +157,7 @@
     <string name="max_button">TỐI ĐA</string>
     <string name="report_button">Báo cáo</string>
     <string name="confirm_button">XÁC NHẬN</string>
+    <string name="cancel_button">HỦY</string>
     <string name="submit_button">GỬI</string>
     <string name="enter_topup_quantity">Nhập số lượng thêm</string>
     <string name="top_up">THÊM:</string>

@@ -157,6 +157,7 @@
     <string name="max_button">MAX</string>
     <string name="report_button">Report</string>
     <string name="confirm_button">CONFIRM</string>
+    <string name="cancel_button">CANCEL</string>
     <string name="submit_button">SUBMIT</string>
     <string name="enter_topup_quantity">Enter Topup Quantity</string>
     <string name="top_up">TOP UP: </string>

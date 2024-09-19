@@ -4,6 +4,8 @@ import com.lock.smartlocker.data.entities.request.ConfirmConsumableCollectReques
 import com.lock.smartlocker.data.entities.request.CreateInventoryTransactionRequest
 import com.lock.smartlocker.data.entities.request.CreateTransactionRequest
 import com.lock.smartlocker.data.entities.request.GetAvailableItemRequest
+import com.lock.smartlocker.data.entities.request.ReportConsumableRequest
+import com.lock.smartlocker.data.entities.request.ReportConsumableTransactionRequest
 import com.lock.smartlocker.data.entities.request.UpdateInventoryTransactionRequest
 import com.lock.smartlocker.data.entities.responses.BaseResponse
 import com.lock.smartlocker.data.entities.responses.CreateInventoryResponse
@@ -38,5 +40,9 @@ class LoanRepository(
 
     suspend fun confirmCollectConsumable(confirmConsumableCollectRequest: ConfirmConsumableCollectRequest): BaseResponse<Any> {
         return apiRequest { api.provideLockerAPIService().confirmCollectConsumable(confirmConsumableCollectRequest) }
+    }
+
+    suspend fun reportConsumableTransaction(reportConsumableTransactionRequest: ReportConsumableTransactionRequest): BaseResponse<Map<String, Any>> {
+        return apiRequest { api.provideLockerAPIService().reportConsumableTransaction(reportConsumableTransactionRequest) }
     }
 }

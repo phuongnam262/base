@@ -11,6 +11,8 @@ import com.lock.smartlocker.data.entities.request.EndUserLoginRequest
 import com.lock.smartlocker.data.entities.request.GetAvailableItemRequest
 import com.lock.smartlocker.data.entities.request.GetConsumableInLockerRequest
 import com.lock.smartlocker.data.entities.request.GetItemReturnRequest
+import com.lock.smartlocker.data.entities.request.ReportConsumableRequest
+import com.lock.smartlocker.data.entities.request.ReportConsumableTransactionRequest
 import com.lock.smartlocker.data.entities.request.RetrieveItemRequest
 import com.lock.smartlocker.data.entities.request.ReturnItemRequest
 import com.lock.smartlocker.data.entities.request.TopupConsumableRequest
@@ -169,6 +171,16 @@ interface LockerServives {
     suspend fun retrieveItem(
         @Body retrieveItemRequest: RetrieveItemRequest
     ): Response<BaseResponse<RetrieveItemResponse>>
+
+    @POST("/api/admin/report-consusmable")
+    suspend fun reportConsumable(
+        @Body reportConsumableRequest: ReportConsumableRequest
+    ): Response<BaseResponse<Map<String, Any>>>
+
+    @POST("/api/consumable-transaction/report-consusmable")
+    suspend fun reportConsumableTransaction(
+        @Body reportConsumableTransactionRequest: ReportConsumableTransactionRequest
+    ): Response<BaseResponse<Map<String, Any>>>
 
     companion object {
         operator fun invoke(retrofit: Retrofit): LockerServives {
