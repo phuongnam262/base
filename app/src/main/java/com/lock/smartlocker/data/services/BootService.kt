@@ -11,31 +11,35 @@ import android.os.Build
 import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.lock.smartlocker.R
+import com.lock.smartlocker.ui.home.HomeActivity
 import com.lock.smartlocker.ui.splash.SplashActivity
 
 class BootService : Service() {
-    private val handler = Handler(Looper.getMainLooper())
+    override fun onCreate() {
+        super.onCreate()
+        createNotificationChannel()
+    }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        if (intent == null) {
-            return START_NOT_STICKY
-        }
+        Log.d(TAG, "BootService onStartCommand")
+        startForeground(NOTIFICATION_ID, createNotification())
 
-        createNotificationChannel()
-        val notification = createNotification()
-        startForeground(NOTIFICATION_ID, notification)
-
-        handler.postDelayed({
-            val startAppIntent = Intent(this, SplashActivity::class.java)
-            startAppIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(startAppIntent)
-
+        Handler(Looper.getMainLooper()).postDelayed({
+            Log.d(TAG, "Starting app from BootService")
+            startApp()
             stopSelf()
-        }, 5000)
+        }, DELAY_MILLIS)
 
         return START_STICKY
+    }
+
+    private fun startApp() {
+        val startAppIntent = Intent(this, SplashActivity::class.java)
+        startAppIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(startAppIntent)
     }
 
     private fun createNotificationChannel() {
@@ -71,7 +75,9 @@ class BootService : Service() {
     override fun onBind(intent: Intent?): IBinder? = null
 
     companion object {
-        private const val NOTIFICATION_ID = 1
+        private const val TAG = "BootService"
         private const val CHANNEL_ID = "BootServiceChannel"
+        private const val NOTIFICATION_ID = 52
+        private const val DELAY_MILLIS = 10000L // 8 seconds delay
     }
 }
