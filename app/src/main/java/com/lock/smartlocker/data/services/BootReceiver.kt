@@ -3,16 +3,25 @@ package com.lock.smartlocker.data.services
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.util.Log
-import com.lock.smartlocker.ui.splash.SplashActivity
 
 class BootReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
-        if (intent.action == Intent.ACTION_BOOT_COMPLETED) {
-            Log.d(TAG, "Boot completed")
-            val startAppIntent = Intent(context, SplashActivity::class.java)
-            startAppIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            context.startActivity(startAppIntent)
+        if (intent.action == Intent.ACTION_BOOT_COMPLETED ||
+            intent.action == Intent.ACTION_POWER_CONNECTED ||
+            intent.action == Intent.ACTION_LOCKED_BOOT_COMPLETED) {
+            Log.d(TAG, "Received action: ${intent.action}")
+            startApp(context)
+        }
+    }
+
+    private fun startApp(context: Context) {
+        val startAppIntent = Intent(context, BootService::class.java)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            context.startForegroundService(startAppIntent)
+        } else {
+            context.startService(startAppIntent)
         }
     }
 

@@ -16,6 +16,8 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
 
     <application
         android:name=".LockerApplication"
@@ -63,7 +65,8 @@
         <service
             android:name= ".data.services.BootService"
             android:exported="false"
-            android:foregroundServiceType="connectedDevice"
+            android:enabled="true"
+            android:directBootAware="true"
             tools:ignore="ForegroundServicePermission">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -73,9 +76,13 @@
         <receiver
             android:name=".data.services.BootReceiver"
             android:enabled="true"
-            android:exported="true">
+            android:exported="true"
+            android:directBootAware="true"
+            android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
