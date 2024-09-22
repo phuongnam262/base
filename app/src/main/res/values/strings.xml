@@ -224,6 +224,9 @@
     <string name="disable_button">Disable</string>
     <string name="sound">Sound</string>
     <string name="background_music">Background Music</string>
+    <string name="display_navigation_bar">Display Android Navigation Bar</string>
+    <string name="display_status_bar">Display Android Status Bar</string>
+    <string name="light_on">Turn on light when detect face</string>
 
     <!-- Thanks -->
     <string name="thank_using_mail">Thank you for using our service!</string>

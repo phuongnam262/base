@@ -6,8 +6,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.lock.smartlocker.BR
 import com.lock.smartlocker.BuildConfig
 import com.lock.smartlocker.R
-import com.lock.smartlocker.data.services.com.ComBean
-import com.lock.smartlocker.data.services.com.SerialHelper
 import com.lock.smartlocker.databinding.FragmentScanWorkCardBinding
 import com.lock.smartlocker.ui.base.BaseFragment
 import com.lock.smartlocker.util.ConstantUtils
@@ -16,8 +14,6 @@ import com.lock.smartlocker.util.SerialControlManager
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
-import java.io.IOException
-import java.security.InvalidParameterException
 
 
 class ScanWorkCardFragment : BaseFragment<FragmentScanWorkCardBinding, ScanWorkCardViewModel>(),

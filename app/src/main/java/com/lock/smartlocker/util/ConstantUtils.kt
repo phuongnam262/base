@@ -49,6 +49,9 @@ class ConstantUtils {
         const val NAME_END_USER = "NAME_END_USER"
         const val WORK_CARD_NUMBER = "WORK_CARD_NUMBER"
 
+        //Setting
+        const val LIGHT_ON = "LIGHT_ON"
+
         //Error code
         const val LOGIN_EMAIL_NOT_EXISTED = "401-001"
         const val LOGIN_WRONG_PASSWORD = "401-002"

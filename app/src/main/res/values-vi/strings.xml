@@ -224,6 +224,9 @@
     <string name="disable_button">Vô Hiệu</string>
     <string name="sound">Âm Thanh</string>
     <string name="background_music">Nhạc Nền</string>
+    <string name="display_navigation_bar">Hiển thị thanh điều hướng Android</string>
+    <string name="display_status_bar">Hiển thị thanh trạng thái Android</string>
+    <string name="light_on">Bật đèn khi quét khuôn mặt</string>
 
     <!-- Thanks -->
     <string name="thank_using_mail">Cảm ơn đã sử dụng dịch vụ của chúng tôi!</string>

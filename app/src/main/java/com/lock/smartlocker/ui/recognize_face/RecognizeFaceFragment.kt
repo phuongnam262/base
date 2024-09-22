@@ -22,6 +22,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.mlkit.common.MlKitException
 import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
+import com.lock.smartlocker.data.preference.PreferenceHelper
 import com.lock.smartlocker.databinding.FragmentRecognizeFaceBinding
 import com.lock.smartlocker.facedetector.CameraXViewModel
 import com.lock.smartlocker.facedetector.DetectResultIml
@@ -31,6 +32,7 @@ import com.lock.smartlocker.facedetector.preference.PreferenceUtils
 import com.lock.smartlocker.ui.base.BaseFragment
 import com.lock.smartlocker.ui.inputemail.InputEmailFragment.Companion.EMAIL_REGISTER
 import com.lock.smartlocker.util.ConstantUtils
+import com.lock.smartlocker.util.KioskModeHelper
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
@@ -87,6 +89,8 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
         mViewDataBinding?.bottomMenu?.btnProcess?.setOnClickListener(this)
         mViewDataBinding?.headerBar?.ivBack?.setOnClickListener(this)
 
+        turnOnLight(1)
+
         cameraSelector = CameraSelector.Builder().requireLensFacing(lensFacing).build()
         if (mViewDataBinding?.previewView == null) {
             Log.d(TAG, "previewView is null")
@@ -135,12 +139,30 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
         }
     }
 
+    private fun turnOnLight(mode: Int){
+        if (PreferenceHelper.getBoolean(ConstantUtils.LIGHT_ON)) {
+            if (mode == 1) activity?.let {
+                KioskModeHelper.sendCommand(
+                    it,
+                    KioskModeHelper.Action.OPEN_WHITE_LIGHT
+                )
+            }
+            else activity?.let {
+                KioskModeHelper.sendCommand(
+                    it,
+                    KioskModeHelper.Action.CLOSE_WHITE_LIGHT
+                )
+            }
+        }
+    }
+
     override fun onClick(v: View?) {
         if (checkDebouncedClick()) {
             when (v?.id) {
                 R.id.rl_home -> activity?.finish()
                 R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
                 R.id.btn_retry -> {
+                    turnOnLight(1)
                     mViewDataBinding?.ivFrame?.setBackgroundResource(R.drawable.bg_face_register)
                     viewModel.showStatusText.value = false
                     FaceDetectorProcessor.isSuccess = false
@@ -370,6 +392,7 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
                             cameraProvider!!.unbindAll()
                         }
                         val strBase64 = encodeImage(photoFile)
+                        turnOnLight(0)
                         detectImageFromImage(strBase64)
                     }
 

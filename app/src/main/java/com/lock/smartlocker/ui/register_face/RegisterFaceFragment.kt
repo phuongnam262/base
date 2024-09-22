@@ -23,6 +23,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.mlkit.common.MlKitException
 import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
+import com.lock.smartlocker.data.preference.PreferenceHelper
 import com.lock.smartlocker.databinding.FragmentRegisterFaceBinding
 import com.lock.smartlocker.facedetector.CameraXViewModel
 import com.lock.smartlocker.facedetector.DetectResultIml
@@ -32,6 +33,7 @@ import com.lock.smartlocker.facedetector.preference.PreferenceUtils
 import com.lock.smartlocker.ui.base.BaseFragment
 import com.lock.smartlocker.ui.inputemail.InputEmailFragment
 import com.lock.smartlocker.util.ConstantUtils
+import com.lock.smartlocker.util.KioskModeHelper
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
@@ -85,6 +87,8 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
         mViewDataBinding?.bottomMenu?.btnProcess?.setOnClickListener(this)
         mViewDataBinding?.headerBar?.ivBack?.setOnClickListener(this)
 
+        turnOnLight(1)
+
         cameraSelector = CameraSelector.Builder().requireLensFacing(lensFacing).build()
         if (mViewDataBinding?.previewView == null) {
             Log.d(TAG, "previewView is null")
@@ -132,6 +136,23 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
         viewModel.cardNumberRegister.value = arguments?.getString(ConstantUtils.WORK_CARD_NUMBER)
     }
 
+    private fun turnOnLight(mode: Int){
+        if (PreferenceHelper.getBoolean(ConstantUtils.LIGHT_ON)) {
+            if (mode == 1) activity?.let {
+                KioskModeHelper.sendCommand(
+                    it,
+                    KioskModeHelper.Action.OPEN_WHITE_LIGHT
+                )
+            }
+            else activity?.let {
+                KioskModeHelper.sendCommand(
+                    it,
+                    KioskModeHelper.Action.CLOSE_WHITE_LIGHT
+                )
+            }
+        }
+    }
+
     override fun onClick(v: View?) {
         if (checkDebouncedClick()) {
             when (v?.id) {
@@ -139,6 +160,7 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
                 R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
                 R.id.btn_process -> {
                     if (isExited) {
+                        turnOnLight(1)
                         isExited = false
                         mViewDataBinding?.ivFrame?.setBackgroundResource(R.drawable.bg_face_register)
                         mViewDataBinding?.bottomMenu?.btnProcess?.text = getString(R.string.process_button)
@@ -330,6 +352,7 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
                             cameraProvider!!.unbindAll()
                         }
                         strBase64 = encodeImage(photoFile)
+                        turnOnLight(0)
                         mViewDataBinding?.bottomMenu?.btnProcess?.isEnabled = true
                         mViewDataBinding?.bottomMenu?.btnProcess?.alpha = 1f
                     }
@@ -341,7 +364,7 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
         }
     }
 
-    fun detectImageFromImage(strBase64: String) {
+    private fun detectImageFromImage(strBase64: String) {
         viewModel.detectImage(strBase64)
     }
 

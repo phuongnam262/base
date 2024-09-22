@@ -5,8 +5,12 @@ import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
+import com.lock.smartlocker.data.preference.PreferenceHelper
 import com.lock.smartlocker.databinding.FragmentSettingBinding
+import com.lock.smartlocker.facedetector.preference.PreferenceUtils
 import com.lock.smartlocker.ui.base.BaseFragment
+import com.lock.smartlocker.util.ConstantUtils
+import com.lock.smartlocker.util.KioskModeHelper
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
@@ -34,6 +38,34 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
         viewModel.titlePage.postValue(getString(R.string.setting))
         mViewDataBinding?.bottomMenu?.rlHome?.setOnClickListener(this)
         mViewDataBinding?.headerBar?.ivBack?.setOnClickListener(this)
+        mViewDataBinding?.swNavigation?.isChecked = true
+        mViewDataBinding?.swStatus?.isChecked = true
+        activity?.let { KioskModeHelper.sendCommand(it, KioskModeHelper.Action.SHOW_NAVIGATION_BAR) }
+        activity?.let { KioskModeHelper.sendCommand(it, KioskModeHelper.Action.SHOW_STATUS_BAR) }
+        mViewDataBinding?.swNavigation?.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked){
+                activity?.let { KioskModeHelper.sendCommand(it, KioskModeHelper.Action.SHOW_NAVIGATION_BAR) }
+            }else{
+                activity?.let { KioskModeHelper.sendCommand(it, KioskModeHelper.Action.HIDE_NAVIGATION_BAR) }
+            }
+        }
+        mViewDataBinding?.swStatus?.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked){
+                activity?.let { KioskModeHelper.sendCommand(it, KioskModeHelper.Action.SHOW_STATUS_BAR) }
+            }else {
+                activity?.let { KioskModeHelper.sendCommand(it, KioskModeHelper.Action.HIDE_STATUS_BAR) }
+            }
+        }
+        mViewDataBinding?.swLight?.isChecked =
+            PreferenceHelper.getBoolean(ConstantUtils.LIGHT_ON, false)
+
+        mViewDataBinding?.swLight?.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked){
+                PreferenceHelper.writeBoolean(ConstantUtils.LIGHT_ON, true)
+            }else {
+                PreferenceHelper.writeBoolean(ConstantUtils.LIGHT_ON, false)
+            }
+        }
     }
 
     private fun initData(){
