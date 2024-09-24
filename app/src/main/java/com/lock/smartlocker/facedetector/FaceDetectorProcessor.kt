@@ -34,7 +34,6 @@ class FaceDetectorProcessor(context: Context, detectorOptions: FaceDetectorOptio
     init {
         val options = detectorOptions
             ?: FaceDetectorOptions.Builder()
-                .setPerformanceMode(FaceDetectorOptions.PERFORMANCE_MODE_FAST)
                 .setLandmarkMode(FaceDetectorOptions.LANDMARK_MODE_NONE)
                 .setClassificationMode(FaceDetectorOptions.CLASSIFICATION_MODE_NONE)
                 .enableTracking()
@@ -88,8 +87,8 @@ class FaceDetectorProcessor(context: Context, detectorOptions: FaceDetectorOptio
                         (-10 < face.headEulerAngleY && face.headEulerAngleY < 10) &&
                         (-4 < face.headEulerAngleZ && face.headEulerAngleZ < 4)
                     ) {
-                        //callback?.onSuccess()
-                        //isSuccess = true
+                        callback?.onSuccess()
+                        isSuccess = true
                     }
                 }
         }
