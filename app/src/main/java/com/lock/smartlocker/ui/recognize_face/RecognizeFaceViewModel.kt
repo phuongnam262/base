@@ -113,12 +113,16 @@ class RecognizeFaceViewModel(
                     }else {
                         showButtonUsingMail.postValue(false)
                         showStatusText.postValue(true)
-                        recognizeFaceListener?.handleSuccess(getUser.personName?.ifEmpty { getUser.email })
+                        uiScope.launch {
+                            recognizeFaceListener?.handleSuccess(getUser.personName?.ifEmpty { getUser.email })
+                        }
                     }
                 } else {
                     showButtonUsingMail.postValue(false)
                     showStatusText.postValue(true)
-                    recognizeFaceListener?.handleSuccess(getUser.personName?.ifEmpty { getUser.email })
+                    uiScope.launch {
+                        recognizeFaceListener?.handleSuccess(getUser.personName?.ifEmpty { getUser.email })
+                    }
                 }
             }
         }.invokeOnCompletion { mLoading.postValue(false) }

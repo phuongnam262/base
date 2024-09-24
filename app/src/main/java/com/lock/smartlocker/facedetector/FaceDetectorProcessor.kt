@@ -17,6 +17,8 @@
 package com.lock.smartlocker.facedetector
 
 import android.content.Context
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import com.google.android.gms.tasks.Task
 import com.google.mlkit.vision.common.InputImage
@@ -30,6 +32,9 @@ class FaceDetectorProcessor(context: Context, detectorOptions: FaceDetectorOptio
     VisionProcessorBase<List<Face>>(context) {
 
     private val detector: FaceDetector
+    private val handler = Handler(Looper.getMainLooper())
+    private var delayRunnable: Runnable? = null
+    private var isMultiFace = false
 
     init {
         val options = detectorOptions
@@ -48,6 +53,7 @@ class FaceDetectorProcessor(context: Context, detectorOptions: FaceDetectorOptio
     override fun stop() {
         super.stop()
         detector.close()
+        delayRunnable?.let { handler.removeCallbacks(it) }
     }
 
     override fun detectInImage(image: InputImage): Task<List<Face>> {
@@ -56,14 +62,21 @@ class FaceDetectorProcessor(context: Context, detectorOptions: FaceDetectorOptio
 
     override fun onSuccess(faces: List<Face>, graphicOverlay: GraphicOverlay) {
         if (faces.size > 1) {
+            delayRunnable?.let { handler.removeCallbacks(it) }
+            isMultiFace = true
             callback?.onMultiFace()
             for (face in faces) {
                 graphicOverlay.add(FaceGraphic(graphicOverlay, face, true))
             }
+            delayRunnable = Runnable {
+                isMultiFace = false
+            }
+            handler.postDelayed(delayRunnable!!, 500)
         } else if (faces.size == 1) {
             callback?.onOneFace()
             graphicOverlay.add(FaceGraphic(graphicOverlay, faces[0], false ))
-            logExtrasForTesting(faces[0])
+            if (isMultiFace.not())
+                logExtrasForTesting(faces[0])
         }
     }
 
