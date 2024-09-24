@@ -62,8 +62,8 @@ class FaceDetectorProcessor(context: Context, detectorOptions: FaceDetectorOptio
 
     override fun onSuccess(faces: List<Face>, graphicOverlay: GraphicOverlay) {
         if (faces.size > 1) {
-            delayRunnable?.let { handler.removeCallbacks(it) }
             isMultiFace = true
+            delayRunnable?.let { handler.removeCallbacks(it) }
             callback?.onMultiFace()
             for (face in faces) {
                 graphicOverlay.add(FaceGraphic(graphicOverlay, face, true))
@@ -73,10 +73,11 @@ class FaceDetectorProcessor(context: Context, detectorOptions: FaceDetectorOptio
             }
             handler.postDelayed(delayRunnable!!, 1000)
         } else if (faces.size == 1) {
-            callback?.onOneFace()
             graphicOverlay.add(FaceGraphic(graphicOverlay, faces[0], false ))
-            if (isMultiFace.not())
+            if (isMultiFace.not()) {
                 logExtrasForTesting(faces[0])
+                callback?.onOneFace()
+            }
         }
     }
 
@@ -100,8 +101,8 @@ class FaceDetectorProcessor(context: Context, detectorOptions: FaceDetectorOptio
                         (-10 < face.headEulerAngleY && face.headEulerAngleY < 10) &&
                         (-4 < face.headEulerAngleZ && face.headEulerAngleZ < 4)
                     ) {
-                        callback?.onSuccess()
                         isSuccess = true
+                        callback?.onSuccess()
                     }
                 }
         }
