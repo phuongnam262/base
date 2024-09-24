@@ -341,6 +341,12 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
         }
     }
 
+    override fun onFaceTooSmall() {
+        Coroutines.main {
+            viewModel.mStatusText.value = R.string.error_email_exited
+        }
+    }
+
     private fun captureImage() {
         val imageCapture = imageCapture ?: return
 

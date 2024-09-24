@@ -61,9 +61,9 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
     private var analysisUseCase: ImageAnalysis? = null
     private var imageProcessor: VisionImageProcessor? = null
     private var needUpdateGraphicOverlayImageSourceInfo = false
-    private var lensFacing = CameraSelector.LENS_FACING_EXTERNAL
-    private var rotateCamera = Surface.ROTATION_270
-    private var rotateDetect = Surface.ROTATION_90
+    private var lensFacing = CameraSelector.LENS_FACING_FRONT
+    private var rotateCamera = Surface.ROTATION_0
+    private var rotateDetect = Surface.ROTATION_0
     private var cameraSelector: CameraSelector? = null
     private var imageCapture: ImageCapture? = null
 
@@ -341,13 +341,13 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
                         mViewDataBinding?.graphicOverlay?.setImageSourceInfo(
                             imageProxy.width,
                             imageProxy.height,
-                            false
+                            true
                         )
                     } else {
                         mViewDataBinding?.graphicOverlay?.setImageSourceInfo(
                             imageProxy.height,
                             imageProxy.width,
-                            false
+                            true
                         )
                     }
                     needUpdateGraphicOverlayImageSourceInfo = false
@@ -380,6 +380,12 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
     override fun onOneFace() {
         Coroutines.main {
             viewModel.showStatusText.value = false
+        }
+    }
+
+    override fun onFaceTooSmall() {
+        Coroutines.main {
+            viewModel.mStatusText.value = R.string.error_email_exited
         }
     }
 

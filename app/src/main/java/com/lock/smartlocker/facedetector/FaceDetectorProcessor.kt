@@ -35,12 +35,14 @@ class FaceDetectorProcessor(context: Context, detectorOptions: FaceDetectorOptio
     private val handler = Handler(Looper.getMainLooper())
     private var delayRunnable: Runnable? = null
     private var isMultiFace = false
+    private val minFaceSize = 0.1f // Example minimum face size, adjust as needed
 
     init {
         val options = detectorOptions
             ?: FaceDetectorOptions.Builder()
                 .setLandmarkMode(FaceDetectorOptions.LANDMARK_MODE_NONE)
                 .setClassificationMode(FaceDetectorOptions.CLASSIFICATION_MODE_NONE)
+                .setMinFaceSize(minFaceSize)
                 .enableTracking()
                 .build()
 
@@ -49,15 +51,15 @@ class FaceDetectorProcessor(context: Context, detectorOptions: FaceDetectorOptio
         Log.v(MANUAL_TESTING_LOG, "Face detector options: $options")
     }
 
+    private fun isFaceLargeEnough(face: Face): Boolean {
+        val boundingBox = face.boundingBox
+        val faceWidth = boundingBox.width().toFloat()
+        val faceHeight = boundingBox.height().toFloat()
+        val imageWidth = 960f // Example image width, adjust as needed
+        val imageHeight = 1280f // Example image height, adjust as needed
 
-    override fun stop() {
-        super.stop()
-        detector.close()
-        delayRunnable?.let { handler.removeCallbacks(it) }
-    }
-
-    override fun detectInImage(image: InputImage): Task<List<Face>> {
-        return detector.process(image)
+        val faceSize = (faceWidth * faceHeight) / (imageWidth * imageHeight)
+        return faceSize >= minFaceSize
     }
 
     override fun onSuccess(faces: List<Face>, graphicOverlay: GraphicOverlay) {
@@ -73,12 +75,27 @@ class FaceDetectorProcessor(context: Context, detectorOptions: FaceDetectorOptio
             }
             handler.postDelayed(delayRunnable!!, 1000)
         } else if (faces.size == 1) {
-            graphicOverlay.add(FaceGraphic(graphicOverlay, faces[0], false ))
+            graphicOverlay.add(FaceGraphic(graphicOverlay, faces[0], false))
             if (isMultiFace.not()) {
-                logExtrasForTesting(faces[0])
-                callback?.onOneFace()
+                if (isFaceLargeEnough(faces[0])) {
+                    logExtrasForTesting(faces[0])
+                    callback?.onOneFace()
+                } else {
+                    callback?.onFaceTooSmall()
+                }
             }
         }
+    }
+
+    override fun stop() {
+        super.stop()
+        detector.close()
+        delayRunnable?.let { handler.removeCallbacks(it) }
+    }
+
+
+    override fun detectInImage(image: InputImage): Task<List<Face>> {
+        return detector.process(image)
     }
 
     override fun onFailure(e: Exception) {

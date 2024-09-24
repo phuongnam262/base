@@ -4,4 +4,5 @@ public interface DetectResultIml {
     fun onSuccess()
     fun onMultiFace()
     fun onOneFace()
+    fun onFaceTooSmall()
 }
