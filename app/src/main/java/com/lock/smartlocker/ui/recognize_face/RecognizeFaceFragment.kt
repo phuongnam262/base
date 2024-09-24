@@ -341,13 +341,13 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
                         mViewDataBinding?.graphicOverlay?.setImageSourceInfo(
                             imageProxy.width,
                             imageProxy.height,
-                            false
+                            true
                         )
                     } else {
                         mViewDataBinding?.graphicOverlay?.setImageSourceInfo(
                             imageProxy.height,
                             imageProxy.width,
-                            false
+                            true
                         )
                     }
                     needUpdateGraphicOverlayImageSourceInfo = false

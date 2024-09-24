@@ -18,7 +18,6 @@ package com.lock.smartlocker.facedetector
 
 import android.content.Context
 import android.util.Log
-import com.example.demofacedetect.facedetector.FaceGraphic
 import com.google.android.gms.tasks.Task
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.face.Face
@@ -28,65 +27,69 @@ import com.google.mlkit.vision.face.FaceDetectorOptions
 
 /** Face Detector Demo.  */
 class FaceDetectorProcessor(context: Context, detectorOptions: FaceDetectorOptions?) :
-  VisionProcessorBase<List<Face>>(context) {
+    VisionProcessorBase<List<Face>>(context) {
 
-  private val detector: FaceDetector
+    private val detector: FaceDetector
 
-  init {
-    val options = detectorOptions
-      ?: FaceDetectorOptions.Builder()
-        .setClassificationMode(FaceDetectorOptions.CLASSIFICATION_MODE_ALL)
-        .enableTracking()
-        .build()
+    init {
+        val options = detectorOptions
+            ?: FaceDetectorOptions.Builder()
+                .setClassificationMode(FaceDetectorOptions.CLASSIFICATION_MODE_ALL)
+                .enableTracking()
+                .build()
 
-    detector = FaceDetection.getClient(options)
+        detector = FaceDetection.getClient(options)
 
-    Log.v(MANUAL_TESTING_LOG, "Face detector options: $options")
-  }
-
-
-
-  override fun stop() {
-    super.stop()
-    detector.close()
-  }
-
-  override fun detectInImage(image: InputImage): Task<List<Face>> {
-    return detector.process(image)
-  }
-
-  override fun onSuccess(faces: List<Face>, graphicOverlay: GraphicOverlay) {
-    if(faces.size > 1){
-      callback?.onMultiFace()
-    }else if (faces.size == 1) {
-      callback?.onOneFace()
-      graphicOverlay.add(FaceGraphic(graphicOverlay, faces[0]))
-      logExtrasForTesting(faces[0])
+        Log.v(MANUAL_TESTING_LOG, "Face detector options: $options")
     }
-  }
 
-  override fun onFailure(e: Exception) {
-    Log.e(TAG, "Face detection failed $e")
-  }
 
-  companion object {
-    private const val TAG = "FaceDetectorProcessor"
-    private var callback: DetectResultIml? = null
-    var isSuccess = false
-
-    fun setCallback(listener: DetectResultIml) {
-      callback = listener
+    override fun stop() {
+        super.stop()
+        detector.close()
     }
-    private fun logExtrasForTesting(face: Face?) {
-      if (isSuccess.not())
-        if (face != null) {
-          if ((-10 < face.headEulerAngleX &&  face.headEulerAngleX < 12) &&
-            (-10 < face.headEulerAngleY &&  face.headEulerAngleY < 10) &&
-            (-4 < face.headEulerAngleZ &&  face.headEulerAngleZ < 4)){
-            callback?.onSuccess()
-            isSuccess = true
-          }
+
+    override fun detectInImage(image: InputImage): Task<List<Face>> {
+        return detector.process(image)
+    }
+
+    override fun onSuccess(faces: List<Face>, graphicOverlay: GraphicOverlay) {
+        if (faces.size > 1) {
+            callback?.onMultiFace()
+            for (face in faces) {
+                graphicOverlay.add(FaceGraphic(graphicOverlay, face, true))
+            }
+        } else if (faces.size == 1) {
+            callback?.onOneFace()
+            graphicOverlay.add(FaceGraphic(graphicOverlay, faces[0], false ))
+            logExtrasForTesting(faces[0])
         }
     }
-  }
+
+    override fun onFailure(e: Exception) {
+        Log.e(TAG, "Face detection failed $e")
+    }
+
+    companion object {
+        private const val TAG = "FaceDetectorProcessor"
+        private var callback: DetectResultIml? = null
+        var isSuccess = false
+
+        fun setCallback(listener: DetectResultIml) {
+            callback = listener
+        }
+
+        private fun logExtrasForTesting(face: Face?) {
+            if (isSuccess.not())
+                if (face != null) {
+                    if ((-10 < face.headEulerAngleX && face.headEulerAngleX < 12) &&
+                        (-10 < face.headEulerAngleY && face.headEulerAngleY < 10) &&
+                        (-4 < face.headEulerAngleZ && face.headEulerAngleZ < 4)
+                    ) {
+                        //callback?.onSuccess()
+                        //isSuccess = true
+                    }
+                }
+        }
+    }
 }

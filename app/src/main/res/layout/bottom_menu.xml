@@ -45,8 +45,8 @@
             android:layout_marginStart="@dimen/dp_30"
             android:layout_marginEnd="@dimen/dp_30"
             android:background="@drawable/bg_radius_white"
-            android:paddingTop="@dimen/dp_12"
-            android:paddingBottom="@dimen/dp_12"
+            android:paddingTop="@dimen/dp_10"
+            android:paddingBottom="@dimen/dp_10"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -59,7 +59,7 @@
                 android:gravity="center"
                 android:textColor="@color/colorRed"
                 android:textSize="@dimen/sp_12"
-                android:visibility="@{showStatusText ? View.VISIBLE : View.GONE}"
+                android:visibility="@{showStatusText ? View.VISIBLE : View.INVISIBLE}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
