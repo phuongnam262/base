@@ -34,7 +34,9 @@ class FaceDetectorProcessor(context: Context, detectorOptions: FaceDetectorOptio
     init {
         val options = detectorOptions
             ?: FaceDetectorOptions.Builder()
-                .setClassificationMode(FaceDetectorOptions.CLASSIFICATION_MODE_ALL)
+                .setPerformanceMode(FaceDetectorOptions.PERFORMANCE_MODE_FAST)
+                .setLandmarkMode(FaceDetectorOptions.LANDMARK_MODE_NONE)
+                .setClassificationMode(FaceDetectorOptions.CLASSIFICATION_MODE_NONE)
                 .enableTracking()
                 .build()
 
