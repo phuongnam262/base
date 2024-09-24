@@ -378,7 +378,9 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
     }
 
     override fun onOneFace() {
-        viewModel.showStatusText.value = false
+        Coroutines.main {
+            viewModel.showStatusText.value = false
+        }
     }
 
     private fun captureImage() {

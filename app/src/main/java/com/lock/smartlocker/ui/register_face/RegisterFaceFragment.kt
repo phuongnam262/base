@@ -336,7 +336,9 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
     }
 
     override fun onOneFace() {
-        viewModel.showStatusText.value = false
+        Coroutines.main {
+            viewModel.showStatusText.value = false
+        }
     }
 
     private fun captureImage() {
