@@ -33,6 +33,7 @@ import com.lock.smartlocker.facedetector.preference.PreferenceUtils
 import com.lock.smartlocker.ui.base.BaseFragment
 import com.lock.smartlocker.ui.inputemail.InputEmailFragment
 import com.lock.smartlocker.util.ConstantUtils
+import com.lock.smartlocker.util.Coroutines
 import com.lock.smartlocker.util.KioskModeHelper
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
@@ -326,6 +327,16 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
 
     override fun onSuccess() {
         captureImage()
+    }
+
+    override fun onMultiFace() {
+        Coroutines.main {
+            viewModel.mStatusText.value = R.string.error_multi_face_detect
+        }
+    }
+
+    override fun onOneFace() {
+        viewModel.showStatusText.value = false
     }
 
     private fun captureImage() {
