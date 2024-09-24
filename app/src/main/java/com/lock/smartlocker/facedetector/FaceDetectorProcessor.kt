@@ -71,7 +71,7 @@ class FaceDetectorProcessor(context: Context, detectorOptions: FaceDetectorOptio
             delayRunnable = Runnable {
                 isMultiFace = false
             }
-            handler.postDelayed(delayRunnable!!, 500)
+            handler.postDelayed(delayRunnable!!, 1000)
         } else if (faces.size == 1) {
             callback?.onOneFace()
             graphicOverlay.add(FaceGraphic(graphicOverlay, faces[0], false ))

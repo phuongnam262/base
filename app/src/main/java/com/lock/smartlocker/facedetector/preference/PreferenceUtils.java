@@ -124,7 +124,7 @@ public class PreferenceUtils {
         Float.parseFloat(
             sharedPreferences.getString(
                 context.getString(R.string.pref_key_live_preview_face_detection_min_face_size),
-                "1"));
+                "0.1"));
 
     FaceDetectorOptions.Builder optionsBuilder =
         new FaceDetectorOptions.Builder()
