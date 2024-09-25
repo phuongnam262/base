@@ -50,6 +50,7 @@ class ScanItemFragment : BaseFragment<FragmentScanItemBinding, ScanItemViewModel
         viewModel.titlePage.postValue(getString(R.string.scan_items))
         mViewDataBinding?.bottomMenu?.rlHome?.setOnClickListener(this)
         mViewDataBinding?.bottomMenu?.btnProcess?.setOnClickListener(this)
+        viewModel.enableButtonProcess.postValue(true)
         mViewDataBinding?.headerBar?.ivBack?.visibility = View.GONE
     }
 

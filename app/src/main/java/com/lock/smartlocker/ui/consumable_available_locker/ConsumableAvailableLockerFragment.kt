@@ -77,7 +77,6 @@ class ConsumableAvailableLockerFragment : BaseFragment<FragmentConsumableAvailab
             when (v?.id) {
                 R.id.rl_home -> activity?.finish()
                 R.id.iv_back -> {
-                    CategoryConsumableFragment.listLockerSelected.clear()
                     activity?.supportFragmentManager?.beginTransaction()?.remove(ConsumableAvailableLockerFragment())?.commit()
                     activity?.supportFragmentManager?.popBackStack()
                 }

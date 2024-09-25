@@ -53,6 +53,14 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel
         mViewDataBinding?.tvHelloSomething?.text = "Hello ${PreferenceHelper.getString(ConstantUtils.ADMIN_NAME, "Admin")}"
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        viewModel.categories.removeObservers(viewLifecycleOwner)
+        viewModel.availableModels.removeObservers(viewLifecycleOwner)
+        viewModel.categoryIdSelected.removeObservers(viewLifecycleOwner)
+        viewModel.listCartItem.removeObservers(viewLifecycleOwner)
+    }
+
     @SuppressLint("NotifyDataSetChanged")
     private fun initData(){
         viewModel.listCartItem.value = listCartItem

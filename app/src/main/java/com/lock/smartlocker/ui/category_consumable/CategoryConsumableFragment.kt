@@ -44,6 +44,15 @@ class CategoryConsumableFragment : BaseFragment<FragmentCategoryConsumableBindin
         initData()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        listLockerSelected.clear()
+        viewModel.categoriesConsumable.removeObservers(viewLifecycleOwner)
+        viewModel.listConsumable.removeObservers(viewLifecycleOwner)
+        viewModel.categoryIdSelected.removeObservers(viewLifecycleOwner)
+        viewModel.lockers.removeObservers(viewLifecycleOwner)
+    }
+
     @SuppressLint("SetTextI18n")
     private fun initView(){
         viewModel.titlePage.postValue(getString(R.string.category))
