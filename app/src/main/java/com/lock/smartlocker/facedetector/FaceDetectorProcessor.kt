@@ -51,17 +51,6 @@ class FaceDetectorProcessor(context: Context, detectorOptions: FaceDetectorOptio
         Log.v(MANUAL_TESTING_LOG, "Face detector options: $options")
     }
 
-    private fun isFaceLargeEnough(face: Face): Boolean {
-        val boundingBox = face.boundingBox
-        val faceWidth = boundingBox.width().toFloat()
-        val faceHeight = boundingBox.height().toFloat()
-        val imageWidth = 960f // Example image width, adjust as needed
-        val imageHeight = 1280f // Example image height, adjust as needed
-
-        val faceSize = (faceWidth * faceHeight) / (imageWidth * imageHeight)
-        return faceSize >= minFaceSize
-    }
-
     override fun onSuccess(faces: List<Face>, graphicOverlay: GraphicOverlay) {
         if (faces.size > 1) {
             isMultiFace = true
@@ -77,12 +66,9 @@ class FaceDetectorProcessor(context: Context, detectorOptions: FaceDetectorOptio
         } else if (faces.size == 1) {
             graphicOverlay.add(FaceGraphic(graphicOverlay, faces[0], false))
             if (isMultiFace.not()) {
-                if (isFaceLargeEnough(faces[0])) {
                     logExtrasForTesting(faces[0])
                     callback?.onOneFace()
-                } else {
-                    callback?.onFaceTooSmall()
-                }
+
             }
         }
     }
