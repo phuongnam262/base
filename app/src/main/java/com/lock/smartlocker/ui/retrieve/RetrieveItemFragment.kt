@@ -40,6 +40,11 @@ class RetrieveItemFragment : BaseFragment<FragmentRetrieveItemBinding, RetrieveV
         initData()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        viewModel.retrieveListener = null
+    }
+
     @SuppressLint("SetTextI18n")
     private fun initView(){
         viewModel.titlePage.postValue(getString(R.string.retrieve_item))

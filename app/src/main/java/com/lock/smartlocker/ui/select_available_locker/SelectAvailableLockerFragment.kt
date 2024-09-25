@@ -43,6 +43,11 @@ class SelectAvailableLockerFragment : BaseFragment<FragmentSelectAvailableLocker
         initData()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        viewModel.selectAvailableListener = null
+    }
+
     private fun initView(){
         viewModel.titlePage.postValue(getString(R.string.select_an_available_locker))
         mViewDataBinding?.bottomMenu?.rlHome?.setOnClickListener(this)

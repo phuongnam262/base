@@ -45,6 +45,11 @@ class InputSerialNumberFragment : BaseFragment<FragmentInputSerialNumberBinding,
         initData()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        viewModel.scanSerialNumberListener = null
+    }
+
     private fun initView(){
         viewModel.titlePage.postValue(getString(R.string.scan_or_enter_serial_number))
         mViewDataBinding?.bottomMenu?.rlHome?.setOnClickListener(this)

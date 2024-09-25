@@ -36,6 +36,11 @@ class SelectFaultyFragment : BaseFragment<FragmentSelectFaultyBinding, SelectFau
         initData()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        viewModel.selectFaultyListener = null
+    }
+
     private fun initView(){
         viewModel.titlePage.postValue(getString(R.string.select_a_faulty))
         viewModel.spinnerItems.observe(viewLifecycleOwner) { items ->

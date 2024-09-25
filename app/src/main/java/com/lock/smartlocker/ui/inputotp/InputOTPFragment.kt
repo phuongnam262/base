@@ -34,6 +34,11 @@ class InputOTPFragment : BaseFragment<FragmentInputOtpBinding, InputOTPViewModel
         initData()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        viewModel.inputOTPListener = null
+    }
+
     private fun initView(){
         viewModel.titlePage.postValue(getString(R.string.auth_required))
         mViewDataBinding?.btnResendOtp?.setOnClickListener(this)

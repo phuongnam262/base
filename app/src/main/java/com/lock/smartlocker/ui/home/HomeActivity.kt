@@ -265,5 +265,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeLis
     override fun onDestroy() {
         super.onDestroy()
         SerialControlManager.closeComPort()
+        viewModel.homeListener = null
     }
 }

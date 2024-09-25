@@ -41,6 +41,11 @@ class ScanItemFragment : BaseFragment<FragmentScanItemBinding, ScanItemViewModel
         initData()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        viewModel.scanItemListener = null
+    }
+
     private fun initView(){
         viewModel.titlePage.postValue(getString(R.string.scan_items))
         mViewDataBinding?.bottomMenu?.rlHome?.setOnClickListener(this)

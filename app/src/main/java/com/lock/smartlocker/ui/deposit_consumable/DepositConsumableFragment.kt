@@ -43,6 +43,11 @@ class DepositConsumableFragment : BaseFragment<FragmentDepositConsumableBinding,
         initData()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        viewModel.depositConsumableListener = null
+    }
+
     private fun initView(){
         mViewDataBinding?.bottomMenu?.rlHome?.setOnClickListener(this)
         mViewDataBinding?.bottomMenu?.btnProcess?.setOnClickListener(this)

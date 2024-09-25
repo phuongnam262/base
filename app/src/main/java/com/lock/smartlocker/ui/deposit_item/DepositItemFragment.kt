@@ -39,6 +39,11 @@ class DepositItemFragment : BaseFragment<FragmentDepositItemBinding, DepositItem
         initData()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        viewModel.depositItemListener = null
+    }
+
     private var returnItem: ItemReturn? = null
 
     private fun initView(){

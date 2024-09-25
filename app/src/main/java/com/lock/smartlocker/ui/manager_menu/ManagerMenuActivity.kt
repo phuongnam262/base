@@ -31,6 +31,11 @@ class ManagerMenuActivity : BaseActivity<ActivityManagerMenuBinding, ManagerMenu
         initView()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.managerMenuListener = null
+    }
+
     private fun initView() {
         when (intent.getStringExtra(ConstantUtils.TYPE_OPEN_MANAGER)) {
             ConstantUtils.TYPE_REGISTER_FACE -> {

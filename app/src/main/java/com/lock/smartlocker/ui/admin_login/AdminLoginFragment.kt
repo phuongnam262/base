@@ -35,6 +35,11 @@ class AdminLoginFragment : BaseFragment<FragmentAdminLoginBinding, AdminLoginVie
         initData()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        viewModel.adminLoginListener = null
+    }
+
     override fun onResume() {
         super.onResume()
         isClicked = false

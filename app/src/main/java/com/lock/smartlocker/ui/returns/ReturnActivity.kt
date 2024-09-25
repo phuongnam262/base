@@ -30,6 +30,11 @@ class ReturnActivity : BaseActivity<ActivityReturnBinding, ReturnViewModel>(),
         initView()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.returnListener = null
+    }
+
     private fun initView() {
         when (intent.getStringExtra(ConstantUtils.TYPE_OPEN)) {
             ConstantUtils.TYPE_LOAN -> {

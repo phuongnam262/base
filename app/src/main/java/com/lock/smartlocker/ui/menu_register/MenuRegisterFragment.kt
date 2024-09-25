@@ -7,10 +7,7 @@ import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
 import com.lock.smartlocker.databinding.FragmentMenuRegisterBinding
 import com.lock.smartlocker.ui.base.BaseFragment
-import com.lock.smartlocker.ui.input_serial_number.InputSerialNumberFragment
-import com.lock.smartlocker.ui.inputemail.InputEmailFragment
 import com.lock.smartlocker.util.ConstantUtils
-import com.lock.smartlocker.util.view.custom.CustomConfirmDialog
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance

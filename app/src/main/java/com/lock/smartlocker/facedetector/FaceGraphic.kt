@@ -30,7 +30,23 @@ class FaceGraphic constructor(overlay: GraphicOverlay?, private val face: Face, 
 
     val paint = if (isMultiFace) boxPaintRed else boxPaintGreen
 
-    canvas.drawRect(left, top, right, bottom, paint)
+    val cornerLength = 120.0f
+
+    // Top-left corner
+    canvas.drawLine(left, top, left + cornerLength, top, paint)
+    canvas.drawLine(left, top, left, top + cornerLength, paint)
+
+    // Top-right corner
+    canvas.drawLine(right, top, right - cornerLength, top, paint)
+    canvas.drawLine(right, top, right, top + cornerLength, paint)
+
+    // Bottom-left corner
+    canvas.drawLine(left, bottom, left + cornerLength, bottom, paint)
+    canvas.drawLine(left, bottom, left, bottom - cornerLength, paint)
+
+    // Bottom-right corner
+    canvas.drawLine(right, bottom, right - cornerLength, bottom, paint)
+    canvas.drawLine(right, bottom, right, bottom - cornerLength, paint)
   }
 
   companion object {

@@ -40,9 +40,9 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(), S
 
     override fun onDestroy() {
         super.onDestroy()
+        viewModel.splashListener = null
     }
 
     override fun updateLayout() {
-        ///Xử lý j ở đây
     }
 }

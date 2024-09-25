@@ -62,13 +62,14 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
     private var analysisUseCase: ImageAnalysis? = null
     private var imageProcessor: VisionImageProcessor? = null
     private var needUpdateGraphicOverlayImageSourceInfo = false
-    private var lensFacing = CameraSelector.LENS_FACING_EXTERNAL
-    private var rotateCamera = Surface.ROTATION_270
-    private var rotateDetect = Surface.ROTATION_90
+    private var lensFacing = CameraSelector.LENS_FACING_FRONT
+    private var rotateCamera = Surface.ROTATION_0
+    private var rotateDetect = Surface.ROTATION_0
     private var cameraSelector: CameraSelector? = null
     private var imageCapture: ImageCapture? = null
     private var isExited: Boolean = false
     private var strBase64: String? = null
+    private val faceDetectorProcessor = FaceDetectorProcessor
 
     companion object {
         private const val TAG = "RegisterFaceFragment"
@@ -111,23 +112,33 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
         mViewDataBinding?.headerBar?.ivBack?.setOnClickListener {
             activity?.onBackPressedDispatcher?.onBackPressed()
         }
-        val faceDetectorProcessor = FaceDetectorProcessor
         faceDetectorProcessor.setCallback(this)
     }
 
-    public override fun onResume() {
+    override fun onResume() {
         super.onResume()
         bindAllCameraUseCases()
     }
 
     override fun onPause() {
         super.onPause()
-        imageProcessor?.run { this.stop() }
+        clearAll()
     }
 
-    public override fun onDestroy() {
+    override fun onDestroy() {
         super.onDestroy()
+        clearAll()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        viewModel.registerFaceListener = null
+        faceDetectorProcessor.removeCallback()
+    }
+
+    private fun clearAll() {
         imageProcessor?.run { this.stop() }
+        cameraProvider?.unbindAll()
         FaceDetectorProcessor.isSuccess = false
     }
 
@@ -299,13 +310,13 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
                         mViewDataBinding?.graphicOverlay?.setImageSourceInfo(
                             imageProxy.width,
                             imageProxy.height,
-                            false
+                            true
                         )
                     } else {
                         mViewDataBinding?.graphicOverlay?.setImageSourceInfo(
                             imageProxy.height,
                             imageProxy.width,
-                            false
+                            true
                         )
                     }
                     needUpdateGraphicOverlayImageSourceInfo = false
@@ -388,7 +399,6 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
     }
 
     private fun encodeImage(file: File): String {
-        //val imageFile = File(path)
         var fis: FileInputStream? = null
         try {
             fis = FileInputStream(file)
@@ -399,8 +409,9 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
         val baos = ByteArrayOutputStream()
         bm.compress(Bitmap.CompressFormat.JPEG, 20, baos)
         val b = baos.toByteArray()
-        //Base64.de
-        return Base64.encodeToString(b, Base64.DEFAULT)
+        val encodedImage = Base64.encodeToString(b, Base64.DEFAULT)
+        bm.recycle() // Recycle the bitmap to free up memory
+        return encodedImage
     }
 
     private fun getOutputDirectory(): File {

@@ -42,7 +42,6 @@ import java.io.File
 import java.io.FileInputStream
 import java.io.FileNotFoundException
 
-
 @SuppressLint("UnsafeOptInUsageError")
 class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, RecognizeFaceViewModel>(),
     KodeinAware, View.OnClickListener, RecognizeFaceListener, DetectResultIml {
@@ -66,6 +65,7 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
     private var rotateDetect = Surface.ROTATION_0
     private var cameraSelector: CameraSelector? = null
     private var imageCapture: ImageCapture? = null
+    private val faceDetectorProcessor = FaceDetectorProcessor
 
     companion object {
         private const val TAG = "RecognizeFaceFragment"
@@ -113,7 +113,6 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
         mViewDataBinding?.headerBar?.ivBack?.setOnClickListener {
             activity?.onBackPressedDispatcher?.onBackPressed()
         }
-        val faceDetectorProcessor = FaceDetectorProcessor
         faceDetectorProcessor.setCallback(this)
     }
 
@@ -125,12 +124,23 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
 
     override fun onPause() {
         super.onPause()
-        imageProcessor?.run { this.stop() }
+        clearAll()
     }
 
     override fun onDestroy() {
         super.onDestroy()
+        clearAll()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        faceDetectorProcessor.removeCallback()
+        viewModel.recognizeFaceListener = null
+    }
+
+    private fun clearAll() {
         imageProcessor?.run { this.stop() }
+        cameraProvider?.unbindAll()
         FaceDetectorProcessor.isSuccess = false
     }
 
@@ -427,7 +437,6 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
     }
 
     private fun encodeImage(file: File): String {
-        //val imageFile = File(path)
         var fis: FileInputStream? = null
         try {
             fis = FileInputStream(file)
@@ -438,8 +447,9 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
         val baos = ByteArrayOutputStream()
         bm.compress(Bitmap.CompressFormat.JPEG, 20, baos)
         val b = baos.toByteArray()
-        //Base64.de
-        return Base64.encodeToString(b, Base64.DEFAULT)
+        val encodedImage = Base64.encodeToString(b, Base64.DEFAULT)
+        bm.recycle() // Recycle the bitmap to free up memory
+        return encodedImage
     }
 
     private fun getOutputDirectory(): File {

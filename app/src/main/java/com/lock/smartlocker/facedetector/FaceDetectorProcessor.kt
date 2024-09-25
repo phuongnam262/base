@@ -68,7 +68,6 @@ class FaceDetectorProcessor(context: Context, detectorOptions: FaceDetectorOptio
             if (isMultiFace.not()) {
                     logExtrasForTesting(faces[0])
                     callback?.onOneFace()
-
             }
         }
     }
@@ -76,7 +75,10 @@ class FaceDetectorProcessor(context: Context, detectorOptions: FaceDetectorOptio
     override fun stop() {
         super.stop()
         detector.close()
-        delayRunnable?.let { handler.removeCallbacks(it) }
+        delayRunnable?.let {
+            handler.removeCallbacks(it)
+            delayRunnable = null
+        }
     }
 
 
@@ -95,6 +97,10 @@ class FaceDetectorProcessor(context: Context, detectorOptions: FaceDetectorOptio
 
         fun setCallback(listener: DetectResultIml) {
             callback = listener
+        }
+
+        fun removeCallback() {
+            callback = null
         }
 
         private fun logExtrasForTesting(face: Face?) {

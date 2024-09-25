@@ -42,6 +42,11 @@ class InputEmailFragment : BaseFragment<FragmentInputEmailBinding, InputEmailVie
         initData()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        viewModel.inputEmailListener = null
+    }
+
     override fun onResume() {
         super.onResume()
         isClicked = false

@@ -41,6 +41,11 @@ class FaceListFragment : BaseFragment<FragmentFaceListBinding, FaceListViewModel
         initData()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        viewModel.faceListener = null
+    }
+
     private fun initView(){
         viewModel.titlePage.postValue(getString(R.string.face_list))
         mViewDataBinding?.bottomMenu?.rlHome?.setOnClickListener(this)
