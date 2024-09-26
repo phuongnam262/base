@@ -110,9 +110,6 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
                 cameraProvider = provider
                 bindAllCameraUseCases()
             }
-        mViewDataBinding?.headerBar?.ivBack?.setOnClickListener {
-            activity?.onBackPressedDispatcher?.onBackPressed()
-        }
         faceDetectorProcessor.setCallback(this)
     }
 
@@ -171,7 +168,7 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
         if (checkDebouncedClick()) {
             when (v?.id) {
                 R.id.rl_home -> activity?.finish()
-                R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
+                R.id.iv_back -> activity?.finish()
                 R.id.btn_retry -> {
                     turnOnLight(1)
                     mViewDataBinding?.ivFrame?.setBackgroundResource(R.drawable.bg_face_register)

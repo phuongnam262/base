@@ -36,7 +36,7 @@ class CategoryConsumableCollectFragment : BaseFragment<FragmentCategoryConsumabl
         get() = ViewModelProvider(this, factory)[CategoryConsumableCollectViewModel::class.java]
 
     companion object{
-        var listCartItem = ArrayList<CartConsumableItem>()
+        var listCartItem: ArrayList<CartConsumableItem>? = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -63,6 +63,9 @@ class CategoryConsumableCollectFragment : BaseFragment<FragmentCategoryConsumabl
 
     @SuppressLint("NotifyDataSetChanged")
     private fun initData(){
+        if (listCartItem == null) {
+            listCartItem = ArrayList()
+        }
         viewModel.listCartItem.value = listCartItem
         mViewDataBinding?.rvCategories?.adapter = categoryAdapter
         mViewDataBinding?.rvConsumables?.adapter = consumableAdapter
@@ -102,7 +105,7 @@ class CategoryConsumableCollectFragment : BaseFragment<FragmentCategoryConsumabl
         if (checkDebouncedClick()) {
             when (v?.id) {
                 R.id.rl_home -> {
-                    listCartItem.clear()
+                    listCartItem = null
                     activity?.finish()
                 }
                 R.id.rl_item -> {}

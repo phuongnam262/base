@@ -35,7 +35,7 @@ class CategoryConsumableFragment : BaseFragment<FragmentCategoryConsumableBindin
         get() = ViewModelProvider(this, factory)[CategoryConsumableViewModel::class.java]
 
     companion object{
-        var listLockerSelected = ArrayList<LockerConsumable>()
+        var listLockerSelected :ArrayList<LockerConsumable>? = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -46,7 +46,6 @@ class CategoryConsumableFragment : BaseFragment<FragmentCategoryConsumableBindin
 
     override fun onDestroyView() {
         super.onDestroyView()
-        listLockerSelected.clear()
         viewModel.categoriesConsumable.removeObservers(viewLifecycleOwner)
         viewModel.listConsumable.removeObservers(viewLifecycleOwner)
         viewModel.categoryIdSelected.removeObservers(viewLifecycleOwner)
@@ -62,6 +61,9 @@ class CategoryConsumableFragment : BaseFragment<FragmentCategoryConsumableBindin
 
     @SuppressLint("NotifyDataSetChanged")
     private fun initData(){
+        if (listLockerSelected == null){
+            listLockerSelected = ArrayList()
+        }
         mViewDataBinding?.rvCategories?.adapter = categoryAdapter
         mViewDataBinding?.rvConsumables?.adapter = consumableAdapter
 
@@ -82,8 +84,8 @@ class CategoryConsumableFragment : BaseFragment<FragmentCategoryConsumableBindin
 
         viewModel.lockers.observe(viewLifecycleOwner) {
             if (it.isNotEmpty()){
-                listLockerSelected.clear()
-                listLockerSelected.addAll(it)
+                listLockerSelected?.clear()
+                listLockerSelected?.addAll(it)
                 openAvailableLocker()
                 viewModel.lockers.value = ArrayList()
             }
@@ -93,8 +95,14 @@ class CategoryConsumableFragment : BaseFragment<FragmentCategoryConsumableBindin
     override fun onClick(v: View?) {
         if (checkDebouncedClick()) {
             when (v?.id) {
-                R.id.rl_home -> activity?.finish()
-                R.id.iv_back -> activity?.supportFragmentManager?.popBackStack()
+                R.id.rl_home -> {
+                    listLockerSelected = null
+                    activity?.finish()
+                }
+                R.id.iv_back -> {
+                    listLockerSelected = null
+                    activity?.supportFragmentManager?.popBackStack()
+                }
             }
         }
     }

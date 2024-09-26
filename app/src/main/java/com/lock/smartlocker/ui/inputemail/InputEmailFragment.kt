@@ -91,7 +91,7 @@ class InputEmailFragment : BaseFragment<FragmentInputEmailBinding, InputEmailVie
             Log.d("InputOTPFragment", System.currentTimeMillis().toString())
             when (v?.id) {
                 R.id.rl_home -> activity?.finish()
-                R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
+                R.id.iv_back -> activity?.supportFragmentManager?.popBackStack()
                 R.id.btn_process -> {
                     if (isClicked.not()) {
                         isClicked = true
