@@ -17,6 +17,8 @@
 package com.lock.smartlocker.facedetector
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
@@ -26,6 +28,8 @@ import com.google.mlkit.vision.face.Face
 import com.google.mlkit.vision.face.FaceDetection
 import com.google.mlkit.vision.face.FaceDetector
 import com.google.mlkit.vision.face.FaceDetectorOptions
+import java.io.File
+import java.io.FileOutputStream
 
 /** Face Detector Demo.  */
 class FaceDetectorProcessor(context: Context, detectorOptions: FaceDetectorOptions?) :
@@ -35,7 +39,8 @@ class FaceDetectorProcessor(context: Context, detectorOptions: FaceDetectorOptio
     private val handler = Handler(Looper.getMainLooper())
     private var delayRunnable: Runnable? = null
     private var isMultiFace = false
-    private val minFaceSize = 0.1f // Example minimum face size, adjust as needed
+    private val minFaceSize = 1f
+    private val context = context.applicationContext
 
     init {
         val options = detectorOptions
@@ -66,9 +71,41 @@ class FaceDetectorProcessor(context: Context, detectorOptions: FaceDetectorOptio
         } else if (faces.size == 1) {
             graphicOverlay.add(FaceGraphic(graphicOverlay, faces[0], false))
             if (isMultiFace.not()) {
-                    logExtrasForTesting(faces[0])
-                    callback?.onOneFace()
+                if ((-10 < faces[0].headEulerAngleX && faces[0].headEulerAngleX < 12) &&
+                    (-10 < faces[0].headEulerAngleY && faces[0].headEulerAngleY < 10) &&
+                    (-4 < faces[0].headEulerAngleZ && faces[0].headEulerAngleZ < 4)
+                ) {
+                    if (isSuccess.not()) {
+                        isSuccess = true
+                        captureFaceBitmap(graphicOverlay, faces[0])
+                        logExtrasForTesting(faces[0])
+                    }
+                }
+                callback?.onOneFace()
             }
+        }
+    }
+
+    private fun captureFaceBitmap(graphicOverlay: GraphicOverlay, face: Face) {
+        val fullBitmap = Bitmap.createBitmap(graphicOverlay.width, graphicOverlay.height, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(fullBitmap)
+        graphicOverlay.draw(canvas)
+        // Cắt bitmap để chỉ chứa khuôn mặt
+        val faceBitmap = Bitmap.createBitmap(
+            fullBitmap,
+            face.boundingBox.left,
+            face.boundingBox.top,
+            face.boundingBox.width(),
+            face.boundingBox.height()
+        )
+
+        saveBitmapToFile(faceBitmap)
+    }
+
+    private fun saveBitmapToFile(bitmap: Bitmap) {
+        val file = File(context.getExternalFilesDir(null), "captured_face.jpg")
+        FileOutputStream(file).use { out ->
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)
         }
     }
 
@@ -104,16 +141,9 @@ class FaceDetectorProcessor(context: Context, detectorOptions: FaceDetectorOptio
         }
 
         private fun logExtrasForTesting(face: Face?) {
-            if (isSuccess.not())
-                if (face != null) {
-                    if ((-10 < face.headEulerAngleX && face.headEulerAngleX < 12) &&
-                        (-10 < face.headEulerAngleY && face.headEulerAngleY < 10) &&
-                        (-4 < face.headEulerAngleZ && face.headEulerAngleZ < 4)
-                    ) {
-                        isSuccess = true
-                        callback?.onSuccess()
-                    }
-                }
+            if (face != null) {
+                callback?.onSuccess()
+            }
         }
     }
 }
