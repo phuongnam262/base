@@ -24,7 +24,7 @@ class AdminLoginFragment : BaseFragment<FragmentAdminLoginBinding, AdminLoginVie
         get() = BR.viewmodel
 
     override val viewModel: AdminLoginViewModel
-        get() = ViewModelProvider(requireActivity(), factory)[AdminLoginViewModel::class.java]
+        get() = ViewModelProvider(this, factory)[AdminLoginViewModel::class.java]
     private var isClicked = false
     private var typeOpen : String? = null
 

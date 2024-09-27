@@ -316,7 +316,7 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
         imageProcessor =
             try {
                 Log.i(TAG, "Using Face Detector Processor")
-                val faceDetectorOptions = PreferenceUtils.getFaceDetectorOptions(requireActivity())
+                val faceDetectorOptions = PreferenceUtils.getFaceDetectorOptions(activity)
                 activity?.let { FaceDetectorProcessor(it, faceDetectorOptions) }
             } catch (e: Exception) {
                 Log.e(TAG, "Can not create image processor: FACE_DETECTION", e)

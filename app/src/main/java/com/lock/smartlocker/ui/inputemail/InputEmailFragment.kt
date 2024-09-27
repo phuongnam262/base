@@ -26,7 +26,7 @@ class InputEmailFragment : BaseFragment<FragmentInputEmailBinding, InputEmailVie
         get() = BR.viewmodel
 
     override val viewModel: InputEmailViewModel
-        get() = ViewModelProvider(requireActivity(), factory)[InputEmailViewModel::class.java]
+        get() = ViewModelProvider(this, factory)[InputEmailViewModel::class.java]
 
     companion object {
         const val EMAIL_REGISTER = "email_register"
@@ -91,7 +91,11 @@ class InputEmailFragment : BaseFragment<FragmentInputEmailBinding, InputEmailVie
             Log.d("InputOTPFragment", System.currentTimeMillis().toString())
             when (v?.id) {
                 R.id.rl_home -> activity?.finish()
-                R.id.iv_back -> activity?.supportFragmentManager?.popBackStack()
+                R.id.iv_back -> {
+                    viewModel.email.value = ""
+                    viewModel.showStatusText.value = false
+                    activity?.supportFragmentManager?.popBackStack()
+                }
                 R.id.btn_process -> {
                     if (isClicked.not()) {
                         isClicked = true

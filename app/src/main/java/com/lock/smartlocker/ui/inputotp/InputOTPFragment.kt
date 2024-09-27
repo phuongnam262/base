@@ -24,7 +24,7 @@ class InputOTPFragment : BaseFragment<FragmentInputOtpBinding, InputOTPViewModel
         get() = BR.viewmodel
 
     override val viewModel: InputOTPViewModel
-        get() = ViewModelProvider(requireActivity(), factory)[InputOTPViewModel::class.java]
+        get() = ViewModelProvider(this, factory)[InputOTPViewModel::class.java]
 
     private var isClicked = false
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -56,7 +56,11 @@ class InputOTPFragment : BaseFragment<FragmentInputOtpBinding, InputOTPViewModel
         if (checkDebouncedClick()) {
             when (v?.id) {
                 R.id.rl_home -> activity?.finish()
-                R.id.iv_back -> activity?.supportFragmentManager?.popBackStack()
+                R.id.iv_back -> {
+                    viewModel.showStatusText.value = false
+                    viewModel.otpText.value = ""
+                    activity?.supportFragmentManager?.popBackStack()
+                }
                 R.id.btn_process -> {
                     if (isClicked.not()) {
                         isClicked = true

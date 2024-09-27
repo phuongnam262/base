@@ -30,7 +30,7 @@
             android:id="@+id/tv_header_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/enter_serial_number_verify"
+            android:text="@{viewmodel.isCreateItem ? @string/enter_serial_number_new: @string/enter_serial_number_verify}"
             android:textColor="@color/colorBlack"
             android:layout_marginHorizontal="@dimen/dp_50"
             android:layout_marginVertical="@dimen/dp_10"
@@ -77,7 +77,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="@dimen/dp_20"
-            app:imageUrl="@{viewmodel.modelImage}"
+            app:isUpdateItem="@{viewmodel.isUpdateItem}"
+            app:isReturnFlow="@{viewmodel.isReturnFlow}"
             app:itemReturn="@{viewmodel.itemReturnData}"
             android:layout_marginHorizontal="@dimen/dp_30"/>
 

@@ -1,9 +1,7 @@
 package com.lock.smartlocker.ui.input_serial_number
 
 import android.os.Bundle
-import android.view.KeyEvent
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
@@ -35,9 +33,8 @@ class InputSerialNumberFragment : BaseFragment<FragmentInputSerialNumberBinding,
         get() = BR.viewmodel
 
     override val viewModel: InputSerialNumberViewModel
-        get() = ViewModelProvider(requireActivity(), factory)[InputSerialNumberViewModel::class.java]
+        get() = ViewModelProvider(this, factory)[InputSerialNumberViewModel::class.java]
 
-    private var isReturnFlow = true
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.scanSerialNumberListener = this
@@ -55,44 +52,49 @@ class InputSerialNumberFragment : BaseFragment<FragmentInputSerialNumberBinding,
         mViewDataBinding?.bottomMenu?.rlHome?.setOnClickListener(this)
         mViewDataBinding?.bottomMenu?.btnProcess?.setOnClickListener(this)
         mViewDataBinding?.headerBar?.ivBack?.setOnClickListener(this)
-        mViewDataBinding?.etSerialNumber?.setOnKeyListener(object : View.OnKeyListener {
-            override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
-                if (event?.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-                    // Xử lý dữ liệu đầu vào từ thiết bị quét thẻ
-                    val inputData =  mViewDataBinding?.etSerialNumber?.text.toString()
-                    Toast.makeText(activity, "Scanned data: $inputData", Toast.LENGTH_SHORT).show()
-                    return true
-                }
-                return false
-            }
-        })
+        viewModel.enableButtonProcess.value = true
     }
 
     private fun initData(){
         if (arguments?.getString(TYPE_INPUT_SERIAL) != null) {
             viewModel.typeInput.value = arguments?.getString(TYPE_INPUT_SERIAL)
-            isReturnFlow = false
-        }else viewModel.typeInput.value = ConstantUtils.TYPE_RETURN
+        }else {
+            viewModel.isReturnFlow = true
+            viewModel.typeInput.value = ConstantUtils.TYPE_RETURN
+        }
     }
 
     override fun onClick(v: View?) {
         if (checkDebouncedClick()) {
             when (v?.id) {
                 R.id.rl_home -> activity?.finish()
-                R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
+                R.id.iv_back -> {
+                    viewModel.serialNumber.value = null
+                    viewModel.showStatusText.value = false
+                    viewModel.isItemDetailVisible.value = false
+                    viewModel.isCreateItem.value = false
+                    viewModel.isUpdateItem.value = false
+                    activity?.onBackPressedDispatcher?.onBackPressed()
+                }
                 R.id.btn_process -> {
                     val newSerialNumber = viewModel.serialNumber.value
-                    if (isReturnFlow) {
-                        if (viewModel.isItemDetailVisible.value == true && newSerialNumber?.lowercase() == viewModel.itemReturnData.value?.serialNumber?.lowercase()) {
-                            showDialogConfirm(getString(R.string.dialog_attention))
-                        } else {
+                    if (viewModel.isReturnFlow) {
+                        if (newSerialNumber?.lowercase() != viewModel.itemReturnData.value?.serialNumber?.lowercase()
+                            || viewModel.itemReturnData.value == null){
                             viewModel.getItemReturn()
+                        }else if (viewModel.isItemDetailVisible.value == true && newSerialNumber?.lowercase() == viewModel.itemReturnData.value?.serialNumber?.lowercase()) {
+                            showDialogConfirm(getString(R.string.dialog_attention))
                         }
                     } else {
-                        if (viewModel.isItemDetailVisible.value == true && newSerialNumber?.lowercase() == viewModel.itemReturnData.value?.serialNumber?.lowercase()) {
+                        if (newSerialNumber?.lowercase() != viewModel.itemReturnData.value?.serialNumber?.lowercase()
+                            || viewModel.itemReturnData.value == null){
+                            viewModel.getItemTopup()
+                        }else if (viewModel.isItemDetailVisible.value == true && newSerialNumber?.lowercase() == viewModel.itemReturnData.value?.serialNumber?.lowercase()) {
                             navigateToSelectAvailableLockerFragment()
                         } else {
-                            viewModel.getItemTopup()
+                            if (viewModel.isItemDetailVisible.value == true && newSerialNumber?.lowercase() != viewModel.itemReturnData.value?.serialNumber?.lowercase()) {
+                                //gonew
+                            }
                         }
                     }
                 }
@@ -122,7 +124,7 @@ class InputSerialNumberFragment : BaseFragment<FragmentInputSerialNumberBinding,
             putSerializable( RETURN_ITEM_REQUEST_KEY, viewModel.itemReturnData.value)
             putString( TYPE_INPUT_SERIAL, viewModel.typeInput.value)
         }
-        if(isReturnFlow)
+        if(viewModel.isReturnFlow)
             navigateTo(R.id.action_inputSerialNumberFragment_to_selectAvailableLockerFragment, bundle)
         else navigateTo(R.id.action_inputSerialNumberFragment2_to_selectAvailableLockerFragment2, bundle)
     }

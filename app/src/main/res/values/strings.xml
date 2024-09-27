@@ -109,7 +109,13 @@
     <!-- Scan serial number   -->
     <string name="scan_or_enter_serial_number">Scan or Enter Serial Number</string>
     <string name="enter_serial_number_verify">Please scan the serial number using the barcode reader below or enter it manually.</string>
+    <string name="enter_serial_number_new">Please scan the serial number using the barcode reader below or enter it manually.\nIf the item is added to the LMS, its information will be displayed.\nIf the serial number is not found, you can create a new item and place it in the locker.</string>
     <string name="enter_serial_number">Enter Serial Number</string>
+    <string name="update_button">UPDATE</string>
+    <string name="item_serial_number">SERIAL NUMBER</string>
+    <string name="item_model">MODEL</string>
+    <string name="item_category">CATEGORY</string>
+    <string name="item_loanee_email">LOANEE EMAIL</string>
     <string name="deposit_item">Deposit Item</string>
     <string name="deposit_item_info">Please deposit the item into the opening locker and close the door.\nLocker will auto-trigger confirmation after 10 seconds or when you tap confirm button.</string>
     <string name="door_has_not_been_closed">Door has not been closed. Tap CONFIRM to continue.</string>

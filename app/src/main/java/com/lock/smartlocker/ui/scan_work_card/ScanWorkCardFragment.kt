@@ -73,7 +73,11 @@ class ScanWorkCardFragment : BaseFragment<FragmentScanWorkCardBinding, ScanWorkC
                     else viewModel.checkCardNumber()
                 }
                 R.id.rl_home -> activity?.finish()
-                R.id.iv_back -> activity?.supportFragmentManager?.popBackStack()
+                R.id.iv_back -> {
+                    viewModel.showStatusText.value = false
+                    viewModel.workCardText.value = ""
+                    activity?.supportFragmentManager?.popBackStack()
+                }
 
             }
         }
