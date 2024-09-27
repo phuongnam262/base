@@ -59,6 +59,7 @@ class RegisterFaceViewModel(
                 getSearchResponse.errorCode.let {
                     if (it == ConstantUtils.ERROR_CODE_SUCCESS) {
                         if (getSearchResponse.result != null) {
+                            mOtherError.postValue("Similar : ${getSearchResponse.result.similar}")
                             if (getSearchResponse.result.similar < 0.7) {
                                 addPerson(strBase64)
                             } else {
