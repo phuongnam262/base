@@ -57,7 +57,7 @@ class RecognizeFaceViewModel(
                 getSearchResponse.errorCode.let {
                     if (it == ConstantUtils.ERROR_CODE_SUCCESS) {
                         if (getSearchResponse.result != null) {
-                            if (getSearchResponse.result.similar < 0.7) {
+                            if (getSearchResponse.result.similar < 0.95) {
                                 mStatusText.postValue(R.string.error_no_face_detect)
                                 recognizeFaceListener?.faceExited()
                             } else {
