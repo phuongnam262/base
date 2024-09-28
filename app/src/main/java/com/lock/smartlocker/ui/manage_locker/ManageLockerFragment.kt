@@ -74,7 +74,7 @@ class ManageLockerFragment : BaseFragment<FragmentManageLockerBinding, ManageLoc
         if (checkDebouncedClick()) {
             when (v?.id) {
                 R.id.rl_home -> activity?.finish()
-                R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
+                R.id.iv_back -> activity?.supportFragmentManager?.popBackStack()
                 R.id.btn_using -> {
                     viewModel.openAllLocker()
                 }

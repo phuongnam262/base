@@ -75,7 +75,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
         if (checkDebouncedClick()) {
             when (v?.id) {
                 R.id.rl_home -> activity?.finish()
-                R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
+                R.id.iv_back -> activity?.supportFragmentManager?.popBackStack()
             }
         }
     }

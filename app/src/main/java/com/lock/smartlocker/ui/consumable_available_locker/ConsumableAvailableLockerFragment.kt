@@ -44,6 +44,7 @@ class ConsumableAvailableLockerFragment : BaseFragment<FragmentConsumableAvailab
     override fun onDestroyView() {
         super.onDestroyView()
         viewModel.consumableAvailableLockerListener = null
+        viewModel.lockers.value = null
     }
 
     private fun initView(){

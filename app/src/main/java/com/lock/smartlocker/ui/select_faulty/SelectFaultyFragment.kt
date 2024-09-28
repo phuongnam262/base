@@ -82,7 +82,7 @@ class SelectFaultyFragment : BaseFragment<FragmentSelectFaultyBinding, SelectFau
         if (checkDebouncedClick()) {
             when (v?.id) {
                 R.id.rl_home -> activity?.finish()
-                R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
+                R.id.iv_back -> activity?.supportFragmentManager?.popBackStack()
                 R.id.btn_process -> {
                     navigateToSelectAvailableLockerFragment()
                 }

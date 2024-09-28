@@ -1,13 +1,9 @@
 package com.lock.smartlocker.ui.input_serial_number
 
 import androidx.lifecycle.MutableLiveData
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.lock.smartlocker.R
 import com.lock.smartlocker.data.entities.request.GetItemReturnRequest
-import com.lock.smartlocker.data.entities.responses.GetListCategoryResponse
 import com.lock.smartlocker.data.models.ItemReturn
-import com.lock.smartlocker.data.preference.PreferenceHelper
 import com.lock.smartlocker.data.repositories.ReturnRepository
 import com.lock.smartlocker.ui.base.BaseViewModel
 import com.lock.smartlocker.util.ConstantUtils
@@ -18,15 +14,17 @@ class InputSerialNumberViewModel(
 ) : BaseViewModel() {
     var scanSerialNumberListener: InputSerialNumberListener? = null
     val serialNumber = MutableLiveData<String>()
-
-    val modelImage = MutableLiveData<String?>("")
+    var isReturnFlow = false
     val itemReturnData = MutableLiveData<ItemReturn?>()
     val isItemDetailVisible = MutableLiveData(false)
+    val isUpdateItem = MutableLiveData(false)
+    val isCreateItem = MutableLiveData(false)
     val typeInput = MutableLiveData<String?>()
 
     fun getItemReturn() {
         ioScope.launch {
             if (serialNumber.value.isNullOrEmpty()) {
+                isItemDetailVisible.postValue(false)
                 mStatusText.postValue(R.string.error_input_serial_empty)
                 return@launch
             }
@@ -39,8 +37,8 @@ class InputSerialNumberViewModel(
                         data.reasonFaulty = ""
                         showStatusText.postValue(false)
                         itemReturnData.postValue(data)
+                        isUpdateItem.postValue(false)
                         isItemDetailVisible.postValue(true)
-                        modelImage.postValue(getModelImageUrl(data.modelId))
                     } else {
                         isItemDetailVisible.postValue(false)
                     }
@@ -55,9 +53,12 @@ class InputSerialNumberViewModel(
     fun getItemTopup() {
         ioScope.launch {
             if (serialNumber.value.isNullOrEmpty()) {
+                isItemDetailVisible.postValue(false)
+                isUpdateItem.postValue(false)
+                isCreateItem.postValue(false)
                 mStatusText.postValue(R.string.error_input_serial_empty)
                 return@launch
-            }
+            }else showStatusText.postValue(false)
             mLoading.postValue(true)
             val param = GetItemReturnRequest()
             param.serial_number = serialNumber.value
@@ -68,28 +69,39 @@ class InputSerialNumberViewModel(
                         showStatusText.postValue(false)
                         itemReturnData.postValue(data)
                         isItemDetailVisible.postValue(true)
-                        modelImage.postValue(getModelImageUrl(data.modelId))
+                        isUpdateItem.postValue(true)
+                        isCreateItem.postValue(false)
                     } else {
                         isItemDetailVisible.postValue(false)
                     }
                 } else {
-                    handleError(status)
-                    isItemDetailVisible.postValue(false)
+                    if (status == ConstantUtils.SERIAL_NUMBER_INVALID_1) {
+                        val itemReturn = ItemReturn(
+                            transactionId = "",
+                            serialNumber = serialNumber.value ?: "",
+                            modelName = "",
+                            modelId = "",
+                            categoryName = "",
+                            categoryId = "",
+                            loaneeEmail = "",
+                            modelImage = "",
+                            type = 0,
+                            lockerId = "",
+                            reasonFaulty = ""
+                        )
+                        itemReturnData.postValue(itemReturn)
+                        isUpdateItem.postValue(false)
+                        isCreateItem.postValue(true)
+                        isItemDetailVisible.postValue(true)
+                    }
+                    else {
+                        handleError(status)
+                        isUpdateItem.postValue(false)
+                        isItemDetailVisible.postValue(false)
+                    }
                 }
             }
         }.invokeOnCompletion { mLoading.postValue(false) }
-    }
-
-    private fun getModelImageUrl(modelId: String) : String? {
-        val jsonCategory = PreferenceHelper.getString(ConstantUtils.LIST_CATEGORY, "")
-        val categoriesResponseType = object : TypeToken<GetListCategoryResponse>() {}.type
-        val categoriesResponse: GetListCategoryResponse = Gson().fromJson(jsonCategory, categoriesResponseType)
-
-        val model = categoriesResponse.categories
-            .flatMap { category -> category.models }
-            .firstOrNull { model -> model.modelId == modelId }
-
-        return model?.image
     }
 }
 

@@ -107,9 +107,6 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
                 cameraProvider = provider
                 bindAllCameraUseCases()
             }
-        mViewDataBinding?.headerBar?.ivBack?.setOnClickListener {
-            activity?.onBackPressedDispatcher?.onBackPressed()
-        }
         faceDetectorProcessor.setCallback(this)
     }
 
@@ -167,7 +164,7 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
         if (checkDebouncedClick()) {
             when (v?.id) {
                 R.id.rl_home -> activity?.finish()
-                R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
+                R.id.iv_back -> activity?.supportFragmentManager?.popBackStack()
                 R.id.btn_process -> {
                     if (isExited) {
                         turnOnLight(1)

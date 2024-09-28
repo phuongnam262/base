@@ -47,6 +47,7 @@
         <item name="android:padding">@dimen/dp_5</item>
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
+        <item name="android:stateListAnimator">@null</item>
     </style>
 
     <style name="CustomEditTextStyle" parent="Widget.AppCompat.EditText">

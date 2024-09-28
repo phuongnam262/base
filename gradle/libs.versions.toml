@@ -16,6 +16,7 @@ junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 appcompat = "1.7.0"
 kotlinxCoroutinesCore = "1.7.3"
+leakcanaryAndroid = "3.0-alpha-8"
 lifecycleExtensions = "2.4.1"
 lifecycleEx = "2.2.0"
 lifecycleViewmodelKtx = "2.8.4"
@@ -29,7 +30,7 @@ activity = "1.9.1"
 navigationUiKtxVersion = "2.7.7"
 preferenceKtx = "1.2.1"
 preferenceKtxVersion = "1.2.1"
-retrofit = "2.9.0"
+retrofit = "2.11.0"
 roomRuntime = "2.6.1"
 securityCrypto = "1.1.0-alpha06"
 
@@ -70,6 +71,7 @@ kodein-di-framework-android-x = { module = "org.kodein.di:kodein-di-framework-an
 kodein-di-generic-jvm = { module = "org.kodein.di:kodein-di-generic-jvm", version.ref = "kodeinDiGenericJvm" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesCore" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
+leakcanary-android = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakcanaryAndroid" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }

@@ -24,7 +24,7 @@ class AdminLoginFragment : BaseFragment<FragmentAdminLoginBinding, AdminLoginVie
         get() = BR.viewmodel
 
     override val viewModel: AdminLoginViewModel
-        get() = ViewModelProvider(requireActivity(), factory)[AdminLoginViewModel::class.java]
+        get() = ViewModelProvider(this, factory)[AdminLoginViewModel::class.java]
     private var isClicked = false
     private var typeOpen : String? = null
 
@@ -63,7 +63,7 @@ class AdminLoginFragment : BaseFragment<FragmentAdminLoginBinding, AdminLoginVie
         if (checkDebouncedClick()) {
             when (v?.id) {
                 R.id.rl_home -> activity?.finish()
-                R.id.iv_back -> activity?.onBackPressedDispatcher?.onBackPressed()
+                R.id.iv_back -> activity?.finish()
                 R.id.btn_process -> {
                     if (isClicked.not()) {
                         isClicked = true

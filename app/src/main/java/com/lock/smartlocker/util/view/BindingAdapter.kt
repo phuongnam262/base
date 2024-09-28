@@ -43,8 +43,8 @@ fun TextView.setTextAny(value : Any) {
 }
 
 @BindingAdapter("imageUrl")
-fun loadImage(view: ImageView, imageUrl: String) {
-    if (imageUrl.isNotEmpty() && imageUrl.isNotBlank())
+fun loadImage(view: ImageView, imageUrl: String? = "") {
+    if (imageUrl?.isNotEmpty() == true && imageUrl.isNotBlank())
         Glide.with(view.context)
         .load(imageUrl)
         .diskCacheStrategy(DiskCacheStrategy.RESOURCE)

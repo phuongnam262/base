@@ -48,6 +48,13 @@ class CartConsumableFragment : BaseFragment<FragmentCartConsumableBinding, CartC
 
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        viewModel.listCartItem.value = null
+        viewModel.listCartItem.removeObservers(viewLifecycleOwner)
+        viewModel.listLockerInfo.removeObservers(viewLifecycleOwner)
+    }
+
     private fun initData(){
         mViewDataBinding?.rvCartItems?.adapter = cartAdapter
         viewModel.listCartItem.value = CategoryConsumableCollectFragment.listCartItem
@@ -66,7 +73,7 @@ class CartConsumableFragment : BaseFragment<FragmentCartConsumableBinding, CartC
                     putString(ConstantUtils.TRANSACTION_ID, viewModel.transactionId.value)
                 }
                 navigateTo(R.id.action_cartConsumableFragment_to_collectConsumableItemFragment, bundle,)
-                CategoryConsumableCollectFragment.listCartItem.clear()
+                CategoryConsumableCollectFragment.listCartItem = null
             }
         }
     }
@@ -75,7 +82,7 @@ class CartConsumableFragment : BaseFragment<FragmentCartConsumableBinding, CartC
         if (checkDebouncedClick()) {
             when (v?.id) {
                 R.id.rl_home -> {
-                    CategoryConsumableCollectFragment.listCartItem.clear()
+                    CategoryConsumableCollectFragment.listCartItem = null
                     activity?.finish()
                 }
 

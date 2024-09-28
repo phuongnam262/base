@@ -112,7 +112,13 @@
     <!-- Scan serial number   -->
     <string name="scan_or_enter_serial_number">Quét hoặc Nhập Số sê-ri</string>
     <string name="enter_serial_number_verify">Vui lòng quét số sê-ri bằng đầu đọc mã vạch bên dưới hoặc nhập thủ công..</string>
+    <string name="enter_serial_number_new">Vui lòng quét số sê-ri bằng đầu đọc mã vạch bên dưới hoặc nhập thủ công.\nNếu đồ dùng được thêm vào LMS, thông tin của đồ dùng đó sẽ được hiển thị.\nNếu không tìm thấy số sê-ri, bạn có thể tạo đồ dùng mới và đặt vào tủ khóa.</string>
     <string name="enter_serial_number">Nhập số sê-ri</string>
+    <string name="update_button">CẬP NHẬT</string>
+    <string name="item_serial_number">SỐ SÊ-RI</string>
+    <string name="item_model">MODEL</string>
+    <string name="item_category">DANH MỤC</string>
+    <string name="item_loanee_email">EMAIL NGƯỜI MƯỢN</string>
     <string name="deposit_item">Gửi Đồ Dùng</string>
     <string name="deposit_item_info">Vui lòng đặt đồ dùng vào tủ khóa đang mở và đóng cửa.\nTủ khóa sẽ tự động kích hoạt xác nhận sau 10 giây hoặc khi bạn nhấn nút xác nhận.</string>
     <string name="door_has_not_been_closed">Cửa chưa được đóng. Nhấn XÁC NHẬN để tiếp tục..</string>

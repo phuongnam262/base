@@ -47,7 +47,7 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel
     }
 
     companion object{
-        var listCartItem = ArrayList<CartItem>()
+        var listCartItem: ArrayList<CartItem>? = null
     }
 
     @SuppressLint("SetTextI18n")
@@ -87,8 +87,10 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel
 
     @SuppressLint("NotifyDataSetChanged")
     private fun initData(){
+        if (listCartItem == null) {
+            listCartItem = ArrayList()
+        }
         viewModel.listCartItem.value = listCartItem
-
         if (arguments?.getString(ConstantUtils.TYPE_OPEN) != null) {
             if (arguments?.getString(ConstantUtils.TYPE_OPEN) == ConstantUtils.TYPE_LOAN) {
                 viewModel.loadAvailableItem(1)
@@ -138,7 +140,10 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel
     override fun onClick(v: View?) {
         if (checkDebouncedClick()) {
             when (v?.id) {
-                R.id.rl_home -> activity?.finish()
+                R.id.rl_home -> {
+                    listCartItem = null
+                    activity?.finish()
+                }
                 R.id.rl_item -> {}
                 R.id.rl_cart -> {
                     val bundle = Bundle().apply {
