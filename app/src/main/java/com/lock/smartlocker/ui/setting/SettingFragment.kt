@@ -7,7 +7,6 @@ import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
 import com.lock.smartlocker.data.preference.PreferenceHelper
 import com.lock.smartlocker.databinding.FragmentSettingBinding
-import com.lock.smartlocker.facedetector.preference.PreferenceUtils
 import com.lock.smartlocker.ui.base.BaseFragment
 import com.lock.smartlocker.util.ConstantUtils
 import com.lock.smartlocker.util.KioskModeHelper

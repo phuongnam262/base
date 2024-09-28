@@ -2,8 +2,7 @@ package com.lock.smartlocker.ui.register_face
 
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.net.Uri
+import android.graphics.Matrix
 import android.os.Bundle
 import android.util.Base64
 import android.util.Log
@@ -13,14 +12,15 @@ import android.widget.Toast
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageCapture
-import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.ImageProxy
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.google.mlkit.common.MlKitException
+import com.google.mlkit.vision.face.Face
 import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
 import com.lock.smartlocker.data.preference.PreferenceHelper
@@ -39,9 +39,6 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 import java.io.ByteArrayOutputStream
-import java.io.File
-import java.io.FileInputStream
-import java.io.FileNotFoundException
 
 
 @SuppressLint("UnsafeOptInUsageError")
@@ -62,9 +59,9 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
     private var analysisUseCase: ImageAnalysis? = null
     private var imageProcessor: VisionImageProcessor? = null
     private var needUpdateGraphicOverlayImageSourceInfo = false
-    private var lensFacing = CameraSelector.LENS_FACING_FRONT
-    private var rotateCamera = Surface.ROTATION_0
-    private var rotateDetect = Surface.ROTATION_0
+    private var lensFacing = CameraSelector.LENS_FACING_EXTERNAL
+    private var rotateCamera = Surface.ROTATION_270
+    private var rotateDetect = Surface.ROTATION_90
     private var cameraSelector: CameraSelector? = null
     private var imageCapture: ImageCapture? = null
     private var isExited: Boolean = false
@@ -87,6 +84,7 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
         viewModel.titlePage.postValue(getString(R.string.register_face))
         mViewDataBinding?.bottomMenu?.rlHome?.setOnClickListener(this)
         mViewDataBinding?.bottomMenu?.btnProcess?.setOnClickListener(this)
+        mViewDataBinding?.bottomMenu?.enableButtonProcess
         mViewDataBinding?.headerBar?.ivBack?.setOnClickListener(this)
 
         turnOnLight(1)
@@ -180,7 +178,10 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
                         viewModel.showStatusText.value = false
                         FaceDetectorProcessor.isSuccess = false
                         bindAllCameraUseCases()
-                    }else strBase64?.let { detectImageFromImage(it) }
+                    }else {
+                        viewModel.enableButtonProcess.value = false
+                        strBase64?.let { viewModel.detectImage(it) }
+                    }
                 }
             }
         }
@@ -205,6 +206,7 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
     private fun failDetectFace(){
         mViewDataBinding?.bottomMenu?.btnProcess?.text = getString(R.string.btn_retry)
         mViewDataBinding?.ivFrame?.setBackgroundResource(R.drawable.bg_face_fail)
+        viewModel.enableButtonProcess.value = true
         isExited = true
     }
 
@@ -310,13 +312,13 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
                         mViewDataBinding?.graphicOverlay?.setImageSourceInfo(
                             imageProxy.width,
                             imageProxy.height,
-                            true
+                            false
                         )
                     } else {
                         mViewDataBinding?.graphicOverlay?.setImageSourceInfo(
                             imageProxy.height,
                             imageProxy.width,
-                            true
+                            false
                         )
                     }
                     needUpdateGraphicOverlayImageSourceInfo = false
@@ -336,8 +338,43 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
         )
     }
 
-    override fun onSuccess() {
-        captureImage()
+    override fun onSuccess(face: Face) {
+        activity?.let { ContextCompat.getMainExecutor(it) }?.let {
+            analysisUseCase?.setAnalyzer(it) { imageProxy ->
+                val bitmap = imageProxy.toBitmap()
+                val faceBoundingBox = face.boundingBox
+                turnOnLight(0)
+                viewModel.enableButtonProcess.value = true
+                imageProcessor?.run { this.stop() }
+                if (cameraProvider != null) {
+                    cameraProvider!!.unbindAll()
+                }
+                val matrix = Matrix()
+                matrix.postRotate(90f)
+                val rotatedBitmap = Bitmap.createBitmap(
+                    bitmap,
+                    0,
+                    0,
+                    bitmap.width,
+                    bitmap.height,
+                    matrix,
+                    true
+                )
+                val faceBitmap = Bitmap.createBitmap(
+                    rotatedBitmap,
+                    faceBoundingBox.left + 20,
+                    faceBoundingBox.top - 20,
+                    faceBoundingBox.width() - 20,
+                    faceBoundingBox.height() + 50
+                )
+
+                val baos = ByteArrayOutputStream()
+                faceBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+                val b = baos.toByteArray()
+                strBase64 = Base64.encodeToString(b, Base64.DEFAULT)
+                imageProxy.close()
+            }
+        }
     }
 
     override fun onMultiFace() {
@@ -354,71 +391,19 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
 
     override fun onFaceTooSmall() {
         Coroutines.main {
-            viewModel.mStatusText.value = R.string.error_email_exited
+            viewModel.mStatusText.value = R.string.error_small_face_detect
         }
     }
 
-    private fun captureImage() {
-        val imageCapture = imageCapture ?: return
-
-        // Tạo file để lưu ảnh chụp
-        val outputDirectory = getOutputDirectory()
-        val photoFile = File(outputDirectory, "IMG_User.jpg")
-
-        // Cấu hình ImageCapture để lưu ảnh vào file
-        val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
-
-        // Chụp ảnh
-        activity?.let { ContextCompat.getMainExecutor(it) }?.let {
-            imageCapture.takePicture(
-                outputOptions,
-                it,
-                object : ImageCapture.OnImageSavedCallback {
-                    override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-                        val savedUri = Uri.fromFile(photoFile)
-                        Log.e(TAG, savedUri.toString())
-                        imageProcessor?.run { this.stop() }
-                        if (cameraProvider != null) {
-                            cameraProvider!!.unbindAll()
-                        }
-                        strBase64 = encodeImage(photoFile)
-                        turnOnLight(0)
-                        mViewDataBinding?.bottomMenu?.btnProcess?.isEnabled = true
-                        mViewDataBinding?.bottomMenu?.btnProcess?.alpha = 1f
-                    }
-
-                    override fun onError(exception: ImageCaptureException) {
-                        Log.e(TAG, "Lỗi chụp ảnh: ${exception.message}", exception)
-                    }
-                })
+    override fun onFaceTooLarger() {
+        Coroutines.main {
+            viewModel.mStatusText.value = R.string.error_large_face_detect
         }
     }
 
-    private fun detectImageFromImage(strBase64: String) {
-        viewModel.detectImage(strBase64)
-    }
-
-    private fun encodeImage(file: File): String {
-        var fis: FileInputStream? = null
-        try {
-            fis = FileInputStream(file)
-        } catch (e: FileNotFoundException) {
-            e.printStackTrace()
+    override fun onNotCenterFace() {
+        Coroutines.main {
+            viewModel.mStatusText.value = R.string.error_center_face_detect
         }
-        val bm = BitmapFactory.decodeStream(fis)
-        val baos = ByteArrayOutputStream()
-        bm.compress(Bitmap.CompressFormat.JPEG, 20, baos)
-        val b = baos.toByteArray()
-        val encodedImage = Base64.encodeToString(b, Base64.DEFAULT)
-        bm.recycle() // Recycle the bitmap to free up memory
-        return encodedImage
-    }
-
-    private fun getOutputDirectory(): File {
-        val mediaDir = activity?.externalMediaDirs?.firstOrNull()?.let {
-            File(it, resources.getString(R.string.app_name)).apply { mkdirs() }
-        }
-        return if (mediaDir != null && mediaDir.exists())
-            mediaDir else activity?.filesDir!!
     }
 }

@@ -80,7 +80,7 @@
         <Button
             android:id="@+id/btn_disable"
             style="@style/CustomButton"
-            android:layout_width="@dimen/dp_80"
+            android:layout_width="@dimen/dp_100"
             android:backgroundTint="@color/redD0000E"
             android:text="@string/disable_button"
             android:textColor="@color/colorWhite"
@@ -94,7 +94,7 @@
         <Button
             android:id="@+id/btn_enable"
             style="@style/CustomButton"
-            android:layout_width="@dimen/dp_80"
+            android:layout_width="@dimen/dp_100"
             android:backgroundTint="@color/colorBlue"
             android:text="@string/enable_button"
             android:textColor="@color/colorWhite"

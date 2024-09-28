@@ -59,7 +59,7 @@
                 android:gravity="center"
                 android:textColor="@color/colorRed"
                 android:textSize="@dimen/sp_12"
-                android:visibility="@{showStatusText ? View.VISIBLE : View.INVISIBLE}"
+                android:visibility="@{showStatusText ? View.VISIBLE : View.GONE}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -120,7 +120,7 @@
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_using"
                         style="@style/CustomButtonBlack"
-                        android:layout_width="@dimen/dp_120"
+                        android:layout_width="@dimen/dp_130"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:text="@string/using_mail_button" />
@@ -135,7 +135,7 @@
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_retry"
                         style="@style/CustomButtonBlack"
-                        android:layout_width="@dimen/dp_120"
+                        android:layout_width="@dimen/dp_130"
                         android:layout_height="wrap_content"
                         android:text="@string/retry_button"
                         android:visibility="@{showButtonUsingMail ? View.VISIBLE : View.GONE}"
@@ -144,7 +144,7 @@
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_process"
                         style="@style/CustomButtonBlack"
-                        android:layout_width="@dimen/dp_120"
+                        android:layout_width="@dimen/dp_130"
                         android:layout_height="wrap_content"
                         android:text="@string/process_button"
                         android:alpha="@{enableButtonProcess ? 1f : 0.3f}"

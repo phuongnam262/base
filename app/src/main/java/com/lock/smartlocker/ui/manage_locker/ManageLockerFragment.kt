@@ -53,6 +53,7 @@ class ManageLockerFragment : BaseFragment<FragmentManageLockerBinding, ManageLoc
         mViewDataBinding?.bottomMenu?.btnRetry?.setOnClickListener(this)
         mViewDataBinding?.bottomMenu?.btnRetry?.text = getString(R.string.check_door_button)
         mViewDataBinding?.rvLockers?.adapter = lockerAdapter
+        mViewDataBinding?.bottomMenu?.tvStatus?.visibility = View.GONE
     }
 
     private fun initData() {

@@ -31,11 +31,9 @@ class FaceItem(
         val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
 
         // Use Glide to display the Bitmap in the ImageView
-        val requestOptions = RequestOptions()
-            .transform(CircleCrop(), Rotate(90))
+
         Glide.with(context)
             .load(decodedByte)
-            .apply(requestOptions)
             .into(viewBinding.ivAvatar)
         viewBinding.btnRemove.setOnClickListener {
             viewModel.removeFace(model)

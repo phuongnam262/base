@@ -1,24 +1,6 @@
-/*
- * Copyright 2020 Google LLC. All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.lock.smartlocker.facedetector
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.Canvas
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
@@ -28,8 +10,6 @@ import com.google.mlkit.vision.face.Face
 import com.google.mlkit.vision.face.FaceDetection
 import com.google.mlkit.vision.face.FaceDetector
 import com.google.mlkit.vision.face.FaceDetectorOptions
-import java.io.File
-import java.io.FileOutputStream
 
 /** Face Detector Demo.  */
 class FaceDetectorProcessor(context: Context, detectorOptions: FaceDetectorOptions?) :
@@ -39,25 +19,41 @@ class FaceDetectorProcessor(context: Context, detectorOptions: FaceDetectorOptio
     private val handler = Handler(Looper.getMainLooper())
     private var delayRunnable: Runnable? = null
     private var isMultiFace = false
-    private val minFaceSize = 1f
-    private val context = context.applicationContext
+    private val minFaceSize = 0.1f
+    private val maxFaceSize = 0.12f
 
     init {
         val options = detectorOptions
             ?: FaceDetectorOptions.Builder()
                 .setLandmarkMode(FaceDetectorOptions.LANDMARK_MODE_NONE)
                 .setClassificationMode(FaceDetectorOptions.CLASSIFICATION_MODE_NONE)
-                .setMinFaceSize(minFaceSize)
+                .setMinFaceSize(1f)
                 .enableTracking()
                 .build()
 
         detector = FaceDetection.getClient(options)
-
         Log.v(MANUAL_TESTING_LOG, "Face detector options: $options")
     }
 
+    private fun isFaceLargeEnough(face: Face): Int {
+        val boundingBox = face.boundingBox
+        val faceWidth = boundingBox.width().toFloat()
+        val faceHeight = boundingBox.height().toFloat()
+        val imageWidth = 960f
+        val imageHeight = 1280f
+
+        val faceSize = (faceWidth * faceHeight) / (imageWidth * imageHeight)
+
+        if (faceSize in minFaceSize..maxFaceSize)
+            return 1
+        else if (faceSize > maxFaceSize){
+            return 2
+        }
+        return 0
+    }
+
     override fun onSuccess(faces: List<Face>, graphicOverlay: GraphicOverlay) {
-        if (faces.size > 1) {
+        /*if (faces.size > 1) {
             isMultiFace = true
             delayRunnable?.let { handler.removeCallbacks(it) }
             callback?.onMultiFace()
@@ -69,43 +65,42 @@ class FaceDetectorProcessor(context: Context, detectorOptions: FaceDetectorOptio
             }
             handler.postDelayed(delayRunnable!!, 1000)
         } else if (faces.size == 1) {
-            graphicOverlay.add(FaceGraphic(graphicOverlay, faces[0], false))
             if (isMultiFace.not()) {
-                if ((-10 < faces[0].headEulerAngleX && faces[0].headEulerAngleX < 12) &&
-                    (-10 < faces[0].headEulerAngleY && faces[0].headEulerAngleY < 10) &&
-                    (-4 < faces[0].headEulerAngleZ && faces[0].headEulerAngleZ < 4)
-                ) {
-                    if (isSuccess.not()) {
-                        isSuccess = true
-                        captureFaceBitmap(graphicOverlay, faces[0])
-                        logExtrasForTesting(faces[0])
-                    }
+                if (isFaceLargeEnough(faces[0]) == 1) {
+                    graphicOverlay.add(FaceGraphic(graphicOverlay, faces[0], false))
+                    logExtrasForTesting(faces[0])
+                    callback?.onOneFace()
+                } else if (isFaceLargeEnough(faces[0]) == 2) {
+                    graphicOverlay.add(FaceGraphic(graphicOverlay, faces[0], true))
+                    callback?.onFaceTooLarger()
+                } else{
+                    graphicOverlay.add(FaceGraphic(graphicOverlay, faces[0], true))
+                    callback?.onFaceTooSmall()
+                }
+
+            }
+        }*/
+
+        for (face in faces) {
+            val faceCenterX = face.boundingBox.centerX().toFloat()
+            val faceCenterY = face.boundingBox.centerY().toFloat()
+            if ((faceCenterX < 260 && faceCenterX > 220) && (faceCenterY < 340 && faceCenterY > 310) ) {
+                if (isFaceLargeEnough(face) == 1) {
+                    graphicOverlay.add(FaceGraphic(graphicOverlay, face, false))
+                    logExtrasForTesting(face)
+                    callback?.onOneFace()
+                } else if (isFaceLargeEnough(face) == 2) {
+                    graphicOverlay.add(FaceGraphic(graphicOverlay, face, true))
+                    callback?.onFaceTooLarger()
+                } else{
+                    graphicOverlay.add(FaceGraphic(graphicOverlay, face, true))
+                    callback?.onFaceTooSmall()
                 }
                 callback?.onOneFace()
+            }else {
+                graphicOverlay.add(FaceGraphic(graphicOverlay, face, true))
+                callback?.onNotCenterFace()
             }
-        }
-    }
-
-    private fun captureFaceBitmap(graphicOverlay: GraphicOverlay, face: Face) {
-        val fullBitmap = Bitmap.createBitmap(graphicOverlay.width, graphicOverlay.height, Bitmap.Config.ARGB_8888)
-        val canvas = Canvas(fullBitmap)
-        graphicOverlay.draw(canvas)
-        // Cắt bitmap để chỉ chứa khuôn mặt
-        val faceBitmap = Bitmap.createBitmap(
-            fullBitmap,
-            face.boundingBox.left,
-            face.boundingBox.top,
-            face.boundingBox.width(),
-            face.boundingBox.height()
-        )
-
-        saveBitmapToFile(faceBitmap)
-    }
-
-    private fun saveBitmapToFile(bitmap: Bitmap) {
-        val file = File(context.getExternalFilesDir(null), "captured_face.jpg")
-        FileOutputStream(file).use { out ->
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)
         }
     }
 
@@ -141,9 +136,16 @@ class FaceDetectorProcessor(context: Context, detectorOptions: FaceDetectorOptio
         }
 
         private fun logExtrasForTesting(face: Face?) {
-            if (face != null) {
-                callback?.onSuccess()
-            }
+            if (isSuccess.not())
+                if (face != null) {
+                    if ((-10 < face.headEulerAngleX && face.headEulerAngleX < 12) &&
+                        (-10 < face.headEulerAngleY && face.headEulerAngleY < 10) &&
+                        (-4 < face.headEulerAngleZ && face.headEulerAngleZ < 4)
+                    ) {
+                        isSuccess = true
+                        callback?.onSuccess(face)
+                    }
+                }
         }
     }
 }

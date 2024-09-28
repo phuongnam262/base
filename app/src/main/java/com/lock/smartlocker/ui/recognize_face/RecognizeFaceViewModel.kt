@@ -1,5 +1,6 @@
 package com.lock.smartlocker.ui.recognize_face
 
+import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.common.api.ApiException
 import com.lock.smartlocker.R
 import com.lock.smartlocker.data.entities.request.ConsumerLoginRequest
@@ -10,6 +11,7 @@ import com.lock.smartlocker.data.entities.responses.DetectImageResponse
 import com.lock.smartlocker.data.preference.PreferenceHelper
 import com.lock.smartlocker.data.repositories.ManagerRepository
 import com.lock.smartlocker.data.repositories.UserFaceRepository
+import com.lock.smartlocker.facedetector.preference.PreferenceUtils
 import com.lock.smartlocker.ui.base.BaseViewModel
 import com.lock.smartlocker.util.ConstantUtils
 import com.lock.smartlocker.util.NoInternetException
@@ -63,6 +65,7 @@ class RecognizeFaceViewModel(
                             } else {
                                 getSearchResponse.result.personCode?.let { it1 ->
                                     getUserLocker(it1)
+                                    PreferenceHelper.writeString(ConstantUtils.USER_AVATAR, strBase64)
                                 }
                             }
                         } else {
