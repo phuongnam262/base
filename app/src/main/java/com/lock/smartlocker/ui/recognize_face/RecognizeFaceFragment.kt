@@ -201,7 +201,6 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
     }
 
     override fun handleSuccess(name: String?) {
-        mViewDataBinding?.ivFrame?.setBackgroundResource(R.drawable.bg_face_success)
         mViewDataBinding?.bottomMenu?.tvStatus?.text = getString(R.string.welcome_back, name)
         activity?.resources?.getColor(R.color.colorGreen)
             ?.let { mViewDataBinding?.bottomMenu?.tvStatus?.setTextColor(it) }
@@ -210,7 +209,6 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
     }
 
     override fun faceNotFound() {
-        mViewDataBinding?.ivFrame?.setBackgroundResource(R.drawable.bg_face_fail)
     }
 
     override fun consumerLoginSuccess(email: String?) {
@@ -239,7 +237,6 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
     }
 
     override fun faceExited() {
-        mViewDataBinding?.ivFrame?.setBackgroundResource(R.drawable.bg_face_fail)
     }
 
     private fun bindAllCameraUseCases() {

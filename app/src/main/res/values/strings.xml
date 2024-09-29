@@ -129,6 +129,22 @@
     <string name="error_logic">Invalid status logic with serial</string>
     <string name="error_unable_locker">You are unable to return the item at this locker station</string>
 
+    <!-- Create Update New Item   -->
+    <string name="create_new_item">Create New Item</string>
+    <string name="create_new_info">The entered serial number cannot be found. Please follow the steps below to create a new item.\nOnce successful, you can store this item in the locker.</string>
+    <string name="serial_number">SERIAL NUMBER:  %1$s</string>
+    <string name="select_item_type">Select Item Type</string>
+    <string-array name="item_type_options">
+        <item>None</item>
+        <item>Loanable</item>
+        <item>Permanent Collect</item>
+    </string-array>
+    <string name="create_button">CREATE</string>
+    <string name="update_item_information">Update Item Information</string>
+    <string name="update_item_info">Please follow the steps below to update your item information.</string>
+    <string name="item_information">Item Information</string>
+    <string name="item_information_info">This is the item information. You can now store the item in the locker or update its details if needed.</string>
+
     <!-- Faulty reason   -->
     <string name="select_a_faulty">Select A Faulty Reason</string>
     <string name="select_faulty_reason_info">The faulty reason helps the administrator understand the current state of the items.\nIf none of the common reasons match your situation, please enter your own.</string>

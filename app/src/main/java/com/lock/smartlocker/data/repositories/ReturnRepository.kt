@@ -1,6 +1,7 @@
 package com.lock.smartlocker.data.repositories
 
 import com.lock.smartlocker.data.entities.request.GetItemReturnRequest
+import com.lock.smartlocker.data.entities.request.ItemRequest
 import com.lock.smartlocker.data.entities.request.ReturnItemRequest
 import com.lock.smartlocker.data.entities.responses.BaseResponse
 import com.lock.smartlocker.data.entities.responses.ListReturnAvailableLockerResponse
@@ -29,5 +30,13 @@ class ReturnRepository (
 
     suspend fun topupItem(returnItemRequest: ReturnItemRequest) : BaseResponse<Map<String, Any>> {
         return apiRequest { api.provideLockerAPIService().topupItem(returnItemRequest) }
+    }
+
+    suspend fun createItem(itemRequest: ItemRequest) : BaseResponse<Map<String, Any>> {
+        return apiRequest { api.provideLockerAPIService().createItem(itemRequest) }
+    }
+
+    suspend fun updateItem(itemRequest: ItemRequest) : BaseResponse<Map<String, Any>> {
+        return apiRequest { api.provideLockerAPIService().updateItem(itemRequest) }
     }
 }

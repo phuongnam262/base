@@ -41,6 +41,7 @@ import com.lock.smartlocker.ui.returns.ReturnViewModelFactory
 import com.lock.smartlocker.ui.scan_item.ScanItemViewModelFactory
 import com.lock.smartlocker.ui.scan_work_card.ScanWorkCardViewModelFactory
 import com.lock.smartlocker.ui.consumable_available_locker.ConsumableAvailableLockerViewModelFactory
+import com.lock.smartlocker.ui.create_update_item.ItemViewModelFactory
 import com.lock.smartlocker.ui.deposit_consumable.DepositConsumableViewModelFactory
 import com.lock.smartlocker.ui.select_available_locker.SelectAvailableLockerViewModelFactory
 import com.lock.smartlocker.ui.select_faulty.SelectFaultyViewModelFactory
@@ -117,6 +118,7 @@ class LockerApplication : Application(), KodeinAware {
         bind() from provider { InputEmailViewModelFactory(instance(), instance()) }
         bind() from provider { InputOTPViewModelFactory(instance()) }
         bind() from provider { InputSerialNumberViewModelFactory(instance()) }
+        bind() from provider { ItemViewModelFactory(instance()) }
         bind() from provider { ManageLockerViewModelFactory(instance(), instance()) }
         bind() from provider { ManagerMenuViewModelFactory(instance()) }
         bind() from provider { MenuRegisterViewModelFactory() }

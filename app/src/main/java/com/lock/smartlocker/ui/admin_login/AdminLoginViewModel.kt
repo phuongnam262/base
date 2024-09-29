@@ -13,8 +13,8 @@ class AdminLoginViewModel(
     private val managerRepository: ManagerRepository
 ) : BaseViewModel() {
     var showPassword = MutableLiveData<Boolean>()
-    val username = MutableLiveData<String>()
-    val password = MutableLiveData<String>()
+    val username = MutableLiveData<String>("kien")
+    val password = MutableLiveData<String>("Qwert123@")
     var adminLoginListener : AdminLoginListener? = null
     var typeOpen : String? = null
 

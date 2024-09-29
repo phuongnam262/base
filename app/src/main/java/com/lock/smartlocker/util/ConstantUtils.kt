@@ -42,6 +42,9 @@ class ConstantUtils {
         const val TRANSACTION_ID = "TRANSACTION_ID"
         const val LOCKER_INFOS = "LOCKER_INFOS"
 
+        //Topup
+        const val SERIAL_NUMBER = "SERIAL_NUMBER"
+
         //Dialog Confirm
         const val DISABLE_LOCKER = "DISABLE_LOCKER"
         const val ENABLE_LOCKER = "ENABLE_LOCKER"

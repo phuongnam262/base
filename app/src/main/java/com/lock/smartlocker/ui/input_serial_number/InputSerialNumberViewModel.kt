@@ -84,7 +84,7 @@ class InputSerialNumberViewModel(
                             categoryName = "",
                             categoryId = "",
                             loaneeEmail = "",
-                            modelImage = "",
+                            modelImage = "null",
                             type = 0,
                             lockerId = "",
                             reasonFaulty = ""

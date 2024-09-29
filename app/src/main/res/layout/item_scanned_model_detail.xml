@@ -24,13 +24,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_rectangle_rounded"
-        android:padding="@dimen/dp_30">
+        android:padding="@dimen/dp_20">
 
         <ImageView
             android:id="@+id/ivModel"
             imageUrl="@{itemReturn.modelImage}"
-            android:layout_width="@dimen/dp_140"
-            android:layout_height="@dimen/dp_140"
+            android:layout_width="@dimen/dp_130"
+            android:layout_height="@dimen/dp_130"
             android:background="@drawable/bg_border_rectangle_rounded"
             android:scaleType="center"
             app:layout_constraintEnd_toEndOf="parent"
@@ -43,33 +43,30 @@
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/dp_15"
             android:orientation="horizontal"
-            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ivModel">
 
             <TextView
                 android:id="@+id/tvSerialNumberLabel"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/dp_115"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:fontFamily="@font/segoe_ui_regular"
                 android:text="@string/item_serial_number"
                 android:textColor="@color/colorBlack"
-                android:textSize="@dimen/sp_16" />
+                android:textSize="@dimen/sp_14" />
 
             <TextView
                 android:id="@+id/tvSerialNumberValue"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
                 android:background="@drawable/bg_model_item_info"
                 android:fontFamily="@font/segoe_ui_semibold"
                 android:letterSpacing="0.05"
                 android:padding="@dimen/dp_6"
                 android:text="@{itemReturn.serialNumber}"
                 android:textColor="@color/colorBlack"
-                android:textSize="@dimen/sp_16"
+                android:textSize="@dimen/sp_14"
                 tools:text="00032021003232" />
         </LinearLayout>
 
@@ -85,26 +82,24 @@
 
             <TextView
                 android:id="@+id/tvModelLabel"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/dp_115"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:fontFamily="@font/segoe_ui_regular"
                 android:text="@string/item_model"
                 android:textColor="@color/colorBlack"
-                android:textSize="@dimen/sp_16" />
+                android:textSize="@dimen/sp_14" />
 
             <TextView
                 android:id="@+id/tvModelValue"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
                 android:background="@drawable/bg_model_item_info"
                 android:fontFamily="@font/segoe_ui_semibold"
                 android:letterSpacing="0.05"
                 android:padding="@dimen/dp_8"
                 android:text="@{itemReturn.modelName}"
                 android:textColor="@color/colorBlack"
-                android:textSize="@dimen/sp_16"
+                android:textSize="@dimen/sp_14"
                 tools:text="SSD 480GB Sandisk E30" />
         </LinearLayout>
 
@@ -113,7 +108,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/dp_10"
-            android:visibility="gone"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -121,26 +115,24 @@
 
             <TextView
                 android:id="@+id/tvCategoryLabel"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/dp_115"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:fontFamily="@font/segoe_ui_regular"
                 android:text="@string/item_category"
                 android:textColor="@color/colorBlack"
-                android:textSize="@dimen/sp_16" />
+                android:textSize="@dimen/sp_14" />
 
             <TextView
                 android:id="@+id/tvCategoryValue"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
                 android:background="@drawable/bg_model_item_info"
                 android:fontFamily="@font/segoe_ui_semibold"
                 android:letterSpacing="0.05"
                 android:padding="@dimen/dp_8"
                 android:text="@{itemReturn.categoryName}"
                 android:textColor="@color/colorBlack"
-                android:textSize="@dimen/sp_16"
+                android:textSize="@dimen/sp_14"
                 tools:text="HARD DISK" />
         </LinearLayout>
 
@@ -157,25 +149,23 @@
 
             <TextView
                 android:id="@+id/tvLoaneeEmailLabel"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/dp_115"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:fontFamily="@font/segoe_ui_regular"
                 android:text="@string/item_loanee_email"
                 android:textColor="@color/colorBlack"
-                android:textSize="@dimen/sp_16" />
+                android:textSize="@dimen/sp_14" />
 
             <TextView
                 android:id="@+id/tvLoaneeEmailValue"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
                 android:background="@drawable/bg_model_item_info"
                 android:fontFamily="@font/segoe_ui_semibold"
                 android:padding="@dimen/dp_8"
                 android:text="@{itemReturn.loaneeEmail}"
                 android:textColor="@color/colorBlack"
-                android:textSize="@dimen/sp_16" />
+                android:textSize="@dimen/sp_14" />
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatButton

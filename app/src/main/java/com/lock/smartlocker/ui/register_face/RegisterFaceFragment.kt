@@ -185,7 +185,6 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
     }
 
     override fun handleSuccess(personCode: String, email: String) {
-        mViewDataBinding?.ivFrame?.setBackgroundResource(R.drawable.bg_face_success)
         viewModel.showButtonProcess.postValue(false)
         viewModel.titlePage.postValue(getString(R.string.face_register_success))
         mViewDataBinding?.tvHeaderInfo?.text = getString(R.string.face_hello, email)
@@ -202,7 +201,6 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
 
     private fun failDetectFace(){
         mViewDataBinding?.bottomMenu?.btnProcess?.text = getString(R.string.btn_retry)
-        mViewDataBinding?.ivFrame?.setBackgroundResource(R.drawable.bg_face_fail)
         viewModel.enableButtonProcess.value = true
         isExited = true
     }

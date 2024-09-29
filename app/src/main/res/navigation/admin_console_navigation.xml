@@ -113,6 +113,9 @@
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/slide_out"/>
+        <action
+            android:id="@+id/action_inputSerialNumberFragment2_to_itemFragment"
+            app:destination="@id/itemFragment" />
     </fragment>
     <fragment
         android:id="@+id/depositItemFragment2"
@@ -209,5 +212,14 @@
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/slide_out"/>
+    </fragment>
+    <fragment
+        android:id="@+id/itemFragment"
+        android:name="com.lock.smartlocker.ui.create_update_item.ItemFragment"
+        android:label="fragment_item"
+        tools:layout="@layout/fragment_item" >
+        <action
+            android:id="@+id/action_itemFragment_to_selectAvailableLockerFragment2"
+            app:destination="@id/selectAvailableLockerFragment2" />
     </fragment>
 </navigation>

@@ -7,5 +7,6 @@ data class Model(
     @SerializedName("model_name") val modelName: String,
     @SerializedName("limit") val limit: Int,
     @SerializedName("position") val position: Int,
-    @SerializedName("image") val image: String
+    @SerializedName("image") val image: String,
+    var isSelected: Boolean,
 )

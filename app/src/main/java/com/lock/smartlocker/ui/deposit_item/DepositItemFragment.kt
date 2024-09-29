@@ -51,6 +51,7 @@ class DepositItemFragment : BaseFragment<FragmentDepositItemBinding, DepositItem
         mViewDataBinding?.bottomMenu?.btnProcess?.setOnClickListener(this)
         mViewDataBinding?.depositItem?.btnReopen?.setOnClickListener(this)
         mViewDataBinding?.depositItem?.btnChangeLocker?.setOnClickListener(this)
+        viewModel.enableButtonProcess.value = true
     }
 
     private fun initData(){

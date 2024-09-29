@@ -52,6 +52,7 @@ class InputSerialNumberFragment : BaseFragment<FragmentInputSerialNumberBinding,
         mViewDataBinding?.bottomMenu?.rlHome?.setOnClickListener(this)
         mViewDataBinding?.bottomMenu?.btnProcess?.setOnClickListener(this)
         mViewDataBinding?.headerBar?.ivBack?.setOnClickListener(this)
+        mViewDataBinding?.containerItem?.btnUpdate?.setOnClickListener(this)
         viewModel.enableButtonProcess.value = true
     }
 
@@ -88,16 +89,18 @@ class InputSerialNumberFragment : BaseFragment<FragmentInputSerialNumberBinding,
                     } else {
                         if (newSerialNumber?.lowercase() != viewModel.itemReturnData.value?.serialNumber?.lowercase()
                             || viewModel.itemReturnData.value == null){
+
                             viewModel.getItemTopup()
-                        }else if (viewModel.isItemDetailVisible.value == true && newSerialNumber?.lowercase() == viewModel.itemReturnData.value?.serialNumber?.lowercase()) {
+                        }else if (viewModel.isItemDetailVisible.value == true && viewModel.itemReturnData.value?.modelId != "") {
                             navigateToSelectAvailableLockerFragment()
                         } else {
-                            if (viewModel.isItemDetailVisible.value == true && newSerialNumber?.lowercase() != viewModel.itemReturnData.value?.serialNumber?.lowercase()) {
-                                //gonew
+                            if (viewModel.isItemDetailVisible.value == true && viewModel.itemReturnData.value?.modelId == "") {
+                                navigateToItemFragment()
                             }
                         }
                     }
                 }
+                R.id.btn_update -> navigateToItemFragment()
             }
         }
     }
@@ -127,6 +130,13 @@ class InputSerialNumberFragment : BaseFragment<FragmentInputSerialNumberBinding,
         if(viewModel.isReturnFlow)
             navigateTo(R.id.action_inputSerialNumberFragment_to_selectAvailableLockerFragment, bundle)
         else navigateTo(R.id.action_inputSerialNumberFragment2_to_selectAvailableLockerFragment2, bundle)
+    }
+
+    private fun navigateToItemFragment() {
+        val bundle = Bundle().apply {
+            putSerializable(ConstantUtils.SERIAL_NUMBER, viewModel.serialNumber.value)
+        }
+        navigateTo(R.id.action_inputSerialNumberFragment2_to_itemFragment, bundle)
     }
 
 }

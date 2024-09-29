@@ -66,7 +66,7 @@
     <string name="error_card_exited">Thẻ nhân viên đã được đăng ký trên thiết bị này</string>
 
     <!-- Admin Login -->
-    <string name="enter_username_continue">Nhập tên người dùng của bạn để tiếp tục..</string>
+    <string name="enter_username_continue">Nhập tên người dùng của bạn để tiếp tục.</string>
     <string name="username">Tên người dùng:</string>
     <string name="password">Mật khẩu:</string>
     <string name="error_username_empty">Vui lòng nhập tên người dùng</string>
@@ -111,23 +111,39 @@
 
     <!-- Scan serial number   -->
     <string name="scan_or_enter_serial_number">Quét hoặc Nhập Số sê-ri</string>
-    <string name="enter_serial_number_verify">Vui lòng quét số sê-ri bằng đầu đọc mã vạch bên dưới hoặc nhập thủ công..</string>
+    <string name="enter_serial_number_verify">Vui lòng quét số sê-ri bằng đầu đọc mã vạch bên dưới hoặc nhập thủ công.</string>
     <string name="enter_serial_number_new">Vui lòng quét số sê-ri bằng đầu đọc mã vạch bên dưới hoặc nhập thủ công.\nNếu đồ dùng được thêm vào LMS, thông tin của đồ dùng đó sẽ được hiển thị.\nNếu không tìm thấy số sê-ri, bạn có thể tạo đồ dùng mới và đặt vào tủ khóa.</string>
     <string name="enter_serial_number">Nhập số sê-ri</string>
     <string name="update_button">CẬP NHẬT</string>
     <string name="item_serial_number">SỐ SÊ-RI</string>
     <string name="item_model">MODEL</string>
     <string name="item_category">DANH MỤC</string>
-    <string name="item_loanee_email">EMAIL NGƯỜI MƯỢN</string>
+    <string name="item_loanee_email">NGƯỜI MƯỢN</string>
     <string name="deposit_item">Gửi Đồ Dùng</string>
     <string name="deposit_item_info">Vui lòng đặt đồ dùng vào tủ khóa đang mở và đóng cửa.\nTủ khóa sẽ tự động kích hoạt xác nhận sau 10 giây hoặc khi bạn nhấn nút xác nhận.</string>
-    <string name="door_has_not_been_closed">Cửa chưa được đóng. Nhấn XÁC NHẬN để tiếp tục..</string>
+    <string name="door_has_not_been_closed">Cửa chưa được đóng. Nhấn XÁC NHẬN để tiếp tục.</string>
     <string name="error_invalid_serial">Số sê-ri không hợp lệ.</string>
     <string name="dialog_attention">Đồ dùng này có vấn đề gì không?</string>
     <string name="error_input_serial_empty">Vui lòng quét hoặc nhập số sê-ri của đồ dùng</string>
     <string name="serial_number_is_not_available">Số sê-ri này không còn khả dụng nữa</string>
     <string name="error_logic">Bị sai logic ở mã này</string>
     <string name="error_unable_locker">Bạn không thể trả hàng tại trạm tủ khóa này</string>
+
+    <!-- Create Update New Item   -->
+    <string name="create_new_item">Tạo Đồ Dùng Mới</string>
+    <string name="create_new_info">Không tìm thấy số sê-ri đã nhập. Vui lòng làm theo các bước dưới đây để tạo một đồ dùng mới.\nKhi thành công, bạn có thể lưu đồ dùng này trong tủ khóa.</string>
+    <string name="serial_number">SỐ SÊ-RI: %1$s</string>
+    <string name="select_item_type">Chọn loại đồ dùng</string>
+    <string-array name="item_type_options">
+        <item>Không có</item>
+        <item>Có thể mượn</item>
+        <item>Mượn vĩnh viễn</item>
+    </string-array>
+    <string name="create_button">TẠO</string>
+    <string name="update_item_information">Cập Nhật Thông Tin Đồ Dùng</string>
+    <string name="update_item_info">Vui lòng làm theo các bước dưới đây để cập nhật thông tin đồ dùng của bạn.</string>
+    <string name="item_information">Thông Tin Đồ Dùng</string>
+    <string name="item_information_info">Đây là thông tin về đồ dùng. Bây giờ bạn có thể lưu đồ dùng vào tủ khóa hoặc cập nhật thông tin chi tiết nếu cần.</string>
 
     <!-- Faulty reason   -->
     <string name="select_a_faulty">Chọn một lý do lỗi</string>

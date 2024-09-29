@@ -28,6 +28,7 @@ class SelectAvailableLockerViewModel(
 
     fun selectLocker(locker: Locker) {
         _selectedLocker.value = locker
+        enableButtonProcess.postValue(true)
     }
 
     fun loadListAvailableLockers() {
