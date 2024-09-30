@@ -24,7 +24,6 @@ import com.lock.smartlocker.util.CommonUtils
 import com.lock.smartlocker.util.ConstantUtils
 import org.kodein.di.KodeinAware
 import com.lock.smartlocker.BuildConfig
-import com.lock.smartlocker.util.SerialControlManager
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
 import java.util.Calendar
@@ -59,8 +58,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeLis
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //open serial comport
-        SerialControlManager.initialize(this)
         //Data binding
         viewModel.homeListener = this
         viewModel.startTimer()
@@ -105,9 +102,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeLis
 
     override fun onResume() {
         super.onResume()
-        if (SerialControlManager.getSerialControl() == null) {
-            SerialControlManager.initialize(this)
-        }
         viewModel.checkATINOpenServer()
         getLocale()
     }
@@ -264,7 +258,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeLis
 
     override fun onDestroy() {
         super.onDestroy()
-        SerialControlManager.closeComPort()
         viewModel.homeListener = null
     }
 }

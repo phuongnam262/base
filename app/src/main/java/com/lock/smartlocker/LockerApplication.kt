@@ -48,6 +48,7 @@ import com.lock.smartlocker.ui.select_faulty.SelectFaultyViewModelFactory
 import com.lock.smartlocker.ui.setting.SettingViewModelFactory
 import com.lock.smartlocker.ui.splash.SplashViewModelFactory
 import com.lock.smartlocker.ui.thank.ThankViewModelFactory
+import com.lock.smartlocker.util.SerialControlManager
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
@@ -75,9 +76,16 @@ class LockerApplication : Application(), KodeinAware {
 
     override fun onCreate() {
         super.onCreate()
+        //open serial comport
+        SerialControlManager.initialize(this)
         // set default handler exception to catch
         PreferenceHelper.loadPreferences(applicationContext)
         Thread.setDefaultUncaughtExceptionHandler(unCaughtExceptionHandler)
+    }
+
+    override fun onTerminate() {
+        super.onTerminate()
+        SerialControlManager.closeComPort()
     }
 
     override val kodein = Kodein.lazy {
