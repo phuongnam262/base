@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.lock.smartlocker.R
 import com.lock.smartlocker.data.entities.request.ItemRequest
 import com.lock.smartlocker.data.entities.responses.GetListCategoryResponse
 import com.lock.smartlocker.data.models.Category
@@ -20,9 +19,10 @@ class ItemViewModel(
     private val returnRepository: ReturnRepository
 ) : BaseViewModel() {
     var itemListener: ItemListener? = null
-    var itemReturn= MutableLiveData<ItemReturn>()
+    var itemReturn = MutableLiveData<ItemReturn>()
     var serialNumber = MutableLiveData<String>()
     var itemType: Int = 0
+    var showInfoItem = MutableLiveData<Boolean>()
     private val _categories = MutableLiveData<List<Category>>()
     val categories: LiveData<List<Category>> get() = _categories
     private val _models = MutableLiveData<List<Model>>()

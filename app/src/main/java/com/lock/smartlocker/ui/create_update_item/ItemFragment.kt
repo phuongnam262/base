@@ -13,7 +13,6 @@ import com.lock.smartlocker.databinding.FragmentItemBinding
 import com.lock.smartlocker.ui.base.BaseFragment
 import com.lock.smartlocker.ui.create_update_item.adapter.CategoryItem
 import com.lock.smartlocker.ui.create_update_item.adapter.ModelItem
-import com.lock.smartlocker.ui.input_serial_number.InputSerialNumberFragment
 import com.lock.smartlocker.util.ConstantUtils
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
@@ -90,7 +89,20 @@ class ItemFragment : BaseFragment<FragmentItemBinding, ItemViewModel>(),
 
     @SuppressLint("NotifyDataSetChanged")
     private fun initData() {
-        viewModel.itemReturn.value?.serialNumber = arguments?.getString(ConstantUtils.SERIAL_NUMBER)!!
+        val itemReturn = ItemReturn(
+            transactionId = "",
+            serialNumber = arguments?.getString(ConstantUtils.SERIAL_NUMBER)!!,
+            modelName = "",
+            modelId = "",
+            categoryName = "",
+            categoryId = "",
+            loaneeEmail = "",
+            modelImage = "null",
+            type = 0,
+            lockerId = "",
+            reasonFaulty = ""
+        )
+        viewModel.itemReturn.value = itemReturn
         viewModel.serialNumber.value = arguments?.getString(ConstantUtils.SERIAL_NUMBER)
         viewModel.categories.observe(viewLifecycleOwner) { categories ->
             categoryAdapter.update(categories.map {
@@ -138,6 +150,10 @@ class ItemFragment : BaseFragment<FragmentItemBinding, ItemViewModel>(),
     }
 
     override fun handleSuccess() {
-
+        viewModel.showInfoItem.value = true
+        viewModel.itemReturn.value = viewModel.itemReturn.value
+        mViewDataBinding?.bottomMenu?.btnProcess?.text = getString(R.string.process_button)
+        mViewDataBinding?.headerBar?.ivBack?.visibility = View.GONE
+        viewModel.titlePage.postValue(getString(R.string.item_information))
     }
 }
