@@ -144,6 +144,7 @@
     <string name="update_item_info">Please follow the steps below to update your item information.</string>
     <string name="item_information">Item Information</string>
     <string name="item_information_info">This is the item information. You can now store the item in the locker or update its details if needed.</string>
+    <string name="error_serial_existed">Serial Number already exists</string>
 
     <!-- Faulty reason   -->
     <string name="select_a_faulty">Select A Faulty Reason</string>

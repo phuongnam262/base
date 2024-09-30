@@ -2,6 +2,7 @@ package com.lock.smartlocker.ui.input_serial_number
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.ViewModelProvider
 import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
@@ -23,6 +24,7 @@ class InputSerialNumberFragment : BaseFragment<FragmentInputSerialNumberBinding,
         const val CATEGORY_ID_KEY = "category_id"
         const val RETURN_ITEM_REQUEST_KEY = "return_item_request"
         const val TYPE_INPUT_SERIAL = "type_input_serial"
+        const val TYPE_UPDATE = "type_update"
     }
 
 
@@ -54,6 +56,12 @@ class InputSerialNumberFragment : BaseFragment<FragmentInputSerialNumberBinding,
         mViewDataBinding?.headerBar?.ivBack?.setOnClickListener(this)
         mViewDataBinding?.containerItem?.btnUpdate?.setOnClickListener(this)
         viewModel.enableButtonProcess.value = true
+        mViewDataBinding?.etSerialNumber?.doAfterTextChanged {
+            viewModel.itemReturnData.value = null
+            mViewDataBinding?.containerItem?.btnUpdate?.isEnabled = false
+            mViewDataBinding?.containerItem?.btnUpdate?.alpha = 0.3f
+            mViewDataBinding?.containerItem?.ivModel?.setImageBitmap(null)
+        }
     }
 
     private fun initData(){
@@ -95,12 +103,12 @@ class InputSerialNumberFragment : BaseFragment<FragmentInputSerialNumberBinding,
                             navigateToSelectAvailableLockerFragment()
                         } else {
                             if (viewModel.isItemDetailVisible.value == true && viewModel.itemReturnData.value?.modelId == "") {
-                                navigateToItemFragment()
+                                navigateToItemFragment(false)
                             }
                         }
                     }
                 }
-                R.id.btn_update -> navigateToItemFragment()
+                R.id.btn_update -> navigateToItemFragment(true)
             }
         }
     }
@@ -120,6 +128,7 @@ class InputSerialNumberFragment : BaseFragment<FragmentInputSerialNumberBinding,
             putSerializable(RETURN_ITEM_REQUEST_KEY, viewModel.itemReturnData.value)
         }
         navigateTo(R.id.action_inputSerialNumberFragment_to_selectFaultyFragment2, bundle)
+
     }
 
     private fun navigateToSelectAvailableLockerFragment() {
@@ -132,11 +141,25 @@ class InputSerialNumberFragment : BaseFragment<FragmentInputSerialNumberBinding,
         else navigateTo(R.id.action_inputSerialNumberFragment2_to_selectAvailableLockerFragment2, bundle)
     }
 
-    private fun navigateToItemFragment() {
+    private fun navigateToItemFragment(isUpdate: Boolean = false) {
         val bundle = Bundle().apply {
+            if (isUpdate) {
+                putString( TYPE_UPDATE, "1")
+                putSerializable(RETURN_ITEM_REQUEST_KEY, viewModel.itemReturnData.value)
+            }
+            putString( TYPE_INPUT_SERIAL, viewModel.typeInput.value)
             putSerializable(ConstantUtils.SERIAL_NUMBER, viewModel.serialNumber.value)
         }
         navigateTo(R.id.action_inputSerialNumberFragment2_to_itemFragment, bundle)
+        viewModel.serialNumber.value = null
+        viewModel.isItemDetailVisible.value = false
+        viewModel.isCreateItem.value = false
+        viewModel.isUpdateItem.value = false
+    }
+
+    override fun onGetItemSuccess() {
+        mViewDataBinding?.containerItem?.btnUpdate?.isEnabled = true
+        mViewDataBinding?.containerItem?.btnUpdate?.alpha = 1f
     }
 
 }

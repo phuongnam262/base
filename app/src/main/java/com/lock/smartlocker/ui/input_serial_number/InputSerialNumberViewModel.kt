@@ -71,6 +71,7 @@ class InputSerialNumberViewModel(
                         isItemDetailVisible.postValue(true)
                         isUpdateItem.postValue(true)
                         isCreateItem.postValue(false)
+                        scanSerialNumberListener?.onGetItemSuccess()
                     } else {
                         isItemDetailVisible.postValue(false)
                     }

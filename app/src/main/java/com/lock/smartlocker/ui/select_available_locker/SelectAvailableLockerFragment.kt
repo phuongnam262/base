@@ -63,6 +63,8 @@ class SelectAvailableLockerFragment : BaseFragment<FragmentSelectAvailableLocker
             viewModel.typeInput.value = arguments?.getString(InputSerialNumberFragment.TYPE_INPUT_SERIAL)
         }
 
+        if (viewModel.isReturnFlow.not()) mViewDataBinding?.headerBar?.ivBack?.visibility = View.GONE
+
         viewModel.loadListAvailableLockers()
         viewModel.lockers.observe(viewLifecycleOwner) { lockers ->
             availableLockerAdapter.update(lockers.map { activity?.let { it1 ->

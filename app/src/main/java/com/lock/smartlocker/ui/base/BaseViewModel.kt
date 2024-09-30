@@ -126,6 +126,8 @@ abstract class BaseViewModel() : ViewModel() {
 
             ConstantUtils.ERROR_CARD_NUMBER -> mStatusText.postValue(R.string.error_wrong_card_number)
 
+            ConstantUtils.ERROR_SERIAL_EXISTED -> mStatusText.postValue(R.string.error_serial_existed)
+
             else -> mMessage.postValue(R.string.error_all)
 
         }

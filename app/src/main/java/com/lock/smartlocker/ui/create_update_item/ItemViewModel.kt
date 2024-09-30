@@ -22,6 +22,7 @@ class ItemViewModel(
     var itemReturn = MutableLiveData<ItemReturn>()
     var serialNumber = MutableLiveData<String>()
     var itemType: Int = 0
+    var typeCreateItem = MutableLiveData<Int>(0) // 0: new, 1: created, 2: updated
     var showInfoItem = MutableLiveData<Boolean>()
     private val _categories = MutableLiveData<List<Category>>()
     val categories: LiveData<List<Category>> get() = _categories
@@ -29,6 +30,7 @@ class ItemViewModel(
     val models: LiveData<List<Model>> get() = _models
     var categorySelected = MutableLiveData<Category>()
     var modelSelected = MutableLiveData<String>()
+    var isUpdateFlow = MutableLiveData<Boolean>(false)
 
     init {
         loadCategories()
@@ -72,6 +74,7 @@ class ItemViewModel(
                         itemListener?.handleSuccess()
                     }
                 } else {
+                    if (status == ConstantUtils.EMAIL_NOT_CORRECT_FORMAT) status = ConstantUtils.ERROR_SERIAL_EXISTED
                     handleError(status)
                 }
             }

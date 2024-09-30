@@ -82,6 +82,7 @@ class ConstantUtils {
         const val ADMIN_NO_PERMISSION = "60601"
         const val ERROR_LOGIC = "623"
         const val ERROR_CARD_NUMBER = "70404"
+        const val ERROR_SERIAL_EXISTED = "722"
 
     }
 

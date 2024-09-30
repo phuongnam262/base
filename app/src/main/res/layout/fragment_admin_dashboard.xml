@@ -101,7 +101,7 @@
             android:id="@+id/ll_container2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginTop="@dimen/dp_10"
             android:baselineAligned="false"
             android:orientation="horizontal"
             android:paddingStart="@dimen/dp_30"

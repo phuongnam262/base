@@ -144,6 +144,7 @@
     <string name="update_item_info">Vui lòng làm theo các bước dưới đây để cập nhật thông tin đồ dùng của bạn.</string>
     <string name="item_information">Thông Tin Đồ Dùng</string>
     <string name="item_information_info">Đây là thông tin về đồ dùng. Bây giờ bạn có thể lưu đồ dùng vào tủ khóa hoặc cập nhật thông tin chi tiết nếu cần.</string>
+    <string name="error_serial_existed">Số sê-ri đã tồn tại</string>
 
     <!-- Faulty reason   -->
     <string name="select_a_faulty">Chọn một lý do lỗi</string>
