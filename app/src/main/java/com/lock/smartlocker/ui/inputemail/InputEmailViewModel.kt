@@ -44,6 +44,8 @@ class InputEmailViewModel(
                     if (data != null) {
                         inputEmailListener?.consumerLoginSuccess(param.email)
                         PreferenceHelper.writeString(ConstantUtils.USER_TOKEN, data.token)
+                        PreferenceHelper.writeString(ConstantUtils.USER_NAME, param.email)
+                        PreferenceHelper.writeString(ConstantUtils.USER_AVATAR, "")
                         showStatusText.postValue(false)
                     }
                 }else {

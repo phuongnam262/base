@@ -102,7 +102,7 @@ class RecognizeFaceViewModel(
             mLoading.postValue(true)
             val getUser = userFaceRepository.getUserLocker(personCode)
             if (getUser?.id != null) {
-                PreferenceHelper.writeString(ConstantUtils.ADMIN_NAME,
+                PreferenceHelper.writeString(ConstantUtils.USER_NAME,
                     getUser.personName?.ifEmpty { getUser.email })
                 email = getUser.email
                 cardNumber = getUser.cardNumber

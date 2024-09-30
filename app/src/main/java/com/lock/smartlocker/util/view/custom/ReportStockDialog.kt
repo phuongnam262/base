@@ -75,7 +75,7 @@ class ReportStockDialog : DialogFragment() {
             dismiss()
         }
         submitButton.setOnClickListener {
-            val selectedReason = if(spinner.selectedItemPosition == 0) "1" else "2"
+            val selectedReason = if(spinner.selectedItemPosition == 0) "Found less stock" else "Found extra stock"
             listener?.onDialogSubmit(selectedReason , lockerId ?: "", consumableId ?: "")
             cancelButton.visibility = View.GONE
             submitButton.visibility = View.GONE

@@ -27,7 +27,7 @@ class CollectItemViewModel(
     fun openLocker() {
         val request = HardwareControllerRequest(
             lockerIds = listLockerId.value,
-            userHandler = PreferenceHelper.getString(ConstantUtils.ADMIN_NAME, "Admin"),
+            userHandler = PreferenceHelper.getString(ConstantUtils.USER_NAME, "User"),
             openType = 2
         )
         ioScope.launch {
@@ -52,7 +52,7 @@ class CollectItemViewModel(
     fun reopenLocker(lockerId: String) {
         val request = HardwareControllerRequest(
             lockerIds = listOf(lockerId),
-            userHandler = PreferenceHelper.getString(ConstantUtils.ADMIN_NAME, "Admin"),
+            userHandler = PreferenceHelper.getString(ConstantUtils.USER_NAME, "User"),
             openType = 2
         )
         ioScope.launch {

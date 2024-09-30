@@ -48,7 +48,7 @@
     <string name="error_center_face_detect">Face is no center the frame\nplease adjust your face center the frame.</string>
     <string name="using_mail_button">USING EMAIL</string>
     <string name="retry_button">RETRY</string>
-    <string name="process_button">PROCESS</string>
+    <string name="process_button">PROCEED</string>
     <string name="using_card_button">USING CARD</string>
     <string name="work_card_error">You are not register work card with face</string>
 

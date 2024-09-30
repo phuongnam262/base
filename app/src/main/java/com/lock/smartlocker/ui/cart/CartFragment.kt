@@ -85,11 +85,10 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(),
                     activity?.finish()
                 }
 
-                R.id.iv_back -> {
+                R.id.iv_back, R.id.rl_item -> {
                     activity?.supportFragmentManager?.popBackStack()
                 }
 
-                R.id.rl_item -> {}
                 R.id.btn_process -> {
                     if (arguments?.getString(ConstantUtils.TYPE_OPEN) != null) {
                         if (arguments?.getString(ConstantUtils.TYPE_OPEN) == ConstantUtils.TYPE_LOAN) {

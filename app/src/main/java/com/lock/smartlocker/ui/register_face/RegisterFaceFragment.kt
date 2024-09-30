@@ -163,8 +163,14 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
     override fun onClick(v: View?) {
         if (checkDebouncedClick()) {
             when (v?.id) {
-                R.id.rl_home -> activity?.finish()
-                R.id.iv_back -> activity?.supportFragmentManager?.popBackStack()
+                R.id.rl_home -> {
+                    turnOnLight(0)
+                    activity?.finish()
+                }
+                R.id.iv_back -> {
+                    turnOnLight(0)
+                    activity?.supportFragmentManager?.popBackStack()
+                }
                 R.id.btn_process -> {
                     if (isExited) {
                         turnOnLight(1)

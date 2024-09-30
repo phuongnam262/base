@@ -5,9 +5,6 @@ class ConstantUtils {
     companion object {
 
         const val API_TOKEN = "API_TOKEN"
-        const val USER_TOKEN = "USER_TOKEN"
-        const val USER_AVATAR = "USER_AVATAR"
-        const val ADMIN_NAME = "ADMIN_NAME"
         const val TERMINAL_LOGIN = "TERMINAL_LOGIN"
         const val TERMINAL_NAME   = "TERMINAL_NAME"
         const val GET_SETTING = "GET_SETTING"
@@ -20,7 +17,12 @@ class ConstantUtils {
         const val ERROR_CODE_SUCCESS = "SUCCESS"
         const val LOCKER_ID = "LOCKER_ID"
         const val CATEGORY_ID = "CATEGORY_ID"
-        const val CONFIRMATION_DIALOG_TAG = "CONFIRMATION_DIALOG_TAG"
+
+        //User
+        const val USER_TOKEN = "USER_TOKEN"
+        const val USER_AVATAR = "USER_AVATAR"
+        const val ADMIN_NAME = "ADMIN_NAME"
+        const val USER_NAME = "USER_NAME"
 
         //Type Open
         const val TYPE_OPEN = "TYPE_OPEN"
@@ -48,6 +50,7 @@ class ConstantUtils {
         //Dialog Confirm
         const val DISABLE_LOCKER = "DISABLE_LOCKER"
         const val ENABLE_LOCKER = "ENABLE_LOCKER"
+        const val CONFIRMATION_DIALOG_TAG = "CONFIRMATION_DIALOG_TAG"
 
         //End user
         const val NAME_END_USER = "NAME_END_USER"

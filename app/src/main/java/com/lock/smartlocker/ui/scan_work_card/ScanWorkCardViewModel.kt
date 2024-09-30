@@ -61,6 +61,8 @@ class ScanWorkCardViewModel(
                 if (isSuccessful) {
                     if (data != null) {
                         PreferenceHelper.writeString(ConstantUtils.USER_TOKEN, data.endUser.userToken)
+                        PreferenceHelper.writeString(ConstantUtils.USER_NAME, data.endUser.fullName)
+                        PreferenceHelper.writeString(ConstantUtils.USER_AVATAR, "")
                         scanCardListener?.handleSuccess(data.endUser.fullName, data.endUser.cardNumber)
                     }
                 }else {

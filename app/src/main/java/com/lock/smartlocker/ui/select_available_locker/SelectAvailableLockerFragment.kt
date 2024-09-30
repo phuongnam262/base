@@ -34,7 +34,6 @@ class SelectAvailableLockerFragment : BaseFragment<FragmentSelectAvailableLocker
         get() = ViewModelProvider(this, factory)[SelectAvailableLockerViewModel::class.java]
 
     private val availableLockerAdapter = GroupAdapter<GroupieViewHolder>()
-    private var isReturnFlow = true
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -60,7 +59,7 @@ class SelectAvailableLockerFragment : BaseFragment<FragmentSelectAvailableLocker
     @SuppressLint("NotifyDataSetChanged")
     private fun initData(){
         if (arguments?.getString(InputSerialNumberFragment.TYPE_INPUT_SERIAL) != null) {
-            isReturnFlow = arguments?.getString(InputSerialNumberFragment.TYPE_INPUT_SERIAL) == ConstantUtils.TYPE_RETURN
+            viewModel.isReturnFlow = arguments?.getString(InputSerialNumberFragment.TYPE_INPUT_SERIAL) == ConstantUtils.TYPE_RETURN
             viewModel.typeInput.value = arguments?.getString(InputSerialNumberFragment.TYPE_INPUT_SERIAL)
         }
 
@@ -96,7 +95,7 @@ class SelectAvailableLockerFragment : BaseFragment<FragmentSelectAvailableLocker
             putSerializable( InputSerialNumberFragment.RETURN_ITEM_REQUEST_KEY, returnItem)
             putString(InputSerialNumberFragment.TYPE_INPUT_SERIAL, viewModel.typeInput.value)
         }
-        if(isReturnFlow)
+        if(viewModel.isReturnFlow)
             navigateTo(R.id.action_selectAvailableLockerFragment_to_depositItemFragment, bundle)
         else
             navigateTo(R.id.action_selectAvailableLockerFragment2_to_depositItemFragment2, bundle)

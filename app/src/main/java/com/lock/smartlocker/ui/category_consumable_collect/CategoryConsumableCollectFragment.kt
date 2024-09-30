@@ -56,7 +56,7 @@ class CategoryConsumableCollectFragment : BaseFragment<FragmentCategoryConsumabl
         mViewDataBinding?.bottomMenu?.rlHome?.setOnClickListener(this)
         mViewDataBinding?.bottomMenu?.rlItem?.setOnClickListener(this)
         mViewDataBinding?.bottomMenu?.rlCart?.setOnClickListener(this)
-        mViewDataBinding?.tvHelloSomething?.text = "Hello ${PreferenceHelper.getString(ConstantUtils.ADMIN_NAME, "Admin")}"
+        mViewDataBinding?.tvHelloSomething?.text = "Hello ${PreferenceHelper.getString(ConstantUtils.USER_NAME, "User")}"
         loadAvatar()
     }
 
@@ -91,6 +91,7 @@ class CategoryConsumableCollectFragment : BaseFragment<FragmentCategoryConsumabl
             listCartItem = ArrayList()
         }
         viewModel.listCartItem.value = listCartItem
+        viewModel.getConsumableAvailableItem()
         mViewDataBinding?.rvCategories?.adapter = categoryAdapter
         mViewDataBinding?.rvConsumables?.adapter = consumableAdapter
 

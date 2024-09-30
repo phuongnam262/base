@@ -25,7 +25,7 @@ class ConsumableAvailableLockerViewModel(
         val lockerId = selectedLocker.value?.lockerId ?: return
         val request = HardwareControllerRequest(
             lockerIds = listOf(lockerId),
-            userHandler = PreferenceHelper.getString(ConstantUtils.ADMIN_NAME, "Admin"),
+            userHandler = PreferenceHelper.getString(ConstantUtils.USER_NAME, "User"),
             openType = 2
         )
         ioScope.launch {

@@ -95,7 +95,7 @@ class CategoryViewModel(
         val cartItem = listCartItem.value?.find { it.modelId == model.modelId }
         if (cartItem != null) {
             if(model.loanable != null){
-                if (model.available > 0 && cartItem.quantity < model.loanable.toInt()) {
+                if (model.available > 0 && cartItem.quantity < model.loanable!!.toInt()) {
                     cartItem.quantity += 1
                     model.available -= 1
                     listCartItem.postValue(listCartItem.value)
@@ -111,16 +111,14 @@ class CategoryViewModel(
             if (model.available > 0) {
                 val cart = categoryIdSelected.value?.let {
                     if (model.loanable != null) {
-                        model.loanable.toInt().let { it1 ->
-                            CartItem(
-                                modelId = model.modelId,
-                                modelName = model.modelName,
-                                categoryId = it,
-                                loanable = it1,
-                                available = model.available,
-                                quantity = 1
-                            )
-                        }
+                        CartItem(
+                            modelId = model.modelId,
+                            modelName = model.modelName,
+                            categoryId = it,
+                            loanable = model.loanable!!.toInt(),
+                            available = model.available,
+                            quantity = 1
+                        )
                     } else {
                         CartItem(
                             modelId = model.modelId,
@@ -138,6 +136,13 @@ class CategoryViewModel(
                 }
                 if (model.available > 0) {
                     model.available -= 1
+                }
+                if (model.loanable != null) {
+                    model.loanable!!.toInt().let { it1 ->
+                        if (it1 > 0) {
+                            model.loanable = (it1 - 1).toString()
+                        }
+                    }
                 }
             }
         }

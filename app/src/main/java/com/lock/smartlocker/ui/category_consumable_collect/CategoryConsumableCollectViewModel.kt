@@ -22,10 +22,6 @@ class CategoryConsumableCollectViewModel(
     private val updatedListCart: ArrayList<CartConsumableItem> = ArrayList()
     val listCartItem = MutableLiveData<ArrayList<CartConsumableItem>>()
 
-    init {
-        getConsumableAvailableItem()
-    }
-
     fun getConsumableAvailableItem() {
         ioScope.launch {
             mLoading.postValue(true)

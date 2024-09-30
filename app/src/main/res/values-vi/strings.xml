@@ -19,7 +19,7 @@
     <!-- login -->
     <string name="login_error_1001">Email không tồn tại</string>
     <string name="login_error_1002">Sai mật khẩu</string>
-    <string name="email_not_correct_format">Sai định dạng email</string>
+    <string name="email_not_correct_format">Định dạng email không hợp lệ</string>
 
     <!-- Error -->
     <string name="unauthorized">Tài khoản bị mất quyền truy cập</string>

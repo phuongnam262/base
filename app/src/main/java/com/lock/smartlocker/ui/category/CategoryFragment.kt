@@ -38,7 +38,7 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel
     private val modelAdapter = GroupAdapter<GroupieViewHolder>()
 
     override val viewModel: CategoryViewModel
-        get() = ViewModelProvider(this, factory)[CategoryViewModel::class.java]
+        get() = ViewModelProvider(requireActivity(), factory)[CategoryViewModel::class.java]
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -55,7 +55,7 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel
         mViewDataBinding?.bottomMenu?.rlHome?.setOnClickListener(this)
         mViewDataBinding?.bottomMenu?.rlItem?.setOnClickListener(this)
         mViewDataBinding?.bottomMenu?.rlCart?.setOnClickListener(this)
-        mViewDataBinding?.tvHelloSomething?.text = "Hello ${PreferenceHelper.getString(ConstantUtils.ADMIN_NAME, "Admin")}"
+        mViewDataBinding?.tvHelloSomething?.text = "Hello ${PreferenceHelper.getString(ConstantUtils.USER_NAME, "User")}"
         loadAvatar()
     }
 
@@ -144,7 +144,9 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel
                     listCartItem = null
                     activity?.finish()
                 }
-                R.id.rl_item -> {}
+                R.id.rl_item -> {
+
+                }
                 R.id.rl_cart -> {
                     val bundle = Bundle().apply {
                         putString(

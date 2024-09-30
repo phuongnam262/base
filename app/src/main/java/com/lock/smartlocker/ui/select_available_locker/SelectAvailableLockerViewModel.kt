@@ -26,6 +26,8 @@ class SelectAvailableLockerViewModel(
 
     val typeInput = MutableLiveData<String?>()
 
+    var isReturnFlow = true
+
     fun selectLocker(locker: Locker) {
         _selectedLocker.value = locker
         enableButtonProcess.postValue(true)
@@ -51,7 +53,8 @@ class SelectAvailableLockerViewModel(
         val lockerId = selectedLocker.value?.lockerId ?: return
         val request = HardwareControllerRequest(
             lockerIds = listOf(lockerId),
-            userHandler = PreferenceHelper.getString(ConstantUtils.ADMIN_NAME, "Admin"),
+            userHandler = if(isReturnFlow) PreferenceHelper.getString(ConstantUtils.USER_NAME, "User")
+            else PreferenceHelper.getString(ConstantUtils.ADMIN_NAME, "Admin"),
             openType = 2
         )
         ioScope.launch {

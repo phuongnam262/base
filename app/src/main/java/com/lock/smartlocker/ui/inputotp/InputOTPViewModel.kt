@@ -22,6 +22,7 @@ class InputOTPViewModel(
         ioScope.launch {
             if (otpText.value.isNullOrEmpty()) {
                 mStatusText.postValue(R.string.error_otp_emplty)
+                inputOTPListener?.verifyFail()
                 return@launch
             }
             mLoading.postValue(true)

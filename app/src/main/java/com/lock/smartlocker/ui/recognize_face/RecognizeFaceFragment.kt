@@ -163,8 +163,10 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
     override fun onClick(v: View?) {
         if (checkDebouncedClick()) {
             when (v?.id) {
-                R.id.rl_home -> activity?.finish()
-                R.id.iv_back -> activity?.finish()
+                R.id.rl_home, R.id.iv_back -> {
+                    turnOnLight(0)
+                    activity?.finish()
+                }
                 R.id.btn_retry -> {
                     turnOnLight(1)
                     mViewDataBinding?.ivFrame?.setBackgroundResource(R.drawable.bg_face_register)
