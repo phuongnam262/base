@@ -83,14 +83,17 @@ class AdminLoginFragment : BaseFragment<FragmentAdminLoginBinding, AdminLoginVie
                 // OTP true thì qua màn OTP
                 val bundle = Bundle().apply {
                     putString(InputEmailFragment.EMAIL_REGISTER, adminLoginResponse.staff.email)
-                    putString(
-                        ConstantUtils.TYPE_OPEN_MANAGER, typeOpen)
+                    putString(ConstantUtils.TYPE_OPEN_MANAGER, typeOpen)
+                    putSerializable(ConstantUtils.ADMIN_LOGIN, adminLoginResponse)
                 }
                 navigateTo(R.id.action_adminLoginFragment_to_inputOTPFragment, bundle)
             } else {
                 // OTP false thì qua màn menu hoặc face list
                 if(typeOpen == ConstantUtils.TYPE_ADMIN_CONSOLE){
-                    navigateTo(R.id.action_adminLoginFragment_to_adminDashboardFragment, null)
+                    val bundle = Bundle().apply {
+                        putSerializable(ConstantUtils.ADMIN_LOGIN, adminLoginResponse)
+                    }
+                    navigateTo(R.id.action_adminLoginFragment_to_adminDashboardFragment, bundle)
                 }else{
                     navigateTo(R.id.action_adminLoginFragment_to_faceListFragment, null)
                 }

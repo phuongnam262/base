@@ -1,7 +1,5 @@
 package com.lock.smartlocker.data.network
 
-import com.google.gson.GsonBuilder
-import com.lock.smartlocker.data.models.LockerRetrieve
 import com.lock.smartlocker.data.network.services.FaceServives
 import com.lock.smartlocker.data.network.services.HardwareControlServices
 import com.lock.smartlocker.data.network.services.LockerServives

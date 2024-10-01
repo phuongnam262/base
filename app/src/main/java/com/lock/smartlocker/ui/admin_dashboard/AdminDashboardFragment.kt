@@ -5,6 +5,7 @@ import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
+import com.lock.smartlocker.data.entities.responses.AdminLoginResponse
 import com.lock.smartlocker.databinding.FragmentAdminDashboardBinding
 import com.lock.smartlocker.ui.base.BaseFragment
 import com.lock.smartlocker.ui.input_serial_number.InputSerialNumberFragment
@@ -54,6 +55,23 @@ class AdminDashboardFragment : BaseFragment<FragmentAdminDashboardBinding, Admin
         viewModel.numberItemFaulty.observe(viewLifecycleOwner) {
             mViewDataBinding?.tvRetrieveFaulty?.text = getString(R.string.retrieve_faulty, it.toString())
         }
+
+        //Disable or enable button based on staff role
+        val adminLogin = arguments?.getSerializable(ConstantUtils.ADMIN_LOGIN)as AdminLoginResponse
+        mViewDataBinding?.llConsumableTopup?.isEnabled = adminLogin.staff.isTopupConsumables
+        mViewDataBinding?.llConsumableTopup?.alpha = if (adminLogin.staff.isTopupConsumables) 1f else 0.3f
+        mViewDataBinding?.llTopupItems?.isEnabled = adminLogin.staff.isTopupItems
+        mViewDataBinding?.llTopupItems?.alpha = if (adminLogin.staff.isTopupItems) 1f else 0.3f
+        mViewDataBinding?.llCloseApp?.isEnabled = adminLogin.staff.isCloseApplication
+        mViewDataBinding?.llCloseApp?.alpha = if (adminLogin.staff.isCloseApplication) 1f else 0.3f
+        mViewDataBinding?.llSettings?.isEnabled = adminLogin.staff.isElockSettings
+        mViewDataBinding?.llSettings?.alpha = if (adminLogin.staff.isElockSettings) 1f else 0.3f
+        mViewDataBinding?.llManageLockers?.isEnabled = adminLogin.staff.isManageLockers
+        mViewDataBinding?.llManageLockers?.alpha = if (adminLogin.staff.isManageLockers) 1f else 0.3f
+        mViewDataBinding?.llRetrieveItems?.isEnabled = adminLogin.staff.isRetrieveItems
+        mViewDataBinding?.llRetrieveItems?.alpha = if (adminLogin.staff.isRetrieveItems) 1f else 0.3f
+        mViewDataBinding?.llRetrieveFaulty?.isEnabled = adminLogin.staff.isRetrieveFaulty
+        mViewDataBinding?.llRetrieveFaulty?.alpha = if (adminLogin.staff.isRetrieveFaulty) 1f else 0.3f
     }
 
     override fun onClick(v: View?) {

@@ -5,6 +5,7 @@ import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
+import com.lock.smartlocker.data.entities.responses.AdminLoginResponse
 import com.lock.smartlocker.databinding.FragmentInputOtpBinding
 import com.lock.smartlocker.ui.base.BaseFragment
 import com.lock.smartlocker.ui.inputemail.InputEmailFragment
@@ -85,6 +86,7 @@ class InputOTPFragment : BaseFragment<FragmentInputOtpBinding, InputOTPViewModel
             }
             if (isOpenManager) {
                 if (arguments?.getString(ConstantUtils.TYPE_OPEN_MANAGER) == ConstantUtils.TYPE_ADMIN_CONSOLE) {
+                    bundle.putSerializable(ConstantUtils.ADMIN_LOGIN, arguments?.getSerializable(ConstantUtils.ADMIN_LOGIN)as AdminLoginResponse)
                     navigateTo(R.id.action_inputOTPFragment_to_adminDashboardFragment, bundle)
                 } else {
                     navigateTo(R.id.action_inputOTPFragment_to_faceListFragment, bundle)

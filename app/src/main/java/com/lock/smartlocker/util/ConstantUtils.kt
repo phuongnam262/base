@@ -23,6 +23,7 @@ class ConstantUtils {
         const val CATEGORY_ID = "CATEGORY_ID"
 
         //User
+        const val ADMIN_LOGIN = "ADMIN_LOGIN"
         const val USER_TOKEN = "USER_TOKEN"
         const val USER_AVATAR = "USER_AVATAR"
         const val ADMIN_NAME = "ADMIN_NAME"

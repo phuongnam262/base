@@ -1,6 +1,7 @@
 package com.lock.smartlocker.data.models
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Staff(
     @SerializedName("user_name")
@@ -34,5 +35,7 @@ data class Staff(
     @SerializedName("is_close_application")
     val isCloseApplication: Boolean,
     @SerializedName("is_manage_media")
-    val isManageMedia: Boolean
-)
+    val isManageMedia: Boolean,
+    @SerializedName("is_topup_consumables")
+    val isTopupConsumables: Boolean
+) : Serializable
