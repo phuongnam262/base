@@ -9,12 +9,14 @@ import com.lock.smartlocker.data.entities.responses.GetSettingResponse
 import com.lock.smartlocker.data.models.Locker
 import com.lock.smartlocker.data.preference.PreferenceHelper
 import com.lock.smartlocker.data.repositories.HardwareControllerRepository
+import com.lock.smartlocker.data.repositories.ReturnRepository
 import com.lock.smartlocker.ui.base.BaseViewModel
 import com.lock.smartlocker.util.ConstantUtils
 import kotlinx.coroutines.launch
 
 class SelectAvailableLockerViewModel(
-    private val hardwareControllerRepository: HardwareControllerRepository
+    private val hardwareControllerRepository: HardwareControllerRepository,
+    private val returnRepository: ReturnRepository
 ) : BaseViewModel() {
     var selectAvailableListener: SelectAvailableLockerListener? = null
 
@@ -33,9 +35,8 @@ class SelectAvailableLockerViewModel(
         enableButtonProcess.postValue(true)
     }
 
-    fun loadListAvailableLockers() {
+    private fun loadListAvailableLockers(availableLockerIds: List<String>) {
         ioScope.launch {
-            val availableLockerIds = PreferenceHelper.getString(ConstantUtils.RETURN_AVAILABLE_LOCKER_LIST, "")
             val jsonSetting = PreferenceHelper.getString(ConstantUtils.GET_SETTING, "")
             if (jsonSetting.isNotEmpty()) {
                 val settingResponseType = object : TypeToken<GetSettingResponse>() {}.type
@@ -47,6 +48,23 @@ class SelectAvailableLockerViewModel(
                 _lockers.postValue(emptyList())
             }
         }
+    }
+
+    fun getListReturnAvailableLockers() {
+        ioScope.launch {
+            mLoading.postValue(true)
+            returnRepository.listReturnAvailableLockers().apply {
+                if (isSuccessful) {
+                    if (data != null) {
+                        if (data.locker_available.isNotEmpty()) {
+                            uiScope.launch {
+                                loadListAvailableLockers(data.locker_available)
+                            }
+                        }
+                    }
+                }else handleError(status)
+            }
+        }.invokeOnCompletion { mLoading.postValue(false) }
     }
 
     fun openLocker() {
@@ -62,7 +80,8 @@ class SelectAvailableLockerViewModel(
             hardwareControllerRepository.openMassLocker(request).apply {
                 if (isSuccessful) {
                     if (data != null) {
-                        selectAvailableListener?.sendCommandOpenLockerSuccess()
+                        val status = data.locker_list.first().doorStatus
+                        selectAvailableListener?.sendCommandOpenLockerSuccess(status)
                     }
                 } else handleError(status)
             }

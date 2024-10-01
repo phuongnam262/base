@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter
 import androidx.lifecycle.ViewModelProvider
 import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
+import com.lock.smartlocker.data.preference.PreferenceHelper
 import com.lock.smartlocker.databinding.FragmentInputEmailBinding
 import com.lock.smartlocker.ui.base.BaseFragment
 import com.lock.smartlocker.util.ConstantUtils
@@ -32,7 +33,11 @@ class InputEmailFragment : BaseFragment<FragmentInputEmailBinding, InputEmailVie
         const val EMAIL_REGISTER = "email_register"
     }
 
-    private val items = listOf("@gmail.com", "@yahoo.com", "@hotmail.com", "@edu")
+    private val items = PreferenceHelper.getString(ConstantUtils.EMAIL_DOMAIN, "")
+        .split(",")
+        .map { it.trim() }
+        .sorted()
+
     private var isClicked = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

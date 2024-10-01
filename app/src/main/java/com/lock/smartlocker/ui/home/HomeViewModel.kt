@@ -1,14 +1,12 @@
 package com.lock.smartlocker.ui.home
 
+import LocaleHelper
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.common.api.ApiException
-import com.google.gson.Gson
 import com.lock.smartlocker.R
 import com.lock.smartlocker.data.models.AddGroupModel
-import com.lock.smartlocker.data.preference.PreferenceHelper
-import com.lock.smartlocker.data.repositories.ReturnRepository
 import com.lock.smartlocker.data.repositories.UserFaceRepository
 import com.lock.smartlocker.ui.base.BaseViewModel
 import com.lock.smartlocker.util.ConstantUtils
@@ -19,8 +17,7 @@ import okhttp3.Request
 import java.io.IOException
 
 class HomeViewModel(
-    private val userLockerRepository: UserFaceRepository,
-    private val returnRepository: ReturnRepository
+    private val userLockerRepository: UserFaceRepository
 ) : BaseViewModel() {
     var homeListener: HomeListener? = null
     var isOpenLocalServer = MutableLiveData<Boolean>()
@@ -99,7 +96,7 @@ class HomeViewModel(
     }
 
 
-    fun addGroup() {
+    private fun addGroup() {
         ioScope.launch {
             try {
                 val addGroupModel = AddGroupModel("G1", "Group 1", 1)
@@ -116,24 +113,6 @@ class HomeViewModel(
                 mMessage.postValue(R.string.error_network)
             }
         }
-    }
-
-    fun getListReturnAvailableLockers() {
-        ioScope.launch {
-            mLoading.postValue(true)
-            returnRepository.listReturnAvailableLockers().apply {
-                if (isSuccessful) {
-                    if (data != null) {
-                        PreferenceHelper.writeString(ConstantUtils.RETURN_AVAILABLE_LOCKER_LIST, Gson().toJson(data))
-                        if (data.locker_available.isNotEmpty()) {
-                            uiScope.launch {
-                                homeListener?.getReturnAvailableLockersSuccess()
-                            }
-                        }
-                    }
-                }else handleError(status)
-            }
-        }.invokeOnCompletion { mLoading.postValue(false) }
     }
 
 }

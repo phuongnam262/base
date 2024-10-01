@@ -68,9 +68,9 @@ abstract class SafeApiRequest {
                 }
             }
         }
-
+        val statusCode = if (errorResponse?.status == null) errorResponse?.code.toString() else errorResponse?.status
         return BaseResponse.error(
-            status = errorResponse?.status,
+            status = statusCode,
             message = errorResponse?.message
         )
     }

@@ -21,7 +21,6 @@ class AdminDashboardViewModel(
             managerRepository.getInformationStaff().apply {
                 if (isSuccessful) {
                     if (data != null) {
-                        PreferenceHelper.writeString(ConstantUtils.RETURN_AVAILABLE_LOCKER_LIST, Gson().toJson(data.lockerAvailable))
                         numberLockerAvailable.postValue(data.lockerAvailable.size)
                         numberItemFaulty.postValue(data.itemFaulty)
                     }

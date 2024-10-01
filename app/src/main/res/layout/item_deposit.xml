@@ -9,6 +9,9 @@
             name="modelName"
             type="String" />
         <variable
+            name="lockerName"
+            type="String" />
+        <variable
             name="doorStatus"
             type="Integer" />
         <variable
@@ -84,6 +87,7 @@
             <Button
                 android:id="@+id/btnLocker"
                 style="@style/CustomLockerButton"
+                android:text="@{lockerName}"
                 app:lockerDoorBackground="@{doorStatus}"/>
 
             <ImageView

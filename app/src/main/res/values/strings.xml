@@ -6,9 +6,9 @@
     <string name="close">Close</string>
 
     <string name="server_error">There is an error from server. Please try again.</string>
-    <string name="error_api">Cal API Error</string>
+    <string name="error_api">Call API Error</string>
     <string name="error_network">Please check your network.</string>
-    <string name="error_all">Some error please check it</string>
+    <string name="error_all">Some error please check it, status %1$s</string>
     <string name="error_response">Error response</string>
     <string name="error_message">An internal error has occurred. Please try again.</string>
     <string name="morning">Good morning</string>
@@ -158,6 +158,7 @@
     <string name="locker_s">Small</string>
     <string name="locker_m">Medium</string>
     <string name="locker_l">Lager</string>
+    <string name="error_no_locker_found">No locker found on this station</string>
 
     <!-- Deposit item   -->
     <string name="deposit_topup_success">Deposit successful!\nDo you have more items to top-up?</string>
@@ -165,6 +166,7 @@
     <!-- hwc   -->
     <string name="error_open_failed">Door has not been opened successfully.</string>
     <string name="error_door_has_not_close">Door has not been closed.</string>
+    <string name="door_is_closed">The door is closed. Auto-confirm will be triggered in 10 seconds.</string>
     <string name="successful">Successful</string>
 
     <!-- Loan   -->

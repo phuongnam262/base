@@ -7,11 +7,10 @@ import com.lock.smartlocker.data.repositories.UserFaceRepository
 
 @Suppress("UNCHECKED_CAST")
 class HomeViewModelFactory(
-    private val userFaceRepository: UserFaceRepository,
-    private val returnRepository: ReturnRepository
+    private val userFaceRepository: UserFaceRepository
 ) : ViewModelProvider.NewInstanceFactory() {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return HomeViewModel(userFaceRepository, returnRepository) as T
+        return HomeViewModel(userFaceRepository) as T
     }
 }

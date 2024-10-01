@@ -115,6 +115,9 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
                 mViewModel?.mOtherError?.observe(activity, Observer {
                     it?.let { CommonUtils.showErrorDialog(activity, "", it) }
                 })
+                mViewModel?.mErrorAllWithStatusCode?.observe(activity, Observer {
+                    it?.let { CommonUtils.showErrorDialog(activity, "", getString(R.string.error_all, it)) }
+                })
                 isObserverSet = true
             }
         }

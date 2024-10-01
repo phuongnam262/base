@@ -21,6 +21,7 @@ abstract class BaseViewModel() : ViewModel() {
     val mMessage = MutableLiveData<Int>()
     val mStatusText = MutableLiveData<Int>()
     val mOtherError = MutableLiveData<String>()
+    val mErrorAllWithStatusCode = MutableLiveData<String>()
 
     // coroutines
     private var viewModelJob = Job()
@@ -128,7 +129,9 @@ abstract class BaseViewModel() : ViewModel() {
 
             ConstantUtils.ERROR_SERIAL_EXISTED -> mStatusText.postValue(R.string.error_serial_existed)
 
-            else -> mMessage.postValue(R.string.error_all)
+            ConstantUtils.ERROR_NO_LOCKER_FOUND -> mStatusText.postValue(R.string.error_no_locker_found)
+
+            else -> mErrorAllWithStatusCode.postValue(status ?: "99999")
 
         }
     }

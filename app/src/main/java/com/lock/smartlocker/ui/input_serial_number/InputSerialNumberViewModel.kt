@@ -88,6 +88,9 @@ class InputSerialNumberViewModel(
                             modelImage = "null",
                             type = 0,
                             lockerId = "",
+                            lockerName = "",
+                            arrowPosition = 1,
+                            doorStatus = 2,
                             reasonFaulty = ""
                         )
                         itemReturnData.postValue(itemReturn)

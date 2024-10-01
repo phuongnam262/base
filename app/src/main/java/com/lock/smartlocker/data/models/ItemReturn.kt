@@ -14,6 +14,9 @@ data class ItemReturn(
     @SerializedName("model_image") var modelImage: String,
     @SerializedName("type") val type: Int,
     var lockerId: String,
+    var lockerName: String,
+    var arrowPosition: Int,
+    var doorStatus: Int,
     var reasonFaulty: String
     ) : Serializable{
     override fun hashCode(): Int {

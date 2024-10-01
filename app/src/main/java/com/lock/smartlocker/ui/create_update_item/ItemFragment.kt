@@ -109,6 +109,9 @@ class ItemFragment : BaseFragment<FragmentItemBinding, ItemViewModel>(),
                 modelImage = "null",
                 type = 0,
                 lockerId = "",
+                lockerName = "",
+                arrowPosition = 1,
+                doorStatus = 2,
                 reasonFaulty = ""
             )
             viewModel.itemReturn.value = itemReturn

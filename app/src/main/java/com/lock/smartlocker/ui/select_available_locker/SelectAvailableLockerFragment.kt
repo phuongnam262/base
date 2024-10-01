@@ -65,7 +65,7 @@ class SelectAvailableLockerFragment : BaseFragment<FragmentSelectAvailableLocker
 
         if (viewModel.isReturnFlow.not()) mViewDataBinding?.headerBar?.ivBack?.visibility = View.GONE
 
-        viewModel.loadListAvailableLockers()
+        viewModel.getListReturnAvailableLockers()
         viewModel.lockers.observe(viewLifecycleOwner) { lockers ->
             availableLockerAdapter.update(lockers.map { activity?.let { it1 ->
                 AvailableLockerItem(
@@ -90,9 +90,12 @@ class SelectAvailableLockerFragment : BaseFragment<FragmentSelectAvailableLocker
         }
     }
 
-    override fun sendCommandOpenLockerSuccess() {
+    override fun sendCommandOpenLockerSuccess(doorStatus: Int) {
         val returnItem = arguments?.getSerializable(InputSerialNumberFragment.RETURN_ITEM_REQUEST_KEY) as? ItemReturn
         returnItem?.lockerId = viewModel.selectedLocker.value?.lockerId.toString()
+        returnItem?.lockerName = viewModel.selectedLocker.value?.name.toString()
+        returnItem?.doorStatus = doorStatus
+        returnItem?.arrowPosition = viewModel.selectedLocker.value?.arrowPosition ?: 0
         val bundle = Bundle().apply {
             putSerializable( InputSerialNumberFragment.RETURN_ITEM_REQUEST_KEY, returnItem)
             putString(InputSerialNumberFragment.TYPE_INPUT_SERIAL, viewModel.typeInput.value)

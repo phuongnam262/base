@@ -14,7 +14,7 @@ data class KioskConfig(
     @SerializedName("order_category_on_kiosk") val orderCategoryOnKiosk: String,
     @SerializedName("order_model_on_kiosk") val orderModelOnKiosk: String,
     @SerializedName("enable_internal_delivery") val enableInternalDelivery: Boolean,
-    @SerializedName("auto_trigger_delay") val autoTriggerDelay: String,
+    @SerializedName("auto_trigger_delay") val autoTriggerDelay: Int,
     @SerializedName("auto_next_page") val autoNextPage: String,
     @SerializedName("check_door_status_on_confirm") val checkDoorStatusOnConfirm: Boolean,
     @SerializedName("mandatory_door_closure_verification") val mandatoryDoorClosureVerification: Boolean

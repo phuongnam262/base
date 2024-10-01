@@ -52,7 +52,9 @@
                 android:id="@+id/depositItem"
                 layout="@layout/item_deposit"
                 app:modelName="@{viewmodel.modelName}"
-                app:doorStatus="@{viewmodel.doorStatus}" />
+                app:doorStatus="@{viewmodel.doorStatus}"
+                app:lockerName="@{viewmodel.lockerName}"
+                app:arrowPosition="@{viewmodel.arrowPosition}" />
         </LinearLayout>
 
         <include

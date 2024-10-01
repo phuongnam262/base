@@ -122,7 +122,7 @@ class LockerApplication : Application(), KodeinAware {
         bind() from provider { DepositConsumableViewModelFactory(instance(), instance()) }
         bind() from provider { DepositItemViewModelFactory(instance(), instance()) }
         bind() from provider { FaceListViewModelFactory(instance()) }
-        bind() from provider { HomeViewModelFactory(instance(), instance()) }
+        bind() from provider { HomeViewModelFactory(instance()) }
         bind() from provider { InputEmailViewModelFactory(instance(), instance()) }
         bind() from provider { InputOTPViewModelFactory(instance()) }
         bind() from provider { InputSerialNumberViewModelFactory(instance()) }
@@ -136,7 +136,7 @@ class LockerApplication : Application(), KodeinAware {
         bind() from provider { RetrieveViewModelFactory(instance(), instance()) }
         bind() from provider { ScanItemViewModelFactory(instance()) }
         bind() from provider { ScanWorkCardViewModelFactory(instance(), instance()) }
-        bind() from provider { SelectAvailableLockerViewModelFactory(instance()) }
+        bind() from provider { SelectAvailableLockerViewModelFactory(instance(), instance()) }
         bind() from provider { SelectFaultyViewModelFactory() }
         bind() from provider { SettingViewModelFactory(instance()) }
         bind() from provider { SplashViewModelFactory(instance()) }

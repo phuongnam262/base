@@ -71,6 +71,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeLis
         mViewDataBinding?.tvEn?.setOnClickListener(this)
         mViewDataBinding?.tvVi?.setOnClickListener(this)
         mViewDataBinding?.containerLoan?.setOnClickListener(this)
+        mViewDataBinding?.containerReturn?.setOnClickListener(this)
         mViewDataBinding?.containerCollect?.setOnClickListener(this)
         mViewDataBinding?.containerConsumableCollect?.setOnClickListener(this)
 
@@ -198,6 +199,13 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeLis
                             )
                         }
 
+                        R.id.container_return -> {
+                            startActivityWithOneValue(
+                                ConstantUtils.TYPE_OPEN, ConstantUtils.TYPE_RETURN,
+                                ReturnActivity::class.java
+                            )
+                        }
+
                         R.id.container_collect -> {
                             startActivityWithOneValue(
                                 ConstantUtils.TYPE_OPEN, ConstantUtils.TYPE_COLLECT,
@@ -215,7 +223,12 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeLis
                 }
             }
         }else{
-            CommonUtils.showErrorDialog(this, "","Please Open ATIN Services")
+            if (viewModel.isOpenLocalServer.value == false) {
+                CommonUtils.showErrorDialog(this, "","Please Open ATIN Services")
+            }
+            if (viewModel.atinInnitSuccess.value == false) {
+                CommonUtils.showErrorDialog(this, "","ATIN SDK init error 90115")
+            }
         }
     }
 
@@ -237,22 +250,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeLis
             overrideActivityTransition(OVERRIDE_TRANSITION_OPEN, android.R.anim.fade_in, android.R.anim.fade_out)
         } else {
             startActivity(intent, ActivityOptions.makeCustomAnimation(this, android.R.anim.fade_in, android.R.anim.fade_out).toBundle())
-        }
-    }
-
-    override fun getReturnAvailableLockersSuccess() {
-        if (viewModel.isOpenLocalServer.value == true && viewModel.atinInnitSuccess.value == true) {
-            startActivityWithOneValue(
-                ConstantUtils.TYPE_OPEN, ConstantUtils.TYPE_RETURN,
-                ReturnActivity::class.java
-            )
-        } else{
-            if (viewModel.isOpenLocalServer.value == false) {
-                CommonUtils.showErrorDialog(this, "","Please Open ATIN Services")
-            }
-            if (viewModel.atinInnitSuccess.value == false) {
-                CommonUtils.showErrorDialog(this, "","ATIN SDK init error 90115")
-            }
         }
     }
 

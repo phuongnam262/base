@@ -161,7 +161,6 @@
                         android:clickable="true"
                         android:focusable="true"
                         android:padding="@dimen/dp_30"
-                        app:debouncedClick="@{() -> viewmodel.getListReturnAvailableLockers() }"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/container_loan">
 

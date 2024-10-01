@@ -12,7 +12,11 @@ class ConstantUtils {
         const val OWNER_TEXT = "OWNER_TEXT"
         const val BACKGROUND = "BACKGROUND"
         const val CHECK_DOOR_STATUS_ON_CONFIRM = "CHECK_DOOR_STATUS_ON_CONFIRM"
-        const val MANDATORY_DOOR_CLOSURE_VERIFICATION = "MANDATORY_DOOR_CLOSURE_VERIFICATION"
+        const val EMAIL_DOMAIN = "email_domain"
+        const val ENFORCE_EMAIL_DOMAIN = "enforceEmailDomain"
+        const val AUTO_TRIGGER_DELAY = "auto_trigger_delay"
+        const val ENABLE_2FA = "enable2FA"
+
         const val RETURN_AVAILABLE_LOCKER_LIST = "RETURN_AVAILABLE_LOCKER_LIST"
         const val ERROR_CODE_SUCCESS = "SUCCESS"
         const val LOCKER_ID = "LOCKER_ID"
@@ -83,6 +87,8 @@ class ConstantUtils {
         const val ERROR_LOGIC = "623"
         const val ERROR_CARD_NUMBER = "70404"
         const val ERROR_SERIAL_EXISTED = "722"
+
+        const val ERROR_NO_LOCKER_FOUND = "4001"
 
     }
 
