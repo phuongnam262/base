@@ -31,7 +31,7 @@ class ManageLockerViewModel(
             managerRepository.getSetting().apply {
                 if (isSuccessful) {
                     if (data != null) {
-                        val filteredLockers = data.lockers.filter { it.name != "Console" }
+                        val filteredLockers = data.lockers.filter { it.name != "Console" }.sortedBy { it.name }
                         filteredLockers.map { it.doorStatus = 2 }
                         _lockers.postValue(filteredLockers)
                     }

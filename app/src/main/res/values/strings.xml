@@ -5,12 +5,12 @@
     <string name="network_error">Make sure you have an active data connection</string>
     <string name="close">Close</string>
 
-    <string name="server_error">There is an error from server. Please try again.</string>
+    <string name="server_error">There is an error from server. Please try again</string>
     <string name="error_api">Call API Error</string>
-    <string name="error_network">Please check your network.</string>
+    <string name="error_network">Please check your network</string>
     <string name="error_all">Some error please check it, status %1$s</string>
     <string name="error_response">Error response</string>
-    <string name="error_message">An internal error has occurred. Please try again.</string>
+    <string name="error_message">An internal error has occurred. Please try again</string>
     <string name="morning">Good morning</string>
     <string name="afternoon">Good afternoon</string>
     <string name="night">Good evening</string>
@@ -40,12 +40,12 @@
 
     <!-- Recognize face -->
     <string name="recognize_face">Recognize Your Face</string>
-    <string name="error_no_face_detect">No face detected.\nTry again or use another authentication method.</string>
-    <string name="error_multi_face_detect">There are multiple faces in the frame\nplease stand closer so the camera can capture one face.</string>
+    <string name="error_no_face_detect">No face detected.\nTry again or use another authentication method</string>
+    <string name="error_multi_face_detect">There are multiple faces in the frame\nplease stand closer so the camera can capture one face</string>
     <string name="welcome_back">Welcome back %1$s</string>
-    <string name="error_small_face_detect">Face is too small for the frame\nplease stand closer so the camera can capture lager face.</string>
-    <string name="error_large_face_detect">Face is too large for the frame\nplease adjust your face within the frame.</string>
-    <string name="error_center_face_detect">Face is no center the frame\nplease adjust your face center the frame.</string>
+    <string name="error_small_face_detect">Face is too small for the frame\nplease stand closer so the camera can capture lager face</string>
+    <string name="error_large_face_detect">Face is too large for the frame\nplease adjust your face within the frame</string>
+    <string name="error_center_face_detect">Face is no center the frame\nplease adjust your face center the frame</string>
     <string name="using_mail_button">USING EMAIL</string>
     <string name="retry_button">RETRY</string>
     <string name="process_button">PROCEED</string>
@@ -54,12 +54,12 @@
 
     <!-- Scan work card -->
     <string name="scan_work_card">Scan Work Card</string>
-    <string name="scan_work_card_info">Please scan your work card.</string>
+    <string name="scan_work_card_info">Please scan your work card</string>
     <string name="your_work_card">Your work card:</string>
 
     <!-- Input email -->
     <string name="auth_required">Authentication Required</string>
-    <string name="enter_email_continue">Enter your email to continue.</string>
+    <string name="enter_email_continue">Enter your email to continue</string>
     <string name="enter_email">Enter your email:</string>
     <string name="error_email_empty">Please enter email</string>
     <string name="error_email_exited">Email already register on this device</string>
@@ -92,10 +92,10 @@
     <string name="save_user_fail">Save user fail</string>
     <string name="face_not_found">Face not found</string>
     <string name="face_register_success">Face Registered Successfully</string>
-    <string name="face_hello">Hello %1$s,\nYour Face ID has been successfully added.</string>
+    <string name="face_hello">Hello %1$s,\nYour Face ID has been successfully added</string>
     <string name="btn_retry">RETRY</string>
-    <string name="face_exits_work_card">Your email have been linked to your work card: %1$s.\nThe data has been automatically merged together.</string>
-    <string name="face_exits_email">Your work card have been linked to email: %1$s\nThe data has been automatically merged together.</string>
+    <string name="face_exits_work_card">Your email have been linked to your work card: %1$s.\nThe data has been automatically merged together</string>
+    <string name="face_exits_email">Your work card have been linked to email: %1$s\nThe data has been automatically merged together</string>
 
     <!-- Admin Dashboard -->
     <string name="consumable_topup">CONSUMABLE TOPUP</string>
@@ -119,9 +119,7 @@
     <string name="item_model">MODEL</string>
     <string name="item_category">CATEGORY</string>
     <string name="item_loanee_email">LOANEE EMAIL</string>
-    <string name="deposit_item">Deposit Item</string>
-    <string name="deposit_item_info">Please deposit the item into the opening locker and close the door.\nLocker will auto-trigger confirmation after 10 seconds or when you tap confirm button.</string>
-    <string name="door_has_not_been_closed">Door has not been closed. Tap CONFIRM to continue.</string>
+    <string name="door_has_not_been_closed">Door has not been closed. Tap CONFIRM to continue</string>
     <string name="error_invalid_serial">Invalid serial number</string>
     <string name="dialog_attention">Does this item require attention?</string>
     <string name="error_input_serial_empty">Please scan or enter item serial number</string>
@@ -161,12 +159,16 @@
     <string name="error_no_locker_found">No locker found on this station</string>
 
     <!-- Deposit item   -->
+    <string name="return_topup_success">Return successful!\nDo you have more items to return?</string>
     <string name="deposit_topup_success">Deposit successful!\nDo you have more items to top-up?</string>
+    <string name="deposit_item">Deposit Item</string>
+    <string name="deposit_item_info">Please deposit the item into the opening locker and close the door.\nLocker will auto-trigger confirmation after 10 seconds or when you tap confirm button.</string>
+    <string name="error_door_has_not_close">Door has not been closed</string>
+    <string name="door_is_closed">The door is closed. Auto-confirm will be triggered in 10 seconds</string>
+    <string name="error_no_locker_topup">No available lockers for topup at this time</string>
 
     <!-- hwc   -->
-    <string name="error_open_failed">Door has not been opened successfully.</string>
-    <string name="error_door_has_not_close">Door has not been closed.</string>
-    <string name="door_is_closed">The door is closed. Auto-confirm will be triggered in 10 seconds.</string>
+    <string name="error_open_failed">Door has not been opened successfully</string>
     <string name="successful">Successful</string>
 
     <!-- Loan   -->
@@ -191,7 +193,7 @@
     <string name="enter_topup_quantity">Enter Topup Quantity</string>
     <string name="top_up">TOP UP: </string>
     <string name="select_report">SELECT REPORT REASON</string>
-    <string name="report_has_sent">The report has been sent.</string>
+    <string name="report_has_sent">The report has been sent</string>
     <string name="found_less_stock">Found less stock</string>
     <string name="found_extra_stock">Found extra stock</string>
     <string name="collectable">Collectable: </string>

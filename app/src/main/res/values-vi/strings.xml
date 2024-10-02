@@ -5,12 +5,12 @@
     <string name="network_error">Hãy đảm bảo bạn có kết nối mạng</string>
     <string name="close">Đóng</string>
 
-    <string name="server_error">Có lỗi từ máy chủ. Vui lòng thử lại.</string>
+    <string name="server_error">Có lỗi từ máy chủ. Vui lòng thử lại</string>
     <string name="error_api">Lỗi gọi API</string>
-    <string name="error_network">Vui lòng kiểm tra mạng của bạn.</string>
+    <string name="error_network">Vui lòng kiểm tra mạng của bạn</string>
     <string name="error_all">Một số lỗi vui lòng kiểm tra, mã lỗi %1$s</string>
     <string name="error_response">Phản hồi lỗi</string>
-    <string name="error_message">Đã xảy ra lỗi nội bộ. Vui lòng thử lại.</string>
+    <string name="error_message">Đã xảy ra lỗi nội bộ. Vui lòng thử lại</string>
     <string name="morning">Chào buổi sáng</string>
     <string name="afternoon">Chào buổi chiều</string>
     <string name="night">Chào buổi tối</string>
@@ -40,12 +40,12 @@
 
     <!-- Recognize face -->
     <string name="recognize_face">Nhận Diện Khuôn Mặt Của Bạn</string>
-    <string name="error_no_face_detect">Không tìm thấy dữ liệu.\nHãy thử lại hoặc sử dụng phương pháp khác.</string>
+    <string name="error_no_face_detect">Không tìm thấy dữ liệu.\nHãy thử lại hoặc sử dụng phương pháp khác</string>
     <string name="error_multi_face_detect">Đang có nhiều khuôn mặt trong khung hình\nvui lòng đứng gần hơn để camera có thể chụp 1 khuôn mặt</string>
     <string name="welcome_back">Chào mừng trở lại %1$s</string>
     <string name="error_small_face_detect">Khuôn mặt nhỏ so với khung hình\nvui lòng đứng gần hơn để camera có thể chụp ảnh lớn</string>
-    <string name="error_large_face_detect">Khuôn mặt lớn so với khung hình\nvui lòng chỉnh khuôn mặt nằm trong khung.</string>
-    <string name="error_center_face_detect">Khuôn mặt chưa nằm giữa khung hình\nvui lòng chỉnh khuôn mặt nằm trung tâm khung.</string>
+    <string name="error_large_face_detect">Khuôn mặt lớn so với khung hình\nvui lòng chỉnh khuôn mặt nằm trong khung</string>
+    <string name="error_center_face_detect">Khuôn mặt chưa nằm giữa khung hình\nvui lòng chỉnh khuôn mặt nằm trung tâm khung</string>
     <string name="using_mail_button">DÙNG EMAIL</string>
     <string name="retry_button">THỬ LẠI</string>
     <string name="process_button">TIẾP TỤC</string>
@@ -54,19 +54,19 @@
 
     <!-- Scan work card -->
     <string name="scan_work_card">Quét thẻ nhân viên</string>
-    <string name="scan_work_card_info">Vui lòng quét thẻ nhân viên.</string>
+    <string name="scan_work_card_info">Vui lòng quét thẻ nhân viên</string>
     <string name="your_work_card">Thẻ nhân viên của bạn:</string>
 
     <!-- Input email -->
     <string name="auth_required">Yêu Cầu Xác Thực</string>
-    <string name="enter_email_continue">Nhập email của bạn để tiếp tục.</string>
+    <string name="enter_email_continue">Nhập email của bạn để tiếp tục</string>
     <string name="enter_email">Nhập email của bạn:</string>
     <string name="error_email_empty">Vui lòng nhập email</string>
     <string name="error_email_exited">Email đã được đăng ký trên thiết bị này</string>
     <string name="error_card_exited">Thẻ nhân viên đã được đăng ký trên thiết bị này</string>
 
     <!-- Admin Login -->
-    <string name="enter_username_continue">Nhập tên người dùng của bạn để tiếp tục.</string>
+    <string name="enter_username_continue">Nhập tên người dùng của bạn để tiếp tục</string>
     <string name="username">Tên người dùng:</string>
     <string name="password">Mật khẩu:</string>
     <string name="error_username_empty">Vui lòng nhập tên người dùng</string>
@@ -88,17 +88,17 @@
     <!-- Register face -->
     <string name="register_face">Đăng Ký Khuôn Mặt Của Bạn</string>
     <string name="register_face_info">Vui lòng đứng gần tủ và nhìn thẳng vào máy ảnh để chúng tôi có thể chụp rõ khuôn mặt của bạn.</string>
-    <string name="face_exits">Khuôn mặt này đã tồn tại.</string>
+    <string name="face_exits">Khuôn mặt này đã tồn tại</string>
     <string name="save_user_fail">Lưu người dùng thất bại</string>
     <string name="face_not_found">Không tìm thấy khuôn mặt</string>
     <string name="face_register_success">Đăng Ký Khuôn Mặt Thành Công</string>
-    <string name="face_hello">Chào %1$s, \nKhuôn mặt của bạn đã được thêm thành công.</string>
+    <string name="face_hello">Chào %1$s, \nKhuôn mặt của bạn đã được thêm thành công</string>
     <string name="btn_retry">THỬ LẠI</string>
     <string name="face_exits_work_card">Email của bạn đã được liên kết với thẻ nhân viên: (%1$s)\nDữ liệu đã tự động kết hợp với nhau</string>
     <string name="face_exits_email">Thẻ nhân viên đã được liên kết với email: (%1$s)\nDữ liệu đã tự động kết hợp với nhau</string>
 
     <!-- Admin Dashboard -->
-    <string name="consumable_topup">THÊM VẬT TƯ</string>
+    <string name="consumable_topup">THÊM VẬT TƯ&#160;</string>
     <string name="topup_items">THÊM ĐỒ DÙNG\n(%1$s)</string>
     <string name="retrieve_faulty">THU HỒI ĐỒ DÙNG LỖI\n(%1$s)</string>
     <string name="retrieve_items">THU HỒI ĐỒ DÙNG </string>
@@ -119,10 +119,8 @@
     <string name="item_model">MODEL</string>
     <string name="item_category">DANH MỤC</string>
     <string name="item_loanee_email">NGƯỜI MƯỢN</string>
-    <string name="deposit_item">Gửi Đồ Dùng</string>
-    <string name="deposit_item_info">Vui lòng đặt đồ dùng vào tủ khóa đang mở và đóng cửa.\nTủ khóa sẽ tự động kích hoạt xác nhận sau 10 giây hoặc khi bạn nhấn nút xác nhận.</string>
-    <string name="door_has_not_been_closed">Cửa chưa được đóng. Nhấn XÁC NHẬN để tiếp tục.</string>
-    <string name="error_invalid_serial">Số sê-ri không hợp lệ.</string>
+    <string name="door_has_not_been_closed">Cửa chưa được đóng. Nhấn XÁC NHẬN để tiếp tục</string>
+    <string name="error_invalid_serial">Số sê-ri không hợp lệ</string>
     <string name="dialog_attention">Đồ dùng này có vấn đề gì không?</string>
     <string name="error_input_serial_empty">Vui lòng quét hoặc nhập số sê-ri của đồ dùng</string>
     <string name="serial_number_is_not_available">Số sê-ri này không còn khả dụng nữa</string>
@@ -161,12 +159,16 @@
     <string name="error_no_locker_found">Không tìm thấy tủ ở trạm này</string>
 
     <!-- Deposit item   -->
+    <string name="return_topup_success">Trả đồ dùng thành công!\nBạn còn đồ dùng nào cần trả nữa không?</string>
     <string name="deposit_topup_success">Thêm đồ dùng thành công!\nBạn còn đồ dùng nào cần thêm không?</string>
+    <string name="deposit_item">Gửi Đồ Dùng</string>
+    <string name="deposit_item_info">Vui lòng đặt đồ dùng vào tủ khóa đang mở và đóng cửa.\nTủ khóa sẽ tự động kích hoạt xác nhận sau 10 giây hoặc khi bạn nhấn nút xác nhận.</string>
+    <string name="error_door_has_not_close">Cửa chưa được đóng</string>
+    <string name="door_is_closed">Cửa đã đóng. Tự động xác nhận sẽ được kích hoạt sau 10 giây</string>
+    <string name="error_no_locker_topup">Hiện tại không có tủ khóa để thêm đồ dùng</string>
 
     <!-- hwc   -->
-    <string name="error_open_failed">Cửa không được mở thành công.</string>
-    <string name="error_door_has_not_close">Cửa chưa được đóng.</string>
-    <string name="door_is_closed">Cửa đã đóng. Tự động xác nhận sẽ được kích hoạt sau 10 giây.</string>
+    <string name="error_open_failed">Cửa không được mở thành công</string>
     <string name="successful">Thành công</string>
 
     <!-- Loan -->
@@ -179,7 +181,7 @@
     <string name="loanable">Được phép lấy: </string>
 
     <!-- Consumable   -->
-    <string name="consumables">Vật tư</string>
+    <string name="consumables">Vật tư&#160;</string>
     <string name="current_quantity">Tổng số lượng hiện tại:</string>
     <string name="select_button">Chọn</string>
     <string name="current_quantity_number">Số lượng hiện tại:</string>
@@ -191,7 +193,7 @@
     <string name="enter_topup_quantity">Nhập số lượng thêm</string>
     <string name="top_up">THÊM:</string>
     <string name="select_report">CHỌN LÝ DO BÁO CÁO</string>
-    <string name="report_has_sent">Báo cáo đã được gửi.</string>
+    <string name="report_has_sent">Báo cáo đã được gửi</string>
     <string name="found_less_stock">Tìm thấy ít hàng hơn</string>
     <string name="found_extra_stock">Tìm thấy nhiều hàng hơn</string>
     <string name="collectable">Được phép lấy: </string>

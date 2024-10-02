@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.lock.smartlocker.data.entities.responses.GetListCategoryResponse
+import com.lock.smartlocker.data.models.Category
 import com.lock.smartlocker.data.preference.PreferenceHelper
 import com.lock.smartlocker.ui.base.BaseViewModel
 import com.lock.smartlocker.util.ConstantUtils
@@ -22,14 +23,13 @@ class SelectFaultyViewModel(
 
     fun loadSpinnerItems(categoryId: String) {
         val jsonCategory = PreferenceHelper.getString(ConstantUtils.LIST_CATEGORY, "")
-
         if (jsonCategory.isNotEmpty()) {
             try {
-                val categoriesResponseType = object : TypeToken<GetListCategoryResponse>() {}.type
-                val categoriesResponse: GetListCategoryResponse = Gson().fromJson(jsonCategory, categoriesResponseType)
+                val listType = object : TypeToken<ArrayList<Category>>() {}.type
+                val categoryList = Gson().fromJson<ArrayList<Category>>(jsonCategory, listType)
 
                 // Lọc danh mục theo categoryId
-                val category = categoriesResponse.categories.find { it.categoryId == categoryId }
+                val category = categoryList.find { it.categoryId == categoryId }
                 val reasonFaulties = category?.reasonFaulties?.distinct() ?: listOf("No faulties available")
 
                 _spinnerItems.value = reasonFaulties

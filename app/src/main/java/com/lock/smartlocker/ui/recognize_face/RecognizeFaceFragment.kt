@@ -389,6 +389,7 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
                     faceBoundingBox.width() - 20,
                     faceBoundingBox.height() + 50
                 )
+
                 val baos = ByteArrayOutputStream()
                 faceBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
                 val b = baos.toByteArray()

@@ -9,6 +9,7 @@ import com.lock.smartlocker.data.models.ItemReturn
 import com.lock.smartlocker.databinding.FragmentDepositItemBinding
 import com.lock.smartlocker.ui.base.BaseFragment
 import com.lock.smartlocker.ui.input_serial_number.InputSerialNumberFragment
+import com.lock.smartlocker.util.ConstantUtils
 import com.lock.smartlocker.util.view.custom.CustomConfirmDialog
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
@@ -49,7 +50,7 @@ class DepositItemFragment : BaseFragment<FragmentDepositItemBinding, DepositItem
         mViewDataBinding?.bottomMenu?.btnProcess?.text = getString(R.string.confirm_button)
         mViewDataBinding?.depositItem?.btnReopen?.setOnClickListener(this)
         mViewDataBinding?.depositItem?.btnChangeLocker?.setOnClickListener(this)
-        viewModel.enableButtonProcess.value = true
+        if (viewModel.isRequireCloseDoor) viewModel.enableButtonProcess.value = false
     }
 
     private fun initData(){
@@ -64,11 +65,14 @@ class DepositItemFragment : BaseFragment<FragmentDepositItemBinding, DepositItem
         }
 
         viewModel.doorStatus.observe(viewLifecycleOwner) {
-            viewModel.enableButtonProcess.value = it == 0
-            if (it == 0 && viewModel.isRequireCloseDoor) {
+            if (viewModel.isRequireCloseDoor.not()) viewModel.enableButtonProcess.value = it == 0
+            if (it == 0) {
                 viewModel.showStatusText.value = false
-                viewModel.startCheckingStatus()
-            }else viewModel.mStatusText.postValue(R.string.error_open_failed)
+                if (viewModel.isRequireCloseDoor) viewModel.startCheckingStatus()
+                else viewModel.mStatusText.postValue(R.string.door_has_not_been_closed)
+            }else {
+                viewModel.mStatusText.postValue(R.string.error_open_failed)
+            }
         }
     }
 
@@ -86,6 +90,7 @@ class DepositItemFragment : BaseFragment<FragmentDepositItemBinding, DepositItem
                 R.id.btn_process -> {
                     if (viewModel.isRequireCloseDoor.not() || viewModel.autoCheckDoorStatus.value == 1) {
                         viewModel.returnItem?.let {
+                            viewModel.showStatusText.value = false
                             viewModel.handleReturnItemProcess(it)
                         }
                     } else {
@@ -97,18 +102,26 @@ class DepositItemFragment : BaseFragment<FragmentDepositItemBinding, DepositItem
     }
 
     override fun returnItemSuccess() {
-        navigateTo(R.id.action_depositItemFragment_to_thankFragment, null)
+        showDialogConfirm(getString(R.string.return_topup_success), "return")
     }
 
     override fun topupItemSuccess() {
-        showDialogConfirm(getString(R.string.deposit_topup_success))
+        showDialogConfirm(getString(R.string.deposit_topup_success), "topup")
     }
 
     override fun onDialogConfirmClick(dialogTag: String?) {
-        navigateTo(R.id.action_depositItemFragment2_to_inputSerialNumberFragment2, null)
+        val bundle = Bundle().apply {
+            putString(
+                InputSerialNumberFragment.TYPE_INPUT_SERIAL,
+                ConstantUtils.TYPE_TOPUP_ITEM
+            )
+        }
+        if (dialogTag.equals("return")) navigateTo(R.id.action_depositItemFragment_to_inputSerialNumberFragment, null)
+        else navigateTo(R.id.action_depositItemFragment2_to_inputSerialNumberFragment2, bundle)
     }
 
-    override fun onDialogCancelClick() {
-        navigateTo(R.id.action_depositItemFragment2_to_adminDashboardFragment, null)
+    override fun onDialogCancelClick(dialogTag: String?) {
+        if (dialogTag.equals("return")) navigateTo(R.id.action_depositItemFragment_to_thankFragment, null)
+        else navigateTo(R.id.action_depositItemFragment2_to_adminDashboardFragment, null)
     }
 }

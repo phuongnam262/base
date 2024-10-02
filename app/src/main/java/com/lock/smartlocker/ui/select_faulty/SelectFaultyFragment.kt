@@ -73,6 +73,7 @@ class SelectFaultyFragment : BaseFragment<FragmentSelectFaultyBinding, SelectFau
         mViewDataBinding?.bottomMenu?.rlHome?.setOnClickListener(this)
         mViewDataBinding?.bottomMenu?.btnProcess?.setOnClickListener(this)
         mViewDataBinding?.headerBar?.ivBack?.setOnClickListener(this)
+        viewModel.enableButtonProcess.value = true
     }
 
     private fun initData(){

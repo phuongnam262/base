@@ -105,6 +105,6 @@ class DepositConsumableFragment : BaseFragment<FragmentDepositConsumableBinding,
         else activity?.supportFragmentManager?.popBackStack()
     }
 
-    override fun onDialogCancelClick() {
+    override fun onDialogCancelClick(dialogTag: String?) {
     }
 }

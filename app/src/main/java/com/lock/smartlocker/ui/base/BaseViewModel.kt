@@ -101,8 +101,6 @@ abstract class BaseViewModel() : ViewModel() {
 
             ConstantUtils.ADMIN_ACCOUNT_LOCKED -> mStatusText.postValue(R.string.error_account_locked)
 
-            ConstantUtils.DOOR_HAS_NOT_BEEN_CLOSE -> mStatusText.postValue(R.string.door_has_not_been_closed)
-
             ConstantUtils.SERIAL_NUMBER_INVALID, ConstantUtils.SERIAL_NUMBER_INVALID_1 -> mStatusText.postValue(R.string.error_invalid_serial)
 
             ConstantUtils.ERROR_LOGIC -> mMessage.postValue(R.string.error_logic)
@@ -130,6 +128,8 @@ abstract class BaseViewModel() : ViewModel() {
             ConstantUtils.ERROR_SERIAL_EXISTED -> mStatusText.postValue(R.string.error_serial_existed)
 
             ConstantUtils.ERROR_NO_LOCKER_FOUND -> mStatusText.postValue(R.string.error_no_locker_found)
+
+            ConstantUtils.ERROR_NO_LOCKER_TOPUP -> mStatusText.postValue(R.string.error_no_locker_topup)
 
             else -> mErrorAllWithStatusCode.postValue(status ?: "99999")
 

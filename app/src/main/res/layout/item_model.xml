@@ -49,6 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_5"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
@@ -63,10 +64,11 @@
                     android:id="@+id/tvAvailable"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/dp_3"
                     android:fontFamily="@font/segoe_ui_light"
                     android:gravity="bottom"
                     android:text="@{String.valueOf(model.available)}"
-                    android:textSize="@dimen/sp_12" />
+                    android:textSize="@dimen/sp_14" />
 
                 <TextView
                     android:id="@+id/tvDivider"
@@ -74,7 +76,8 @@
                     android:layout_height="match_parent"
                     android:fontFamily="@font/segoe_ui_light"
                     android:text=" | "
-                    android:textSize="@dimen/sp_12"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/sp_14"
                     android:visibility="@{model.loanable != null}" />
 
                 <TextView
@@ -83,7 +86,7 @@
                     android:layout_height="match_parent"
                     android:fontFamily="@font/segoe_ui_light"
                     android:text="@string/loanable"
-                    android:textSize="@dimen/sp_12"
+                    android:textSize="@dimen/sp_14"
                     android:visibility="@{model.loanable != null}" />
 
                 <TextView
@@ -91,6 +94,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:fontFamily="@font/segoe_ui_light"
+                    android:layout_marginStart="@dimen/dp_3"
                     android:text="@{String.valueOf(model.loanable)}"
                     android:textSize="@dimen/sp_14"
                     android:visibility="@{model.loanable != null}" />

@@ -118,7 +118,7 @@ class InputSerialNumberFragment : BaseFragment<FragmentInputSerialNumberBinding,
         navigateToSelectFaultyFragment(viewModel.itemReturnData.value!!.categoryId)
     }
 
-    override fun onDialogCancelClick() {
+    override fun onDialogCancelClick(dialogTag: String?) {
         navigateToSelectAvailableLockerFragment()
     }
 
@@ -126,6 +126,7 @@ class InputSerialNumberFragment : BaseFragment<FragmentInputSerialNumberBinding,
         val bundle = Bundle().apply {
             putString(CATEGORY_ID_KEY, categoryId)
             putSerializable(RETURN_ITEM_REQUEST_KEY, viewModel.itemReturnData.value)
+            putString( TYPE_INPUT_SERIAL, viewModel.typeInput.value)
         }
         navigateTo(R.id.action_inputSerialNumberFragment_to_selectFaultyFragment2, bundle)
 

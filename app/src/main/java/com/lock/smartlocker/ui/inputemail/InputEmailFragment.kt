@@ -35,7 +35,7 @@ class InputEmailFragment : BaseFragment<FragmentInputEmailBinding, InputEmailVie
 
     private val items = PreferenceHelper.getString(ConstantUtils.EMAIL_DOMAIN, "")
         .split(",")
-        .map { it.trim() }
+        .map { ("@$it").trim() }
         .sorted()
 
     private var isClicked = false

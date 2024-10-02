@@ -38,7 +38,10 @@ class DepositItemViewModel(
         }
     }
 
-    private val autoConfirmRunnable = Runnable { handleReturnItemProcess(returnItem!!) }
+    private val autoConfirmRunnable = Runnable {
+        showStatusText.postValue(false)
+        handleReturnItemProcess(returnItem!!)
+    }
 
     fun startCheckingStatus() {
         handler.post(checkStatusRunnable)
@@ -55,7 +58,6 @@ class DepositItemViewModel(
 
     fun checkStatusCloseOrNot(lockerId: String) {
         ioScope.launch {
-            mLoading.postValue(true)
             val request = HardwareControllerRequest(
                 lockerIds = listOf(lockerId),
                 userHandler = PreferenceHelper.getString(ConstantUtils.ADMIN_NAME, "Admin"),
@@ -68,6 +70,7 @@ class DepositItemViewModel(
                         if (data.locker_list.first().doorStatus == 0) {
                             mStatusText.postValue(R.string.error_door_has_not_close)
                         }else{
+                            uiScope.launch { enableButtonProcess.value = true}
                             handler.removeCallbacks(checkStatusRunnable)
                             startAutoConfirm()
                             mStatusText.postValue(R.string.door_is_closed)
@@ -75,7 +78,7 @@ class DepositItemViewModel(
                     }
                 } else handleError(status)
             }
-        }.invokeOnCompletion { mLoading.postValue(false) }
+        }
     }
 
     fun handleReturnItemProcess(itemReturn: ItemReturn) {

@@ -98,7 +98,7 @@ class SelectAvailableLockerFragment : BaseFragment<FragmentSelectAvailableLocker
         returnItem?.arrowPosition = viewModel.selectedLocker.value?.arrowPosition ?: 0
         val bundle = Bundle().apply {
             putSerializable( InputSerialNumberFragment.RETURN_ITEM_REQUEST_KEY, returnItem)
-            putString(InputSerialNumberFragment.TYPE_INPUT_SERIAL, viewModel.typeInput.value)
+            if (viewModel.isReturnFlow.not()) putString(InputSerialNumberFragment.TYPE_INPUT_SERIAL, ConstantUtils.TYPE_TOPUP_ITEM)
         }
         if(viewModel.isReturnFlow)
             navigateTo(R.id.action_selectAvailableLockerFragment_to_depositItemFragment, bundle)

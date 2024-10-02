@@ -130,7 +130,7 @@ class CollectConsumableItemFragment : BaseFragment<FragmentCollectConsumableItem
         activity?.finish()
     }
 
-    override fun onDialogCancelClick() {
+    override fun onDialogCancelClick(dialogTag: String?) {
     }
 
     override fun onDialogSubmit(reason: String, lockerId: String, consumableId: String) {

@@ -2,6 +2,7 @@ package com.lock.smartlocker.ui.admin_dashboard
 
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
+import com.lock.smartlocker.data.entities.responses.AdminLoginResponse
 import com.lock.smartlocker.data.preference.PreferenceHelper
 import com.lock.smartlocker.data.repositories.ManagerRepository
 import com.lock.smartlocker.ui.base.BaseViewModel
@@ -14,6 +15,7 @@ class AdminDashboardViewModel(
 
     val numberLockerAvailable = MutableLiveData<Int>()
     val numberItemFaulty = MutableLiveData<Int>()
+    var adminLogin: AdminLoginResponse? = null
 
     fun getInformationStaff() {
         ioScope.launch {

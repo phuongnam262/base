@@ -90,7 +90,7 @@ class FaceListFragment : BaseFragment<FragmentFaceListBinding, FaceListViewModel
         viewModel.removeAllFace()
     }
 
-    override fun onDialogCancelClick() {
+    override fun onDialogCancelClick(dialogTag: String?) {
     }
 
 }

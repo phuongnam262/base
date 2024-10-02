@@ -38,10 +38,9 @@ class ItemViewModel(
 
     private fun loadCategories() {
         val jsonCategory = PreferenceHelper.getString(ConstantUtils.LIST_CATEGORY, "")
-        val categoriesResponseType = object : TypeToken<GetListCategoryResponse>() {}.type
-        val categoriesResponse: GetListCategoryResponse =
-            Gson().fromJson(jsonCategory, categoriesResponseType)
-        _categories.postValue(categoriesResponse.categories)
+        val listType = object : TypeToken<ArrayList<Category>>() {}.type
+        val categoryList = Gson().fromJson<ArrayList<Category>>(jsonCategory, listType)
+        _categories.postValue(categoryList)
     }
 
     fun onCategorySelected(category: Category) {

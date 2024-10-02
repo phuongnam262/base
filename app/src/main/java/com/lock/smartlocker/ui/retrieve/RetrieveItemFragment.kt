@@ -110,6 +110,6 @@ class RetrieveItemFragment : BaseFragment<FragmentRetrieveItemBinding, RetrieveV
         viewModel.openAllLocker()
     }
 
-    override fun onDialogCancelClick() {
+    override fun onDialogCancelClick(dialogTag: String?) {
     }
 }

@@ -16,6 +16,8 @@ class ConstantUtils {
         const val ENFORCE_EMAIL_DOMAIN = "enforceEmailDomain"
         const val AUTO_TRIGGER_DELAY = "auto_trigger_delay"
         const val ENABLE_2FA = "enable2FA"
+        const val ORDER_CATEGORY = "order_category_on_kiosk"
+        const val ORDER_MODEL = "order_model_on_kiosk"
 
         const val RETURN_AVAILABLE_LOCKER_LIST = "RETURN_AVAILABLE_LOCKER_LIST"
         const val ERROR_CODE_SUCCESS = "SUCCESS"
@@ -69,7 +71,6 @@ class ConstantUtils {
         const val LOGIN_WRONG_PASSWORD = "401-002"
         const val SERIAL_NUMBER_INVALID_1 = "421"
         const val EMAIL_NOT_CORRECT_FORMAT = "422"
-        const val DOOR_HAS_NOT_BEEN_CLOSE = "423-001"
 
         const val REQUIRE_OTP = "201"
         const val INVALID_OTP = "601"
@@ -80,6 +81,7 @@ class ConstantUtils {
         const val PASSWORD_POLICY_UPDATE = "60402"
         const val ERROR_NO_AVAILABLE_ITEM = "605"
         const val PASSWORD_EXPIRED = "60503"
+        const val ERROR_NO_LOCKER_TOPUP = "60504"
         const val ERROR_NO_RETRIEVE_ITEM = "60505"
         const val ERROR_NO_RETRIEVE_FAULTY = "60506"
         const val ERROR_RETRIEVE_ITEM_FAIL = "60509"

@@ -101,7 +101,7 @@ class CartConsumableFragment : BaseFragment<FragmentCartConsumableBinding, CartC
         TODO("Not yet implemented")
     }
 
-    override fun onDialogCancelClick() {
+    override fun onDialogCancelClick(dialogTag: String?) {
         TODO("Not yet implemented")
     }
 }

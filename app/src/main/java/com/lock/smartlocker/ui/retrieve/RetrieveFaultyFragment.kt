@@ -91,6 +91,6 @@ class RetrieveFaultyFragment : BaseFragment<FragmentRetrieveFaultyBinding, Retri
         viewModel.openAllLocker()
     }
 
-    override fun onDialogCancelClick() {
+    override fun onDialogCancelClick(dialogTag: String?) {
     }
 }

@@ -57,21 +57,26 @@ class AdminDashboardFragment : BaseFragment<FragmentAdminDashboardBinding, Admin
         }
 
         //Disable or enable button based on staff role
-        val adminLogin = arguments?.getSerializable(ConstantUtils.ADMIN_LOGIN)as AdminLoginResponse
-        mViewDataBinding?.llConsumableTopup?.isEnabled = adminLogin.staff.isTopupConsumables
-        mViewDataBinding?.llConsumableTopup?.alpha = if (adminLogin.staff.isTopupConsumables) 1f else 0.3f
-        mViewDataBinding?.llTopupItems?.isEnabled = adminLogin.staff.isTopupItems
-        mViewDataBinding?.llTopupItems?.alpha = if (adminLogin.staff.isTopupItems) 1f else 0.3f
-        mViewDataBinding?.llCloseApp?.isEnabled = adminLogin.staff.isCloseApplication
-        mViewDataBinding?.llCloseApp?.alpha = if (adminLogin.staff.isCloseApplication) 1f else 0.3f
-        mViewDataBinding?.llSettings?.isEnabled = adminLogin.staff.isElockSettings
-        mViewDataBinding?.llSettings?.alpha = if (adminLogin.staff.isElockSettings) 1f else 0.3f
-        mViewDataBinding?.llManageLockers?.isEnabled = adminLogin.staff.isManageLockers
-        mViewDataBinding?.llManageLockers?.alpha = if (adminLogin.staff.isManageLockers) 1f else 0.3f
-        mViewDataBinding?.llRetrieveItems?.isEnabled = adminLogin.staff.isRetrieveItems
-        mViewDataBinding?.llRetrieveItems?.alpha = if (adminLogin.staff.isRetrieveItems) 1f else 0.3f
-        mViewDataBinding?.llRetrieveFaulty?.isEnabled = adminLogin.staff.isRetrieveFaulty
-        mViewDataBinding?.llRetrieveFaulty?.alpha = if (adminLogin.staff.isRetrieveFaulty) 1f else 0.3f
+        if (arguments?.getSerializable(ConstantUtils.ADMIN_LOGIN) != null)
+            viewModel.adminLogin = arguments?.getSerializable(ConstantUtils.ADMIN_LOGIN)as AdminLoginResponse
+        viewModel.adminLogin.let {
+            if (it != null) {
+                mViewDataBinding?.llConsumableTopup?.isEnabled = it.staff.isTopupConsumables
+                mViewDataBinding?.llConsumableTopup?.alpha = if (it.staff.isTopupConsumables) 1f else 0.3f
+                mViewDataBinding?.llTopupItems?.isEnabled = it.staff.isTopupItems
+                mViewDataBinding?.llTopupItems?.alpha = if (it.staff.isTopupItems) 1f else 0.3f
+                mViewDataBinding?.llCloseApp?.isEnabled = it.staff.isCloseApplication
+                mViewDataBinding?.llCloseApp?.alpha = if (it.staff.isCloseApplication) 1f else 0.3f
+                mViewDataBinding?.llSettings?.isEnabled = it.staff.isElockSettings
+                mViewDataBinding?.llSettings?.alpha = if (it.staff.isElockSettings) 1f else 0.3f
+                mViewDataBinding?.llManageLockers?.isEnabled = it.staff.isManageLockers
+                mViewDataBinding?.llManageLockers?.alpha = if (it.staff.isManageLockers) 1f else 0.3f
+                mViewDataBinding?.llRetrieveItems?.isEnabled = it.staff.isRetrieveItems
+                mViewDataBinding?.llRetrieveItems?.alpha = if (it.staff.isRetrieveItems) 1f else 0.3f
+                mViewDataBinding?.llRetrieveFaulty?.isEnabled = it.staff.isRetrieveFaulty
+                mViewDataBinding?.llRetrieveFaulty?.alpha = if (it.staff.isRetrieveFaulty) 1f else 0.3f
+            }
+        }
     }
 
     override fun onClick(v: View?) {
@@ -125,6 +130,6 @@ class AdminDashboardFragment : BaseFragment<FragmentAdminDashboardBinding, Admin
         activity?.finishAffinity()
     }
 
-    override fun onDialogCancelClick() {
+    override fun onDialogCancelClick(dialogTag: String?) {
     }
 }

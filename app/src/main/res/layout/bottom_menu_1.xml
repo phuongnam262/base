@@ -118,7 +118,7 @@
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_process"
                         style="@style/CustomButtonBlack"
-                        android:layout_width="@dimen/dp_120"
+                        android:layout_width="@dimen/dp_140"
                         android:layout_height="wrap_content"
                         android:alpha="@{enableButtonProcess ? 1f : 0.3f}"
                         android:enabled="@{enableButtonProcess ? true : false}"

@@ -15,7 +15,7 @@ class CustomConfirmDialog : DialogFragment() {
 
     interface ConfirmationDialogListener {
         fun onDialogConfirmClick(dialogTag: String?)
-        fun onDialogCancelClick()
+        fun onDialogCancelClick(dialogTag: String?)
     }
 
     private var listener: ConfirmationDialogListener? = null
@@ -55,7 +55,7 @@ class CustomConfirmDialog : DialogFragment() {
             dismiss()
         }
         cancelButton.setOnClickListener {
-            listener?.onDialogCancelClick()
+            listener?.onDialogCancelClick(dialogTag)
             dismiss()
         }
 

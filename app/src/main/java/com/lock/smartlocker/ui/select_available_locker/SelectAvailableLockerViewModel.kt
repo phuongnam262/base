@@ -43,7 +43,7 @@ class SelectAvailableLockerViewModel(
                 val settingsResponse: GetSettingResponse = Gson().fromJson(jsonSetting, settingResponseType)
                 val allLockers = settingsResponse.lockers
                 val availableLockers = allLockers.filter { it.lockerId in availableLockerIds }
-                _lockers.postValue(availableLockers)
+                _lockers.postValue(availableLockers.sortedBy { it.name })
             } else {
                 _lockers.postValue(emptyList())
             }

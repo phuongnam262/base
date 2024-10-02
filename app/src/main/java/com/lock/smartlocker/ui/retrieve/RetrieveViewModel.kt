@@ -62,7 +62,7 @@ class RetrieveViewModel(
         val categoriesItem =
             _categoriesRetrieve.value?.find { it.categoryId == category.categoryId }
         categoriesItem.let { categories ->
-            val listLocker = categories?.modelRetrievies?.flatMap { it.lockers }
+            val listLocker = categories?.modelRetrievies?.flatMap { it.lockers }?.sortedBy { it.lockerName }
             _retrieveModels.postValue(listLocker ?: emptyList())
         }
     }
@@ -80,7 +80,7 @@ class RetrieveViewModel(
                             listId.addAll(categories.modelRetrievies.flatMap { model ->
                                 model.lockers.map { it.lockerId }
                             })
-                            listModel.addAll(categories.modelRetrievies.flatMap { it.lockers })
+                            listModel.addAll(categories.modelRetrievies.flatMap { it.lockers }.sortedBy { it.lockerName })
                         }
                         listLockerId.postValue(listId)
                         _retrieveModels.postValue(listModel)

@@ -95,6 +95,6 @@ class ManageLockerFragment : BaseFragment<FragmentManageLockerBinding, ManageLoc
         viewModel.disableLocker()
     }
 
-    override fun onDialogCancelClick() {
+    override fun onDialogCancelClick(dialogTag: String?) {
     }
 }

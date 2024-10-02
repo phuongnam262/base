@@ -1,5 +1,6 @@
 package com.lock.smartlocker.ui.splash
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.lock.smartlocker.data.preference.PreferenceHelper
@@ -28,6 +29,8 @@ class SplashViewModel(
                         PreferenceHelper.writeInt(ConstantUtils.AUTO_TRIGGER_DELAY, data.setting.kiosk.kioskConfig.autoTriggerDelay)
                         PreferenceHelper.writeString(ConstantUtils.EMAIL_DOMAIN, data.setting.kiosk.kioskConfig.emailDomain)
                         PreferenceHelper.writeBoolean(ConstantUtils.ENABLE_2FA, data.setting.systemSetting.enable2FA)
+                        PreferenceHelper.writeString(ConstantUtils.ORDER_CATEGORY, data.setting.kiosk.kioskConfig.orderCategoryOnKiosk)
+                        PreferenceHelper.writeString(ConstantUtils.ORDER_MODEL, data.setting.kiosk.kioskConfig.orderModelOnKiosk)
                         PreferenceHelper.writeString(ConstantUtils.TERMINAL_LOGIN, Gson().toJson(data))
                         getSetting()
                         splashListener?.updateLayout()
@@ -56,7 +59,11 @@ class SplashViewModel(
             startAppRepository.listCategory().apply {
                 if (isSuccessful) {
                     if (data != null) {
-                        PreferenceHelper.writeString(ConstantUtils.LIST_CATEGORY, Gson().toJson(data))
+                        if (PreferenceHelper.getString(ConstantUtils.ORDER_CATEGORY) == "position"){
+                            PreferenceHelper.writeString(ConstantUtils.LIST_CATEGORY, Gson().toJson(data.categories.sortedBy { it.position }))
+                        }else{
+                            PreferenceHelper.writeString(ConstantUtils.LIST_CATEGORY, Gson().toJson(data.categories.sortWith(compareBy { it.categoryName })))
+                        }
                         allSuccess.postValue(true)
                     }
                 }else handleError(status)
