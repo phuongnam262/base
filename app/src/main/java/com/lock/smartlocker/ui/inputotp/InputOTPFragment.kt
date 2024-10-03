@@ -65,8 +65,15 @@ class InputOTPFragment : BaseFragment<FragmentInputOtpBinding, InputOTPViewModel
                 R.id.btn_process -> {
                     if (isClicked.not()) {
                         isClicked = true
-                        viewModel.onSendOTP()
+                        if (arguments?.getString(ConstantUtils.TYPE_OPEN_MANAGER) != null)
+                            viewModel.onSendAdminOTP()
+                        else viewModel.onSendOTP()
                     }
+                }
+                R.id.btn_resend_otp -> {
+                    if (arguments?.getString(ConstantUtils.TYPE_OPEN_MANAGER) != null)
+                        viewModel.onAdminResend()
+                    else viewModel.onResend()
                 }
             }
         }

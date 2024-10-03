@@ -69,12 +69,20 @@ class ManagerRepository (
         return apiRequest { api.provideLockerAPIService().retrieveItem(retrieveItemRequest) }
     }
 
+    suspend fun verifyAdminOTP(verifyOTPRequest: VerifyOTPRequest): BaseResponse<AdminLoginResponse> {
+        return apiRequest { api.provideLockerAPIService().verifyAdminOTP(verifyOTPRequest) }
+    }
+
     suspend fun verifyOTP(verifyOTPRequest: VerifyOTPRequest): BaseResponse<ConsumerLoginResponse> {
         return apiRequest { api.provideLockerAPIService().verifyOTP(verifyOTPRequest) }
     }
 
     suspend fun resendOTP(consumerLoginRequest: ConsumerLoginRequest): BaseResponse<Map<String, Any>> {
         return apiRequest { api.provideLockerAPIService().resendOTP(consumerLoginRequest) }
+    }
+
+    suspend fun resendAdminOTP(consumerLoginRequest: ConsumerLoginRequest): BaseResponse<Map<String, Any>> {
+        return apiRequest { api.provideLockerAPIService().resendAdminOTP(consumerLoginRequest) }
     }
 
     suspend fun getConsumable(): BaseResponse<GetConsumableResponse> {

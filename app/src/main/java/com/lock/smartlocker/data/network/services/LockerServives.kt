@@ -78,6 +78,11 @@ interface LockerServives {
         @Body consumerLoginRequest: ConsumerLoginRequest
     ): Response<BaseResponse<Map<String, Any>>>
 
+    @POST("/api/admin/resend-otp")
+    suspend fun resendAdminOTP(
+        @Body consumerLoginRequest: ConsumerLoginRequest
+    ): Response<BaseResponse<Map<String, Any>>>
+
     @POST("/api/end-user/check-card-number")
     suspend fun checkCardNumber(
         @Body checkCardRequest: CheckCardRequest
@@ -86,6 +91,11 @@ interface LockerServives {
     @POST("/api/admin/admin-login")
     suspend fun adminLogin(
         @Body adminLoginRequest: AminLoginRequest
+    ): Response<BaseResponse<AdminLoginResponse>>
+
+    @POST("/api/admin/verify-otp ")
+    suspend fun verifyAdminOTP(
+        @Body verifyOTPRequest: VerifyOTPRequest
     ): Response<BaseResponse<AdminLoginResponse>>
 
     @GET("/api/admin/get-information-staff")
