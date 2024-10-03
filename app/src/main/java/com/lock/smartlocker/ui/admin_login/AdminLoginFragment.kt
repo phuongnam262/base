@@ -6,9 +6,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
 import com.lock.smartlocker.data.entities.responses.AdminLoginResponse
+import com.lock.smartlocker.data.models.Staff
 import com.lock.smartlocker.databinding.FragmentAdminLoginBinding
 import com.lock.smartlocker.ui.base.BaseFragment
 import com.lock.smartlocker.ui.inputemail.InputEmailFragment
+import com.lock.smartlocker.ui.inputemail.InputEmailFragment.Companion.EMAIL_REGISTER
 import com.lock.smartlocker.util.ConstantUtils
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
@@ -82,7 +84,7 @@ class AdminLoginFragment : BaseFragment<FragmentAdminLoginBinding, AdminLoginVie
             if (adminLoginResponse.staff.isOtp) {
                 // OTP true thì qua màn OTP
                 val bundle = Bundle().apply {
-                    putString(InputEmailFragment.EMAIL_REGISTER, adminLoginResponse.staff.email)
+                    putString(EMAIL_REGISTER, adminLoginResponse.staff.email)
                     putString(ConstantUtils.TYPE_OPEN_MANAGER, typeOpen)
                     putSerializable(ConstantUtils.ADMIN_LOGIN, adminLoginResponse)
                 }
@@ -103,7 +105,15 @@ class AdminLoginFragment : BaseFragment<FragmentAdminLoginBinding, AdminLoginVie
         }
     }
 
-    override fun adminLoginFail() {
-        isClicked = false
+    override fun adminLoginFail(adminLoginResponse: AdminLoginResponse?, status: String?) {
+        if (status == ConstantUtils.REQUIRE_OTP){
+            val bundle = Bundle().apply {
+                putString(EMAIL_REGISTER, adminLoginResponse?.staff?.email)
+                putString(ConstantUtils.TYPE_OPEN_MANAGER, typeOpen)
+                putSerializable(ConstantUtils.ADMIN_LOGIN, adminLoginResponse)
+            }
+            navigateTo(R.id.action_adminLoginFragment_to_inputOTPFragment, bundle)
+
+        }else isClicked = false
     }
 }

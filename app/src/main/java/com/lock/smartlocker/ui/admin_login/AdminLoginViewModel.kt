@@ -13,8 +13,8 @@ class AdminLoginViewModel(
     private val managerRepository: ManagerRepository
 ) : BaseViewModel() {
     var showPassword = MutableLiveData<Boolean>()
-    val username = MutableLiveData<String>("kien")
-    val password = MutableLiveData<String>("Qwert123@")
+    val username = MutableLiveData<String>()
+    val password = MutableLiveData<String>()
     var adminLoginListener : AdminLoginListener? = null
     var typeOpen : String? = null
 
@@ -27,12 +27,12 @@ class AdminLoginViewModel(
             mLoading.postValue(true)
             if (username.value.isNullOrEmpty()) {
                 mStatusText.postValue(R.string.error_username_empty)
-                adminLoginListener?.adminLoginFail()
+                adminLoginListener?.adminLoginFail(null,"")
                 return@launch
             }
             if (password.value.isNullOrEmpty()) {
                 mStatusText.postValue(R.string.error_password_empty)
-                adminLoginListener?.adminLoginFail()
+                adminLoginListener?.adminLoginFail(null,"")
                 return@launch
             }
             val param = AminLoginRequest()
@@ -48,8 +48,11 @@ class AdminLoginViewModel(
                         showStatusText.postValue(false)
                     }
                 }else {
-                    handleError(status)
-                    adminLoginListener?.adminLoginFail()
+                    if (status != ConstantUtils.REQUIRE_OTP) {
+                        handleError(status)
+                        adminLoginListener?.adminLoginFail(null,"")
+                    }
+                    else adminLoginListener?.adminLoginFail(data, status)
                 }
             }
         }.invokeOnCompletion { mLoading.postValue(false) }
