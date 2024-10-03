@@ -75,16 +75,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeLis
         mViewDataBinding?.containerCollect?.setOnClickListener(this)
         mViewDataBinding?.containerConsumableCollect?.setOnClickListener(this)
 
-        if (BuildConfig.IS_NEW_FLOW.not()) {
-            mViewDataBinding?.containerLoan?.visibility = View.VISIBLE
-            mViewDataBinding?.containerCollect?.visibility = View.VISIBLE
-            mViewDataBinding?.containerConsumableCollect?.visibility = View.VISIBLE
-        } else {
-            mViewDataBinding?.containerLoan?.visibility = View.GONE
-            mViewDataBinding?.containerCollect?.visibility = View.GONE
-            mViewDataBinding?.containerReturn?.visibility = View.GONE
-        }
-
         viewModel.isOpenLocalServer.observeForever {
             if (it) {
                 viewModel.getGroup()
