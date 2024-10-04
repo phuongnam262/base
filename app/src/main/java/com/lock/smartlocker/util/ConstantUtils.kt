@@ -17,6 +17,7 @@ class ConstantUtils {
         const val AUTO_TRIGGER_DELAY = "auto_trigger_delay"
         const val ENABLE_2FA = "enable2FA"
         const val ORDER_CATEGORY = "order_category_on_kiosk"
+        const val ENABLE_SCANNING = "enableScanningSerialNumberPage"
         const val ORDER_MODEL = "order_model_on_kiosk"
 
         const val RETURN_AVAILABLE_LOCKER_LIST = "RETURN_AVAILABLE_LOCKER_LIST"

@@ -5,6 +5,7 @@ package com.lock.smartlocker.data.network
  */
 enum class Status(val value: Int) {
     SUCCESS(200),
+    SUCCESSWITHOTP(201),
     NETWORK_ERROR(99),
     BAD_REQUEST(400),
     UNAUTHORIZED(401),

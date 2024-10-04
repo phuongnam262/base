@@ -49,6 +49,8 @@ class InputEmailViewModel(
                         showStatusText.postValue(false)
                     }
                 }else {
+                    PreferenceHelper.writeString(ConstantUtils.USER_TOKEN, "")
+                    PreferenceHelper.writeString(ConstantUtils.USER_NAME, "")
                     if (status != ConstantUtils.REQUIRE_OTP) {
                         handleError(status)
                         inputEmailListener?.consumerLoginFail("","")

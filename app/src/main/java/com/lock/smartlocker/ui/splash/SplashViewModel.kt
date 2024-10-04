@@ -31,6 +31,7 @@ class SplashViewModel(
                         PreferenceHelper.writeBoolean(ConstantUtils.ENABLE_2FA, data.setting.systemSetting.enable2FA)
                         PreferenceHelper.writeString(ConstantUtils.ORDER_CATEGORY, data.setting.kiosk.kioskConfig.orderCategoryOnKiosk)
                         PreferenceHelper.writeString(ConstantUtils.ORDER_MODEL, data.setting.kiosk.kioskConfig.orderModelOnKiosk)
+                        PreferenceHelper.writeBoolean(ConstantUtils.ENABLE_SCANNING, data.setting.workflow.enableScanningSerialNumberPage)
                         PreferenceHelper.writeString(ConstantUtils.TERMINAL_LOGIN, Gson().toJson(data))
                         getSetting()
                         splashListener?.updateLayout()

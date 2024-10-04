@@ -40,19 +40,21 @@ class AdminLoginViewModel(
             param.password = password.value
             managerRepository.adminLogin(param).apply {
                 if (isSuccessful) {
-
                     if (data != null) {
-                        adminLoginListener?.adminLoginSuccess(data)
                         PreferenceHelper.writeString(ConstantUtils.USER_TOKEN, data.staff.userToken)
                         PreferenceHelper.writeString(ConstantUtils.ADMIN_NAME, data.staff.userName)
-                        showStatusText.postValue(false)
+                        if (data.staff.isOtp){
+                            adminLoginListener?.adminLoginFail(data.staff.email, "201")
+                        }else {
+                            adminLoginListener?.adminLoginSuccess(data)
+                            showStatusText.postValue(false)
+                        }
                     }
                 }else {
-                    if (status != ConstantUtils.REQUIRE_OTP) {
-                        handleError(status)
-                        adminLoginListener?.adminLoginFail(null,"")
-                    }
-                    else adminLoginListener?.adminLoginFail(data, status)
+                    PreferenceHelper.writeString(ConstantUtils.USER_NAME, "")
+                    PreferenceHelper.writeString(ConstantUtils.USER_TOKEN, "")
+                    handleError(status)
+                    adminLoginListener?.adminLoginFail(null,"")
                 }
             }
         }.invokeOnCompletion { mLoading.postValue(false) }

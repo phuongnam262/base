@@ -6,10 +6,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
 import com.lock.smartlocker.data.entities.responses.AdminLoginResponse
-import com.lock.smartlocker.data.models.Staff
 import com.lock.smartlocker.databinding.FragmentAdminLoginBinding
 import com.lock.smartlocker.ui.base.BaseFragment
-import com.lock.smartlocker.ui.inputemail.InputEmailFragment
 import com.lock.smartlocker.ui.inputemail.InputEmailFragment.Companion.EMAIL_REGISTER
 import com.lock.smartlocker.util.ConstantUtils
 import org.kodein.di.KodeinAware
@@ -105,12 +103,12 @@ class AdminLoginFragment : BaseFragment<FragmentAdminLoginBinding, AdminLoginVie
         }
     }
 
-    override fun adminLoginFail(adminLoginResponse: AdminLoginResponse?, status: String?) {
+    override fun adminLoginFail(email: String?, status: String?) {
         if (status == ConstantUtils.REQUIRE_OTP){
             val bundle = Bundle().apply {
-                putString(EMAIL_REGISTER, adminLoginResponse?.staff?.email)
+                putString(EMAIL_REGISTER, email)
                 putString(ConstantUtils.TYPE_OPEN_MANAGER, typeOpen)
-                putSerializable(ConstantUtils.ADMIN_LOGIN, adminLoginResponse)
+                putSerializable(ConstantUtils.ADMIN_LOGIN, null)
             }
             navigateTo(R.id.action_adminLoginFragment_to_inputOTPFragment, bundle)
 

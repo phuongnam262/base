@@ -4,5 +4,5 @@ import com.lock.smartlocker.data.entities.responses.AdminLoginResponse
 
 interface AdminLoginListener {
     fun adminLoginSuccess( adminLoginResponse: AdminLoginResponse)
-    fun adminLoginFail(adminLoginResponse: AdminLoginResponse?, status: String?)
+    fun adminLoginFail(email: String?, status: String?)
 }

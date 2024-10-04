@@ -18,7 +18,8 @@ abstract class SafeApiRequest {
     ): BaseResponse<T> {
         return try {
             val response = call.invoke()
-            if (response.isSuccessful && response.body()?.code == Status.SUCCESS.value) {
+            if (response.isSuccessful && (response.body()?.code == Status.SUCCESS.value ||
+                        response.body()?.code == Status.SUCCESSWITHOTP.value)) {
                 response.body() ?: run {
                     BaseResponse.error(
                         status = Status.NO_RESPONSE.value.toString()

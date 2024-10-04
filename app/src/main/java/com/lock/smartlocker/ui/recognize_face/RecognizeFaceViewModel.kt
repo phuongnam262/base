@@ -143,6 +143,7 @@ class RecognizeFaceViewModel(
                         recognizeFaceListener?.consumerLoginSuccess(email)
                     }
                 }else {
+                    PreferenceHelper.writeString(ConstantUtils.USER_TOKEN, "")
                     if (status != ConstantUtils.REQUIRE_OTP) handleError(status)
                     else recognizeFaceListener?.consumerLoginFail(param.email, status)
                 }
