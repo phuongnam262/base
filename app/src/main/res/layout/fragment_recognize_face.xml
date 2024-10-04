@@ -65,6 +65,7 @@
                 android:id="@+id/iv_eclip"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:padding="@dimen/dp_10"
                 android:src="@drawable/eclip_blank"/>
         </androidx.cardview.widget.CardView>
 

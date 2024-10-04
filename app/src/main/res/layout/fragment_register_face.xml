@@ -65,6 +65,7 @@
             <ImageView
                 android:id="@+id/iv_template"
                 android:layout_width="match_parent"
+                android:padding="@dimen/dp_10"
                 android:layout_height="match_parent"
                 android:src="@drawable/eclip_blank"/>
         </androidx.cardview.widget.CardView>

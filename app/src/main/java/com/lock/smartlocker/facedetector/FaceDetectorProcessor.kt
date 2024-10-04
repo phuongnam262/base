@@ -19,8 +19,8 @@ class FaceDetectorProcessor(context: Context, detectorOptions: FaceDetectorOptio
     private val handler = Handler(Looper.getMainLooper())
     private var delayRunnable: Runnable? = null
     private var isMultiFace = false
-    private val minFaceSize = 0.1f
-    private val maxFaceSize = 0.12f
+    private val minFaceSize = 0.08f
+    private val maxFaceSize = 0.11f
 
     init {
         val options = detectorOptions
@@ -84,7 +84,7 @@ class FaceDetectorProcessor(context: Context, detectorOptions: FaceDetectorOptio
         for (face in faces) {
             val faceCenterX = face.boundingBox.centerX().toFloat()
             val faceCenterY = face.boundingBox.centerY().toFloat()
-            if ((faceCenterX < 260 && faceCenterX > 220) && (faceCenterY < 340 && faceCenterY > 310) ) {
+            if ((faceCenterX < 260 && faceCenterX > 220) && (faceCenterY < 360 && faceCenterY > 290) ) {
                 if (isFaceLargeEnough(face) == 1) {
                     graphicOverlay.add(FaceGraphic(graphicOverlay, face, false))
                     logExtrasForTesting(face)

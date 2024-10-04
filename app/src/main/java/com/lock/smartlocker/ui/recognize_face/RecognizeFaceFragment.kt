@@ -384,10 +384,10 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
                 )
                 val faceBitmap = Bitmap.createBitmap(
                     rotatedBitmap,
-                    faceBoundingBox.left + 20,
-                    faceBoundingBox.top - 20,
-                    faceBoundingBox.width() - 20,
-                    faceBoundingBox.height() + 50
+                    faceBoundingBox.left + 40,
+                    faceBoundingBox.top - 40,
+                    faceBoundingBox.width() - 40,
+                    faceBoundingBox.height() + 70
                 )
 
                 val baos = ByteArrayOutputStream()
