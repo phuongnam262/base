@@ -22,24 +22,28 @@ class CategoryConsumableCollectViewModel(
     private val updatedListCart: ArrayList<CartConsumableItem> = ArrayList()
     val listCartItem = MutableLiveData<ArrayList<CartConsumableItem>>()
 
+    init {
+        getConsumableAvailableItem()
+    }
+
     fun getConsumableAvailableItem() {
         ioScope.launch {
             mLoading.postValue(true)
             loanRepository.getConsumableAvailableItem().apply {
                 if (isSuccessful) {
                     if (data != null) {
-                        listCartItem.value?.let { listCart ->
-                            val listModel = data.categories.flatMap { it.consumables }
-                            listModel.map { item ->
-                                listCart.map { cart ->
-                                    if (item.consumableId == cart.consumableId) {
-                                        item.available -= cart.quantity
-                                        item.collectable -= cart.quantity
-                                    }
-                                }
-
-                            }
-                        }
+//                        listCartItem.value?.let { listCart ->
+//                            val listModel = data.categories.flatMap { it.consumables }
+//                            listModel.map { item ->
+//                                listCart.map { cart ->
+//                                    if (item.consumableId == cart.consumableId) {
+//                                        item.available -= cart.quantity
+//                                        item.collectable -= cart.quantity
+//                                    }
+//                                }
+//
+//                            }
+//                        }
                         _consumableAvailableItems.postValue(data.categories)
 
                     }
@@ -74,9 +78,9 @@ class CategoryConsumableCollectViewModel(
         if (cartConsumableItem != null) {
             if (consumable.available > 0 && consumable.collectable > 0) {
                 cartConsumableItem.quantity += 1
-                consumable.available -= 1
-                consumable.collectable -= 1
-                cartConsumableItem.collectable -= 1
+                //consumable.available -= 1
+                //consumable.collectable -= 1
+                //cartConsumableItem.collectable -= 1
                 listCartItem.postValue(listCartItem.value)
             }
         } else {
@@ -86,17 +90,17 @@ class CategoryConsumableCollectViewModel(
                         consumableId = consumable.consumableId,
                         consumableName = consumable.consumableName,
                         categoryId = it,
-                        collectable = consumable.collectable - 1,
-                        available = consumable.available - 1,
+                        collectable = consumable.collectable,
+                        available = consumable.available,
                         quantity = 1
                     )
                 }
-                if (consumable.available > 0) {
-                    consumable.available -= 1
-                }
-                if (consumable.collectable > 0) {
-                    consumable.collectable -= 1
-                }
+//                if (consumable.available > 0) {
+//                    consumable.available -= 1
+//                }
+//                if (consumable.collectable > 0) {
+//                    consumable.collectable -= 1
+//                }
                 if (cart != null) {
                     updatedListCart.add(cart)
                     listCartItem.postValue(updatedListCart)

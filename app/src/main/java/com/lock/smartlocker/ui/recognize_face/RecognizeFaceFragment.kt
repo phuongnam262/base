@@ -17,7 +17,6 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
-import com.bumptech.glide.Glide
 import com.google.mlkit.common.MlKitException
 import com.google.mlkit.vision.face.Face
 import com.lock.smartlocker.BR
@@ -184,6 +183,7 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
                 }
 
                 R.id.btn_using -> {
+                    turnOnLight(0)
                     imageProcessor?.run { this.stop() }
                     if (cameraProvider != null) {
                         cameraProvider!!.unbindAll()
@@ -384,10 +384,10 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
                 )
                 val faceBitmap = Bitmap.createBitmap(
                     rotatedBitmap,
-                    faceBoundingBox.left + 40,
-                    faceBoundingBox.top - 40,
-                    faceBoundingBox.width() - 40,
-                    faceBoundingBox.height() + 70
+                    faceBoundingBox.left - 25,
+                    faceBoundingBox.top - 50,
+                    faceBoundingBox.width() + 40,
+                    faceBoundingBox.height() + 80
                 )
 
                 val baos = ByteArrayOutputStream()
@@ -428,6 +428,12 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
     override fun onNotCenterFace() {
         Coroutines.main {
             viewModel.mStatusText.value = R.string.error_center_face_detect
+        }
+    }
+
+    override fun onNotStraightFace() {
+        Coroutines.main {
+            viewModel.mStatusText.value = R.string.error_straight_face_detect
         }
     }
 }

@@ -45,7 +45,8 @@
     <string name="welcome_back">Chào mừng trở lại %1$s</string>
     <string name="error_small_face_detect">Khuôn mặt nhỏ so với khung hình\nvui lòng đứng gần hơn để camera có thể chụp ảnh lớn</string>
     <string name="error_large_face_detect">Khuôn mặt lớn so với khung hình\nvui lòng chỉnh khuôn mặt nằm trong khung</string>
-    <string name="error_center_face_detect">Khuôn mặt chưa nằm giữa khung hình\nvui lòng chỉnh khuôn mặt nằm trung tâm khung</string>
+    <string name="error_center_face_detect">Khuôn mặt chưa nằm trong khung hình\nvui lòng chỉnh khuôn mặt nằm trong khung</string>
+    <string name="error_straight_face_detect">Khuôn mặt chưa thẳng, hãy chỉnh lại hướng khuôn mặt</string>
     <string name="using_mail_button">DÙNG EMAIL</string>
     <string name="retry_button">THỬ LẠI</string>
     <string name="process_button">TIẾP TỤC</string>
@@ -198,6 +199,8 @@
     <string name="found_extra_stock">Tìm thấy nhiều hàng hơn</string>
     <string name="collectable">Được phép lấy: </string>
     <string name="collectable_value">Được phép lấy: %1$s</string>
+    <string name="quantity_exceeds_collectable">Số lượng đã nhập vượt quá số lượng có thể lấy</string>
+    <string name="error_Something_wrong">Đã xảy ra lỗi. Vui lòng thử lại hoặc liên hệ với bộ phận hỗ trợ</string>
     <string-array name="stock_options">
         <item>Tìm thấy ít hàng hơn</item>
         <item>Tìm thấy nhiều hàng hơn</item>

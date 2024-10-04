@@ -18,9 +18,8 @@ class FaceDetectorProcessor(context: Context, detectorOptions: FaceDetectorOptio
     private val detector: FaceDetector
     private val handler = Handler(Looper.getMainLooper())
     private var delayRunnable: Runnable? = null
-    private var isMultiFace = false
-    private val minFaceSize = 0.06f
-    private val maxFaceSize = 0.11f
+    private val minFaceSize = 0.05f
+    private val maxFaceSize = 0.14f
 
     init {
         val options = detectorOptions
@@ -32,18 +31,16 @@ class FaceDetectorProcessor(context: Context, detectorOptions: FaceDetectorOptio
                 .build()
 
         detector = FaceDetection.getClient(options)
-        Log.v(MANUAL_TESTING_LOG, "Face detector options: $options")
     }
 
     private fun isFaceLargeEnough(face: Face): Int {
         val boundingBox = face.boundingBox
         val faceWidth = boundingBox.width().toFloat()
         val faceHeight = boundingBox.height().toFloat()
-        val imageWidth = 960f
-        val imageHeight = 1280f
+        val imageWidth = 768f
+        val imageHeight = 1024f
 
         val faceSize = (faceWidth * faceHeight) / (imageWidth * imageHeight)
-
         if (faceSize in minFaceSize..maxFaceSize)
             return 1
         else if (faceSize > maxFaceSize){
@@ -53,52 +50,45 @@ class FaceDetectorProcessor(context: Context, detectorOptions: FaceDetectorOptio
     }
 
     override fun onSuccess(faces: List<Face>, graphicOverlay: GraphicOverlay) {
-        /*if (faces.size > 1) {
-            isMultiFace = true
-            delayRunnable?.let { handler.removeCallbacks(it) }
-            callback?.onMultiFace()
-            for (face in faces) {
-                graphicOverlay.add(FaceGraphic(graphicOverlay, face, true))
-            }
-            delayRunnable = Runnable {
-                isMultiFace = false
-            }
-            handler.postDelayed(delayRunnable!!, 1000)
-        } else if (faces.size == 1) {
-            if (isMultiFace.not()) {
-                if (isFaceLargeEnough(faces[0]) == 1) {
-                    graphicOverlay.add(FaceGraphic(graphicOverlay, faces[0], false))
-                    logExtrasForTesting(faces[0])
-                    callback?.onOneFace()
-                } else if (isFaceLargeEnough(faces[0]) == 2) {
-                    graphicOverlay.add(FaceGraphic(graphicOverlay, faces[0], true))
-                    callback?.onFaceTooLarger()
-                } else{
-                    graphicOverlay.add(FaceGraphic(graphicOverlay, faces[0], true))
-                    callback?.onFaceTooSmall()
-                }
-
-            }
-        }*/
+        var largestFace: Face? = null
+        var largestArea = 0
 
         for (face in faces) {
-            val faceCenterX = face.boundingBox.centerX().toFloat()
-            val faceCenterY = face.boundingBox.centerY().toFloat()
-            if ((faceCenterX < 260 && faceCenterX > 200) && (faceCenterY < 360 && faceCenterY > 230) ) {
-                if (isFaceLargeEnough(face) == 1) {
-                    graphicOverlay.add(FaceGraphic(graphicOverlay, face, false))
-                    logExtrasForTesting(face)
-                    callback?.onOneFace()
-                } else if (isFaceLargeEnough(face) == 2) {
-                    graphicOverlay.add(FaceGraphic(graphicOverlay, face, true))
+            val area = face.boundingBox.width() * face.boundingBox.height()
+            if (area > largestArea) {
+                largestArea = area
+                largestFace = face
+            }
+        }
+
+        largestFace?.let {
+            val faceCenterX = largestFace.boundingBox.centerX().toFloat()
+            val faceCenterY = largestFace.boundingBox.centerY().toFloat()
+            if ((faceCenterX < 310 && faceCenterX > 180) && (faceCenterY < 400 && faceCenterY > 240) ) {
+                if (isFaceLargeEnough(largestFace) == 1) {
+                    if ((-13 < largestFace.headEulerAngleX && largestFace.headEulerAngleX < 5) &&
+                        (-10 < largestFace.headEulerAngleY && largestFace.headEulerAngleY <9) &&
+                        (-5 < largestFace.headEulerAngleZ && largestFace.headEulerAngleZ < 5)
+                    ) {
+                        graphicOverlay.add(FaceGraphic(graphicOverlay, largestFace, false))
+                        callback?.onOneFace()
+                        logExtrasForTesting(largestFace)
+                    }else {
+                        graphicOverlay.add(FaceGraphic(graphicOverlay, largestFace, true))
+                        callback?.onNotStraightFace()
+                    }
+
+
+                } else if (isFaceLargeEnough(largestFace) == 2) {
+                    graphicOverlay.add(FaceGraphic(graphicOverlay, largestFace, true))
                     callback?.onFaceTooLarger()
                 } else{
-                    graphicOverlay.add(FaceGraphic(graphicOverlay, face, true))
+                    graphicOverlay.add(FaceGraphic(graphicOverlay, largestFace, true))
                     callback?.onFaceTooSmall()
                 }
                 callback?.onOneFace()
             }else {
-                graphicOverlay.add(FaceGraphic(graphicOverlay, face, true))
+                graphicOverlay.add(FaceGraphic(graphicOverlay, largestFace, true))
                 callback?.onNotCenterFace()
             }
         }
@@ -138,13 +128,8 @@ class FaceDetectorProcessor(context: Context, detectorOptions: FaceDetectorOptio
         private fun logExtrasForTesting(face: Face?) {
             if (isSuccess.not())
                 if (face != null) {
-                    if ((-10 < face.headEulerAngleX && face.headEulerAngleX < 12) &&
-                        (-10 < face.headEulerAngleY && face.headEulerAngleY < 10) &&
-                        (-4 < face.headEulerAngleZ && face.headEulerAngleZ < 4)
-                    ) {
-                        isSuccess = true
-                        callback?.onSuccess(face)
-                    }
+                    isSuccess = true
+                    callback?.onSuccess(face)
                 }
         }
     }

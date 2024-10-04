@@ -1,5 +1,7 @@
 package com.lock.smartlocker.data.models
 
+import java.io.Serializable
+
 data class CartConsumableItem(
     val consumableId: String,
     var collectable: Int,
@@ -7,7 +9,7 @@ data class CartConsumableItem(
     val consumableName: String,
     val categoryId: String,
     var quantity: Int
-){
+): Serializable{
     var quantityString: String
         get() = quantity.toString()
         set(value) {

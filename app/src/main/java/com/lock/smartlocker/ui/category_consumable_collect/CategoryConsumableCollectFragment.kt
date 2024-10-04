@@ -41,9 +41,9 @@ class CategoryConsumableCollectFragment : BaseFragment<FragmentCategoryConsumabl
     override val viewModel: CategoryConsumableCollectViewModel
         get() = ViewModelProvider(this, factory)[CategoryConsumableCollectViewModel::class.java]
 
-    companion object{
-        var listCartItem: ArrayList<CartConsumableItem>? = null
-    }
+//    companion object{
+//        var listCartItem: ArrayList<CartConsumableItem>? = null
+//    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -87,11 +87,10 @@ class CategoryConsumableCollectFragment : BaseFragment<FragmentCategoryConsumabl
 
     @SuppressLint("NotifyDataSetChanged")
     private fun initData(){
-        if (listCartItem == null) {
-            listCartItem = ArrayList()
-        }
-        viewModel.listCartItem.value = listCartItem
-        viewModel.getConsumableAvailableItem()
+//        if (listCartItem == null) {
+//            listCartItem = ArrayList()
+//        }
+//        viewModel.listCartItem.value = listCartItem
         mViewDataBinding?.rvCategories?.adapter = categoryAdapter
         mViewDataBinding?.rvConsumables?.adapter = consumableAdapter
 
@@ -111,7 +110,7 @@ class CategoryConsumableCollectFragment : BaseFragment<FragmentCategoryConsumabl
 
         viewModel.listCartItem.observe(viewLifecycleOwner) {
             consumableAdapter.notifyDataSetChanged()
-            listCartItem = it
+            //listCartItem = it
             if (it.size == 0) {
                 mViewDataBinding?.bottomMenu?.rlCart?.isClickable = false
                 mViewDataBinding?.bottomMenu?.rlCart?.alpha = 0.3f
@@ -130,12 +129,15 @@ class CategoryConsumableCollectFragment : BaseFragment<FragmentCategoryConsumabl
         if (checkDebouncedClick()) {
             when (v?.id) {
                 R.id.rl_home -> {
-                    listCartItem = null
+                   // listCartItem = null
                     activity?.finish()
                 }
                 R.id.rl_item -> {}
                 R.id.rl_cart -> {
-                    navigateTo(R.id.action_categoryConsumableCollectFragment_to_cartConsumableFragment, null)
+                    val bundle = Bundle().apply {
+                        putSerializable(ConstantUtils.CART_LIST, viewModel.listCartItem.value)
+                    }
+                    navigateTo(R.id.action_categoryConsumableCollectFragment_to_cartConsumableFragment, bundle)
                 }
             }
         }

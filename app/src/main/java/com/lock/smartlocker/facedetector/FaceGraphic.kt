@@ -52,12 +52,6 @@ class FaceGraphic constructor(
         canvas.drawLine(right, bottom, right - cornerLength, bottom, paint)
         canvas.drawLine(right, bottom, right, bottom - cornerLength, paint)
 
-
-        if (isFailFace) {
-            // Center
-            canvas.drawLine(x - 20f, y, x + 20f, y, paint)
-            canvas.drawLine(x, y - 20f, x, y + 20f, paint)
-        }
     }
 
     companion object {

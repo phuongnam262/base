@@ -51,6 +51,7 @@ class ConstantUtils {
         //Collect
         const val TRANSACTION_ID = "TRANSACTION_ID"
         const val LOCKER_INFOS = "LOCKER_INFOS"
+        const val CART_LIST = "CART_LIST"
 
         //Topup
         const val SERIAL_NUMBER = "SERIAL_NUMBER"
@@ -90,6 +91,8 @@ class ConstantUtils {
         const val ADMIN_NO_PERMISSION = "60601"
         const val ERROR_LOGIC = "623"
         const val ERROR_CARD_NUMBER = "70404"
+        const val ERROR_NO_AVAILABLE_ITEM_COMSUMABLE = "70705"
+        const val ERROR_COLLECT_AMOUNT = "70707"
         const val ERROR_SERIAL_EXISTED = "722"
 
         const val ERROR_NO_LOCKER_FOUND = "4001"

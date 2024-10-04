@@ -58,6 +58,8 @@
         <include
             android:id="@+id/bottom_menu"
             layout="@layout/bottom_menu_2"
+            app:statusText="@{viewmodel.statusText}"
+            app:showStatusText="@{viewmodel.showStatusText}"
             app:ownerText="@{viewmodel.ownerText}"
             app:timerHour="@{viewmodel.timerHour}"
             app:showButtonProcess="@{true}"

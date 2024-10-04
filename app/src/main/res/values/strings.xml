@@ -45,7 +45,8 @@
     <string name="welcome_back">Welcome back %1$s</string>
     <string name="error_small_face_detect">Face is too small for the frame\nplease stand closer so the camera can capture lager face</string>
     <string name="error_large_face_detect">Face is too large for the frame\nplease adjust your face within the frame</string>
-    <string name="error_center_face_detect">Face is no center the frame\nplease adjust your face center the frame</string>
+    <string name="error_center_face_detect">Face is not in the frame\nplease adjust your face to be in the frame</string>
+    <string name="error_straight_face_detect">Face not looking straight, please adjust the face direction</string>
     <string name="using_mail_button">USING EMAIL</string>
     <string name="retry_button">RETRY</string>
     <string name="process_button">PROCEED</string>
@@ -198,6 +199,8 @@
     <string name="found_extra_stock">Found extra stock</string>
     <string name="collectable">Collectable: </string>
     <string name="collectable_value">Collectable: %1$s</string>
+    <string name="quantity_exceeds_collectable">The entered quantity exceeds the collectable amount</string>
+    <string name="error_Something_wrong">Somethings went wrong. Please try again or contact support.</string>
     <string-array name="stock_options">
         <item>Found less stock</item>
         <item>Found extra stock</item>

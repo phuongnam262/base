@@ -26,8 +26,8 @@ class CartConsumableViewModel(
     fun increaseQuantity(cartItem: CartConsumableItem) {
         if (cartItem.quantity < cartItem.available && cartItem.quantity < cartItem.collectable) {
             cartItem.quantity += 1
-            cartItem.collectable -= 1
-            cartItem.available -= 1
+            //cartItem.collectable -= 1
+            //cartItem.available -= 1
             listCartItem.postValue(listCartItem.value)
         }else{
             mMessage.postValue(R.string.maximum_item_quantity_consumable)
@@ -38,12 +38,12 @@ class CartConsumableViewModel(
         if (cartItem.quantity > 0) {
             if (cartItem.quantity == 1) {
                 listCartItem.value?.remove(cartItem)
-                cartItem.collectable += 1
-                cartItem.available += 1
+                //cartItem.collectable += 1
+                //cartItem.available += 1
             } else {
                 cartItem.quantity -= 1
-                cartItem.collectable += 1
-                cartItem.available += 1
+                //cartItem.collectable += 1
+                //cartItem.available += 1
             }
         }
         listCartItem.postValue(listCartItem.value)

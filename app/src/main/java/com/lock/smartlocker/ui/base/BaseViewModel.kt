@@ -86,10 +86,15 @@ abstract class BaseViewModel() : ViewModel() {
     fun handleError(status: String?) {
         when (status) {
             Status.NETWORK_ERROR.value.toString() -> mMessage.postValue(R.string.error_network)
+
             Status.EXCEPTION.value.toString() -> mMessage.postValue(R.string.error_message)
+
             Status.UNAUTHORIZED.value.toString() -> mMessage.postValue(R.string.unauthorized)
+
             Status.NO_RESPONSE.value.toString() -> mMessage.postValue(R.string.server_error)
-            ConstantUtils.ERROR_NO_AVAILABLE_ITEM -> mMessage.postValue(R.string.error_no_available_item)
+
+            ConstantUtils.ERROR_NO_AVAILABLE_ITEM, ConstantUtils.ERROR_NO_AVAILABLE_ITEM_COMSUMABLE ->
+                mStatusText.postValue(R.string.error_no_available_item)
 
             ConstantUtils.LOGIN_EMAIL_NOT_EXISTED -> mStatusText.postValue(R.string.login_error_1001)
 
@@ -130,6 +135,8 @@ abstract class BaseViewModel() : ViewModel() {
             ConstantUtils.ERROR_NO_LOCKER_FOUND -> mStatusText.postValue(R.string.error_no_locker_found)
 
             ConstantUtils.ERROR_NO_LOCKER_TOPUP -> mStatusText.postValue(R.string.error_no_locker_topup)
+
+            ConstantUtils.ERROR_COLLECT_AMOUNT -> mStatusText.postValue(R.string.error_Something_wrong)
 
             else -> mErrorAllWithStatusCode.postValue(status ?: "99999")
 

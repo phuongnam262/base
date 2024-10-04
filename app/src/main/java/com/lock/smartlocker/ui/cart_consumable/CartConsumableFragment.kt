@@ -5,6 +5,8 @@ import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
+import com.lock.smartlocker.data.models.CartConsumableItem
+import com.lock.smartlocker.data.models.CartItem
 import com.lock.smartlocker.databinding.FragmentCartConsumableBinding
 import com.lock.smartlocker.ui.base.BaseFragment
 import com.lock.smartlocker.ui.category_consumable_collect.CategoryConsumableCollectFragment
@@ -57,12 +59,12 @@ class CartConsumableFragment : BaseFragment<FragmentCartConsumableBinding, CartC
 
     private fun initData(){
         mViewDataBinding?.rvCartItems?.adapter = cartAdapter
-        viewModel.listCartItem.value = CategoryConsumableCollectFragment.listCartItem
+        viewModel.listCartItem.value = arguments?.getSerializable(ConstantUtils.CART_LIST) as ArrayList<CartConsumableItem>?
         viewModel.listCartItem.observe(viewLifecycleOwner) { cartItems ->
             cartAdapter.update(cartItems.map {
                 CartItemAdapter(it, viewModel)
             })
-            CategoryConsumableCollectFragment.listCartItem = cartItems
+            //CategoryConsumableCollectFragment.listCartItem = cartItems
             viewModel.enableButtonProcess.value = cartItems.size > 0
         }
 
@@ -73,7 +75,7 @@ class CartConsumableFragment : BaseFragment<FragmentCartConsumableBinding, CartC
                     putString(ConstantUtils.TRANSACTION_ID, viewModel.transactionId.value)
                 }
                 navigateTo(R.id.action_cartConsumableFragment_to_collectConsumableItemFragment, bundle,)
-                CategoryConsumableCollectFragment.listCartItem = null
+                //CategoryConsumableCollectFragment.listCartItem = null
             }
         }
     }
@@ -82,7 +84,7 @@ class CartConsumableFragment : BaseFragment<FragmentCartConsumableBinding, CartC
         if (checkDebouncedClick()) {
             when (v?.id) {
                 R.id.rl_home -> {
-                    CategoryConsumableCollectFragment.listCartItem = null
+                    //CategoryConsumableCollectFragment.listCartItem = null
                     activity?.finish()
                 }
 

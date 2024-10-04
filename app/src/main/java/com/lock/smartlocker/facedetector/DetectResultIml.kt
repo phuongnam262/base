@@ -9,4 +9,5 @@ public interface DetectResultIml {
     fun onFaceTooSmall()
     fun onFaceTooLarger()
     fun onNotCenterFace()
+    fun onNotStraightFace()
 }

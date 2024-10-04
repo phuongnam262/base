@@ -7,6 +7,14 @@
         <import type="android.view.View" />
 
         <variable
+            name="statusText"
+            type="String" />
+
+        <variable
+            name="showStatusText"
+            type="Boolean" />
+
+        <variable
             name="showButtonProcess"
             type="Boolean" />
 
@@ -47,6 +55,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+            <TextView
+                android:id="@+id/tv_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{statusText}"
+                android:gravity="center"
+                android:textColor="@color/colorRed"
+                android:textSize="@dimen/sp_12"
+                android:visibility="@{showStatusText ? View.VISIBLE : View.GONE}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -55,7 +75,7 @@
                 android:orientation="horizontal"
                 android:weightSum="3"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toBottomOf="@+id/tv_status">
 
                 <RelativeLayout
                     android:id="@+id/rl_menu_1"
@@ -112,6 +132,7 @@
                             android:layout_height="@dimen/dp_30"
                             android:background="@color/colorWhite"
                             android:scaleType="centerCrop"
+                            android:layout_centerHorizontal="true"
                             android:src="@drawable/power_menu_items_icon" />
 
                         <TextView
