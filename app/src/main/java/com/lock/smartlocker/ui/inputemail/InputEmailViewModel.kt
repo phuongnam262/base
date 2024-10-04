@@ -42,20 +42,21 @@ class InputEmailViewModel(
             managerRepository.consumerLogin(param).apply {
                 if (isSuccessful) {
                     if (data != null) {
-                        inputEmailListener?.consumerLoginSuccess(param.email)
                         PreferenceHelper.writeString(ConstantUtils.USER_TOKEN, data.token)
                         PreferenceHelper.writeString(ConstantUtils.USER_NAME, param.email)
                         PreferenceHelper.writeString(ConstantUtils.USER_AVATAR, "")
-                        showStatusText.postValue(false)
+                        if (data.token != null) {
+                            inputEmailListener?.consumerLoginSuccess(param.email)
+                            showStatusText.postValue(false)
+                        }else {
+                            inputEmailListener?.consumerLoginFail(param.email, "201")
+                        }
                     }
                 }else {
                     PreferenceHelper.writeString(ConstantUtils.USER_TOKEN, "")
                     PreferenceHelper.writeString(ConstantUtils.USER_NAME, "")
-                    if (status != ConstantUtils.REQUIRE_OTP) {
-                        handleError(status)
-                        inputEmailListener?.consumerLoginFail("","")
-                    }
-                    else inputEmailListener?.consumerLoginFail(param.email, status)
+                    handleError(status)
+                    inputEmailListener?.consumerLoginFail("","")
                 }
             }
         }.invokeOnCompletion { mLoading.postValue(false) }

@@ -140,12 +140,15 @@ class RecognizeFaceViewModel(
                 if (isSuccessful) {
                     if (data != null) {
                         PreferenceHelper.writeString(ConstantUtils.USER_TOKEN, data.token)
-                        recognizeFaceListener?.consumerLoginSuccess(email)
+                        if (data.token != null) {
+                            recognizeFaceListener?.consumerLoginSuccess(email)
+                        }else {
+                            recognizeFaceListener?.consumerLoginFail(email, "201")
+                        }
                     }
                 }else {
                     PreferenceHelper.writeString(ConstantUtils.USER_TOKEN, "")
-                    if (status != ConstantUtils.REQUIRE_OTP) handleError(status)
-                    else recognizeFaceListener?.consumerLoginFail(param.email, status)
+                    handleError(status)
                 }
             }
         }.invokeOnCompletion { mLoading.postValue(false) }

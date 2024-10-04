@@ -4,5 +4,5 @@ import com.lock.smartlocker.BuildConfig
 
 class ConsumerLoginRequest(
     var email: String? = null,
-    var type: String = BuildConfig.TYPE_LOGIN.toString(),
+    var type: String = "6",
 )

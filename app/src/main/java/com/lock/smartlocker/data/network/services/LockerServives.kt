@@ -73,7 +73,7 @@ interface LockerServives {
         @Body verifyOTPRequest: VerifyOTPRequest
     ): Response<BaseResponse<ConsumerLoginResponse>>
 
-    @POST("/api/consumer/verify-consumer-login")
+    @POST("/api/consumer/resend-otp")
     suspend fun resendOTP(
         @Body consumerLoginRequest: ConsumerLoginRequest
     ): Response<BaseResponse<Map<String, Any>>>
