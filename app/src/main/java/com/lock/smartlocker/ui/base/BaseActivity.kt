@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.KeyEvent
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -148,5 +149,12 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : BaseAppCom
             lastClickTime = currentTime
             return true
         }else return false
+    }
+
+    override fun dispatchKeyEvent(event: KeyEvent): Boolean {
+        if (event.keyCode == KeyEvent.KEYCODE_ENTER) {
+            return true
+        }
+        return super.dispatchKeyEvent(event)
     }
 }

@@ -18,8 +18,8 @@
         android:layout_height="match_parent"
         android:background="@color/colorWhite"
         android:backgroundImage="@{viewmodel.imageBackgroundUrl}"
-        android:clickable="true"
-        android:focusable="true">
+        android:clickable="false"
+        android:focusable="false">
 
         <include
             android:id="@+id/header_title"

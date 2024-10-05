@@ -34,14 +34,10 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            buildConfigField("boolean", "IS_DISABLE_WORK_CARD", "true")
-            buildConfigField("Integer", "TYPE_LOGIN", "6")
             signingConfig = signingConfigs.getByName("debug")
         }
         debug {
             isMinifyEnabled = false
-            buildConfigField("boolean", "IS_DISABLE_WORK_CARD", "false")
-            buildConfigField("Integer", "TYPE_LOGIN", "0")
         }
     }
     compileOptions {

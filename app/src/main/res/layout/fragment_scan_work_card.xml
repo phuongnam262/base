@@ -5,6 +5,7 @@
     tools:context=".ui.scan_work_card.ScanWorkCardFragment">
 
     <data>
+
         <variable
             name="viewmodel"
             type="com.lock.smartlocker.ui.scan_work_card.ScanWorkCardViewModel" />
@@ -15,8 +16,9 @@
         android:layout_height="match_parent"
         android:background="@color/colorWhite"
         android:backgroundImage="@{viewmodel.imageBackgroundUrl}"
-        android:clickable="true"
-        android:focusable="true">
+        android:clickable="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false">
 
         <include
             android:id="@+id/header_bar"
@@ -30,14 +32,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_50"
-            android:layout_marginEnd="@dimen/dp_50"
             android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp_50"
             android:text="@string/scan_work_card_info"
             android:textColor="@color/text_sub_color"
             android:textSize="@dimen/sp_18"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/header_bar"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/header_bar" />
 
         <TextView
             android:id="@+id/tv_input_card"
@@ -59,6 +61,8 @@
             android:layout_marginStart="@dimen/dp_30"
             android:layout_marginTop="@dimen/dp_15"
             android:layout_marginEnd="@dimen/dp_30"
+            android:inputType="none"
+            android:maxLength="8"
             android:text="@={viewmodel.workCardText}"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
@@ -69,11 +73,11 @@
         <include
             android:id="@+id/bottom_menu"
             layout="@layout/bottom_menu_1"
-            app:statusText="@{viewmodel.statusText}"
-            app:ownerText="@{viewmodel.ownerText}"
-            app:showStatusText="@{viewmodel.showStatusText}"
-            app:timerHour="@{viewmodel.timerHour}"
             app:enableButtonProcess="@{viewmodel.enableButtonProcess}"
-            app:showProcessButton="@{viewmodel.showButtonProcess}"/>
+            app:ownerText="@{viewmodel.ownerText}"
+            app:showProcessButton="@{viewmodel.showButtonProcess}"
+            app:showStatusText="@{viewmodel.showStatusText}"
+            app:statusText="@{viewmodel.statusText}"
+            app:timerHour="@{viewmodel.timerHour}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

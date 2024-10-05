@@ -43,7 +43,12 @@ class ScanWorkCardViewModel(
                         showStatusText.postValue(false)
                         scanCardListener?.handleSuccess(data.endUser.fullName, workCardText.value!!.trim())
                     }
-                }else handleError(status)
+                }else {
+                    uiScope.launch {
+                        scanCardListener?.handleFail()
+                    }
+                    handleError(status)
+                }
             }
         }.invokeOnCompletion { mLoading.postValue(false) }
     }
@@ -67,6 +72,9 @@ class ScanWorkCardViewModel(
                     }
                 }else {
                     handleError(status)
+                    uiScope.launch {
+                        scanCardListener?.handleFail()
+                    }
                 }
             }
         }.invokeOnCompletion { mLoading.postValue(false) }

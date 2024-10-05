@@ -1,10 +1,13 @@
 package com.lock.smartlocker.ui.scan_work_card
 
+import android.content.Context
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.lifecycle.ViewModelProvider
 import com.lock.smartlocker.BR
-import com.lock.smartlocker.BuildConfig
 import com.lock.smartlocker.R
 import com.lock.smartlocker.databinding.FragmentScanWorkCardBinding
 import com.lock.smartlocker.ui.base.BaseFragment
@@ -51,17 +54,31 @@ class ScanWorkCardFragment : BaseFragment<FragmentScanWorkCardBinding, ScanWorkC
         mViewDataBinding?.bottomMenu?.btnProcess?.setOnClickListener(this)
         mViewDataBinding?.headerBar?.ivBack?.setOnClickListener(this)
         viewModel.enableButtonProcess.postValue(true)
-        if (BuildConfig.IS_DISABLE_WORK_CARD){
-            mViewDataBinding?.etWorkCard?.isEnabled = false
-        }
+
+        mViewDataBinding?.etWorkCard?.requestFocus()
+        mViewDataBinding?.etWorkCard?.showSoftInputOnFocus = false
+        val inputMethodManager = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(mViewDataBinding?.etWorkCard?.windowToken, 0)
+        mViewDataBinding?.etWorkCard?.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                inputMethodManager.hideSoftInputFromWindow(mViewDataBinding?.etWorkCard?.windowToken, 0)
+                mViewDataBinding?.etWorkCard?.isEnabled = false
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                inputMethodManager.hideSoftInputFromWindow(mViewDataBinding?.etWorkCard?.windowToken, 0)
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                viewModel.showStatusText.value = false
+                inputMethodManager.hideSoftInputFromWindow(mViewDataBinding?.etWorkCard?.windowToken, 0)
+            }
+        })
     }
 
     private fun initData(){
         if (arguments?.getString(ConstantUtils.TYPE_OPEN) != null) {
             viewModel.typeOpen = arguments?.getString(ConstantUtils.TYPE_OPEN)
-        }
-        viewModel.workCardText.observe(viewLifecycleOwner) { text ->
-            viewModel.enableButtonProcess.postValue(text.isNotEmpty())
         }
     }
 
@@ -78,7 +95,6 @@ class ScanWorkCardFragment : BaseFragment<FragmentScanWorkCardBinding, ScanWorkC
                     viewModel.workCardText.value = ""
                     activity?.supportFragmentManager?.popBackStack()
                 }
-
             }
         }
     }
@@ -100,5 +116,12 @@ class ScanWorkCardFragment : BaseFragment<FragmentScanWorkCardBinding, ScanWorkC
     override fun onDestroy() {
         super.onDestroy()
         SerialControlManager.getSerialControl()?.onDataReceivedListener = null
+    }
+
+    override fun handleFail() {
+        mViewDataBinding?.etWorkCard?.text = null
+        mViewDataBinding?.etWorkCard?.isEnabled = true
+        mViewDataBinding?.etWorkCard?.requestFocus()
+        mViewDataBinding?.etWorkCard?.showSoftInputOnFocus = false
     }
 }
