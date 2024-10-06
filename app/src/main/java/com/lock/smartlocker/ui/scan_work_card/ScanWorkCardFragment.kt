@@ -1,16 +1,15 @@
 package com.lock.smartlocker.ui.scan_work_card
 
-import android.content.Context
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
+import android.util.Log
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import androidx.lifecycle.ViewModelProvider
 import com.lock.smartlocker.BR
 import com.lock.smartlocker.R
 import com.lock.smartlocker.databinding.FragmentScanWorkCardBinding
 import com.lock.smartlocker.ui.base.BaseFragment
+import com.lock.smartlocker.ui.manager_menu.ManagerMenuActivity
+import com.lock.smartlocker.ui.returns.ReturnActivity
 import com.lock.smartlocker.util.ConstantUtils
 import com.lock.smartlocker.util.Coroutines
 import com.lock.smartlocker.util.SerialControlManager
@@ -39,6 +38,7 @@ class ScanWorkCardFragment : BaseFragment<FragmentScanWorkCardBinding, ScanWorkC
             }
         }
         viewModel.scanCardListener = this
+        (activity as? ReturnActivity)?.viewModel?.textEndScan?.value = ""
         initView()
         initData()
     }
@@ -46,6 +46,8 @@ class ScanWorkCardFragment : BaseFragment<FragmentScanWorkCardBinding, ScanWorkC
     override fun onDestroyView() {
         super.onDestroyView()
         viewModel.scanCardListener = null
+        (activity as? ManagerMenuActivity)?.viewModel?.textEndScan?.removeObservers(viewLifecycleOwner)
+        (activity as? ReturnActivity)?.viewModel?.textEndScan?.removeObservers(viewLifecycleOwner)
     }
 
     private fun initView(){
@@ -54,31 +56,19 @@ class ScanWorkCardFragment : BaseFragment<FragmentScanWorkCardBinding, ScanWorkC
         mViewDataBinding?.bottomMenu?.btnProcess?.setOnClickListener(this)
         mViewDataBinding?.headerBar?.ivBack?.setOnClickListener(this)
         viewModel.enableButtonProcess.postValue(true)
-
-        mViewDataBinding?.etWorkCard?.requestFocus()
-        mViewDataBinding?.etWorkCard?.showSoftInputOnFocus = false
-        val inputMethodManager = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(mViewDataBinding?.etWorkCard?.windowToken, 0)
-        mViewDataBinding?.etWorkCard?.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                inputMethodManager.hideSoftInputFromWindow(mViewDataBinding?.etWorkCard?.windowToken, 0)
-                mViewDataBinding?.etWorkCard?.isEnabled = false
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                inputMethodManager.hideSoftInputFromWindow(mViewDataBinding?.etWorkCard?.windowToken, 0)
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-                viewModel.showStatusText.value = false
-                inputMethodManager.hideSoftInputFromWindow(mViewDataBinding?.etWorkCard?.windowToken, 0)
-            }
-        })
     }
 
     private fun initData(){
         if (arguments?.getString(ConstantUtils.TYPE_OPEN) != null) {
             viewModel.typeOpen = arguments?.getString(ConstantUtils.TYPE_OPEN)
+        }
+        (activity as? ManagerMenuActivity)?.viewModel?.textEndScan?.observe(viewLifecycleOwner) { text ->
+            Log.d("textEndScan", text)
+            mViewDataBinding?.etWorkCard?.setText(text)
+        }
+        (activity as? ReturnActivity)?.viewModel?.textEndScan?.observe(viewLifecycleOwner) { text ->
+            Log.d("textEndScan", text)
+            mViewDataBinding?.etWorkCard?.setText(text)
         }
     }
 
@@ -91,6 +81,8 @@ class ScanWorkCardFragment : BaseFragment<FragmentScanWorkCardBinding, ScanWorkC
                 }
                 R.id.rl_home -> activity?.finish()
                 R.id.iv_back -> {
+                    (activity as? ManagerMenuActivity)?.viewModel?.textEndScan?.value = ""
+                    (activity as? ReturnActivity)?.viewModel?.textEndScan?.value = ""
                     viewModel.showStatusText.value = false
                     viewModel.workCardText.value = ""
                     activity?.supportFragmentManager?.popBackStack()

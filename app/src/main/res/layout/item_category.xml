@@ -17,12 +17,10 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/dp_10"
         android:background="@drawable/bg_radius_white_selector"
-        android:clickable="true"
-        android:focusable="true"
         android:orientation="vertical"
+        android:focusable="false"
         android:padding="@dimen/dp_10"
         tools:ignore="TouchTargetSizeCheck">
-
         <TextView
             android:id="@+id/categoryTxt"
             android:layout_width="wrap_content"

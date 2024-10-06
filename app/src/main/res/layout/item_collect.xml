@@ -55,6 +55,7 @@
                 android:id="@+id/btnReopen"
                 style="@style/CustomButton"
                 android:layout_weight="0.2"
+                android:focusable="false"
                 android:text="@string/reopen_button" />
 
         </LinearLayout>

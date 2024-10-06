@@ -51,19 +51,19 @@ class CategoryViewModel(
             loanRepository.getAvailableItem(param).apply {
                 if (isSuccessful) {
                     if (data != null) {
-                            listCartItem.value?.let { listCart ->
-                                val listModel = data.categories.flatMap { it.models }
-                                listModel.map { item ->
-                                    listCart.map { cart ->
-                                        if (item.modelId == cart.modelId) {
-                                            item.available -= cart.quantity
-                                            item.loanable =
-                                                item.loanable?.toInt()?.minus(cart.quantity).toString()
-                                        }
+                        listCartItem.value?.let { listCart ->
+                            val listModel = data.categories.flatMap { it.models }
+                            listModel.map { item ->
+                                listCart.map { cart ->
+                                    if (item.modelId == cart.modelId) {
+                                        item.available -= cart.quantity
+                                        item.loanable =
+                                            item.loanable?.toInt()?.minus(cart.quantity).toString()
                                     }
-
                                 }
+
                             }
+                        }
 
                         _availableItem.postValue(data.categories)
 

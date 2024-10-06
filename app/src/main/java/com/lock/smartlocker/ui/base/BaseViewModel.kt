@@ -45,6 +45,8 @@ abstract class BaseViewModel() : ViewModel() {
         ConstantUtils.BACKGROUND,
         "https://uatalamapisapp.smartlocker.vn/Images/home-background.png"
     )
+    var textScan = StringBuilder()
+    var textEndScan = MutableLiveData<String>()
 
     fun startTimer() {
         uiScope.launch {

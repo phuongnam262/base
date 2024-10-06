@@ -81,6 +81,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
                 android:clipToPadding="false"
+                android:focusable="false"
+                android:clickable="false"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -153,7 +155,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:numberCart="@{String.valueOf(viewmodel.listCartItem.size())}"
+            app:statusText="@{viewmodel.statusText}"
             app:ownerText="@{viewmodel.ownerText}"
+            app:showStatusText="@{viewmodel.showStatusText}"
             app:timerHour="@{viewmodel.timerHour}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

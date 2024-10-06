@@ -46,6 +46,8 @@
             android:layout_height="0dp"
             android:clipToPadding="false"
             android:orientation="vertical"
+            android:focusable="false"
+            android:clickable="false"
             android:layout_marginVertical="@dimen/dp_10"
             android:layout_marginHorizontal="@dimen/dp_30"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

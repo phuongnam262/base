@@ -58,8 +58,10 @@
         <include
             android:id="@+id/bottom_menu"
             layout="@layout/bottom_menu_2"
-            app:ownerText="@{viewmodel.ownerText}"
             app:timerHour="@{viewmodel.timerHour}"
+            app:statusText="@{viewmodel.statusText}"
+            app:ownerText="@{viewmodel.ownerText}"
+            app:showStatusText="@{viewmodel.showStatusText}"
             app:showButtonProcess="@{true}"
             app:enableButtonProcess="@{viewmodel.enableButtonProcess}"
             app:layout_constraintBottom_toBottomOf="parent"

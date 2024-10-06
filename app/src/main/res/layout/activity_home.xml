@@ -94,14 +94,14 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/container_loan"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/dp_140"
-                        android:layout_marginStart="@dimen/dp_30"
+                        android:layout_height="@dimen/dp_145"
+                        android:layout_marginStart="@dimen/dp_20"
                         android:layout_marginTop="@dimen/dp_20"
-                        android:layout_marginEnd="@dimen/dp_30"
+                        android:layout_marginEnd="@dimen/dp_20"
                         android:background="@drawable/bg_radius_white_selector"
                         android:clickable="true"
                         android:focusable="true"
-                        android:padding="@dimen/dp_15"
+                        android:padding="@dimen/dp_20"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
@@ -111,7 +111,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/loan_button"
                             android:textColor="@color/colorBlack"
-                            android:textSize="@dimen/sp_25"
+                            android:textSize="@dimen/sp_26"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -153,10 +153,10 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/container_return"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/dp_140"
-                        android:layout_marginStart="@dimen/dp_30"
-                        android:layout_marginTop="@dimen/dp_15"
-                        android:layout_marginEnd="@dimen/dp_30"
+                        android:layout_height="@dimen/dp_145"
+                        android:layout_marginStart="@dimen/dp_20"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:layout_marginEnd="@dimen/dp_20"
                         android:background="@drawable/bg_radius_white_selector"
                         android:clickable="true"
                         android:focusable="true"
@@ -170,7 +170,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/return_button"
                             android:textColor="@color/colorBlack"
-                            android:textSize="@dimen/sp_25"
+                            android:textSize="@dimen/sp_26"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -212,10 +212,10 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/container_consumable_collect"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/dp_140"
-                        android:layout_marginStart="@dimen/dp_30"
-                        android:layout_marginTop="@dimen/dp_15"
-                        android:layout_marginEnd="@dimen/dp_30"
+                        android:layout_height="@dimen/dp_145"
+                        android:layout_marginStart="@dimen/dp_20"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:layout_marginEnd="@dimen/dp_20"
                         android:background="@drawable/bg_radius_white_selector"
                         android:clickable="true"
                         android:focusable="true"
@@ -229,7 +229,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/consumable_collect_button"
                             android:textColor="@color/colorBlack"
-                            android:textSize="@dimen/sp_25"
+                            android:textSize="@dimen/sp_26"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -271,10 +271,10 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/container_collect"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/dp_140"
-                        android:layout_marginStart="@dimen/dp_30"
-                        android:layout_marginTop="@dimen/dp_15"
-                        android:layout_marginEnd="@dimen/dp_30"
+                        android:layout_height="@dimen/dp_145"
+                        android:layout_marginStart="@dimen/dp_20"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:layout_marginEnd="@dimen/dp_20"
                         android:background="@drawable/bg_radius_white_selector"
                         android:clickable="true"
                         android:focusable="true"
@@ -288,7 +288,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/collect_button"
                             android:textColor="@color/colorBlack"
-                            android:textSize="@dimen/sp_25"
+                            android:textSize="@dimen/sp_26"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 

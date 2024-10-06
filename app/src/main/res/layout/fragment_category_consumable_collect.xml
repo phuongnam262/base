@@ -154,6 +154,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:numberCart="@{String.valueOf(viewmodel.listCartItem.size())}"
             app:ownerText="@{viewmodel.ownerText}"
+            app:statusText="@{viewmodel.statusText}"
+            app:showStatusText="@{viewmodel.showStatusText}"
             app:timerHour="@{viewmodel.timerHour}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

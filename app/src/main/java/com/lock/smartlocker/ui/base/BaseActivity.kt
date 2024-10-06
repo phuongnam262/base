@@ -4,20 +4,23 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.KeyEvent
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import com.lock.smartlocker.R
 import com.lock.smartlocker.util.CommonUtils
 import com.lock.smartlocker.util.ConstantUtils
+import com.lock.smartlocker.util.Coroutines
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 
 /**
  * process base logic for all activities
  */
-abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : BaseAppCompatActivity() {
+abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : BaseAppCompatActivity(){
 
     protected var mViewDataBinding: T? = null
         private set
@@ -44,6 +47,8 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : BaseAppCom
     abstract val viewModel: V
 
     private var isObserverSet = false
+    private val delayMillis = 200L
+    private var job: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -152,9 +157,15 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : BaseAppCom
     }
 
     override fun dispatchKeyEvent(event: KeyEvent): Boolean {
-        if (event.keyCode == KeyEvent.KEYCODE_ENTER) {
-            return true
-        }
+        if (event.action == KeyEvent.ACTION_DOWN && event.isPrintingKey) {
+            viewModel.textScan.append(event.unicodeChar.toChar())
+            job?.cancel()
+            job = Coroutines.main {
+                delay(delayMillis)
+                viewModel.textEndScan.postValue(viewModel.textScan.toString())
+                viewModel.textScan.clear()
+            }
+        }else return true
         return super.dispatchKeyEvent(event)
     }
 }

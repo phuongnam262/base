@@ -1,6 +1,7 @@
 package com.lock.smartlocker.ui.scan_item
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.google.gson.Gson
@@ -11,6 +12,8 @@ import com.lock.smartlocker.data.models.LockerInfo
 import com.lock.smartlocker.data.preference.PreferenceHelper
 import com.lock.smartlocker.databinding.FragmentScanItemBinding
 import com.lock.smartlocker.ui.base.BaseFragment
+import com.lock.smartlocker.ui.manager_menu.ManagerMenuActivity
+import com.lock.smartlocker.ui.returns.ReturnActivity
 import com.lock.smartlocker.ui.scan_item.adapter.ScanItem
 import com.lock.smartlocker.util.ConstantUtils
 import com.xwray.groupie.GroupAdapter
@@ -37,6 +40,7 @@ class ScanItemFragment : BaseFragment<FragmentScanItemBinding, ScanItemViewModel
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.scanItemListener = this
+        (activity as? ReturnActivity)?.viewModel?.textEndScan?.value = ""
         initView()
         initData()
     }
@@ -44,6 +48,9 @@ class ScanItemFragment : BaseFragment<FragmentScanItemBinding, ScanItemViewModel
     override fun onDestroyView() {
         super.onDestroyView()
         viewModel.scanItemListener = null
+        viewModel.listLockerInfo.removeObservers(viewLifecycleOwner)
+        viewModel.textEndScan.removeObservers(viewLifecycleOwner)
+        (activity as? ManagerMenuActivity)?.viewModel?.textEndScan?.removeObservers(viewLifecycleOwner)
     }
 
     private fun initView(){
@@ -69,6 +76,9 @@ class ScanItemFragment : BaseFragment<FragmentScanItemBinding, ScanItemViewModel
             viewModel.listLockerId.value = collect.map { it.lockerId }
         }
         mViewDataBinding?.rvLockers?.adapter = scanItemAdapter
+        (activity as? ReturnActivity)?.viewModel?.textEndScan?.observe(viewLifecycleOwner) { text ->
+            viewModel.scanningItem(text)
+        }
     }
 
     override fun onClick(v: View?) {

@@ -51,6 +51,7 @@ class InputSerialNumberFragment : BaseFragment<FragmentInputSerialNumberBinding,
 
     private fun initView(){
         viewModel.titlePage.postValue(getString(R.string.scan_or_enter_serial_number))
+        mViewDataBinding?.etSerialNumber?.requestFocus()
         mViewDataBinding?.bottomMenu?.rlHome?.setOnClickListener(this)
         mViewDataBinding?.bottomMenu?.btnProcess?.setOnClickListener(this)
         mViewDataBinding?.headerBar?.ivBack?.setOnClickListener(this)
