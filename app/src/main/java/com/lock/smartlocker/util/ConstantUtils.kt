@@ -97,6 +97,13 @@ class ConstantUtils {
 
         const val ERROR_NO_LOCKER_FOUND = "4001"
 
+        //Media
+        const val MEDIA_PATH = "MEDIA_PATH"
+        const val MEDIA_ENABLE = "MEDIA_ENABLE"
+        const val MEDIA_SOUND_ENABLE = "MEDIA_SOUND_ENABLE"
+        const val BACKGROUND_MUSIC = "BACKGROUND_MUSIC"
+        const val BACKGROUND_MUSIC_ENABLE = "BACKGROUND_MUSIC_ENABLE"
+
     }
 
     object Language {

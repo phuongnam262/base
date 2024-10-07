@@ -6,11 +6,15 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.KeyEvent
+import android.view.MotionEvent
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.navigation.fragment.NavHostFragment
 import com.lock.smartlocker.R
+import com.lock.smartlocker.data.preference.PreferenceHelper
+import com.lock.smartlocker.ui.home.HomeActivity
+import com.lock.smartlocker.ui.media.MediaActivity
 import com.lock.smartlocker.util.CommonUtils
 import com.lock.smartlocker.util.ConstantUtils
 import com.lock.smartlocker.util.Coroutines
@@ -50,10 +54,33 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : BaseAppCom
     private val delayMillis = 200L
     private var job: Job? = null
 
+    //Qua màn media nếu không touch xài app
+    private val inactivityTimeout = 30000L // 30 seconds
+    val handler = Handler(Looper.getMainLooper())
+    val inactivityRunnable: Runnable = object : Runnable {
+        override fun run() {
+            startActivity(Intent(this@BaseActivity, MediaActivity::class.java))
+            handler.removeCallbacks(this) // Remove the inactivity timer
+            if (this@BaseActivity !is HomeActivity) {
+                finish()
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         performDataBinding()
         setupObservers()
+    }
+
+    override fun onResume() {
+        if (PreferenceHelper.getBoolean(ConstantUtils.MEDIA_ENABLE, false)) resetInactivityTimer()
+        super.onResume()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        handler.removeCallbacks(inactivityRunnable)
     }
 
     /**
@@ -98,11 +125,13 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : BaseAppCom
     }
 
     fun startActivity( activity: Class<*>) {
+        handler.removeCallbacks(inactivityRunnable)
         val intent = Intent(this, activity)
         startActivity(intent)
     }
 
     fun startActivityWithOneValue(strKey: String, strValue: String, activity: Class<*>) {
+        handler.removeCallbacks(inactivityRunnable)
         val intent = Intent(this, activity)
         intent.putExtra(strKey, strValue)
         startActivity(intent)
@@ -115,6 +144,7 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : BaseAppCom
         strValue2: String,
         activity: Class<*>
     ) {
+        handler.removeCallbacks(inactivityRunnable)
         val intent = Intent(this, activity)
         intent.putExtra(strKey1, strValue1)
         intent.putExtra(strKey2, strValue2)
@@ -168,5 +198,15 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : BaseAppCom
         }else if (event.action == KeyEvent.KEYCODE_ENTER)
             return true
         return super.dispatchKeyEvent(event)
+    }
+
+    private fun resetInactivityTimer() {
+        handler.removeCallbacks(inactivityRunnable)
+        handler.postDelayed(inactivityRunnable, inactivityTimeout)
+    }
+
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        resetInactivityTimer()
+        return super.dispatchTouchEvent(ev)
     }
 }

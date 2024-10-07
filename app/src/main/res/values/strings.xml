@@ -15,6 +15,7 @@
     <string name="afternoon">Good afternoon</string>
     <string name="night">Good evening</string>
     <string name="from">%1$s\nfrom SmartLocker</string>
+    <string name="touch_to_play">TOUCH TO USE</string>
 
     <!-- login -->
     <string name="login_error_1001">Email is not existed</string>

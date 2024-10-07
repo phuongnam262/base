@@ -37,10 +37,13 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
         viewModel.titlePage.postValue(getString(R.string.setting))
         mViewDataBinding?.bottomMenu?.rlHome?.setOnClickListener(this)
         mViewDataBinding?.headerBar?.ivBack?.setOnClickListener(this)
+
+        //mặc định vào admin sẽ hiện navigation và status bar để thao tác
         mViewDataBinding?.swNavigation?.isChecked = true
         mViewDataBinding?.swStatus?.isChecked = true
         activity?.let { KioskModeHelper.sendCommand(it, KioskModeHelper.Action.SHOW_NAVIGATION_BAR) }
         activity?.let { KioskModeHelper.sendCommand(it, KioskModeHelper.Action.SHOW_STATUS_BAR) }
+
         mViewDataBinding?.swNavigation?.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked){
                 activity?.let { KioskModeHelper.sendCommand(it, KioskModeHelper.Action.SHOW_NAVIGATION_BAR) }
@@ -65,10 +68,44 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
                 PreferenceHelper.writeBoolean(ConstantUtils.LIGHT_ON, false)
             }
         }
+
+        mViewDataBinding?.etMediaPath?.setText(PreferenceHelper.getString(ConstantUtils.MEDIA_PATH, ""))
+        mViewDataBinding?.etMusic?.setText(PreferenceHelper.getString(ConstantUtils.BACKGROUND_MUSIC, ""))
+        mViewDataBinding?.cbSound?.isChecked = PreferenceHelper.getBoolean(ConstantUtils.MEDIA_SOUND_ENABLE, false)
+        mViewDataBinding?.swEnableMedia?.isChecked = PreferenceHelper.getBoolean(ConstantUtils.MEDIA_ENABLE, false)
+        mViewDataBinding?.swEnableMusic?.isChecked = PreferenceHelper.getBoolean(ConstantUtils.BACKGROUND_MUSIC_ENABLE, false)
+
+        mViewDataBinding?.cbSound?.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked){
+                PreferenceHelper.writeBoolean(ConstantUtils.MEDIA_SOUND_ENABLE, true)
+            }else {
+                PreferenceHelper.writeBoolean(ConstantUtils.MEDIA_SOUND_ENABLE, false)
+            }
+        }
+        mViewDataBinding?.swEnableMedia?.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked){
+                PreferenceHelper.writeBoolean(ConstantUtils.MEDIA_ENABLE, true)
+            }else {
+                PreferenceHelper.writeBoolean(ConstantUtils.MEDIA_ENABLE, false)
+            }
+        }
+        mViewDataBinding?.swEnableMusic?.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked){
+                PreferenceHelper.writeBoolean(ConstantUtils.BACKGROUND_MUSIC_ENABLE, true)
+            }else {
+                PreferenceHelper.writeBoolean(ConstantUtils.BACKGROUND_MUSIC_ENABLE, false)
+            }
+        }
     }
 
     private fun initData(){
         viewModel.getInformationStaff()
+        viewModel.mediaPath.observe(viewLifecycleOwner) {
+            PreferenceHelper.writeString(ConstantUtils.MEDIA_PATH, it)
+        }
+        viewModel.backgroundMusic.observe(viewLifecycleOwner) {
+            PreferenceHelper.writeString(ConstantUtils.BACKGROUND_MUSIC, it)
+        }
     }
 
     override fun onClick(v: View?) {

@@ -70,20 +70,19 @@
                 android:layout_height="@dimen/dp_40"
                 android:layout_marginTop="@dimen/dp_10"
                 android:layout_marginEnd="@dimen/dp_25"
-                android:text=""
-                app:layout_constraintEnd_toStartOf="@+id/btn_disable_media"
+                android:text="@={viewmodel.mediaPath}"
+                app:layout_constraintEnd_toStartOf="@+id/cb_sound"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_input_media"
                 tools:ignore="TextFields" />
 
-            <Button
-                android:id="@+id/btn_disable_media"
-                style="@style/CustomButton"
-                android:background="@drawable/bg_disable_button"
-                android:text="@string/disable_button"
-                android:textColor="@color/colorWhite"
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/sw_enable_media"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
 
             <CheckBox
                 android:id="@+id/cb_sound"
@@ -93,8 +92,7 @@
                 android:text="@string/sound"
                 android:textSize="@dimen/sp_14"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/btn_disable_media"
-                app:layout_constraintTop_toBottomOf="@+id/btn_disable_media" />
+                app:layout_constraintTop_toBottomOf="@+id/sw_enable_media" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -127,20 +125,19 @@
                 android:layout_height="@dimen/dp_40"
                 android:layout_marginTop="@dimen/dp_10"
                 android:layout_marginEnd="@dimen/dp_25"
-                android:text=""
-                app:layout_constraintEnd_toStartOf="@+id/btn_disable_music"
+                android:text="@={viewmodel.backgroundMusic}"
+                app:layout_constraintEnd_toStartOf="@+id/sw_enable_music"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_input_music"
                 tools:ignore="TextFields" />
 
-            <Button
-                android:id="@+id/btn_disable_music"
-                style="@style/CustomButton"
-                android:background="@drawable/bg_disable_button"
-                android:text="@string/disable_button"
-                android:textColor="@color/colorWhite"
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/sw_enable_music"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

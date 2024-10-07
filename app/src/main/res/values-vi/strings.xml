@@ -15,6 +15,7 @@
     <string name="afternoon">Chào buổi chiều</string>
     <string name="night">Chào buổi tối</string>
     <string name="from">%1$s\ntừ tủ khóa thông minh</string>
+    <string name="touch_to_play">CHẠM ĐỂ SỬ DỤNG</string>
 
     <!-- login -->
     <string name="login_error_1001">Email không tồn tại</string>

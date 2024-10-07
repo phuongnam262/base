@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Typeface
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -24,6 +25,7 @@ import com.lock.smartlocker.util.CommonUtils
 import com.lock.smartlocker.util.ConstantUtils
 import org.kodein.di.KodeinAware
 import com.lock.smartlocker.BuildConfig
+import com.lock.smartlocker.data.preference.PreferenceHelper
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
 import java.util.Calendar
@@ -40,6 +42,8 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeLis
         get() = BR.viewmodel
     override val viewModel: HomeViewModel
         get() = ViewModelProvider(this, factory)[HomeViewModel::class.java]
+
+    private var mediaPlayer: MediaPlayer? = null
 
     companion object {
         private const val TAG = "MainActivity"
@@ -93,8 +97,19 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeLis
 
     override fun onResume() {
         super.onResume()
+        if (mediaPlayer == null && PreferenceHelper.getBoolean(ConstantUtils.BACKGROUND_MUSIC_ENABLE, false))
+            playAudioFromUrl(PreferenceHelper.getString(ConstantUtils.BACKGROUND_MUSIC, ""))
         viewModel.checkATINOpenServer()
         getLocale()
+    }
+
+    private fun playAudioFromUrl(url: String) {
+        mediaPlayer = MediaPlayer().apply {
+            setDataSource(url)
+            setOnPreparedListener { start() }
+            isLooping = true
+            prepareAsync()
+        }
     }
 
     private fun getGreeting() {
@@ -223,6 +238,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeLis
     }
 
     private fun openManagerFromLeftMenu(type: String) {
+        handler.removeCallbacks(inactivityRunnable)
         startActivityWithOneValue(
             ConstantUtils.TYPE_OPEN_MANAGER, type,
             ManagerMenuActivity::class.java
@@ -246,5 +262,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeLis
     override fun onDestroy() {
         super.onDestroy()
         viewModel.homeListener = null
+        mediaPlayer?.stop()
+        mediaPlayer?.release()
     }
 }
