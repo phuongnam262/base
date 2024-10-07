@@ -165,7 +165,8 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : BaseAppCom
                 viewModel.textEndScan.postValue(viewModel.textScan.toString())
                 viewModel.textScan.clear()
             }
-        }else return true
+        }else if (event.action == KeyEvent.KEYCODE_ENTER)
+            return true
         return super.dispatchKeyEvent(event)
     }
 }
