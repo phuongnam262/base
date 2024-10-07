@@ -143,7 +143,7 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
     }
 
     private fun turnOnLight(mode: Int){
-        if (PreferenceHelper.getBoolean(ConstantUtils.LIGHT_ON)) {
+        if (PreferenceHelper.getBoolean(ConstantUtils.LIGHT_ON, false)) {
             if (mode == 1) activity?.let {
                 KioskModeHelper.sendCommand(
                     it,

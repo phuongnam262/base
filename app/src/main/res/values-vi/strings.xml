@@ -262,6 +262,8 @@
     <string name="display_navigation_bar">Hiển thị thanh điều hướng Android</string>
     <string name="display_status_bar">Hiển thị thanh trạng thái Android</string>
     <string name="light_on">Bật đèn khi quét khuôn mặt</string>
+    <string name="select_media">Bấm để chọn video</string>
+    <string name="select_audio">Bấm để chọn âm thanh</string>
 
     <!-- Thanks -->
     <string name="thank_using_mail">Cảm ơn đã sử dụng dịch vụ của chúng tôi!</string>

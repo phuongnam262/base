@@ -63,7 +63,7 @@
             android:layout_marginEnd="@dimen/dp_30"
             android:inputType="none"
             android:enabled="false"
-            android:maxLength="8"
+            android:maxLength="10"
             android:text="@={viewmodel.workCardText}"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"

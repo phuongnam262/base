@@ -55,7 +55,7 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : BaseAppCom
     private var job: Job? = null
 
     //Qua màn media nếu không touch xài app
-    private val inactivityTimeout = 30000L // 30 seconds
+    private val inactivityTimeout = 1000L * 30 // 30 seconds
     val handler = Handler(Looper.getMainLooper())
     val inactivityRunnable: Runnable = object : Runnable {
         override fun run() {
@@ -74,7 +74,7 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : BaseAppCom
     }
 
     override fun onResume() {
-        if (PreferenceHelper.getBoolean(ConstantUtils.MEDIA_ENABLE, false)) resetInactivityTimer()
+        resetInactivityTimer()
         super.onResume()
     }
 
@@ -201,8 +201,10 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : BaseAppCom
     }
 
     private fun resetInactivityTimer() {
-        handler.removeCallbacks(inactivityRunnable)
-        handler.postDelayed(inactivityRunnable, inactivityTimeout)
+        if (PreferenceHelper.getBoolean(ConstantUtils.MEDIA_ENABLE, false)) {
+            handler.removeCallbacks(inactivityRunnable)
+            handler.postDelayed(inactivityRunnable, inactivityTimeout)
+        }
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {

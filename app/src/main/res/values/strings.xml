@@ -262,6 +262,8 @@
     <string name="display_navigation_bar">Display Android Navigation Bar</string>
     <string name="display_status_bar">Display Android Status Bar</string>
     <string name="light_on">Turn on light when detect face</string>
+    <string name="select_media">Click to select media from storage</string>
+    <string name="select_audio">Click to select audio from storage</string>
 
     <!-- Thanks -->
     <string name="thank_using_mail">Thank you for using our service!</string>

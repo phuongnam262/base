@@ -67,6 +67,13 @@ class ConstantUtils {
 
         //Setting
         const val LIGHT_ON = "LIGHT_ON"
+        const val NAVIGATION_ON = "NAVIGATION_ON"
+        const val STATUS_ON = "STATUS_ON"
+        const val MEDIA_PATH = "MEDIA_PATH"
+        const val MEDIA_ENABLE = "MEDIA_ENABLE"
+        const val MEDIA_SOUND_ENABLE = "MEDIA_SOUND_ENABLE"
+        const val BACKGROUND_MUSIC = "BACKGROUND_MUSIC"
+        const val BACKGROUND_MUSIC_ENABLE = "BACKGROUND_MUSIC_ENABLE"
 
         //Error code
         const val LOGIN_EMAIL_NOT_EXISTED = "401-001"
@@ -94,15 +101,8 @@ class ConstantUtils {
         const val ERROR_NO_AVAILABLE_ITEM_COMSUMABLE = "70705"
         const val ERROR_COLLECT_AMOUNT = "70707"
         const val ERROR_SERIAL_EXISTED = "722"
-
         const val ERROR_NO_LOCKER_FOUND = "4001"
 
-        //Media
-        const val MEDIA_PATH = "MEDIA_PATH"
-        const val MEDIA_ENABLE = "MEDIA_ENABLE"
-        const val MEDIA_SOUND_ENABLE = "MEDIA_SOUND_ENABLE"
-        const val BACKGROUND_MUSIC = "BACKGROUND_MUSIC"
-        const val BACKGROUND_MUSIC_ENABLE = "BACKGROUND_MUSIC_ENABLE"
 
     }
 

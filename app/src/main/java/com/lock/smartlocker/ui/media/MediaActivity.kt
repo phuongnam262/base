@@ -9,6 +9,7 @@ import android.widget.VideoView
 import com.lock.smartlocker.R
 import com.lock.smartlocker.data.preference.PreferenceHelper
 import com.lock.smartlocker.ui.base.BaseAppCompatActivity
+import com.lock.smartlocker.ui.home.HomeActivity
 import com.lock.smartlocker.util.ConstantUtils
 
 class MediaActivity : BaseAppCompatActivity() {
@@ -25,6 +26,7 @@ class MediaActivity : BaseAppCompatActivity() {
 
     @SuppressLint("ClickableViewAccessibility")
     private fun initView() {
+        HomeActivity.stopMusic()
         val videoView = findViewById<VideoView>(R.id.videoView)
         val textView = findViewById<TextView>(R.id.touchToPlay)
         val videoUrl = PreferenceHelper.getString(ConstantUtils.MEDIA_PATH, "")
@@ -33,6 +35,9 @@ class MediaActivity : BaseAppCompatActivity() {
 
         videoView.setOnPreparedListener { mp ->
             mp.isLooping = true
+            if (PreferenceHelper.getBoolean(ConstantUtils.MEDIA_SOUND_ENABLE, false).not()){
+                mp.setVolume(0f, 0f)
+            }
             videoView.start()
         }
 

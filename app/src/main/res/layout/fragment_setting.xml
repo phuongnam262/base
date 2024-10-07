@@ -63,23 +63,23 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
+            <TextView
                 android:id="@+id/et_media_path"
-                style="@style/CustomEditTextStyle"
+                style="@style/CustomTextViewStyle"
                 android:layout_width="0dp"
+                android:hint="@string/select_media"
                 android:layout_height="@dimen/dp_40"
                 android:layout_marginTop="@dimen/dp_10"
                 android:layout_marginEnd="@dimen/dp_25"
-                android:text="@={viewmodel.mediaPath}"
                 app:layout_constraintEnd_toStartOf="@+id/cb_sound"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_input_media"
-                tools:ignore="TextFields" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_input_media" />
 
             <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/sw_enable_media"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:enabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="UseSwitchCompatOrMaterialXml" />
@@ -118,23 +118,23 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
+            <TextView
                 android:id="@+id/et_music"
-                style="@style/CustomEditTextStyle"
+                style="@style/CustomTextViewStyle"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/dp_40"
                 android:layout_marginTop="@dimen/dp_10"
                 android:layout_marginEnd="@dimen/dp_25"
-                android:text="@={viewmodel.backgroundMusic}"
+                android:hint="@string/select_audio"
                 app:layout_constraintEnd_toStartOf="@+id/sw_enable_music"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_input_music"
-                tools:ignore="TextFields" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_input_music" />
 
             <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/sw_enable_music"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:enabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="UseSwitchCompatOrMaterialXml" />

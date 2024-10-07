@@ -43,11 +43,10 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeLis
     override val viewModel: HomeViewModel
         get() = ViewModelProvider(this, factory)[HomeViewModel::class.java]
 
-    private var mediaPlayer: MediaPlayer? = null
-
     companion object {
         private const val TAG = "MainActivity"
         private const val PERMISSION_REQUESTS = 1
+        private var mediaPlayer: MediaPlayer? = null
 
         private val REQUIRED_RUNTIME_PERMISSIONS =
             arrayOf(
@@ -55,9 +54,22 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeLis
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.READ_EXTERNAL_STORAGE
             )
-        const val NUMBER_AVAILABLE = "number_available"
         const val TYPE_OPEN = "type_open"
-        const val PERSON_CODE = "person_code"
+
+        fun playAudioFromUrl(url: String) {
+            mediaPlayer = MediaPlayer().apply {
+                setDataSource(url)
+                setOnPreparedListener { start() }
+                isLooping = true
+                prepareAsync()
+            }
+        }
+
+        fun stopMusic() {
+            mediaPlayer?.stop()
+            mediaPlayer?.release()
+            mediaPlayer = null
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -101,15 +113,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeLis
             playAudioFromUrl(PreferenceHelper.getString(ConstantUtils.BACKGROUND_MUSIC, ""))
         viewModel.checkATINOpenServer()
         getLocale()
-    }
-
-    private fun playAudioFromUrl(url: String) {
-        mediaPlayer = MediaPlayer().apply {
-            setDataSource(url)
-            setOnPreparedListener { start() }
-            isLooping = true
-            prepareAsync()
-        }
     }
 
     private fun getGreeting() {
@@ -262,7 +265,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeLis
     override fun onDestroy() {
         super.onDestroy()
         viewModel.homeListener = null
-        mediaPlayer?.stop()
-        mediaPlayer?.release()
+        stopMusic()
     }
 }
