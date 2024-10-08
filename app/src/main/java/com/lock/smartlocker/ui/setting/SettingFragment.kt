@@ -105,6 +105,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
             }else {
                 PreferenceHelper.writeBoolean(ConstantUtils.MEDIA_ENABLE, false)
             }
+            simulateTouch()
         }
         mViewDataBinding?.swEnableMusic?.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked){

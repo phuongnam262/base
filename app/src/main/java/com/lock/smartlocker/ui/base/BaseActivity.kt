@@ -210,10 +210,15 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : BaseAppCom
     }
 
     private fun startCountdown() {
-        if (PreferenceHelper.getBoolean(ConstantUtils.MEDIA_ENABLE, false)) {
-            val minutes = PreferenceHelper.getString(ConstantUtils.TIME_BACK_HOME, "1").toInt()
-            CountdownTimer.startCountdownTimer(minutes)
+        val minutes = PreferenceHelper.getString(ConstantUtils.TIME_BACK_HOME, "1").toInt()
+        CountdownTimer.onTimeout = {
+            if (PreferenceHelper.getBoolean(ConstantUtils.MEDIA_ENABLE, false).not()) {
+                if (this@BaseActivity !is HomeActivity) {
+                    finish()
+                }
+            }
         }
+        CountdownTimer.startCountdownTimer(minutes)
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {

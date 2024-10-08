@@ -173,6 +173,7 @@
                 android:layout_height="@dimen/dp_40"
                 android:textAlignment="center"
                 android:maxLength="3"
+                android:hint="1"
                 android:inputType="number"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>

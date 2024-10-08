@@ -254,12 +254,12 @@
 
     <!-- Setting -->
     <string name="setting">Settings</string>
-    <string name="setting_info">These are all the settings for this device.\nPlease follow the instructions to set it up, especially for face recognition settings.</string>
+    <string name="setting_info">These are all the settings for this device.\nPlease follow the instructions to set it up.</string>
     <string name="media_path">Media Path</string>
     <string name="disable_button">Disable</string>
     <string name="sound">Sound</string>
     <string name="background_music">Background Music</string>
-    <string name="time_out">Time out back to home and show video (minute)</string>
+    <string name="time_out">Number of minutes to return to home page, if media is on then show video</string>
     <string name="display_navigation_bar">Display Android Navigation Bar</string>
     <string name="display_status_bar">Display Android Status Bar</string>
     <string name="light_on">Turn on light when detect face</string>

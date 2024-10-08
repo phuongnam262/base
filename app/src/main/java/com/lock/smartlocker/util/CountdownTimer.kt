@@ -8,6 +8,7 @@ object CountdownTimer {
     val timeoutString = MutableLiveData<String>()
     private var timer: Timer? = null
     private var remainingTime: Long = 0
+    var onTimeout: (() -> Unit)? = null
 
     fun startCountdownTimer(minutes: Int) {
         stopTimer()
@@ -23,6 +24,7 @@ object CountdownTimer {
                     timeoutString.postValue(formattedTime)
                 } else {
                     stopTimer()
+                    onTimeout?.invoke()
                 }
             }
         }, 0, 1000)
