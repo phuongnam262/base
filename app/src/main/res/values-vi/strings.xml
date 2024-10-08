@@ -259,6 +259,7 @@
     <string name="disable_button">Vô Hiệu</string>
     <string name="sound">Âm Thanh</string>
     <string name="background_music">Nhạc Nền</string>
+    <string name="time_out">Thời gian về trang chủ và hiển thị video (phút)</string>
     <string name="display_navigation_bar">Hiển thị thanh điều hướng Android</string>
     <string name="display_status_bar">Hiển thị thanh trạng thái Android</string>
     <string name="light_on">Bật đèn khi quét khuôn mặt</string>

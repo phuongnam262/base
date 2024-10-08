@@ -76,7 +76,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeLis
         super.onCreate(savedInstanceState)
         //Data binding
         viewModel.homeListener = this
-        viewModel.startTimer()
         if (!allRuntimePermissionsGranted()) {
             getRuntimePermissions()
         }

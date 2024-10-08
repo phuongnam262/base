@@ -32,7 +32,6 @@ class ThankFragment : BaseFragment<FragmentThankBinding, ThankViewModel>(),
     }
 
     private fun initView(){
-        viewModel.startTimer()
         mViewDataBinding?.bottomMenu?.rlHome?.setOnClickListener(this)
     }
 

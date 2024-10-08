@@ -5,16 +5,12 @@ import androidx.lifecycle.ViewModel
 import com.lock.smartlocker.R
 import com.lock.smartlocker.data.network.Status
 import com.lock.smartlocker.data.preference.PreferenceHelper
+import com.lock.smartlocker.util.AppTimer
 import com.lock.smartlocker.util.ConstantUtils
+import com.lock.smartlocker.util.CountdownTimer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
-import java.util.Timer
-import java.util.TimerTask
 
 abstract class BaseViewModel() : ViewModel() {
     val mLoading = MutableLiveData<Boolean>().apply { value = false }
@@ -32,7 +28,8 @@ abstract class BaseViewModel() : ViewModel() {
 
     // Data binding
     var terminalName = PreferenceHelper.getString(ConstantUtils.TERMINAL_NAME, "")
-    var timerString = MutableLiveData<String>()
+    var timerString = AppTimer.timerString
+    var timerHour = CountdownTimer.timeoutString
     var ownerText = PreferenceHelper.getString(ConstantUtils.OWNER_TEXT, "")
     var titlePage = MutableLiveData<String>()
     var statusText = MutableLiveData<String>()
@@ -40,7 +37,6 @@ abstract class BaseViewModel() : ViewModel() {
     var enableButtonProcess = MutableLiveData<Boolean>(false)
     var showButtonUsingMail = MutableLiveData<Boolean>(true)
     var showStatusText = MutableLiveData<Boolean>()
-    var timerHour = MutableLiveData<String>()
     var imageBackgroundUrl = PreferenceHelper.getString(
         ConstantUtils.BACKGROUND,
         "https://uatalamapisapp.smartlocker.vn/Images/home-background.png"
@@ -48,31 +44,15 @@ abstract class BaseViewModel() : ViewModel() {
     var textScan = StringBuilder()
     var textEndScan = MutableLiveData<String>()
 
-    fun startTimer() {
-        uiScope.launch {
-            val timer = Timer()
-            timer.schedule(object : TimerTask() {
-                override fun run() {
-                    val currentTime = Date()
-                    val formattedTime = SimpleDateFormat(
-                        "HH:mm dd/MM/yyyy",
-                        Locale.getDefault()
-                    ).format(currentTime)
-                    val formattedHour = SimpleDateFormat(
-                        "HH:mm",
-                        Locale.getDefault()
-                    ).format(currentTime)
-                    timerString.postValue(formattedTime)
-                    timerHour.postValue(formattedHour)
-                }
-            }, 0, 1000)
-        }
-    }
-
     /**
      * Init viewModel
      */
-    open fun initViewModel() {}
+    open fun initViewModel() {
+    }
+
+    init {
+        AppTimer.startTimer()
+    }
 
     /**
      * Clearing viewModelJob when this viewModel already destroyed

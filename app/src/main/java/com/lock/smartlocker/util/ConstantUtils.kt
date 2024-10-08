@@ -74,6 +74,7 @@ class ConstantUtils {
         const val MEDIA_SOUND_ENABLE = "MEDIA_SOUND_ENABLE"
         const val BACKGROUND_MUSIC = "BACKGROUND_MUSIC"
         const val BACKGROUND_MUSIC_ENABLE = "BACKGROUND_MUSIC_ENABLE"
+        const val TIME_BACK_HOME = "TIME_BACK_HOME"
 
         //Error code
         const val LOGIN_EMAIL_NOT_EXISTED = "401-001"
