@@ -24,7 +24,7 @@
             android:orientation="vertical"
             android:layout_marginHorizontal="@dimen/dp_15"
             app:layout_constraintEnd_toStartOf="@+id/btnRemove"
-            app:layout_constraintStart_toEndOf="@+id/ivAvatar"
+            app:layout_constraintStart_toEndOf="@+id/cvAvatar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -48,7 +48,7 @@
                 android:ellipsize="end"
                 android:fontFamily="@font/segoe_ui_light"
                 android:maxLines="1"
-                android:layout_marginTop="@dimen/dp_5"
+                android:layout_marginTop="@dimen/dp_3"
                 android:visibility="@{userLocker.email.equals(userLocker.personName) ? View.GONE : View.VISIBLE}"
                 android:text="@{userLocker.email}"
                 android:textColor="@color/colorBlack"
@@ -65,14 +65,20 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/ivAvatar"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvAvatar"
             android:layout_width="@dimen/dp_70"
             android:layout_height="@dimen/dp_70"
-            android:scaleType="centerInside"
-            android:background="@drawable/avatar"
+            app:cardCornerRadius="@dimen/dp_15"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" >
+            <ImageView
+                android:id="@+id/ivAvatar"
+                android:layout_width="@dimen/dp_70"
+                android:layout_height="@dimen/dp_70"
+                android:scaleType="centerCrop"
+                android:background="@drawable/avatar" />
+        </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
