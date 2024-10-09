@@ -58,10 +58,12 @@ class InputSerialNumberFragment : BaseFragment<FragmentInputSerialNumberBinding,
         mViewDataBinding?.containerItem?.btnUpdate?.setOnClickListener(this)
         viewModel.enableButtonProcess.value = true
         mViewDataBinding?.etSerialNumber?.doAfterTextChanged {
-            viewModel.itemReturnData.value = null
-            mViewDataBinding?.containerItem?.btnUpdate?.isEnabled = false
-            mViewDataBinding?.containerItem?.btnUpdate?.alpha = 0.3f
-            mViewDataBinding?.containerItem?.ivModel?.setImageBitmap(null)
+            if (mViewDataBinding?.etSerialNumber?.text.toString() != viewModel.itemReturnData.value?.serialNumber) {
+                viewModel.itemReturnData.value = null
+                mViewDataBinding?.containerItem?.btnUpdate?.isEnabled = false
+                mViewDataBinding?.containerItem?.btnUpdate?.alpha = 0.3f
+                mViewDataBinding?.containerItem?.ivModel?.setImageBitmap(null)
+            }
         }
     }
 
