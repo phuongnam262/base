@@ -200,7 +200,8 @@
                 android:textColor="@color/colorBlack"
                 android:textSize="@dimen/sp_16"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
             <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/sw_navigation"
@@ -232,7 +233,8 @@
                 android:checked="true"
                 android:textSize="@dimen/sp_16"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
             <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/sw_status"

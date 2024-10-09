@@ -56,7 +56,7 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : BaseAppCom
     private var job: Job? = null
 
     //Qua màn media nếu không touch xài app
-    private val inactivityTimeout = 60000L * PreferenceHelper.getString(ConstantUtils.TIME_BACK_HOME, "1").toInt()
+    private var inactivityTimeout = 0L
     val handler = Handler(Looper.getMainLooper())
     val inactivityRunnable: Runnable = object : Runnable {
         override fun run() {
@@ -204,6 +204,7 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : BaseAppCom
 
     private fun resetInactivityTimer() {
         if (PreferenceHelper.getBoolean(ConstantUtils.MEDIA_ENABLE, false)) {
+            inactivityTimeout = 60000L * PreferenceHelper.getString(ConstantUtils.TIME_BACK_HOME, "1").toInt()
             handler.removeCallbacks(inactivityRunnable)
             handler.postDelayed(inactivityRunnable, inactivityTimeout)
         }

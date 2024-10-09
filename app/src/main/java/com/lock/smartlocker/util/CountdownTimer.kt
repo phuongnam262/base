@@ -1,5 +1,6 @@
 package com.lock.smartlocker.util
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.MutableLiveData
 import java.util.Timer
 import java.util.TimerTask
@@ -10,11 +11,12 @@ object CountdownTimer {
     private var remainingTime: Long = 0
     var onTimeout: (() -> Unit)? = null
 
-    fun startCountdownTimer(minutes: Int) {
+    fun startCountdownTimer(minute: Int) {
         stopTimer()
-        remainingTime = minutes * 60L
+        remainingTime = minute * 60L
         timer = Timer()
-        timer?.scheduleAtFixedRate(object : TimerTask() {
+        timer?.schedule(object : TimerTask() {
+            @SuppressLint("DefaultLocale")
             override fun run() {
                 if (remainingTime > 0) {
                     remainingTime--
