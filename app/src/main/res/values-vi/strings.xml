@@ -93,6 +93,7 @@
     <string name="face_exits">Khuôn mặt này đã tồn tại</string>
     <string name="save_user_fail">Lưu người dùng thất bại</string>
     <string name="face_not_found">Không tìm thấy khuôn mặt</string>
+    <string name="face_not_liveness">Khuôn mặt không phải là người thật</string>
     <string name="face_register_success">Đăng Ký Khuôn Mặt Thành Công</string>
     <string name="face_hello">Chào %1$s, \nKhuôn mặt của bạn đã được thêm thành công</string>
     <string name="btn_retry">THỬ LẠI</string>

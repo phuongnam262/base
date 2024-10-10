@@ -87,14 +87,17 @@ class RecognizeFaceViewModel(
     }
 
     private fun handelFaceFail(detectImageResponse: DetectImageResponse) {
-        if (detectImageResponse.message.contains("not found") || detectImageResponse.result.liveness != 1) {
+        if (detectImageResponse.message.contains("not found")) {
             uiScope.launch {
                 recognizeFaceListener?.faceNotFound()
                 mStatusText.postValue(R.string.face_not_found)
             }
-        }else{
-            mOtherError.postValue(detectImageResponse.message)
-        }
+        }else if(detectImageResponse.result.liveness != 1) {
+            uiScope.launch {
+                recognizeFaceListener?.faceNotFound()
+                mStatusText.postValue(R.string.face_not_liveness)
+            }
+        }else mOtherError.postValue(detectImageResponse.message)
     }
 
     private fun getUserLocker(personCode: String) {
