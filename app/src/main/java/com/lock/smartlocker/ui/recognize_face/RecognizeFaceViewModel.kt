@@ -87,15 +87,10 @@ class RecognizeFaceViewModel(
     }
 
     private fun handelFaceFail(detectImageResponse: DetectImageResponse) {
-        if (detectImageResponse.message.contains("not found")) {
+        if (detectImageResponse.message.contains("not found") || detectImageResponse.result.liveness != 1) {
             uiScope.launch {
                 recognizeFaceListener?.faceNotFound()
                 mStatusText.postValue(R.string.face_not_found)
-            }
-        }else if(detectImageResponse.result.liveness != 1) {
-            uiScope.launch {
-                recognizeFaceListener?.faceNotFound()
-                mStatusText.postValue(R.string.face_not_liveness)
             }
         }else mOtherError.postValue(detectImageResponse.message)
     }

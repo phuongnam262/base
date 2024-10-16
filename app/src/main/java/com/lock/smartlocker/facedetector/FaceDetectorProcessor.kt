@@ -19,7 +19,7 @@ class FaceDetectorProcessor(context: Context, detectorOptions: FaceDetectorOptio
     private val handler = Handler(Looper.getMainLooper())
     private var delayRunnable: Runnable? = null
     private val minFaceSize = 0.05f
-    private val maxFaceSize = 0.14f
+    private val maxFaceSize = 0.13f
 
     init {
         val options = detectorOptions
@@ -64,20 +64,36 @@ class FaceDetectorProcessor(context: Context, detectorOptions: FaceDetectorOptio
         largestFace?.let {
             val faceCenterX = largestFace.boundingBox.centerX().toFloat()
             val faceCenterY = largestFace.boundingBox.centerY().toFloat()
-            if ((faceCenterX < 310 && faceCenterX > 180) && (faceCenterY < 400 && faceCenterY > 240) ) {
+            Log.d("faceCenterXY", "$faceCenterX--$faceCenterY")
+            if ((faceCenterX < 320 && faceCenterX > 170) && (faceCenterY < 420 && faceCenterY > 225) ) {
                 if (isFaceLargeEnough(largestFace) == 1) {
-                    if ((-13 < largestFace.headEulerAngleX && largestFace.headEulerAngleX < 5) &&
-                        (-10 < largestFace.headEulerAngleY && largestFace.headEulerAngleY <9) &&
-                        (-5 < largestFace.headEulerAngleZ && largestFace.headEulerAngleZ < 5)
-                    ) {
-                        graphicOverlay.add(FaceGraphic(graphicOverlay, largestFace, false))
-                        callback?.onOneFace()
-                        logExtrasForTesting(largestFace)
-                    }else {
-                        graphicOverlay.add(FaceGraphic(graphicOverlay, largestFace, true))
-                        callback?.onNotStraightFace()
-                    }
 
+                    val boundingBox = largestFace.boundingBox
+                    val faceWidth = boundingBox.width().toFloat()
+                    val faceHeight = boundingBox.height().toFloat()
+                    val imageWidth = 768f
+                    val imageHeight = 1024f
+                    val faceSize = (faceWidth * faceHeight) / (imageWidth * imageHeight)
+                    Log.d("faceCenterXY face", faceSize.toString())
+                    if (faceSize > 0.10 && faceSize <= maxFaceSize){
+                        Log.d("faceCenterXY", ">>>.01")
+                        if ((faceCenterX < 280 && faceCenterX > 205) && (faceCenterY < 370 && faceCenterY > 305) ) {
+                            processFace(largestFace, graphicOverlay)
+                        }else{
+                            graphicOverlay.add(FaceGraphic(graphicOverlay, largestFace, true))
+                            callback?.onNotCenterFace()
+                        }
+                    }else if (faceSize > 0.07 && faceSize <= 0.10){
+                        Log.d("faceCenterXY", ">>>.07")
+                        if ((faceCenterX < 290 && faceCenterX > 195) && (faceCenterY < 390 && faceCenterY > 285) ) {
+                            processFace(largestFace, graphicOverlay)
+                        }else{
+                            graphicOverlay.add(FaceGraphic(graphicOverlay, largestFace, true))
+                            callback?.onNotCenterFace()
+                        }
+                    }else {
+                        processFace(largestFace, graphicOverlay)
+                    }
 
                 } else if (isFaceLargeEnough(largestFace) == 2) {
                     graphicOverlay.add(FaceGraphic(graphicOverlay, largestFace, true))
@@ -91,6 +107,20 @@ class FaceDetectorProcessor(context: Context, detectorOptions: FaceDetectorOptio
                 graphicOverlay.add(FaceGraphic(graphicOverlay, largestFace, true))
                 callback?.onNotCenterFace()
             }
+        }
+    }
+
+    private fun processFace(largestFace: Face, graphicOverlay: GraphicOverlay){
+        if ((-13 < largestFace.headEulerAngleX && largestFace.headEulerAngleX < 5) &&
+            (-10 < largestFace.headEulerAngleY && largestFace.headEulerAngleY < 9) &&
+            (-5 < largestFace.headEulerAngleZ && largestFace.headEulerAngleZ < 5)
+        ) {
+            graphicOverlay.add(FaceGraphic(graphicOverlay, largestFace, false))
+            callback?.onOneFace()
+            logExtrasForTesting(largestFace)
+        } else {
+            graphicOverlay.add(FaceGraphic(graphicOverlay, largestFace, true))
+            callback?.onNotStraightFace()
         }
     }
 

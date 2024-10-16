@@ -17,6 +17,7 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.google.mlkit.common.MlKitException
 import com.google.mlkit.vision.face.Face
 import com.lock.smartlocker.BR
@@ -382,21 +383,28 @@ class RecognizeFaceFragment : BaseFragment<FragmentRecognizeFaceBinding, Recogni
                     matrix,
                     true
                 )
-                val faceBitmap = Bitmap.createBitmap(
+                var faceBitmap: Bitmap? = null
+                try {faceBitmap = Bitmap.createBitmap(
                     rotatedBitmap,
-                    faceBoundingBox.left - 25,
-                    faceBoundingBox.top - 50,
-                    faceBoundingBox.width() + 40,
-                    faceBoundingBox.height() + 80
+                    faceBoundingBox.left - 35,
+                    faceBoundingBox.top - 100,
+                    faceBoundingBox.width() + 60,
+                    faceBoundingBox.height() + 150
                 )
-
-                val baos = ByteArrayOutputStream()
-                faceBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-                val b = baos.toByteArray()
-                val strBase64 = Base64.encodeToString(b, Base64.DEFAULT)
-                turnOnLight(0)
-                viewModel.detectImage(strBase64)
-                imageProxy.close()
+                } catch (e: IllegalArgumentException) {
+                    Log.e("FaceDetection", "Error creating face bitmap", e)
+                }
+                if (faceBitmap != null) {
+                    val baos = ByteArrayOutputStream()
+                    faceBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+                    val b = baos.toByteArray()
+                    val strBase64 = Base64.encodeToString(b, Base64.DEFAULT)
+                    turnOnLight(0)
+                    viewModel.detectImage(strBase64)
+                    imageProxy.close()
+                } else {
+                    viewModel.mStatusText.postValue(R.string.face_not_liveness)
+                }
             }
         }
     }

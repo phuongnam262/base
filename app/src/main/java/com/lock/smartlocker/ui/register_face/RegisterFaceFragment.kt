@@ -360,19 +360,27 @@ class RegisterFaceFragment : BaseFragment<FragmentRegisterFaceBinding, RegisterF
                     matrix,
                     true
                 )
-                val faceBitmap = Bitmap.createBitmap(
+                var faceBitmap: Bitmap? = null
+                try {faceBitmap = Bitmap.createBitmap(
                     rotatedBitmap,
-                    faceBoundingBox.left - 25,
-                    faceBoundingBox.top - 50,
-                    faceBoundingBox.width() + 40,
-                    faceBoundingBox.height() + 80
+                    faceBoundingBox.left - 35,
+                    faceBoundingBox.top - 100,
+                    faceBoundingBox.width() + 60,
+                    faceBoundingBox.height() + 150
                 )
-
-                val baos = ByteArrayOutputStream()
-                faceBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-                val b = baos.toByteArray()
-                strBase64 = Base64.encodeToString(b, Base64.DEFAULT)
-                imageProxy.close()
+                } catch (e: IllegalArgumentException) {
+                    Log.e("FaceDetection", "Error creating face bitmap", e)
+                }
+                if (faceBitmap != null) {
+                    val baos = ByteArrayOutputStream()
+                    faceBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+                    val b = baos.toByteArray()
+                    strBase64 = Base64.encodeToString(b, Base64.DEFAULT)
+                    imageProxy.close()
+                } else {
+                    viewModel.mStatusText.postValue(R.string.face_not_found)
+                    failDetectFace()
+                }
             }
         }
     }
