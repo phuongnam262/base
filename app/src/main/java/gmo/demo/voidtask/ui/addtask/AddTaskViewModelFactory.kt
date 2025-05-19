@@ -1,15 +1,15 @@
-package gmo.demo.voidtask.ui.inputotp
+package gmo.demo.voidtask.ui.addtask
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import gmo.demo.voidtask.data.repositories.AppRepository
+import gmo.demo.voidtask.data.repositories.TaskRepository
 
 @Suppress("UNCHECKED_CAST")
-class InputOTPViewModelFactory(
-    private val repository: AppRepository
+class AddTaskViewModelFactory(
+    private val repository: TaskRepository
 ) : ViewModelProvider.NewInstanceFactory() {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return InputOTPViewModel(repository) as T
+        return AddTaskViewModel(repository) as T
     }
 }

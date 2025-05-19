@@ -1,45 +1,24 @@
-package gmo.demo.voidtask.ui.inputotp
+package gmo.demo.voidtask.ui.addtask
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import gmo.demo.voidtask.R
-import gmo.demo.voidtask.data.entities.request.VerifyOTPRequest
-import gmo.demo.voidtask.data.preference.PreferenceHelper
-import gmo.demo.voidtask.data.repositories.AppRepository
+import gmo.demo.voidtask.data.models.Task
+import gmo.demo.voidtask.data.repositories.TaskRepository
 import gmo.demo.voidtask.ui.base.BaseViewModel
-import gmo.demo.voidtask.util.ConstantUtils
 import kotlinx.coroutines.launch
 
-class  InputOTPViewModel(
-    private val managerRepository: AppRepository
-) : BaseViewModel() {
+class AddTaskViewModel(private val repository: TaskRepository) : BaseViewModel() {
+    val title = MutableLiveData<String>()
+    val detail = MutableLiveData<String>()
 
-    var inputOTPListener: InputOTPListener? = null
-    var otpText = MutableLiveData<String>()
-    var email = MutableLiveData<String>()
-
-    fun onSendOTP() {
+    fun addTask() {
         ioScope.launch {
-            if (otpText.value.isNullOrEmpty()) {
-                mMessageError.postValue(R.string.error_otp_emplty)
-                inputOTPListener?.verifyFail()
-                return@launch
-            }
-            mLoading.postValue(true)
-            val param = VerifyOTPRequest()
-            param.email = email.value
-            param.otp = otpText.value
-            managerRepository.verifyOTP(param).apply {
-                if (isSuccessful) {
-                    if (data != null ) {
-                        PreferenceHelper.writeString(ConstantUtils.API_TOKEN, data.token)
-                        mMessageError.postValue(R.string.error_null)
-                        inputOTPListener?.verifySuccess(email.value)
-                    }
-                } else {
-                    handleError(status)
-                    inputOTPListener?.verifyFail()
-                }
-            }
-        }.invokeOnCompletion { mLoading.postValue(false) }
+            val titleValue = title.value ?: ""
+            val detailValue = detail.value ?: ""
+            val a = repository.insertTask(Task(title = titleValue, detail = detailValue))
+            Log.d("add", a.toString())
+            val task = repository.getAllTask()
+            Log.d("task", task.toString())
+        }
     }
 }

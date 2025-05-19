@@ -6,24 +6,22 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import gmo.demo.voidtask.data.models.UserModel
+import gmo.demo.voidtask.data.models.Task
 
 @Dao
-interface UserDAO{
-
+interface TaskDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertUser(user: UserModel) : Long
+    suspend fun insertTask(task: Task)
 
     @Update
-    suspend fun updateUser(user: UserModel) : Int
+    suspend fun updateTask(task: Task) : Int
 
     @Delete
-    suspend fun deleteUser(user: UserModel)
+    suspend fun deleteTask(task: Task)
 
-    @Query("DELETE FROM UserModel")
-    fun deleteAllUser() : Int
+    @Query("SELECT * FROM tasks WHERE id = :id")
+    suspend fun getTask(id: String) : Task?
 
-    @Query("SELECT * FROM UserModel WHERE email = :email")
-    suspend fun checkUserEmail(email: String) : UserModel?
-
+    @Query("SELECT * FROM tasks")
+    suspend fun getAllTask() : List<Task>
 }
