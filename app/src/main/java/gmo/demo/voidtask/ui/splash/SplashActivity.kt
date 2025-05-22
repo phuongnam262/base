@@ -1,13 +1,17 @@
 package gmo.demo.voidtask.ui.splash
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import gmo.demo.voidtask.databinding.ActivitySplashBinding
 import gmo.demo.voidtask.ui.base.BaseActivity
 import gmo.demo.voidtask.BR
 import gmo.demo.voidtask.R
+import gmo.demo.voidtask.data.preference.PreferenceHelper
 import gmo.demo.voidtask.ui.home.HomeActivity
+import gmo.demo.voidtask.ui.login.LoginActivity
 import gmo.demo.voidtask.util.CommonUtils
 import gmo.demo.voidtask.util.ConstantUtils
 import org.kodein.di.KodeinAware
@@ -29,8 +33,18 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d("SplashActivity", "start")
         CommonUtils.runTimeDelay(ConstantUtils.SPLASH_TIME_OUT.toLong()) {
-            startActivity(HomeActivity::class.java)
+            val token = PreferenceHelper.getString(ConstantUtils.API_TOKEN, "")
+            Log.d("SplashActivity", "Token: $token")
+            if (token.isNotEmpty()) {
+                Log.d("SplashActivity", "Chuyển sang HomeActivity")
+                startActivity(Intent(this, HomeActivity::class.java))
+            } else {
+                Log.d("SplashActivity", "Chuyển sang LoginActivity")
+                startActivity(Intent(this, LoginActivity::class.java))
+            }
+            Log.d("SplashActivity", "end")
             finish()
         }
     }

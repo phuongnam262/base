@@ -12,6 +12,7 @@ import gmo.demo.voidtask.data.repositories.AppRepository
 import gmo.demo.voidtask.data.repositories.TaskRepository
 import gmo.demo.voidtask.ui.addtask.AddTaskViewModelFactory
 import gmo.demo.voidtask.ui.home.HomeViewModelFactory
+import gmo.demo.voidtask.ui.login.LoginViewModelFactory
 import gmo.demo.voidtask.ui.splash.SplashViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -61,6 +62,7 @@ class LockerApplication : Application(), KodeinAware {
         bind() from provider { SplashViewModelFactory() }
         bind() from provider { HomeViewModelFactory() }
         bind() from provider { AddTaskViewModelFactory(instance()) }
+        bind() from provider { LoginViewModelFactory(instance()) }
 
     }
 
