@@ -9,7 +9,7 @@ import gmo.demo.voidtask.R
 import gmo.demo.voidtask.data.repositories.UserRepository
 import gmo.demo.voidtask.databinding.ActivityLoginBinding
 import gmo.demo.voidtask.ui.base.BaseActivity
-import gmo.demo.voidtask.ui.home.HomeActivity
+import gmo.demo.voidtask.ui.productlist.ProductListActivity
 
 class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
     private val userRepository = UserRepository()
@@ -29,7 +29,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
         }
         viewModel.loginResult.observe(this) { success ->
             if (success) {
-                startActivity(Intent(this, HomeActivity::class.java))
+                startActivity(Intent(this, gmo.demo.voidtask.ui.productlist.ProductListActivity::class.java))
                 finish()
             }
         }

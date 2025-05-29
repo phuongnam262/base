@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:padding="16dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imgDetailProduct"
+            android:layout_width="200dp"
+            android:layout_height="300dp"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvDetailTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Angie Mango"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imgDetailProduct"/>
+
+        <!-- Tên sản phẩm -->
+        <LinearLayout
+            android:id="@+id/linear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvDetailTitle"
+            android:orientation="horizontal">
+
+            <!-- Giá sản phẩm -->
+            <TextView
+                android:id="@+id/tvDetailPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$2.00 /kg"
+                android:textSize="20sp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@id/linear"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="180dp"
+                android:background="@drawable/bg_quantity_selector"
+                android:gravity="center">
+
+                <!-- Nút giảm -->
+                <ImageButton
+                    android:id="@+id/btnDecrease"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_remove"
+                    android:background="?attr/selectableItemBackgroundBorderless" />
+
+                <!-- Hiển thị số lượng -->
+                <TextView
+                    android:id="@+id/tvQuantity"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:text="1"
+                    android:textSize="18sp"
+                    android:gravity="center" />
+
+                <!-- Nút tăng -->
+                <ImageButton
+                    android:id="@+id/btnIncrease"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_add"
+                    android:background="?attr/selectableItemBackgroundBorderless" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+        <!-- Mô tả sản phẩm -->
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Product Detail"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/linear"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvDetailDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="A mango is an edible stone fruit produced by the tropical tree Mangifera indica which is..."
+            android:textSize="16sp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/description"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <!-- Tiêu đề "Other Products" -->
+        <TextView
+            android:id="@+id/other_fruits"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Other Products"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="30dp"
+            app:layout_constraintTop_toBottomOf="@id/tvDetailDescription"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <!-- RecyclerView cho danh sách sản phẩm khác -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recOtherProducts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/other_fruits"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <!-- Nút "Add to cart" -->
+        <Button
+            android:id="@+id/btnAddToCart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add to cart"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintTop_toBottomOf="@id/recOtherProducts"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
