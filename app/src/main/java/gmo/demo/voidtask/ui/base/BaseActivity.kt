@@ -12,7 +12,7 @@ import gmo.demo.voidtask.util.CommonUtils
  */
 abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : gmo.demo.voidtask.ui.base.BaseAppCompatActivity(){
 
-    private var mViewDataBinding: T? = null
+    var mViewDataBinding: T? = null
     private var mViewModel: V? = null
 
     /**

@@ -12,7 +12,6 @@ import gmo.demo.voidtask.ui.base.BaseActivity
 import gmo.demo.voidtask.ui.home.HomeActivity
 
 class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
-    private lateinit var binding: ActivityLoginBinding
     private val userRepository = UserRepository()
     private val factory = LoginViewModelFactory(userRepository)
     override val layoutId: Int get() = R.layout.activity_login
@@ -23,9 +22,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.btnLogin.setOnClickListener {
-            val email = binding.edtEmail.text.toString()
-            val password = binding.edtPassword.text.toString()
+        mViewDataBinding?.btnLogin?.setOnClickListener {
+            val email = mViewDataBinding?.edtEmail?.text.toString()
+            val password = mViewDataBinding?.edtPassword?.text.toString()
             viewModel.login(email, password)
         }
         viewModel.loginResult.observe(this) { success ->

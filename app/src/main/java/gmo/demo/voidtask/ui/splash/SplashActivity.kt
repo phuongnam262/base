@@ -37,6 +37,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(),
         CommonUtils.runTimeDelay(ConstantUtils.SPLASH_TIME_OUT.toLong()) {
             val token = PreferenceHelper.getString(ConstantUtils.API_TOKEN, "")
             Log.d("SplashActivity", "Token: $token")
+            Log.d("SplashActivity", "Token before check: $token")
             if (token.isNotEmpty()) {
                 Log.d("SplashActivity", "Chuyển sang HomeActivity")
                 startActivity(Intent(this, HomeActivity::class.java))
