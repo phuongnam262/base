@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -65,9 +64,7 @@ class ProductListActivity : BaseAppCompatActivity() {
     }
 
     private fun onClickGoToDetail(product: Product) {
-        val intent = Intent(this, DetailActivity::class.java)
-        intent.putExtra("object_product", product)
-        startActivity(intent)
+        startActivityWithOneValue("product_id", product.id.toString(), DetailActivity::class.java)
     }
 }
 
