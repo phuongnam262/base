@@ -3,25 +3,24 @@ package gmo.demo.voidtask.ui.productlist
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import gmo.demo.voidtask.R
 import gmo.demo.voidtask.data.models.Product
-import gmo.demo.voidtask.data.network.ApiService
 import gmo.demo.voidtask.ui.common.adapter.ProductAdapter
 import gmo.demo.voidtask.ui.common.listener.ClickItemListener
 import gmo.demo.voidtask.ui.detail.DetailActivity
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.io.Serializable
 
 class ProductListActivity : AppCompatActivity() {
 
     private lateinit var recProduct: RecyclerView
-    private lateinit var mListProduct: MutableList<Product>
+    private val viewModel: ProductListViewModel by viewModels()
+    private lateinit var productAdapter: ProductAdapter
+    private val mListProduct = mutableListOf<Product>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,46 +28,37 @@ class ProductListActivity : AppCompatActivity() {
 
         recProduct = findViewById(R.id.rec_product)
         recProduct.layoutManager = GridLayoutManager(this, 2)
+        recProduct.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
 
-        mListProduct = ArrayList()
+        productAdapter = ProductAdapter(mListProduct, object : ClickItemListener {
+            override fun onClickItem(product: Product) {
+                onClickGoToDetail(product)
+            }
+        })
 
-        val itemDecoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
-        recProduct.addItemDecoration(itemDecoration)
+        recProduct.adapter = productAdapter
 
-        callApiGetProducts()
+        observeViewModel()
+        viewModel.getProducts()
     }
 
-    private fun callApiGetProducts() {
-        ApiService.apiService.getListProducts(productId = 1).enqueue(object : Callback<List<Product>> {
-            override fun onResponse(
-                call: Call<List<Product>>,
-                response: Response<List<Product>>
-            ) {
-                val productList = response.body() ?: emptyList()
-                mListProduct.clear()
-                mListProduct.addAll(productList)
-                val productAdapter = ProductAdapter(mListProduct, object : ClickItemListener {
-                    override fun onClickItem(product: Product) {
-                        onClickGoToDetail(product)
-                    }
-                })
-                recProduct.adapter = productAdapter
-            }
+    private fun observeViewModel() {
+        viewModel.productList.observe(this, Observer { products ->
+            mListProduct.clear()
+            mListProduct.addAll(products)
+            productAdapter.notifyDataSetChanged()
+        })
 
-            override fun onFailure(call: Call<List<Product>>, t: Throwable) {
-                Toast.makeText(this@ProductListActivity, "onFailure", Toast.LENGTH_SHORT).show()
-                // Log the error for debugging
-                t.printStackTrace()
-            }
+        viewModel.error.observe(this, Observer { errorMsg ->
+            Toast.makeText(this, errorMsg, Toast.LENGTH_SHORT).show()
         })
     }
 
     private fun onClickGoToDetail(product: Product) {
         val intent = Intent(this, DetailActivity::class.java)
         val bundle = Bundle()
-        // Ensure Product is Serializable or Parcelable
         bundle.putSerializable("object_product", product)
         intent.putExtras(bundle)
         startActivity(intent)
     }
-} 
+}
