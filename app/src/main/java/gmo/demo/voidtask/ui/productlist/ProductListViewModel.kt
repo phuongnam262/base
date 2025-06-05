@@ -9,7 +9,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ProductListViewModel : ViewModel() {
+class ProductListViewModel(private val productId: Int) : ViewModel() {
 
     private val _productList = MutableLiveData<List<Product>>()
     val productList: LiveData<List<Product>> = _productList
@@ -17,12 +17,13 @@ class ProductListViewModel : ViewModel() {
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> = _error
 
-    fun getProducts(productId: Int = 1) {
+    init {
+        getProducts()
+    }
+
+    private fun getProducts() {
         ApiService.apiService.getListProducts(productId).enqueue(object : Callback<List<Product>> {
-            override fun onResponse(
-                call: Call<List<Product>>,
-                response: Response<List<Product>>
-            ) {
+            override fun onResponse(call: Call<List<Product>>, response: Response<List<Product>>) {
                 if (response.isSuccessful) {
                     _productList.value = response.body() ?: emptyList()
                 } else {
@@ -32,8 +33,9 @@ class ProductListViewModel : ViewModel() {
 
             override fun onFailure(call: Call<List<Product>>, t: Throwable) {
                 _error.value = "onFailure: ${t.message}"
-                // t.printStackTrace() // optional debug log
+                // t.printStackTrace() // Optional
             }
         })
     }
 }
+
