@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import gmo.demo.voidtask.R
 import gmo.demo.voidtask.data.models.Product
+import gmo.demo.voidtask.data.repositories.ProductRepository
 import gmo.demo.voidtask.ui.common.adapter.ProductAdapter
 import gmo.demo.voidtask.ui.common.listener.ClickItemListener
 import gmo.demo.voidtask.ui.detail.DetailActivity
@@ -22,9 +23,11 @@ class ProductListActivity : BaseAppCompatActivity() {
     private lateinit var productAdapter: ProductAdapter
     private val mListProduct = mutableListOf<Product>()
 
+    private val repository = ProductRepository()
     private val viewModel: ProductListViewModel by viewModels {
-        ProductListViewModelFactory(productId = 1)
+        ProductListViewModelFactory(productId = 1, repository = repository)
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

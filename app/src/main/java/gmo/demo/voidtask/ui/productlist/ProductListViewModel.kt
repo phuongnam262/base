@@ -4,12 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import gmo.demo.voidtask.data.models.Product
-import gmo.demo.voidtask.data.network.ApiService
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import gmo.demo.voidtask.data.repositories.ProductRepository
 
-class ProductListViewModel(private val productId: Int) : ViewModel() {
+class ProductListViewModel(
+    private val productId: Int,
+    private val repository: ProductRepository
+) : ViewModel() {
 
     private val _productList = MutableLiveData<List<Product>>()
     val productList: LiveData<List<Product>> = _productList
@@ -22,20 +22,12 @@ class ProductListViewModel(private val productId: Int) : ViewModel() {
     }
 
     private fun getProducts() {
-        ApiService.apiService.getListProducts(productId).enqueue(object : Callback<List<Product>> {
-            override fun onResponse(call: Call<List<Product>>, response: Response<List<Product>>) {
-                if (response.isSuccessful) {
-                    _productList.value = response.body() ?: emptyList()
-                } else {
-                    _error.value = "Failed to load products"
-                }
+        repository.getProducts(productId).observeForever { result ->
+            result.onSuccess {
+                _productList.value = it
+            }.onFailure {
+                _error.value = "Error: ${it.message}"
             }
-
-            override fun onFailure(call: Call<List<Product>>, t: Throwable) {
-                _error.value = "onFailure: ${t.message}"
-                // t.printStackTrace() // Optional
-            }
-        })
+        }
     }
 }
-
