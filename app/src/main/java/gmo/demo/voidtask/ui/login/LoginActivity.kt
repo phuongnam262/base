@@ -1,6 +1,5 @@
 package gmo.demo.voidtask.ui.login
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
@@ -29,7 +28,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
         }
         viewModel.loginResult.observe(this) { success ->
             if (success) {
-                startActivity(Intent(this, gmo.demo.voidtask.ui.productlist.ProductListActivity::class.java))
+                startActivity(ProductListActivity::class.java)
                 finish()
             }
         }
