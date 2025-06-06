@@ -2,11 +2,11 @@
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="160dp"
+    android:layout_width="@dimen/dp_160"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="4dp"
+    android:layout_margin="@dimen/dp_8"
+    app:cardCornerRadius="@dimen/dp_8"
+    app:cardElevation="@dimen/dp_4"
     android:id="@+id/layout_item">
 
 
@@ -14,12 +14,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="@dimen/dp_16">
 
         <ImageView
             android:id="@+id/img_product"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="@dimen/dp_100"
             android:layout_gravity="center"
             android:scaleType="fitCenter"
             android:src="@mipmap/ic_launcher"/>
@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/angie_mango"
-            android:textSize="18sp"
+            android:textSize="@dimen/sp_18"
             android:textStyle="bold"
             android:gravity="center"/>
 
@@ -38,9 +38,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/_2_00_kg"
-            android:textSize="16sp"
+            android:textSize="@dimen/sp_16"
             android:gravity="center"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginTop="@dimen/dp_8"/>
 
 
 
