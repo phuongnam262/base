@@ -28,7 +28,7 @@
             android:id="@+id/tv_product_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Mango"
+            android:text="@string/angie_mango"
             android:textSize="18sp"
             android:textStyle="bold"
             android:gravity="center"/>
@@ -37,7 +37,7 @@
             android:id="@+id/tv_product_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="$2/kg"
+            android:text="@string/_2_00_kg"
             android:textSize="16sp"
             android:gravity="center"
             android:layout_marginTop="8dp"/>

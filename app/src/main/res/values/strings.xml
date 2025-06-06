@@ -22,6 +22,25 @@
     <string name="title_hint">Title</string>
     <string name="detail_hint">Detail</string>
     <string name="add_button">ADD</string>
+    <string name="basesource">BaseSource</string>
+    <string name="welcome_back">Welcome back!</string>
+    <string name="smallNoti">Log in to your existant account of Q Allure</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="log_in">LOG IN</string>
+    <string name="or_connect_using">Or connect using</string>
+    <string name="facebook">Facebook</string>
+    <string name="google">Google</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="angie_mango">Angie Mango</string>
+    <string name="_2_00_kg">$2.00 /kg</string>
+    <string name="_1">1</string>
+    <string name="product_detail">Product Detail</string>
+    <string name="description">A mango is an edible stone fruit produced by the tropical tree Mangifera indica which is...</string>
+    <string name="other_products">Other Products</string>
+    <string name="add_to_cart">Add to cart</string>
 
 
 </resources>
