@@ -4,12 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import gmo.demo.voidtask.data.models.Product
-import gmo.demo.voidtask.data.network.ApiService
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import gmo.demo.voidtask.data.repositories.ProductRepository
 
-class DetailViewModel(private val productId: String) : ViewModel() {
+class DetailViewModel(
+    private val productId: String,
+    private val repository: ProductRepository
+) : ViewModel() {
 
     private val _product = MutableLiveData<Product>()
     val product: LiveData<Product> get() = _product
@@ -22,18 +22,12 @@ class DetailViewModel(private val productId: String) : ViewModel() {
     }
 
     private fun fetchProductDetails() {
-        ApiService.apiService.getProductById(productId).enqueue(object : Callback<Product> {
-            override fun onResponse(call: Call<Product>, response: Response<Product>) {
-                if (response.isSuccessful) {
-                    _product.value = response.body()
-                } else {
-                    _error.value = "Failed to load product"
-                }
+        repository.getProductById(productId).observeForever { result ->
+            result.onSuccess {
+                _product.value = it
+            }.onFailure {
+                _error.value = it.message ?: "Unknown error"
             }
-
-            override fun onFailure(call: Call<Product>, t: Throwable) {
-                _error.value = t.message
-            }
-        })
+        }
     }
 }

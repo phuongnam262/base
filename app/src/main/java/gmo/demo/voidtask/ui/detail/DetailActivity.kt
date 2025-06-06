@@ -1,15 +1,14 @@
 package gmo.demo.voidtask.ui.detail
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import gmo.demo.voidtask.data.models.Product
 import gmo.demo.voidtask.data.network.ApiService
+import gmo.demo.voidtask.data.repositories.ProductRepository
 import gmo.demo.voidtask.databinding.ActivityDetailBinding
 import gmo.demo.voidtask.ui.base.BaseAppCompatActivity
 import gmo.demo.voidtask.ui.common.adapter.OtherProductsAdapter
@@ -25,6 +24,8 @@ class DetailActivity : BaseAppCompatActivity() {
     private lateinit var recOtherProducts: RecyclerView
     private var currentQuantity = 1
 
+    private val repository = ProductRepository()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
@@ -37,10 +38,13 @@ class DetailActivity : BaseAppCompatActivity() {
             return
         }
 
-        viewModel = ViewModelProvider(this, DetailViewModelFactory(productId))[DetailViewModel::class.java]
+        viewModel = ViewModelProvider(
+            this,
+            DetailViewModelFactory(productId, repository)
+        )[DetailViewModel::class.java]
 
         observeViewModel()
-        setupAddandRemoveQuantity()
+        setupAddRemoveQuantity()
     }
 
     private fun observeViewModel() {
@@ -68,7 +72,7 @@ class DetailActivity : BaseAppCompatActivity() {
         }
     }
 
-    private fun setupAddandRemoveQuantity() {
+    private fun setupAddRemoveQuantity() {
         binding.btnDecrease.setOnClickListener {
             if (currentQuantity > 1) {
                 currentQuantity--

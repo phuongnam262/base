@@ -30,4 +30,30 @@ class ProductRepository {
 
         return result
     }
+
+    fun getProductById(productId: String): LiveData<Result<Product>> {
+        val result = MutableLiveData<Result<Product>>()
+
+        ApiService.apiService.getProductById(productId).enqueue(object : Callback<Product> {
+            override fun onResponse(call: Call<Product>, response: Response<Product>) {
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        result.value = Result.success(it)
+                    } ?: run {
+                        result.value = Result.failure(Exception("Product not found"))
+                    }
+                } else {
+                    result.value = Result.failure(Exception("Failed to load product"))
+                }
+            }
+
+            override fun onFailure(call: Call<Product>, t: Throwable) {
+                result.value = Result.failure(t)
+            }
+        })
+
+        return result
+    }
+
+
 }
