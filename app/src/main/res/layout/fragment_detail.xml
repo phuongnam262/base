@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="gmo.demo.voidtask.ui.detail.DetailViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:padding="@dimen/dp_16">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/dp_80">
+
+            <!-- Ảnh sản phẩm -->
+            <ImageView
+                android:id="@+id/imgDetailProduct"
+                android:layout_width="@dimen/dp_200"
+                android:layout_height="@dimen/dp_300"
+                android:src="@mipmap/ic_launcher"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Tên sản phẩm -->
+            <TextView
+                android:id="@+id/tvDetailTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/angie_mango"
+                android:textSize="@dimen/sp_24"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/imgDetailProduct"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="@dimen/dp_12" />
+
+            <!-- Giá + Selector số lượng -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                app:layout_constraintTop_toBottomOf="@id/tvDetailTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <!-- Giá -->
+                <TextView
+                    android:id="@+id/tvDetailPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/_2_00_kg"
+                    android:textSize="@dimen/sp_20"
+                    android:layout_marginTop="@dimen/dp_8"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <!-- Layout số lượng -->
+                <LinearLayout
+                    android:id="@+id/quantityLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/bg_quantity_selector"
+                    android:gravity="center"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <ImageButton
+                        android:id="@+id/btnDecrease"
+                        android:layout_width="@dimen/dp_40"
+                        android:layout_height="@dimen/dp_40"
+                        android:src="@drawable/ic_remove"
+                        android:background="?attr/selectableItemBackgroundBorderless" />
+
+                    <TextView
+                        android:id="@+id/tvQuantity"
+                        android:layout_width="@dimen/dp_40"
+                        android:layout_height="@dimen/dp_40"
+                        android:text="@string/_1"
+                        android:textSize="@dimen/sp_18"
+                        android:gravity="center" />
+
+                    <ImageButton
+                        android:id="@+id/btnIncrease"
+                        android:layout_width="@dimen/dp_40"
+                        android:layout_height="@dimen/dp_40"
+                        android:src="@drawable/ic_add"
+                        android:background="?attr/selectableItemBackgroundBorderless" />
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Tiêu đề "Mô tả sản phẩm" -->
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/product_detail"
+                android:textSize="@dimen/sp_20"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/dp_16"
+                app:layout_constraintTop_toBottomOf="@id/constraint"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <!-- Nội dung mô tả -->
+            <TextView
+                android:id="@+id/tvDetailDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/description"
+                android:textSize="@dimen/sp_16"
+                android:layout_marginTop="@dimen/dp_8"
+                app:layout_constraintTop_toBottomOf="@id/description"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <!-- Tiêu đề "Other Products" -->
+            <TextView
+                android:id="@+id/other_fruits"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/other_products"
+                android:textSize="@dimen/sp_18"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/dp_30"
+                app:layout_constraintTop_toBottomOf="@id/tvDetailDescription"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <!-- RecyclerView danh sách sản phẩm khác -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recOtherProducts"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_140"
+                android:layout_marginTop="@dimen/dp_8"
+                android:nestedScrollingEnabled="false"
+                android:overScrollMode="never"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/other_fruits"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <!-- Nút "Add to Cart" -->
+            <Button
+                android:id="@+id/btnAddToCart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/add_to_cart"
+                android:textAllCaps="false"
+                android:textSize="@dimen/sp_18"
+                android:layout_marginTop="@dimen/dp_16"
+                android:layout_marginBottom="@dimen/dp_10"
+                app:layout_constraintTop_toBottomOf="@id/recOtherProducts"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

@@ -1,5 +1,6 @@
 package gmo.demo.voidtask.ui.productlist
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -66,7 +67,9 @@ class ProductListActivity : BaseAppCompatActivity() {
     }
 
     private fun onClickGoToDetail(product: Product) {
-        startActivityWithOneValue("product_id", product.id.toString(), DetailActivity::class.java)
+        val intent = Intent(this, DetailActivity::class.java)
+        intent.putExtra("product_id", product.id.toString())
+        startActivity(intent)
     }
 }
 

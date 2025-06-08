@@ -5,11 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import gmo.demo.voidtask.data.models.Product
 import gmo.demo.voidtask.data.repositories.ProductRepository
+import gmo.demo.voidtask.ui.base.BaseViewModel
 
 class DetailViewModel(
     private val productId: String,
     private val repository: ProductRepository
-) : ViewModel() {
+) : BaseViewModel() {
 
     private val _product = MutableLiveData<Product>()
     val product: LiveData<Product> get() = _product
