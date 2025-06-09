@@ -9,4 +9,18 @@
         android:name="gmo.demo.voidtask.ui.addtask.AddTaskFragment"
         android:label="fragment_add_task"
         tools:layout="@layout/fragment_add_task" />
+
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="gmo.demo.voidtask.ui.detail.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail">
+
+        <argument
+            android:name="product_id"
+            app:argType="string"
+            android:defaultValue="" />
+    </fragment>
+
+
 </navigation>

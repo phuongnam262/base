@@ -67,9 +67,7 @@ class ProductListActivity : BaseAppCompatActivity() {
     }
 
     private fun onClickGoToDetail(product: Product) {
-        val intent = Intent(this, DetailActivity::class.java)
-        intent.putExtra("product_id", product.id.toString())
-        startActivity(intent)
+        startActivityWithOneValue("product_id", product.id.toString(), DetailActivity::class.java)
     }
 }
 
