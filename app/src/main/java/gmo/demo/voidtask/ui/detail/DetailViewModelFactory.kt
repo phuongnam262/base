@@ -9,9 +9,9 @@ class DetailViewModelFactory(
     private val repository: ProductRepository
 ) : ViewModelProvider.Factory {
 
-    @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(DetailViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
             return DetailViewModel(productId, repository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")

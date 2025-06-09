@@ -2,16 +2,34 @@ package gmo.demo.voidtask.ui.detail
 
 import android.os.Bundle
 import androidx.core.os.bundleOf
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
+import gmo.demo.voidtask.BR
 import gmo.demo.voidtask.R
-import gmo.demo.voidtask.ui.base.BaseAppCompatActivity
+import gmo.demo.voidtask.data.repositories.ProductRepository
+import gmo.demo.voidtask.databinding.ActivityDetailBinding
+import gmo.demo.voidtask.ui.base.BaseActivity
 
-class DetailActivity : BaseAppCompatActivity() {
+class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
+
+    private val repository = ProductRepository()
+
+    override val layoutId: Int
+        get() = R.layout.activity_detail
+
+    override val bindingVariable: Int
+        get() = BR.viewmodel
+
+    override val viewModel: DetailViewModel by lazy {
+        val productId = intent.getStringExtra("product_id") ?: ""
+        val factory = DetailViewModelFactory(productId, repository)
+        ViewModelProvider(this, factory)[DetailViewModel::class.java]
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail)
-
+        showLoading()
+        
         val productId = intent.getStringExtra("product_id") ?: return
 
         val navHostFragment =
@@ -23,5 +41,7 @@ class DetailActivity : BaseAppCompatActivity() {
 
         navGraph.setStartDestination(R.id.detailFragment)
         navController.setGraph(navGraph, bundle)
+        
+        hideLoading()
     }
 }
