@@ -20,10 +20,6 @@ interface AppServives {
         @Body verifyOTPRequest: VerifyOTPRequest
     ): Response<BaseResponse<ConsumerLoginResponse>>
 
-    // Thêm API đăng nhập
-    @GET("users")
-    suspend fun getUsers(): UserResponse
-
     companion object {
         fun create(retrofit: Retrofit): AppServives {
             return retrofit.create(AppServives::class.java)

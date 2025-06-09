@@ -75,7 +75,6 @@ class ProductListActivity : BaseActivity<ActivityProductListBinding, ProductList
     }
 
     private fun onClickGoToDetail(product: Product) {
-        showLoading()
         startActivityWithOneValue("product_id", product.id.toString(), DetailActivity::class.java)
     }
 }
