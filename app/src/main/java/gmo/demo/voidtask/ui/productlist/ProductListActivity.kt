@@ -40,6 +40,11 @@ class ProductListActivity : BaseActivity<ActivityProductListBinding, ProductList
         observeViewModel()
     }
 
+    override fun onPause() {
+        super.onPause()
+        hideLoading()
+    }
+
     private fun setupRecyclerView() {
         recProduct = mViewDataBinding?.recProduct!!
         recProduct.layoutManager = GridLayoutManager(this, 2)
