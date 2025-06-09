@@ -13,6 +13,7 @@ class LoginViewModel(private val userRepository: UserRepository) : BaseViewModel
     fun login(email: String, password: String) {
         viewModelScope.launch {
             try {
+                mLoading.value = true
                 val users = userRepository.getUsers()
                 val user = users.find { it.username == email && it.password == password }
                 if (user != null) {
@@ -22,6 +23,8 @@ class LoginViewModel(private val userRepository: UserRepository) : BaseViewModel
                 }
             } catch (e: Exception) {
                 errorMessage.value = "Error: ${e.message}"
+            } finally {
+                mLoading.value = false
             }
         }
     }
