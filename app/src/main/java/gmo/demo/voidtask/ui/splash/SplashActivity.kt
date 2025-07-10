@@ -10,8 +10,8 @@ import gmo.demo.voidtask.ui.base.BaseActivity
 import gmo.demo.voidtask.BR
 import gmo.demo.voidtask.R
 import gmo.demo.voidtask.data.preference.PreferenceHelper
-import gmo.demo.voidtask.ui.home.HomeActivity
 import gmo.demo.voidtask.ui.login.LoginActivity
+import gmo.demo.voidtask.ui.productlist.ProductListActivity
 import gmo.demo.voidtask.util.CommonUtils
 import gmo.demo.voidtask.util.ConstantUtils
 import org.kodein.di.KodeinAware
@@ -39,8 +39,8 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(),
             Log.d("SplashActivity", "Token: $token")
             Log.d("SplashActivity", "Token before check: $token")
             if (token.isNotEmpty()) {
-                Log.d("SplashActivity", "Chuyển sang HomeActivity")
-                startActivity(Intent(this, HomeActivity::class.java))
+                Log.d("SplashActivity", "Chuyển sang ProductListActivity")
+                startActivity(Intent(this, ProductListActivity::class.java))
             } else {
                 Log.d("SplashActivity", "Chuyển sang LoginActivity")
                 startActivity(Intent(this, LoginActivity::class.java))
