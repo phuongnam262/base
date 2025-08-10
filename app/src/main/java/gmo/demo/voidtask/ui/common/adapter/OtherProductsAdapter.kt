@@ -26,7 +26,7 @@ class OtherProductsAdapter(private val mListProduct: List<Product>, private val 
             // Example with Glide:
             Glide.with(itemView.context).load(product.image).into(imgProduct)
             tvProductTitle.text = product.title
-            tvProductPrice.text = "$" + product.price.toString()
+            tvProductPrice.text = "$" + product.price
 
             itemView.setOnClickListener {
                 clickItemListener.onClickItem(product)

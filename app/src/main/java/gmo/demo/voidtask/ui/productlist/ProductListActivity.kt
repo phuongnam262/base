@@ -15,6 +15,7 @@ import gmo.demo.voidtask.databinding.ActivityProductListBinding
 import gmo.demo.voidtask.ui.common.adapter.ProductAdapter
 import gmo.demo.voidtask.ui.common.listener.ClickItemListener
 import gmo.demo.voidtask.ui.detail.DetailActivity
+import gmo.demo.voidtask.ui.myCart.CartActivity
 import gmo.demo.voidtask.ui.base.BaseActivity
 
 class ProductListActivity : BaseActivity<ActivityProductListBinding, ProductListViewModel>() {
@@ -37,6 +38,7 @@ class ProductListActivity : BaseActivity<ActivityProductListBinding, ProductList
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setupRecyclerView()
+        setupClickListeners()
         observeViewModel()
     }
 
@@ -57,6 +59,28 @@ class ProductListActivity : BaseActivity<ActivityProductListBinding, ProductList
         })
 
         recProduct.adapter = productAdapter
+    }
+
+    private fun setupClickListeners() {
+        mViewDataBinding?.btnCart?.setOnClickListener {
+            val intent = Intent(this, CartActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateCartBadge()
+    }
+
+    private fun updateCartBadge() {
+        val totalItems = gmo.demo.voidtask.data.repositories.CartManager.getTotalItems()
+        // Có thể thêm badge hoặc text để hiển thị số lượng sản phẩm
+        if (totalItems > 0) {
+            mViewDataBinding?.btnCart?.contentDescription = "Giỏ hàng ($totalItems sản phẩm)"
+        } else {
+            mViewDataBinding?.btnCart?.contentDescription = "Giỏ hàng"
+        }
     }
 
     private fun observeViewModel() {

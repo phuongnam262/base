@@ -25,7 +25,7 @@ class ProductAdapter(private val mListProduct: MutableList<Product>, private val
              Glide.with(itemView.context).load(product.image).into(imgProduct)
 
             tvProductTitle.text = product.title
-            tvProductPrice.text = "$" + product.price.toString()
+            tvProductPrice.text = "$" + product.price
 
             itemView.setOnClickListener {
                 clickItemListener.onClickItem(product)

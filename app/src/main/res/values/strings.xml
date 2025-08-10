@@ -41,6 +41,23 @@
     <string name="description">A mango is an edible stone fruit produced by the tropical tree Mangifera indica which is...</string>
     <string name="other_products">Other Products</string>
     <string name="add_to_cart">Add to cart</string>
-
-
+    <string name="cart">Cart</string>
+    <string name="empty_cart">Empty Cart</string>
+    <string name="add_products_to_cart">Add products To Cart</string>
+    <string name="total_price">Total Price</string>
+    <string name="total_items">Total: %1$d Products</string>
+    <string name="clear_cart">Delete Cart</string>
+    <string name="checkout">Checkout</string>
+    <string name="order_time">Order Time: %1$s</string>
+    <string name="checkout_developing">Chức năng thanh toán đang phát triển</string>
+    <string name="cart_cleared">Cart is Cleared</string>
+    <string name="added_to_cart">Added %1$s to Cart</string>
+    <string name="product_list">Product List</string>
+    
+    <!-- Cart item placeholders -->
+    <string name="product_name_placeholder">Tên sản phẩm</string>
+    <string name="price_placeholder">$0.00</string>
+    <string name="order_time_placeholder">Đặt hàng: 01/01/2024 12:00</string>
+    <string name="total_price_placeholder">$0.00</string>
+    <string name="quantity_placeholder">1</string>
 </resources>

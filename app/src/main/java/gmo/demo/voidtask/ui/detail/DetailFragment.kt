@@ -19,6 +19,7 @@ import gmo.demo.voidtask.databinding.FragmentDetailBinding
 import gmo.demo.voidtask.ui.base.BaseFragment
 import gmo.demo.voidtask.ui.common.adapter.OtherProductsAdapter
 import gmo.demo.voidtask.ui.common.listener.ClickItemListener
+import gmo.demo.voidtask.ui.myCart.CartActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -55,7 +56,7 @@ class DetailFragment : BaseFragment<FragmentDetailBinding, DetailViewModel>() {
                 Glide.with(requireContext()).load(product.image).into(imgDetailProduct)
 
                 btnAddToCart.setOnClickListener {
-                    Toast.makeText(requireContext(), "Added to cart: ${product.title}", Toast.LENGTH_SHORT).show()
+                    addToCart(product)
                 }
             }
 
@@ -85,6 +86,17 @@ class DetailFragment : BaseFragment<FragmentDetailBinding, DetailViewModel>() {
                 }
             }
         }
+    }
+
+    private fun addToCart(product: Product) {
+        // Thêm sản phẩm vào giỏ hàng
+        gmo.demo.voidtask.data.repositories.CartManager.addToCart(product, currentQuantity)
+        
+        Toast.makeText(requireContext(), getString(R.string.added_to_cart, product.title), Toast.LENGTH_SHORT).show()
+        
+        // Chuyển đến màn hình giỏ hàng
+        val intent = Intent(requireContext(), CartActivity::class.java)
+        startActivity(intent)
     }
 
     private fun setupOtherProductsRecyclerView(currentProductId: String?) {

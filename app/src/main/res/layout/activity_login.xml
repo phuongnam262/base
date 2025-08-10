@@ -27,11 +27,11 @@
             <!-- Top illustration -->
             <ImageView
                 android:id="@+id/img_login_illustration"
-                android:layout_width="@dimen/dp_250"
+                android:layout_width="@dimen/dp_350"
                 android:layout_height="@dimen/dp_200"
                 android:layout_marginTop="@dimen/dp_24"
                 android:scaleType="fitCenter"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@drawable/login" />
 
             <!-- Welcome title -->
             <TextView
