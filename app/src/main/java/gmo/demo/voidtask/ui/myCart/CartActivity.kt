@@ -114,7 +114,8 @@ class CartActivity : BaseActivity<ActivityCartBinding, CartViewModel>() {
         }
 
         mViewDataBinding?.btnCheckout?.setOnClickListener {
-            Toast.makeText(this, getString(R.string.checkout_developing), Toast.LENGTH_SHORT).show()
+            viewModel.clearCart()
+            Toast.makeText(this, getString(R.string.checkout_placed), Toast.LENGTH_SHORT).show()
         }
     }
 }

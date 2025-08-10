@@ -49,7 +49,7 @@
     <string name="clear_cart">Delete Cart</string>
     <string name="checkout">Checkout</string>
     <string name="order_time">Order Time: %1$s</string>
-    <string name="checkout_developing">Chức năng thanh toán đang phát triển</string>
+    <string name="checkout_placed">Your Products has been placed</string>
     <string name="cart_cleared">Cart is Cleared</string>
     <string name="added_to_cart">Added %1$s to Cart</string>
     <string name="product_list">Product List</string>

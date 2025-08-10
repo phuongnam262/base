@@ -144,26 +144,29 @@
                 android:orientation="horizontal"
                 android:layout_marginTop="@dimen/dp_16">
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnClearCart"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/clear_cart"
                     android:textAllCaps="false"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/sp_20"
                     android:layout_marginEnd="@dimen/dp_8"
-                    android:background="@drawable/bg_button_gray" />
+                    android:background="@drawable/bg_button_red" />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnCheckout"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textSize="@dimen/sp_20"
                     android:text="@string/checkout"
-                    android:visibility="gone"
                     android:textAllCaps="false"
+                    android:textStyle="bold"
                     android:layout_marginStart="@dimen/dp_8"
-                    android:background="?attr/colorPrimary" />
+                    android:background="@drawable/bg_button_green" />
 
             </LinearLayout>
 

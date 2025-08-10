@@ -7,7 +7,7 @@
     </style>
 
     <style name="CustomButtonBlack" parent="Widget.AppCompat.Button">
-        <item name="android:background">@drawable/bg_button_gray</item>
+        <item name="android:background">@drawable/bg_button_red</item>
         <item name="android:textSize">@dimen/sp_14</item>
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:textAllCaps">true</item>

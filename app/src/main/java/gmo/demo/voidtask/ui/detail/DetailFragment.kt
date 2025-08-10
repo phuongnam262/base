@@ -95,8 +95,8 @@ class DetailFragment : BaseFragment<FragmentDetailBinding, DetailViewModel>() {
         Toast.makeText(requireContext(), getString(R.string.added_to_cart, product.title), Toast.LENGTH_SHORT).show()
         
         // Chuyển đến màn hình giỏ hàng
-        val intent = Intent(requireContext(), CartActivity::class.java)
-        startActivity(intent)
+//        val intent = Intent(requireContext(), CartActivity::class.java)
+//        startActivity(intent)
     }
 
     private fun setupOtherProductsRecyclerView(currentProductId: String?) {
