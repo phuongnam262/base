@@ -1,14 +1,17 @@
 package gmo.demo.voidtask.ui.myCart
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import gmo.demo.voidtask.BR
 import gmo.demo.voidtask.R
 import gmo.demo.voidtask.data.repositories.CartRepository
 import gmo.demo.voidtask.databinding.ActivityCartBinding
 import gmo.demo.voidtask.ui.base.BaseActivity
+import gmo.demo.voidtask.ui.productlist.ProductListActivity
 
 class CartActivity : BaseActivity<ActivityCartBinding, CartViewModel>() {
 
@@ -27,9 +30,32 @@ class CartActivity : BaseActivity<ActivityCartBinding, CartViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setupToolbar()
         setupRecyclerView()
         setupObservers()
         setupClickListeners()
+    }
+
+    private fun setupToolbar() {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            mViewDataBinding?.toolbar?.navigationIcon = getDrawable(R.drawable.ic_back)
+        } else {
+            mViewDataBinding?.toolbar?.navigationIcon = ContextCompat.getDrawable(this, R.drawable.ic_back)
+        }
+        mViewDataBinding?.toolbar?.setNavigationOnClickListener {
+            val intent = Intent(this, ProductListActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+            startActivity(intent)
+            finish()
+        }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        val intent = Intent(this, ProductListActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+        startActivity(intent)
+        finish()
+        return true
     }
 
     private fun setupRecyclerView() {

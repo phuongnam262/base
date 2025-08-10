@@ -1,13 +1,22 @@
 package gmo.demo.voidtask.ui.detail
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import gmo.demo.voidtask.R
+import gmo.demo.voidtask.databinding.ActivityDetailBinding
+import gmo.demo.voidtask.ui.productlist.ProductListActivity
 
 class DetailActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityDetailBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail)
+        binding = ActivityDetailBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        setupToolbar()
 
         if (savedInstanceState == null) {
             val productId = intent.getStringExtra("product_id")
@@ -22,5 +31,23 @@ class DetailActivity : AppCompatActivity() {
                     .commit()
             }
         }
+    }
+
+    private fun setupToolbar() {
+        binding.toolbar.navigationIcon = getDrawable(R.drawable.ic_back)
+        binding.toolbar.setNavigationOnClickListener {
+            val intent = Intent(this, ProductListActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+            startActivity(intent)
+            finish()
+        }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        val intent = Intent(this, ProductListActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+        startActivity(intent)
+        finish()
+        return true
     }
 }
